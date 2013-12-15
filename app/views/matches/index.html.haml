@@ -1,0 +1,27 @@
+%h1 Matches for #{@ladder.name}
+.col-md-8.centeredContainer
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h2.panel-title Matches
+      .panel-actions
+        %a(href="#{ladder_path(@ladder)}") Back to ladder
+    - if @matches.length > 0
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Name
+            %th Actions
+        %tbody
+          - @matches.each do |match|
+            %tr
+              %td
+                = match.get_competitor_1.name
+                vs.
+                = match.get_competitor_2.name
+              %td
+                = link_to 'Edit', edit_match_path(match)
+                = link_to 'Add game', new_match_game_path(match)
+                = link_to 'Delete', match, method: :delete, data: { confirm: 'Are you sure?' }
+    - else
+      %p You have no matces currently, would you like to 
+      %a= link_to 'record one', new_ladder_match_path(@ladder)

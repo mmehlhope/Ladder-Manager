@@ -1,0 +1,16 @@
+= form_for([@ladder, @competitor]) do |f|
+  - if @competitor.errors.any?
+    %div#error_explanation
+      %h2
+        = pluralize(@competitor.errors.count, "error") 
+        prohibited this competitor from being saved:
+      %ul
+        - @competitor.errors.full_messages.each do |msg|
+          %li= msg
+  = f.hidden_field :rating, value: 1000
+  .field
+    = f.label :name
+    .input-group
+      = f.text_field :name, :class => "form-control"
+      %span.input-group-btn
+        = f.submit :class => "btn btn-primary"

@@ -1,0 +1,8 @@
+.col-md-8.centeredContainer
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h2.panel-title Edit match
+      .panel-actions
+        %a(href="#{ladder_matches_path(@ladder)}") Back to matches
+    .panel-body
+      = render 'edit'

@@ -1,0 +1,29 @@
+%h1 All Games
+.col-md-8.centeredContainer
+  .panel.panel-default
+    .panel-heading.clearfix
+      %h2.panel-title Games
+      .panel-actions
+        %a(href="#{match_path(@match)}") Back to match
+    - if @games.length > 0
+      %table.table.table-striped
+        %thead
+          %tr
+            %th #
+            %th Score
+            %th Winner
+            %th Actions
+        %tbody
+          - series = 0
+          - @games.each do |game|
+            %tr
+              %td= series += 1
+              %td #{game.competitor_1_score} - #{game.competitor_2_score}
+              %td= game.winner_id
+              %td
+                = link_to 'Edit', edit_game_path(game)
+                = link_to 'Delete', game, method: :delete, data: { confirm: 'Are you sure?' }
+    - else
+      %p You have no games currently, would you like to
+      %a= link_to 'record one', new_match_game_path(@match)
+

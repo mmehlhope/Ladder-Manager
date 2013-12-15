@@ -1,0 +1,26 @@
+<%= form_for(@match) do |f| %>
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% @match.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :ladder_id, :value => @ladder.id %>
+  <% competitors_array = @competitors.map { |competitor| [competitor.name, competitor.id] } %>
+  <div class="field">
+    <%= f.label :competitor_1 %><br>
+    <%= f.select :competitor_1, options_for_select(competitors_array, @match.competitor_1) %>
+  </div>
+  <div class="field">
+    <%= f.label :competitor_2 %><br>
+    <%= f.select :competitor_2, options_for_select(competitors_array, @match.competitor_2) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

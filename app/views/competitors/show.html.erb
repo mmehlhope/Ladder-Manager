@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @competitor.name %>
+</p>
+
+<%= link_to 'Edit', edit_competitor_path(@competitor) %> |
+<%= link_to 'Back', ladder_competitors_path(@ladder) %>

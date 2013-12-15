@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+game_one:
+  competitor_1_score: 0
+  competitor_2_score: 0
+  match: match_one
+game_two:
+  competitor_1_score: 0
+  competitor_2_score: 0
+  match: match_one
