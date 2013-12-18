@@ -1,8 +1,8 @@
 class Game < ActiveRecord::Base
   belongs_to :match
 
-  before_save :populate_winner
-  after_save :update_match_winner
+  before_save   :populate_winner
+  after_save    :update_match_winner
   after_destroy :update_match_winner
 
 
@@ -15,7 +15,7 @@ class Game < ActiveRecord::Base
         self.winner_id = match.get_competitor_1.id
       elsif competitor_1_score < competitor_2_score
         self.winner_id = match.get_competitor_2.id
-      else 
+      else
         self.winner_id = nil
       end
     end
@@ -23,6 +23,6 @@ class Game < ActiveRecord::Base
     # After a game is saved, the parent match is updated with
     # a new overall winner (or nil if not yet decided)
     def update_match_winner
-      match.update_current_match_winner
+      match.set_current_match_winner
     end
 end

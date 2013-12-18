@@ -25,6 +25,7 @@ class LaddersControllerTest < ActionController::TestCase
   end
 
   test "should show ladder" do
+    debugger
     get :show, id: @ladder
     assert_response :success
   end

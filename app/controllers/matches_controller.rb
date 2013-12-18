@@ -27,6 +27,11 @@ class MatchesController < ApplicationController
   # POST /matches.json
   def create
     @match = @ladder.matches.build(match_params)
+
+    # Find competitors and add them to the match association
+    competitors = Competitor.find([match_params[:competitor_1], match_params[:competitor_2]])
+    @match.competitors << competitors
+
     respond_to do |format|
       if @match.save
         format.html { redirect_to ladder_matches_path(@ladder), notice: 'Match was successfully created.' }
@@ -60,7 +65,7 @@ class MatchesController < ApplicationController
       if @match.finalize && errors.blank?
 
         @match.update_player_stats
-        
+
         format.html { redirect_to match_path(@match), notice: 'Match was successfully finalized.' }
         format.json { head :ok }
       else
@@ -70,7 +75,7 @@ class MatchesController < ApplicationController
       end
     end
   end
-  
+
   # DELETE /matches/1
   # DELETE /matches/1.json
   def destroy

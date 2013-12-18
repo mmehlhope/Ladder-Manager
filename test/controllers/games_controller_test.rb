@@ -2,8 +2,11 @@ require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
   setup do
-    @game = games(:game_one)
-    @match = matches(:match_one)
+    @game   = games(:game_one)
+    @match  = matches(:match_one)
+    c1      = competitors(:competitor_one)
+    c2      = competitors(:competitor_two)
+    @match.competitors << [c1, c2]
   end
 
   test "should get index" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215200318) do
+ActiveRecord::Schema.define(version: 20131218031359) do
 
   create_table "competitors", force: true do |t|
     t.string   "name"
@@ -20,10 +20,17 @@ ActiveRecord::Schema.define(version: 20131215200318) do
     t.integer  "ladder_id"
     t.integer  "rating"
     t.integer  "wins",       default: 0
-    t.integer  "match_id"
   end
 
-  add_index "competitors", ["ladder_id"], name: "index_competitors_on_ladder_id"
+  add_index "competitors", ["ladder_id"], name: "index_competitors_on_ladder_id", using: :btree
+
+  create_table "competitors_matches", id: false, force: true do |t|
+    t.integer "match_id"
+    t.integer "competitor_id"
+  end
+
+  add_index "competitors_matches", ["competitor_id"], name: "index_competitors_matches_on_competitor_id", using: :btree
+  add_index "competitors_matches", ["match_id", "competitor_id"], name: "index_competitors_matches_on_match_id_and_competitor_id", using: :btree
 
   create_table "games", force: true do |t|
     t.datetime "created_at"
@@ -34,7 +41,7 @@ ActiveRecord::Schema.define(version: 20131215200318) do
     t.integer  "competitor_2_score"
   end
 
-  add_index "games", ["match_id"], name: "index_games_on_match_id"
+  add_index "games", ["match_id"], name: "index_games_on_match_id", using: :btree
 
   create_table "ladders", force: true do |t|
     t.string   "name"
@@ -52,9 +59,9 @@ ActiveRecord::Schema.define(version: 20131215200318) do
     t.boolean  "finalized",    default: false
   end
 
-  add_index "matches", ["competitor_1"], name: "index_matches_on_competitor_1"
-  add_index "matches", ["competitor_2"], name: "index_matches_on_competitor_2"
-  add_index "matches", ["ladder_id"], name: "index_matches_on_ladder_id"
+  add_index "matches", ["competitor_1"], name: "index_matches_on_competitor_1", using: :btree
+  add_index "matches", ["competitor_2"], name: "index_matches_on_competitor_2", using: :btree
+  add_index "matches", ["ladder_id"], name: "index_matches_on_ladder_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -1,6 +1,7 @@
 class Match < ActiveRecord::Base
-  has_many :games, dependent: :destroy
-  belongs_to :ladder
+  belongs_to              :ladder
+  has_many                :games, dependent: :destroy
+  has_and_belongs_to_many :competitors
 
   include MatchesHelper
 
@@ -25,24 +26,27 @@ class Match < ActiveRecord::Base
 
   # Finalizes the match so that no more games can be added/edited
   def finalize(bool=true)
-    update_attributes(:finalized => bool)
+    update(:finalized => bool)
   end
 
   # Updates the match's overall winner, using determine_match_winner as
   # a helper to decide. Called every time a game is saved.
-  def update_current_match_winner
-    competitor_id = determine_match_winner
-    update_attributes({:winner_id => competitor_id})
+  def set_current_match_winner(winning_id=nil)
+    winning_id = determine_match_winner unless !winning_id.blank?
+
+    update(:winner_id => winning_id)
   end
 
   # Currently assumes a winner and a loser. The winner has their win count
   # incremeneted, while bothplayers have their new ELOs calculated
   def update_player_stats
     winning_competitor.increment_win_count
-    winning_competitor.calculate_elo(losing_competitor.rating, 1)
-    losing_competitor.calculate_elo(winning_competitor.rating, 0)
+    winning_elo = winning_competitor.calculate_elo(losing_competitor.rating, 1)
+    losing_elo  = losing_competitor.calculate_elo(winning_competitor.rating, 0)
+
+    winning_competitor.update_rating(winning_elo) unless winning_elo.blank?
+    losing_competitor.update_rating(losing_elo) unless losing_elo.blank?
   end
 end
 
 
-      

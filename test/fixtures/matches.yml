@@ -3,16 +3,14 @@
 # This model initially had no columns defined.  If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
+
 match_one:
-  ladder: ladder_one
   competitor_1: <%= ActiveRecord::FixtureSet.identify(:competitor_one) %>
   competitor_2: <%= ActiveRecord::FixtureSet.identify(:competitor_two) %>
   finalized: false
   winner_id: NULL
 
 match_two:
-  ladder: ladder_one
   competitor_1: <%= ActiveRecord::FixtureSet.identify(:competitor_three) %>
   competitor_2: <%= ActiveRecord::FixtureSet.identify(:competitor_four) %>
   winner_id: NULL

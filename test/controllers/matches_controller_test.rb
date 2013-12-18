@@ -18,8 +18,11 @@ class MatchesControllerTest < ActionController::TestCase
   end
 
   test "should create match" do
+    c1 = competitors(:competitor_one)
+    c2 = competitors(:competitor_two)
+
     assert_difference('Match.count') do
-      post :create, match: {  }, ladder_id: @ladder.id
+      post :create, match: {:competitor_1 => c1.id, :competitor_2 => c2.id}, ladder_id: @ladder.id
     end
 
     assert_redirected_to ladder_matches_path(@ladder)
