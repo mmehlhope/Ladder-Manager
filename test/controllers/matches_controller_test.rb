@@ -2,8 +2,11 @@ require 'test_helper'
 
 class MatchesControllerTest < ActionController::TestCase
   setup do
-    @match = matches(:match_one)
     @ladder = ladders(:ladder_one)
+    @match = matches(:match_one)
+    @c1 = competitors(:competitor_one)
+    @c2 = competitors(:competitor_two)
+    @match.competitors << [@c1,@c2]
   end
 
   test "should get index" do
@@ -18,11 +21,9 @@ class MatchesControllerTest < ActionController::TestCase
   end
 
   test "should create match" do
-    c1 = competitors(:competitor_one)
-    c2 = competitors(:competitor_two)
 
     assert_difference('Match.count') do
-      post :create, match: {:competitor_1 => c1.id, :competitor_2 => c2.id}, ladder_id: @ladder.id
+      post :create, match: {:competitor_1 => @c1.id, :competitor_2 => @c2.id}, ladder_id: @ladder.id
     end
 
     assert_redirected_to ladder_matches_path(@ladder)

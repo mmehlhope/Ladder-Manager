@@ -15,13 +15,13 @@
           - @matches.each do |match|
             %tr
               %td
-                = match.get_competitor_1.name
+                = match.get_competitor_1.try(:name)
                 vs.
-                = match.get_competitor_2.name
+                = match.get_competitor_2.try(:name)
               %td
                 = link_to 'Edit', edit_match_path(match)
                 = link_to 'Add game', new_match_game_path(match)
                 = link_to 'Delete', match, method: :delete, data: { confirm: 'Are you sure?' }
     - else
-      %p You have no matces currently, would you like to 
+      %p You have no matces currently, would you like to
       %a= link_to 'record one', new_ladder_match_path(@ladder)
