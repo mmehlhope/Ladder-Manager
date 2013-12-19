@@ -1,3 +1,9 @@
+= content_for :head do
+  :coffeescript
+    require(['views/ladders/page'], (LadderPageView) ->
+      LadderPageView.init()
+    )
+
 %h1 Ladders
 .col-md-8.centeredContainer
   .panel.panel-default
@@ -17,5 +23,5 @@
               %td= link_to 'Rename', edit_ladder_path(ladder)
               %td= link_to 'Delete', ladder, method: :delete, data: { confirm: 'Are you sure?' }
     - else
-      %p You have no ladders currently, would you like to 
+      %p You have no ladders currently, would you like to
       %a= link_to 'create one', new_ladder_path
