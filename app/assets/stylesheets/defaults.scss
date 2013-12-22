@@ -10,6 +10,12 @@ body, html {
   min-height: 100%;
 }
 
+.container-large-offset {
+  padding-top: 150px;
+}
+.container-small-offset {
+  padding-top:75px;
+}
 .header {
   position: fixed;
   top: 0;
@@ -24,6 +30,10 @@ body, html {
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 2px 3px rgba(0,0,0,0.3)
+}
+
+.small-content-wrapper {
+  width: 400px;
 }
 
 // Bootstrap Addons

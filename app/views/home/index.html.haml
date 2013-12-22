@@ -3,16 +3,16 @@
 
 %div.container.centeredContainer.text-center
   %h1.titleize Ladder Manager
-  %h2.tagline Create and manage brilliantly simple online ladders.
-  %div.centeredContainer.home-options
+  %h2.tagline Online ladders have never been easier
+  %div.small-content-wrapper.centeredContainer
     %a.btn.btn-primary.btn-lg.btn-block(href="#{new_ladder_path}" title="Create new ladder") Create New Ladder
     %p.spacer-text
       or
-    - if alert
-      .alert.alert-danger.alert-dismissable.text-left= alert
     = form_tag(ladders_search_path, method: :post) do
       .field
         .input-group
           %input.input-lg.form-control(name="id" type="text" placeholder="Enter existing ladder id")
           %span.input-group-btn
             = submit_tag("Load", :class => 'btn btn-primary btn-lg')
+    - if alert
+      .alert.alert-danger.alert-dismissable.text-left= alert

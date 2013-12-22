@@ -1,19 +1,12 @@
 @import 'colors';
 @import 'type';
 
-.container {
-  padding-top: 150px;
-}
-
-.home-options {
-  width: 400px;
-}
-
 .tagline {
   font-size: $largePx;
   font-weight: 300;
   letter-spacing: 1px;
   margin:0.25em 0 1em 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 .spacer-text {
   padding: 0.5em 0;
