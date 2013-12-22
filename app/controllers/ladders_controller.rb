@@ -87,6 +87,6 @@ class LaddersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ladder_params
-      params.require(:ladder).permit(:name)
+      params.require(:ladder).permit(:name, :admin_email)
     end
 end

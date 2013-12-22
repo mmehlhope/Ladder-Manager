@@ -10,12 +10,14 @@ body, html {
   min-height: 100%;
 }
 
-.container-large-offset {
-  padding-top: 150px;
-}
 .container-small-offset {
   padding-top:75px;
 }
+
+.container-large-offset {
+  padding-top: 150px;
+}
+
 .header {
   position: fixed;
   top: 0;
