@@ -38,12 +38,23 @@ class CompetitorTest < ActiveSupport::TestCase
     assert_equal 988, new_rating, "Competitor ELO decreased"
   end
 
-
   test "should update competitor rating" do
     competitor = Competitor.new
     assert_equal 1000, competitor.rating,  "Competitor default rating"
 
     competitor.update_rating(1200)
     assert_equal 1200, competitor.rating, "Competitor's rating updated"
+  end
+
+  test "invalid competitor name should not save" do
+    competitor = Competitor.new(name: "bob;exec()")
+    assert !competitor.valid?
+    assert !competitor.save
+  end
+
+  test "valid competitor name should save" do
+    competitor = Competitor.new(name: "Steven12")
+    assert competitor.valid?
+    assert competitor.save
   end
 end
