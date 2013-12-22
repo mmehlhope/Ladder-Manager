@@ -1,0 +1,100 @@
+LadderManager.com
+
+Home Page
+  > Create New Ladder
+    -> Ladder#new
+  - Go to existing ladder
+    - Input Ladder id
+     -> Ladder#show
+
+Ladder#new
+  - Input Ladder Name
+  - Input Ladder Admin email
+  - Input Ladder Admin Password
+
+Ladder#show
+  - List of ladder competitors
+    - Include rank, name, record, rating
+  - Admin Panel
+    - Input admin password
+      - Doing so unlocks admin panel
+    > Forgot password?
+      -> Ladder#password_reset
+    ________________________________
+
+    > Add competitor(s)
+      -> Competitors#new
+    > Record matches
+      -> Matches#new
+    > Edit ladder
+      -> Ladder#edit
+  - Recent Matches
+    - List of recent matches
+      - Competitor1 vs. Competitor2
+      > Details link
+        -> Matches#show
+    > Show all matches link
+      -> Matches#index
+
+Ladder#edit
+  - Input ladder name
+  - Input ladder existing password
+  - Input ladder new password
+  - Input ladder new password
+  - Delete Ladder
+
+Ladder#password_reset
+  - Input admin email address
+   -> Send email with password instructions
+
+Matches#new
+  - Select competitor 1
+  - Select competitor 2
+  -> Matches#index
+
+Matches#index
+  - List of all matches in ladder, newest first
+    > Match ID
+      -> Matches#show
+    - Competitor 1 vs. Competitor 2
+    - Date created
+    - Date of last game played
+    - Victor (if any)
+  > Edit (if no games)
+    -> Matches#edit
+  > Add Game (if admin)
+    -> Games#new
+  > Finalize (if admin)
+  > Delete (if admin)
+
+Matches#show
+  - Match ID
+  > Competitor 1
+    -> Competitors#show
+  > Competitor 2
+    -> Competitors#show
+  - Date created
+  - Date of last game played
+  - Victor (if any)
+
+Matches#edit
+  - Change competitor 1
+  - Change competitor 2
+
+Competitors#new
+  - Input competitor(s)? name
+
+Competitors#show
+  - Rank?
+  - Name
+  - Record
+  - rating
+  - Match history
+    > Match ID
+    > vs. Opponent
+    - Date
+    - Number of games played
+    - Win/Loss/Tie/Undetermined
+
+Competitors#edit
+  - Input new competitor name
