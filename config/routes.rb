@@ -2,14 +2,20 @@ RailsCompetitionPlatform::Application.routes.draw do
   # General User / Admin
   resources :users
 
+  # Ladder, competitors, matches, games
   resources :ladders, shallow: true do
     resources :competitors
     resources :matches do
       get 'finalize', on: :member
-      
+
       resources :games
     end
   end
+
+  # Custom routes
+  post '/ladders/search', to: "ladders#search"
+
+
 
   # Custom Match routes
   # get 'matches/:id/finalize' => 'matches#finalize'
@@ -18,7 +24,7 @@ RailsCompetitionPlatform::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'ladders#index'
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -54,7 +60,7 @@ RailsCompetitionPlatform::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

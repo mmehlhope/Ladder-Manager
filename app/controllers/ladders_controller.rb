@@ -63,6 +63,21 @@ class LaddersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  # GET /ladders/search
+  def search
+    if params[:id] =~ /\A[0-9]+\z/
+      ladder = Ladder.find_by_id(params[:id])
+    else
+      error = "Ladder IDs can only be numbers, please try again."
+    end
+
+    unless ladder.nil? or @error
+      redirect_to ladder
+    else
+      error ||= "That Ladder ID was not found, please try again."
+      redirect_to root_path, alert: error
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
