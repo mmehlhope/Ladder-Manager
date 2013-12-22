@@ -7,7 +7,6 @@
       %ul
         - @competitor.errors.full_messages.each do |msg|
           %li= msg
-  = f.hidden_field :rating, value: @default_competitor_rating
   .field
     .form-group
       = f.text_field :name, :class => "form-control", :placeholder => "Competitor name"

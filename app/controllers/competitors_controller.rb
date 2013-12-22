@@ -15,7 +15,6 @@ class CompetitorsController < ApplicationController
 
   # GET /competitors/new
   def new
-    @default_competitor_rating = 1000
     @competitor = @ladder.competitors.build
   end
 
