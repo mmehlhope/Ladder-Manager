@@ -4,7 +4,22 @@ $basePx   : 12px;
 $smallPx  : 14px;
 $mediumPx : 18px;
 $largePx  : 24px;
+$titlePx  : 48px;
 
-$lightWt  : 300;
-$mediumWt : 500;
-$heavyWt  : 700;
+
+@mixin century-gothic {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+@mixin text-shadow {
+  text-shadow: 0 2px 3px rgba(0,0,0,0.3)
+}
+
+.titleize {
+  @include century-gothic;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1em;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+}

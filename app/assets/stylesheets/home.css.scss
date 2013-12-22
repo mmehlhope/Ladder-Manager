@@ -1,25 +1,19 @@
 @import 'colors';
 @import 'type';
 
-.home-page {
-  background:$homePageBg url('/assets/background.jpg') center -150px no-repeat;
-}
 .container {
   padding-top: 150px;
 }
-.home-options {
-  width: 300px;
-}
 
-h1 {
-  font-weight: $heavyWt;
-  margin: 0;
+.home-options {
+  width: 400px;
 }
 
 .tagline {
   font-size: $largePx;
-  font-weight: $lightWt;
-  margin:0.5em 0 1em 0;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin:0.25em 0 1em 0;
 }
 .spacer-text {
   padding: 0.5em 0;
