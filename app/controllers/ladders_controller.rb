@@ -57,12 +57,14 @@ class LaddersController < ApplicationController
   # DELETE /ladders/1
   # DELETE /ladders/1.json
   def destroy
-    if @ladder.destroy
-      format.html { redirect_to ladders_url }
-      format.json { head :no_content }
-    else
-      format.html { redirect_to @ladder, alert: "There was an error deleting this ladder"}
-      format.json { render json: @ladder.errors,  status: :unprocessable_entity}
+    respond_to do |format|
+      if @ladder.destroy
+        format.html { redirect_to ladders_path }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @ladder, alert: "There was an error deleting this ladder"}
+        format.json { render json: @ladder.errors,  status: :unprocessable_entity}
+      end
     end
   end
   # GET /ladders/search
