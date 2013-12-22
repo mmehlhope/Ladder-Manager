@@ -523,10 +523,10 @@ dd {
   .dl-horizontal dd:after {
     content: " ";
     /* 1 */
-  
+
     display: table;
     /* 2 */
-  
+
   }
   .dl-horizontal dd:after {
     clear: both;
@@ -535,10 +535,10 @@ dd {
   .dl-horizontal dd:after {
     content: " ";
     /* 1 */
-  
+
     display: table;
     /* 2 */
-  
+
   }
   .dl-horizontal dd:after {
     clear: both;
@@ -2109,6 +2109,7 @@ fieldset[disabled] .btn-link:focus {
   font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
+  display: block;
 }
 .btn-sm,
 .btn-xs {
@@ -2505,8 +2506,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   z-index: 2;
 }
 .alert {
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 6px;
+  margin-bottom: 12px;
   border: 1px solid transparent;
   border-radius: 4px;
 }

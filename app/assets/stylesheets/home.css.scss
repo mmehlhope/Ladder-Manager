@@ -1,0 +1,28 @@
+@import 'colors';
+@import 'type';
+
+.home-page {
+  background:$homePageBg url('/assets/background.jpg') center -150px no-repeat;
+}
+.container {
+  padding-top: 150px;
+}
+.home-options {
+  width: 300px;
+}
+
+h1 {
+  font-weight: $heavyWt;
+  margin: 0;
+}
+
+.tagline {
+  font-size: $largePx;
+  font-weight: $lightWt;
+  margin:0.5em 0 1em 0;
+}
+.spacer-text {
+  padding: 0.5em 0;
+  margin: 0;
+  font-style: italic;
+}
