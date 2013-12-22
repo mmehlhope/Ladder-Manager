@@ -2,6 +2,10 @@ class Competitor < ActiveRecord::Base
   belongs_to :ladder
   has_and_belongs_to_many :matches
 
+  validates :name, presence: true, format: {
+    with: /\A[a-zA-Z0-9]+\z/, message: "can only contain letters and numbers"
+  }
+
   include CompetitorsHelper
   include Elo
 
