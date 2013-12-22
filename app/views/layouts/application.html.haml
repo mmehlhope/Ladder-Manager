@@ -1,14 +1,15 @@
 !!!
 %html
   %head
-    %title Stuff
+    %title Ladder Manager
     #{stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true}
     #{requirejs_include_tag}
     #{csrf_meta_tags}
     = yield :head
 
   %body
-    = render :partial => 'includes/header'
-    %div.container
-      = yield
+    - exclude_header = @exclude_header || false
+    - unless exclude_header
+      = render :partial => 'includes/header'
+    = yield
     = render :partial => 'includes/footer'

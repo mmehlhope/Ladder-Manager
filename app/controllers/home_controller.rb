@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   # GET /
   def index
-    render "index", layout: false
+    @exclude_header = true
   end
 
 end

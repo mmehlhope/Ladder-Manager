@@ -1,26 +1,18 @@
-!!!
-%html
-  %head
-    %title Ladder Manager
-    #{stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true}
-    #{stylesheet_link_tag "home", media: "all"}
-    #{requirejs_include_tag}
-    #{csrf_meta_tags}
+= content_for :head do
+  #{stylesheet_link_tag "home", media: "all"}
 
-  %body.home-page
-    %div.container.col-sm-6.centeredContainer.text-center
-      %h1 Ladder Manager
-      %h2.tagline Create and manage brilliantly simple online ladders.
-      %div.centeredContainer.home-options
-        %a.btn.btn-primary.btn-lg(href="#{new_ladder_path}" title="Create new ladder") Create New Ladder
-        %p.spacer-text
-          or
-        - if alert
-          .alert.alert-danger.alert-dismissable.text-left= alert
-        = form_tag(ladders_search_path, method: :post) do
-          .field
-            .input-group
-              %input.form-control(name="id" type="text" placeholder="Enter existing ladder id")
-              %span.input-group-btn
-                = submit_tag("Load", :class => 'btn btn-primary')
-
+%div.container.centeredContainer.text-center
+  %h1.titleize Ladder Manager
+  %h2.tagline Create and manage brilliantly simple online ladders.
+  %div.centeredContainer.home-options
+    %a.btn.btn-primary.btn-lg.btn-block(href="#{new_ladder_path}" title="Create new ladder") Create New Ladder
+    %p.spacer-text
+      or
+    - if alert
+      .alert.alert-danger.alert-dismissable.text-left= alert
+    = form_tag(ladders_search_path, method: :post) do
+      .field
+        .input-group
+          %input.input-lg.form-control(name="id" type="text" placeholder="Enter existing ladder id")
+          %span.input-group-btn
+            = submit_tag("Load", :class => 'btn btn-primary btn-lg')
