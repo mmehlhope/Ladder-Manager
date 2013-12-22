@@ -1,8 +1,6 @@
-.col-md-8.centeredContainer
-  .panel.panel-default
-    .panel-heading.clearfix
-      %h2.panel-title Add new competitor
-      .panel-actions
-        %a(href="#{ladder_path(@ladder)}") Back to ladder
-    .panel-body
-      = render 'create'
+.container-large-offset.centeredContainer.text-center
+  %h1.titleize Add new competitor
+  .small-content-wrapper.centeredContainer
+    - if alert
+      .alert.alert-danger.alert-dismissable.text-left= alert
+    = render 'create'
