@@ -8,11 +8,11 @@
         - @game.errors.full_messages.each do |msg|
           %li= msg
   .field
-    = f.label :competitor_1_score, "#{@match.get_competitor_1.name}'s score"
+    = f.label :competitor_1_score, "#{@match.competitor_1_name}'s score"
     .input-group
       = f.text_field :competitor_1_score, :class => "form-control"
 
-    = f.label :competitor_2_score, "#{@match.get_competitor_2.name}'s score"
+    = f.label :competitor_2_score, "#{@match.competitor_2_name}'s score"
     .input-group
       = f.text_field :competitor_2_score, :class => "form-control"
   = f.submit :class => "btn btn-primary"

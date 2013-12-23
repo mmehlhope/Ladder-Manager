@@ -62,5 +62,15 @@ class MatchTest < ActiveSupport::TestCase
     assert_not_equal "Andrew", @match.losing_competitor.name, "Losing competitor is not Andrew"
   end
 
+  test "should return competitor name" do
+    assert_equal "Andrew", @match.competitor_1_name
+  end
+
+  test "should return n/a as name" do
+    assert_equal "Andrew", @match.competitor_1_name
+    @match.get_competitor_1.destroy
+    assert_equal "N/A", @match.competitor_1_name
+  end
+
 
 end

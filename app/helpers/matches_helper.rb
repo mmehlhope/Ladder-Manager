@@ -12,6 +12,14 @@ module MatchesHelper
     competitors.find_by_id(competitor_2)
   end
 
+  def competitor_1_name
+    get_competitor_1.try(:name) || "N/A"
+  end
+
+  def competitor_2_name
+    get_competitor_2.try(:name) || "N/A"
+  end
+
   def winning_competitor
     competitors.find_by_id(winner_id)
   end

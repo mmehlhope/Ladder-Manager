@@ -57,4 +57,5 @@ class CompetitorTest < ActiveSupport::TestCase
     assert competitor.valid?
     assert competitor.save
   end
+
 end

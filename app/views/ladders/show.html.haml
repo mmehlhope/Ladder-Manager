@@ -58,9 +58,9 @@
               - @matches.each do |match|
                 %tr
                   %td
-                    = match.get_competitor_1.name
+                    = match.competitor_1_name
                     vs.
-                    = match.get_competitor_2.name
+                    = match.competitor_2_name
                   %td.text-right
                     = link_to 'Details', match_path(match)
         - else
