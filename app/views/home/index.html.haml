@@ -1,10 +1,10 @@
 = content_for :head do
   #{stylesheet_link_tag "home", media: "all"}
 
-%div.container-large-offset.centeredContainer.text-center
+%div.col-medium.container-large-offset.centeredContainer.text-center
   %h1.titleize Ladder Manager
   %h2.tagline Online ladders have never been easier
-  %div.small-content-wrapper.centeredContainer
+  %div.col-small.centeredContainer
     %a.btn.btn-primary.btn-lg.btn-block(href="#{new_ladder_path}" title="Create new ladder") Create New Ladder
     %p.spacer-text
       or

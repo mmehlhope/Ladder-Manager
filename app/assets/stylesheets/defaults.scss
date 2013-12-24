@@ -22,11 +22,11 @@ body, html {
   position: fixed;
   top: 0;
   left: 50%;
-  margin-left: -200px;
+  margin-left: -12em;
   font-size: $mediumPx;
   line-height: 2em;
   text-align: center;
-  width: 400px;
+  width: 24em;
   background: #000;
   color: #fff;
   text-transform: uppercase;
@@ -34,8 +34,41 @@ body, html {
   box-shadow: 0 2px 3px rgba(0,0,0,0.3)
 }
 
-.small-content-wrapper {
-  width: 400px;
+.content-wrapper {
+  width: 75em;
+}
+.col-xsmall,
+.col-small,
+.col-medium,
+.col-large,
+.col-xlarge {
+
+  float: left;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+
+  &.first {
+    padding: 0 2.5em 0 0;
+  }
+  &.last {
+    padding: 0 0 0 2.5em;
+  }
+}
+
+.col-xsmall {
+  width: 15em;
+}
+.col-small {
+  width: 30em;
+}
+.col-medium {
+  width: 45em;
+}
+.col-large {
+  width: 60em;
+}
+.col-xlarge {
+  width: 75em;
 }
 
 // Bootstrap Addons
@@ -61,4 +94,21 @@ body, html {
   float:none;
   margin-left: auto;
   margin-right: auto;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
 }

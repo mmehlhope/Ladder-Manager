@@ -67,6 +67,7 @@ class LaddersController < ApplicationController
       end
     end
   end
+
   # GET /ladders/search
   def search
     if params[:id] =~ /\A[0-9]+\z/
