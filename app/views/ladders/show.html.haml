@@ -1,34 +1,47 @@
 %p#notice= notice
 
 %div.content-wrapper.container-small-offset.centeredContainer.clearfix
-  %h1.titleize= @ladder.name
+  %div.col-xlarge
+    %h1.titleize.pull-left= @ladder.name
+    .btn-group.pull-right
+      %button.btn.btn-primary.btn-lg.dropdown-toggle(data-toggle="dropdown")
+        Admin
+        %span.caret
+      %ul.dropdown-menu
+        %li(role="presentation")
+          %a(role="menuitem" tabindex="-1" href="#") Action 1
+        %li(role="presentation")
+          %a(role="menuitem" tabindex="-1" href="#") Action 2
+        %li(role="presentation")
+          %a(role="menuitem" tabindex="-1" href="#") Action 3
 
   %div.col-medium.first
-    %table.table.table-striped
-      %thead
-        %tr
-          %th(style="width:10%;") Rank
-          %th(style="width:25%;") Name
-          %th.text-center(style="width:25%;") Record
-          %th.text-center(style="width:25%;") Rating
-          %th.text-right(style="width:15%;") Actions
-      %tbody
-        - rank = 0
-        - @competitors.each do |competitor|
+    .panel
+      %table.table.table-striped
+        %thead
           %tr
-            %td
-              %span.badge= rank += 1
-            %td= competitor.name
-            %td.text-center #{competitor.wins} - #{competitor.losses}
-            %td.text-center= competitor.rating
-            %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
+            %th(style="width:10%;") Rank
+            %th(style="width:25%;") Name
+            %th.text-center(style="width:25%;") Record
+            %th.text-center(style="width:25%;") Rating
+            %th.text-right(style="width:15%;") Actions
+        %tbody
+          - rank = 0
+          - @competitors.each do |competitor|
+            %tr
+              %td
+                %span.badge= rank += 1
+              %td= competitor.name
+              %td.text-center #{competitor.wins} - #{competitor.losses}
+              %td.text-center= competitor.rating
+              %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
   %div.col-small.last
-    .panel.panel-default
-      .panel-heading.clearfix
-        %h2.panel-title Recent Matches
-
-      - if @matches.size > 0
-        %table.table
+    .panel
+      %table.table.table-striped
+        %thead
+          %tr
+            %th(colspan="3") Recent Matches
+        - if @matches.size > 0
           %tbody
             - @matches.each do |match|
               %tr
@@ -36,79 +49,9 @@
                   = match.competitor_1_name
                   vs.
                   = match.competitor_2_name
+                %td= match.created_at.strftime("%B %d, %Y")
                 %td.text-right
                   = link_to 'Details', match_path(match)
-      - else
-        .panel-body
-          %p There are no recent matches
-
-
-
-
-
-/ .col-md-12
-/   %h1 Site name
-/   .col-md-7
-/     .panel.panel-default
-/       .panel-heading.clearfix
-/         %h2.panel-title= @ladder.name
-/         .panel-actions
-/           %a(href="#{new_ladder_match_path(@ladder)}" title="New Match")
-/             %span.glyphicon.glyphicon-edit
-/           %a.edit-ladder(href="#{edit_ladder_path(@ladder)}" title="Edit Ladder")
-/             %span.glyphicon.glyphicon-cog
-/           %a.delete-ladder(href="#{new_ladder_match_path(@ladder)}" title="Delete")
-/             %span.glyphicon.glyphicon-trash
-/       %table.table
-/         %thead
-/           %tr
-/             %th(style="width:10%;") Rank
-/             %th(style="width:25%;") Name
-/             %th.text-center(style="width:25%;") Record
-/             %th.text-center(style="width:25%;") Rating
-/             %th.text-right(style="width:15%;") Actions
-/         %tbody
-/           - rank = 0
-/           - @competitors.each do |competitor|
-/             %tr
-/               %td
-/                 %span.badge= rank += 1
-/               %td= competitor.name
-/               %td.text-center #{competitor.wins} - #{competitor.losses}
-/               %td.text-center= competitor.rating
-/               %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
-/   .col-md-5.pull-right
-/     .col-md-12
-/       .panel.panel-default
-/         .panel-heading.clearfix
-/           %h2.panel-title Actions
-/         %ul.list-group
-/           %li.list-group-item
-/             = link_to 'Show all ladders', ladders_path
-/           %li.list-group-item
-/             = link_to 'Add competitor', new_ladder_competitor_path(@ladder)
-/           %li.list-group-item
-/             = link_to 'New Match', new_ladder_match_path(@ladder)
-/           %li.list-group-item
-/             = link_to 'Rename Ladder', edit_ladder_path(@ladder)
-/           %li.list-group-item
-/             = link_to 'Delete Ladder', @ladder, method: :delete
-/     .col-md-12
-/       .panel.panel-default
-/         .panel-heading.clearfix
-/           %h2.panel-title Recent Matches
-
-/         - if @matches.size > 0
-/           %table.table
-/             %tbody
-/               - @matches.each do |match|
-/                 %tr
-/                   %td
-/                     = match.competitor_1_name
-/                     vs.
-/                     = match.competitor_2_name
-/                   %td.text-right
-/                     = link_to 'Details', match_path(match)
-/         - else
-/           .panel-body
-/             %p There are no recent matches
+        - else
+          .panel-body
+            %p There are no recent matches
