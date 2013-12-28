@@ -27,26 +27,3 @@
     - else
       %p You have no ladders currently, would you like to
       %a= link_to 'create one', new_ladder_path
-
-
-/ %h1 Ladders
-/ .col-md-8.centeredContainer
-/   .panel.panel-default
-/     .panel-heading.clearfix
-/       %h2.panel-title Your ladders
-/     - if @ladders.length > 0
-/       %table.table.table-striped
-/         %thead
-/           %tr
-/             %th Name
-/             %th Actions
-/             %th
-/         %tbody
-/           - @ladders.each do |ladder|
-/             %tr
-/               %td= link_to ladder.name, ladder_path(ladder)
-/               %td= link_to 'Rename', edit_ladder_path(ladder)
-/               %td= link_to 'Delete', ladder, method: :delete, data: { confirm: 'Are you sure?' }
-/     - else
-/       %p You have no ladders currently, would you like to
-/       %a= link_to 'create one', new_ladder_path
