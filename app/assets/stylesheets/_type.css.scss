@@ -1,5 +1,6 @@
-@import 'colors';
 // Typography
+
+@import 'colors';
 
 $basePx        : 12px;
 $smallPx       : 14px;
@@ -8,7 +9,8 @@ $mediumPx      : 18px;
 $largePx       : 24px;
 $titlePx       : 48px;
 
-$panelHeaderPx : 36px;
+$panelHeaderPx   : 36px;
+$sidebarHeaderPx : $largePx;
 
 
 @mixin century-gothic {
@@ -34,4 +36,10 @@ $panelHeaderPx : 36px;
   font-size: $panelHeaderPx;
   font-weight: 300;
   margin-top: 0;
+}
+.sidebarPanelHeading {
+  color: $panelTitleColor;
+  font-weight: 300;
+  font-size: $sidebarHeaderPx;
+  margin-top: $panelHeaderPx - $sidebarHeaderPx;
 }
