@@ -1,10 +1,13 @@
+@import 'colors';
 // Typography
 
-$basePx   : 12px;
-$smallPx  : 14px;
-$mediumPx : 18px;
-$largePx  : 24px;
-$titlePx  : 48px;
+$basePx        : 12px;
+$smallPx       : 14px;
+$mediumPx      : 18px;
+$largePx       : 24px;
+$titlePx       : 48px;
+
+$panelHeaderPx : 36px;
 
 
 @mixin century-gothic {
@@ -16,10 +19,18 @@ $titlePx  : 48px;
 
 .titleize {
   @include century-gothic;
+  color: #fff;
   font-size: 48px;
   font-weight: bold;
   line-height: 1em;
   letter-spacing: 1px;
   text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
+}
+
+.panelHeading {
+  color: $panelTitleColor;
+  font-size: $panelHeaderPx;
+  font-weight: 300;
+  margin-top: 0;
 }

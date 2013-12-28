@@ -1,6 +1,6 @@
-.container-large-offset.centeredContainer.text-center
-  %h1.titleize New competitor
-  .small-content-wrapper.centeredContainer
+%div.col-small.centeredContainer.container-large-offset
+  %h1.panelHeading New Competitor
+  .panel.panel-padded
     - if alert
       .alert.alert-danger.alert-dismissable.text-left= alert
     = render 'create'

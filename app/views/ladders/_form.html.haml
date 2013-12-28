@@ -1,12 +1,8 @@
 = form_for(@ladder) do |f|
   - if @ladder.errors.any?
-    %div#error_explanation
-      %h2
-        = pluralize(@ladder.errors.count, "error")
-        prohibited this ladder from being saved:
-      %ul
-        - @ladder.errors.full_messages.each do |msg|
-          %li= msg
+    %ul.alert.alert-danger.alert-dismissable.text-left
+      - @ladder.errors.full_messages.each do |msg|
+        %p= msg
   .field
     .form-group
       = f.text_field :name, :class => "form-control", :placeholder => "Ladder name"

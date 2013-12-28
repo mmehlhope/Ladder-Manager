@@ -1,9 +1,6 @@
-= content_for :head do
-  %javascript_include_tag "bootstrap.min.js"
-
-%div.col-medium.container-large-offset.centeredContainer.text-center
-  %h1.titleize New Ladder
-  %div.col-small.centeredContainer
+%div.col-small.centeredContainer.container-large-offset
+  %h1.panelHeading New Ladder
+  .panel.panel-padded
     - if alert
       .alert.alert-danger.alert-dismissable.text-left= alert
     = render 'form'
