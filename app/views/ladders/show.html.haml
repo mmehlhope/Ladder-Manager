@@ -1,29 +1,51 @@
 %p#notice= notice
-/ CHANGEME
-- blah = false
-%div.col-medium.centeredContainer.container-small-offset
-  %h1.panelHeading= @ladder.name
-  .panel.panel-full-padding
-    %table.table.table-striped
-      %thead
-        %tr
-          %th(style="width:10%;") Rank
-          %th(style="width:25%;") Name
-          %th.text-center(style="width:25%;") Record
-          %th.text-center(style="width:25%;") Rating
-          - if blah
-            %th.text-right(style="width:15%;") Actions
-      %tbody
-        - rank = 0
-        - @competitors.each do |competitor|
+- blah = false # change me
+%section.content-wrapper.container-small-offset
+  .col-medium.first
+    %h1.panelHeading= @ladder.name
+    .panel.panel-full-padding
+      %table.table.table-striped
+        %thead
           %tr
-            %td
-              %span.badge= rank += 1
-            %td= competitor.name
-            %td.text-center #{competitor.wins} - #{competitor.losses}
-            %td.text-center= competitor.rating
+            %th(style="width:10%;") Rank
+            %th(style="width:25%;") Name
+            %th.text-center(style="width:25%;") Record
+            %th.text-center(style="width:25%;") Rating
             - if blah
-              %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
+              %th.text-right(style="width:15%;") Actions
+        %tbody
+          - rank = 0
+          - @competitors.each do |competitor|
+            %tr
+              %td
+                %span.badge= rank += 1
+              %td= competitor.name
+              %td.text-center #{competitor.wins} - #{competitor.losses}
+              %td.text-center= competitor.rating
+              - if blah
+                %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
+  %aside.pull-right.last
+    %h2.panelHeading Recent matches
+    .panel.panel-full-padding
+      %table.table.table-striped
+        %thead
+          %tr
+            %th ID
+            %th Competitors
+            %th.text-right Date
+        - if @matches.size > 0
+          %tbody
+            - @matches.each do |match|
+              %tr
+                %td= link_to match.id, match
+                %td
+                  = match.competitor_1_name
+                  vs.
+                  = match.competitor_2_name
+                %td.text-right= match.created_at.strftime("%m/%d/%Y")
+        - else
+          .panel-body
+            %p There are no recent matches
 
 
 
@@ -62,23 +84,23 @@
 /               %td.text-center #{competitor.wins} - #{competitor.losses}
 /               %td.text-center= competitor.rating
 /               %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
-/   %div.col-small.last
-/     .panel
-/       %table.table.table-striped
-/         %thead
-/           %tr
-/             %th(colspan="3") Recent Matches
-/         - if @matches.size > 0
-/           %tbody
-/             - @matches.each do |match|
-/               %tr
-/                 %td
-/                   = match.competitor_1_name
-/                   vs.
-/                   = match.competitor_2_name
-/                 %td= match.created_at.strftime("%B %d, %Y")
-/                 %td.text-right
-/                   = link_to 'Details', match_path(match)
-/         - else
-/           .panel-body
-/             %p There are no recent matches
+/ %div.col-small.last
+/   .panel
+/     %table.table.table-striped
+/       %thead
+/         %tr
+/           %th(colspan="3") Recent Matches
+/       - if @matches.size > 0
+/         %tbody
+/           - @matches.each do |match|
+/             %tr
+/               %td
+/                 = match.competitor_1_name
+/                 vs.
+/                 = match.competitor_2_name
+/               %td= match.created_at.strftime("%B %d, %Y")
+/               %td.text-right
+/                 = link_to 'Details', match_path(match)
+/       - else
+/         .panel-body
+/           %p There are no recent matches
