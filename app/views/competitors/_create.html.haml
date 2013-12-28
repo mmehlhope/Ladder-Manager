@@ -1,7 +1,7 @@
 = form_for([@ladder, @competitor]) do |f|
   - if @competitor.errors.any?
     %ul.alert.alert-danger.alert-dismissable.text-left
-      - @ladder.errors.full_messages.each do |msg|
+      - @competitor.errors.full_messages.each do |msg|
         %p= msg
   .field
     .form-group

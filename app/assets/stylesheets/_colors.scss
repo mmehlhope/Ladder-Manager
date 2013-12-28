@@ -1,11 +1,12 @@
 // Colors
 
 // General
-$bodyBg         : #fff;
+$bodyBg             : #fff;
+$headerBg           : #333;
 
 // Panels
-$panelHeaderBg   : #2C333A;
-$panelTitleColor : #333;
+$panelHeaderBg      : #2C333A;
+$panelTitleColor    : $headerBg;
 
 // Tables
-$tableBg        : #fff;
+$tableBg            : $bodyBg;

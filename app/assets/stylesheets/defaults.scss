@@ -19,19 +19,22 @@ body, html {
   padding-top: 150px;
 }
 
-.header {
+header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  font-size: $mediumPx;
-  line-height: 2em;
-  text-align: center;
-  background: #000;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: $bodyBg;
+  background: $headerBg;
   box-shadow: 0 2px 3px rgba(0,0,0,0.3)
+
+}
+.header-wrapper {
+  width: 75em;
+  line-height: 2.25em;
+  font-size: $headerPx;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 .content-wrapper {
