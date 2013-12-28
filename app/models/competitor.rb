@@ -3,7 +3,7 @@ class Competitor < ActiveRecord::Base
   has_and_belongs_to_many :matches
 
   validates :name, presence: true, format: {
-    with: /\A[a-zA-Z0-9]+\z/, message: "can only contain letters and numbers"
+    with: /\A[a-zA-Z0-9 ]+\z/, message: "can only contain letters, numbers, and spaces."
   }
 
   include CompetitorsHelper
