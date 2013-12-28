@@ -1,6 +1,13 @@
 @import 'colors';
 @import 'type';
 
+$xSmallContainerWidth : 240px;
+$sidebarContainerWidth: 380px;
+$smallContainerWidth  : 480px;
+$mediumContainerWidth : 720px;
+$largeContainerWidth  : 960px;
+$xLargeContainerWidth : 1100px;
+
 // Layout
 body {
   background:$bodyBg url('/assets/ladder-manager-bg.jpg') center -250px no-repeat;
@@ -30,7 +37,7 @@ header {
 
 }
 .header-wrapper {
-  width: 75em;
+  width: $xLargeContainerWidth;
   line-height: 2.25em;
   font-size: $headerPx;
   font-weight: 300;
@@ -38,7 +45,9 @@ header {
 }
 
 .content-wrapper {
-  width: 75em;
+  width: $xLargeContainerWidth;
+  margin: 0 auto;
+  overflow: auto;
 }
 .col-xsmall,
 .col-small,
@@ -47,6 +56,7 @@ header {
 .col-xlarge {
 
   float: left;
+  overflow: auto;
   padding-left: 2.5em;
   padding-right: 2.5em;
 
@@ -54,24 +64,27 @@ header {
     padding: 0 2.5em 0 0;
   }
   &.last {
-    padding: 0 0 0 2.5em;
+    padding: 0;
   }
 }
 
 .col-xsmall {
-  width: 15em;
+  width: $xSmallContainerWidth;
+}
+.col-sidebar {
+  width: $sidebarContainerWidth;
 }
 .col-small {
-  width: 30em;
+  width: $smallContainerWidth;
 }
 .col-medium {
-  width: 45em;
+  width: $mediumContainerWidth;
 }
 .col-large {
-  width: 60em;
+  width: $largeContainerWidth;
 }
 .col-xlarge {
-  width: 75em;
+  width: $xLargeContainerWidth;
 }
 
 // Bootstrap Addons
