@@ -37,9 +37,9 @@ $sidebarHeaderPx : $largePx;
   font-weight: 300;
   margin-top: 0;
 }
-.sidebarPanelHeading {
+aside .panelHeading {
   color: $panelTitleColor;
   font-weight: 300;
   font-size: $sidebarHeaderPx;
-  margin-top: $panelHeaderPx - $sidebarHeaderPx;
+  margin-top: $panelHeaderPx - $sidebarHeaderPx +1;
 }
