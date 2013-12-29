@@ -1,8 +1,6 @@
-.col-md-8.centeredContainer
-  .panel.panel-default
-    .panel-heading.clearfix
-      %h2.panel-title New match
-      .panel-actions
-        %a(href="#{ladder_path(@ladder)}") Back to ladder
-    .panel-body
-      = render 'create'
+%div.col-small.centeredContainer.container-large-offset
+  %h1.panelHeading Record a match
+  .panel.panel-full-padding
+    - if alert
+      .alert.alert-danger.alert-dismissable.text-left= alert
+    = render 'create'

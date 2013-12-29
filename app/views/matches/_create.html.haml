@@ -2,17 +2,20 @@
   - if @match.errors.any?
     %div#error_explanation
       %h2
-        = pluralize(@match.errors.count, "error") 
+        = pluralize(@match.errors.count, "error")
         prohibited this match from being saved:
       %ul
         - @match.errors.full_messages.each do |msg|
           %li= msg
   - competitors_array = @competitors.map { |competitor| [competitor.name, competitor.id] }
   .field
-    = f.label :competitor_1
-    .input-group
-      = f.select :competitor_1, options_for_select(competitors_array), :class => "form-control"
-    = f.label :competitor_2
-    .input-group
-      = f.select :competitor_2, options_for_select(competitors_array), :class => "form-control"
+    .form-group
+      = f.label :competitor_1
+      .input-group
+        = f.select(:competitor_1, options_for_select(competitors_array), :class => "form-control")
+  .field
+    .form-group
+      = f.label :competitor_2
+      .input-group
+        = f.select :competitor_2, options_for_select(competitors_array), :class => "form-control"
   = f.submit :class => "btn btn-primary"

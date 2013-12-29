@@ -21,7 +21,7 @@
               %td= game.competitor_1_score
               %td= game.competitor_2_score
               %td
-        - if !@match.finalized
+        - if !@match.finalized?
           %tfoot
             %tr
               %td(colspan="4")

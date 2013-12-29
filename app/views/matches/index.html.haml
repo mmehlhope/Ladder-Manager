@@ -1,27 +1,37 @@
-%h1 Matches for #{@ladder.name}
-.col-md-8.centeredContainer
-  .panel.panel-default
-    .panel-heading.clearfix
-      %h2.panel-title Matches
-      .panel-actions
-        %a(href="#{ladder_path(@ladder)}") Back to ladder
+- blah = true
+%div.col-large.centeredContainer.container-small-offset
+  %h1.panelHeading Matches for #{@ladder.name}
+  .panel
+    - if alert
+      .alert.alert-danger.alert-dismissable.text-left= alert
     - if @matches.length > 0
       %table.table.table-striped
         %thead
           %tr
-            %th Name
-            %th Actions
+            %th ID
+            %th Competitors
+            %th Date
+            %th Status
+            - if blah
+              %th.text-right Actions
         %tbody
           - @matches.each do |match|
             %tr
+              %td= link_to match.id, match_path(match)
               %td
-                = match.get_competitor_1.try(:name)
+                = match.competitor_1_name
                 vs.
-                = match.get_competitor_2.try(:name)
-              %td
-                = link_to 'Edit', edit_match_path(match)
-                = link_to 'Add game', new_match_game_path(match)
-                = link_to 'Delete', match, method: :delete, data: { confirm: 'Are you sure?' }
+                = match.competitor_2_name
+              %td= match.created_at.strftime("%m/%d/%Y")
+              %td= match.finalized? ? 'Final' : 'In Progress'
+              - if blah
+                %td.text-right
+                  %a.btn.btn-success.btn-xs(href="#{new_match_game_path(match)}" title="Add game" class="#{match.finalized? ? 'disabled' : ''}") Add game
+                  %a.btn.btn-default.btn-xs(href="#{finalize_match_path(@match)}" title="Finalize match" class="#{match.finalized? ? 'disabled' : ''}") Finalize
+                  %a.btn.btn-danger.btn-xs(href="#{match}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{match.finalized? ? 'disabled' : ''}") Delete
+
+
     - else
-      %p You have no matces currently, would you like to
-      %a= link_to 'record one', new_ladder_match_path(@ladder)
+      %p There have been no matches recorded for #{@ladder.name}.
+      - if blah
+        %a= link_to 'Record a new match', new_ladder_match_path
