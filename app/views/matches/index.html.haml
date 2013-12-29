@@ -1,6 +1,6 @@
-- blah = true
+- blah = false
 %div.col-large.centeredContainer.container-small-offset
-  %h1.panelHeading Matches for #{@ladder.name}
+  %h1.panelHeading All matches
   .panel
 
     = render 'includes/message' unless flash.nil?
@@ -9,6 +9,13 @@
     - if @matches.length > 0
       %table.table.table-striped
         %thead
+          %tr.breadcrumb-bar
+            %th.breadcrumbs(colspan="5")
+              %a(href="#{ladder_path(@ladder)}") #{@ladder.name}
+              &#47; matches
+            - if blah
+              %th.text-right
+                %a.btn.btn-success.btn-xs(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
           %tr
             %th ID
             %th Competitors

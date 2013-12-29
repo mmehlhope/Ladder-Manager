@@ -1,3 +1,4 @@
+- blah = false
 %div.col-large.centeredContainer.container-small-offset
   %h1.panelHeading Match # #{@match.id} #{@match.finalized? ? '(final)' : nil}
   .panel
@@ -11,7 +12,8 @@
           %th Date played
           %th #{@match.competitor_1_name}'s score
           %th #{@match.competitor_2_name}'s score
-          %th
+          - if blah
+            %th
         %tbody
           - series = 0
           - @match.games.each do |game|
@@ -21,10 +23,11 @@
               %td= game.created_at.strftime("%m/%d/%Y")
               %td= game.competitor_1_score
               %td= game.competitor_2_score
-              %td.text-right
-                %a.btn.btn-primary.btn-xs(href="#{edit_game_path(game)}" title="Edit game" class="#{@match.finalized? ? 'disabled' : ''}") Edit
-                %a.btn.btn-danger.btn-xs(href="#{game_path(game)}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{@match.finalized? ? 'disabled' : ''}") Delete
-        - if !@match.finalized?
+              - if blah
+                %td.text-right
+                  %a.btn.btn-primary.btn-xs(href="#{edit_game_path(game)}" title="Edit game" class="#{@match.finalized? ? 'disabled' : ''}") Edit
+                  %a.btn.btn-danger.btn-xs(href="#{game_path(game)}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{@match.finalized? ? 'disabled' : ''}") Delete
+        - if !@match.finalized? && blah
           %tfoot
             %tr
               %td(colspan="5")
@@ -34,5 +37,6 @@
       %p.alert.alert-info
         %span.glyphicon.glyphicon-info-sign
         There are currently no games added for this match.
-        %a(href="#{new_match_game_path(@match)}") Record a new game.
+        - if blah
+          %a(href="#{new_match_game_path(@match)}") Record a new game.
   %a(href="#{ladder_matches_path(@ladder)}") Return to all matches

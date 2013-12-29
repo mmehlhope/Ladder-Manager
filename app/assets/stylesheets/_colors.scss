@@ -3,6 +3,7 @@
 // General
 $bodyBg             : #fff;
 $headerBg           : #333;
+$link               : #428BCA;
 
 // Panels
 $panelHeaderBg      : #2C333A;
@@ -11,3 +12,8 @@ $panelTitleColor    : $headerBg;
 // Tables
 $tableBg            : $bodyBg;
 $tableBorder        : #ddd;
+
+// Breadcrumbs
+$breadcrumbBg       : #343C46;
+$breadcrumbColor    : $tableBorder;
+$breadcrumbLinkColor: lighten($link, 20%);

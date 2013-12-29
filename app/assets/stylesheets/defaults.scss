@@ -88,6 +88,28 @@ aside {
   width: $xLargeContainerWidth;
 }
 
+// Breadcrumbs
+.breadcrumb-bar > th {
+  background: $breadcrumbBg;
+}
+.breadcrumb-bar .breadcrumbs {
+  color: $breadcrumbColor;
+  font-weight: normal;
+  a {
+    color: $breadcrumbLinkColor;
+  }
+}
+.breadcrumb-bar > th:first-child {
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+}
+.breadcrumb-bar > th:last-child {
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
+}
+
 // Bootstrap Addons
 .panel-actions {
   float:right;
