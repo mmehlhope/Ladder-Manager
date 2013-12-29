@@ -1,8 +1,6 @@
-.col-md-8.centeredContainer
-  .panel.panel-default
-    .panel-heading.clearfix
-      %h2.panel-title Rename ladder
-      .panel-actions
-        %a(href="#{ladder_path(@ladder)}") Back to ladder
-    .panel-body
-      = render 'form'
+%div.col-small.centeredContainer.container-large-offset
+  %h1.panelHeading Edit Ladder
+  .panel.panel-padded
+    - if alert
+      .alert.alert-danger.alert-dismissable.text-left= alert
+    = render 'edit_form'
