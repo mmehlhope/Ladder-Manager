@@ -1,0 +1,14 @@
+= form_for(@ladder) do |f|
+  - if @ladder.errors.any?
+    %ul.alert.alert-danger.alert-dismissable.text-left
+      - @ladder.errors.full_messages.each do |msg|
+        %p= msg
+  .field
+    .form-group
+      = f.text_field :name, :class => "form-control", :placeholder => "Ladder name"
+    .form-group
+      = f.text_field :admin_email, :class => "form-control", :placeholder => "Administrator email"
+  .field.text-left
+    .form-group
+      = f.submit :class => "btn btn-primary"
+      = link_to "Cancel", ladder_path
