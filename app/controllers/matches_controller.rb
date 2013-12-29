@@ -59,17 +59,24 @@ class MatchesController < ApplicationController
 
   # GET /matches/1/finalize
   def finalize
-    errors = "Match was already finalized" if @match.finalized
+
+    # Validate
+    errors = "Match was already finalized" if @match.finalized?
+    errors = "Match must contain at least one game to be finalized" if @match.games.count == 0
+
+    if errors.blank?
+      @match.finalize
+    end
 
     respond_to do |format|
-      if @match.finalize && errors.blank?
+      if @match.finalized?
 
         @match.update_player_stats
 
         format.html { redirect_to match_path(@match), notice: 'Match was successfully finalized.' }
         format.json { head :ok }
       else
-        msg = "There was an error finalizing the match" if msg.blank?
+        errors = "There was an error finalizing the match" if errors.blank?
         format.html { redirect_to match_path(@match), notice: errors }
         format.json { render json: { :msg => errors} }
       end
