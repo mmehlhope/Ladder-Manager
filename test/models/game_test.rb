@@ -10,6 +10,19 @@ class GameTest < ActiveSupport::TestCase
     @match.competitors << [c1, c2]
   end
 
+  test "scores can only contain integers" do
+    @game.update_attributes({
+      competitor_1_score: "test",
+      competitor_2_score: 3
+    })
+    assert !@game.valid?
+
+    @game.update_attributes({
+      competitor_1_score: 1
+    })
+    assert @game.valid?
+  end
+
   test "should populate match winner id" do
     game = @game
     assert_equal nil, game.winner_id, "Winner ID is nil by default"

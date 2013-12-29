@@ -5,6 +5,8 @@ class Game < ActiveRecord::Base
   after_save    :update_match_winner
   after_destroy :update_match_winner
 
+  validates :competitor_1_score, numericality: { only_integer: true }
+  validates :competitor_2_score, numericality: { only_integer: true }
 
   private
     # Based on the scores of the game, a winner is decided
