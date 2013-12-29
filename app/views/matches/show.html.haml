@@ -1,11 +1,8 @@
-.col-md-8.centeredContainer
-  %p#notice= notice
-  .panel.panel-default
-    .panel-heading.clearfix
-      %h2.panel-title Match #{@match.id} details #{@match.finalized ? '(final)' : nil}
-      .panel-actions
-        %a(href="#{edit_match_path(@match)}") Edit
-        %a(href="#{ladder_path(@ladder)}") Back to ladder
+%div.col-large.centeredContainer.container-small-offset
+  - if notice
+    .alert.alert-danger.alert-dismissable.text-left= notice
+  %h1.panelHeading Match # #{@match.id} #{@match.finalized? ? '(final)' : nil}
+  .panel
     - if @match.games.length > 0
       %table.table.table-striped
         %thead
@@ -17,7 +14,8 @@
           - series = 0
           - @match.games.each do |game|
             %tr
-              %td= series += 1
+              %td
+                %span.badge= series += 1
               %td= game.competitor_1_score
               %td= game.competitor_2_score
               %td
@@ -28,6 +26,5 @@
                 %a(href="#{new_match_game_path(@match)}") Record a new game
                 %a(href="#{finalize_match_path(@match)}") Finalize match
     - else
-      .panel-body
-        %p There are no games recorded for this match
-        %a(href="#{new_match_game_path(@match)}") Record a new game
+      %p There are no games recorded for this match
+      %a(href="#{new_match_game_path(@match)}") Record a new game
