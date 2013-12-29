@@ -1,9 +1,9 @@
 %p#notice= notice
-- blah = false # change me
+- blah = true # change me
 %section.content-wrapper.container-small-offset
   .col-medium.first
     %h1.panelHeading= @ladder.name
-    .panel.panel-full-padding
+    .panel
       %table.table.table-striped
         %thead
           %tr
@@ -23,84 +23,43 @@
               %td.text-center #{competitor.wins} - #{competitor.losses}
               %td.text-center= competitor.rating
               - if blah
-                %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
+                %td.text-right
+                  = link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }, :class => "text-danger"
   %aside.pull-right.last
     %h2.panelHeading Recent matches
-    .panel.panel-full-padding
-      %table.table.table-striped
-        %thead
-          %tr
-            %th ID
-            %th Competitors
-            %th.text-right Date
-        - if @matches.size > 0
-          %tbody
-            - @matches.each do |match|
+    .panel
+      - if @matches.size > 0
+        %table.table.table-striped
+          %thead
+            %tr
+              %th ID
+              %th Competitors
+              %th.text-right Date
+            %tbody
+              - @matches.each do |match|
+                %tr
+                  %td= link_to match.id, match
+                  %td
+                    = match.competitor_1_name
+                    vs.
+                    = match.competitor_2_name
+                  %td.text-right= match.created_at.strftime("%m/%d/%Y")
               %tr
-                %td= link_to match.id, match
-                %td
-                  = match.competitor_1_name
-                  vs.
-                  = match.competitor_2_name
-                %td.text-right= match.created_at.strftime("%m/%d/%Y")
-        - else
-          .panel-body
-            %p There are no recent matches
+                %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
+      - else
+        %span There are no recent matches
 
-
-
-/ %div.content-wrapper.container-small-offset.centeredContainer.clearfix
-/   %div.col-xlarge
-/     %h1.titleize.pull-left= @ladder.name
-/     .btn-group.pull-right
-/       %button.btn.btn-primary.btn-lg.dropdown-toggle(data-toggle="dropdown")
-/         Admin
-/         %span.caret
-/       %ul.dropdown-menu
-/         %li(role="presentation")
-/           %a(role="menuitem" tabindex="-1" href="#") Action 1
-/         %li(role="presentation")
-/           %a(role="menuitem" tabindex="-1" href="#") Action 2
-/         %li(role="presentation")
-/           %a(role="menuitem" tabindex="-1" href="#") Action 3
-
-/   %div.col-medium.first
-/     .panel
-/       %table.table.table-striped
-/         %thead
-/           %tr
-/             %th(style="width:10%;") Rank
-/             %th(style="width:25%;") Name
-/             %th.text-center(style="width:25%;") Record
-/             %th.text-center(style="width:25%;") Rating
-/             %th.text-right(style="width:15%;") Actions
-/         %tbody
-/           - rank = 0
-/           - @competitors.each do |competitor|
-/             %tr
-/               %td
-/                 %span.badge= rank += 1
-/               %td= competitor.name
-/               %td.text-center #{competitor.wins} - #{competitor.losses}
-/               %td.text-center= competitor.rating
-/               %td.text-right= link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }
-/ %div.col-small.last
-/   .panel
-/     %table.table.table-striped
-/       %thead
-/         %tr
-/           %th(colspan="3") Recent Matches
-/       - if @matches.size > 0
-/         %tbody
-/           - @matches.each do |match|
-/             %tr
-/               %td
-/                 = match.competitor_1_name
-/                 vs.
-/                 = match.competitor_2_name
-/               %td= match.created_at.strftime("%B %d, %Y")
-/               %td.text-right
-/                 = link_to 'Details', match_path(match)
-/       - else
-/         .panel-body
-/           %p There are no recent matches
+    %h2.panelHeading #{blah ? 'Admin Options' : 'Admin login'}
+    %div(class="#{blah ? 'panel' : 'panel panel-full-padding'}")
+      - if blah
+        %a.panel-block-link(href="#{edit_ladder_path}" title="Edit ladder") Edit ladder
+        %a.panel-block-link(href="#{new_ladder_competitor_path(@ladder)}" title="Add competitor") Add competitor
+        %a.panel-block-link(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
+        %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
+      - else
+        = form_tag(ladders_search_path, method: :post) do
+          .field
+            .input-group
+              %input.form-control(name="admin_password" type="text" placeholder="Administrator password")
+              %span.input-group-btn
+                = submit_tag("Submit", :class => 'btn btn-primary')

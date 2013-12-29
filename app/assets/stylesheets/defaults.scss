@@ -11,6 +11,7 @@ $xLargeContainerWidth : 1100px;
 // Layout
 body {
   background:$bodyBg url('/assets/ladder-manager-bg.jpg') center -250px no-repeat;
+  background-attachment: fixed;
 }
 
 body, html {
@@ -110,6 +111,16 @@ aside {
 }
 .panel-full-padding {
   padding: 1em;
+}
+
+.panel-block-link {
+  padding: 0.5em;
+  display:block;
+  border-bottom: 1px solid $tableBorder;
+
+  &:last-child {
+    border: 0;
+  }
 }
 
 // OO Styles

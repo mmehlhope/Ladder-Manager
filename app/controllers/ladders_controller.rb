@@ -12,7 +12,7 @@ class LaddersController < ApplicationController
   def show
     # Sort competitors in descending order by rating
     @competitors = @ladder.competitors.sort { |a,b| b.rating <=> a.rating }
-    @matches = @ladder.matches.limit(5)
+    @matches = @ladder.matches.limit(5).sort { |a,b| b.created_at <=> a.created_at }
   end
 
   # GET /ladders/new
