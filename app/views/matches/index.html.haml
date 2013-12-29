@@ -11,6 +11,7 @@
             %th ID
             %th Competitors
             %th Date
+            %th # of Games
             %th Status
             - if blah
               %th.text-right Actions
@@ -23,14 +24,13 @@
                 vs.
                 = match.competitor_2_name
               %td= match.created_at.strftime("%m/%d/%Y")
+              %td= match.games.count
               %td= match.finalized? ? 'Final' : 'In Progress'
               - if blah
                 %td.text-right
                   %a.btn.btn-success.btn-xs(href="#{new_match_game_path(match)}" title="Add game" class="#{match.finalized? ? 'disabled' : ''}") Add game
-                  %a.btn.btn-default.btn-xs(href="#{finalize_match_path(@match)}" title="Finalize match" class="#{match.finalized? ? 'disabled' : ''}") Finalize
+                  %a.btn.btn-default.btn-xs(href="#{finalize_match_path(match)}" title="Finalize match" class="#{match.finalized? ? 'disabled' : ''}") Finalize
                   %a.btn.btn-danger.btn-xs(href="#{match}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{match.finalized? ? 'disabled' : ''}") Delete
-
-
     - else
       %p There have been no matches recorded for #{@ladder.name}.
       - if blah
