@@ -24,7 +24,8 @@
               %td.text-center= competitor.rating
               - if blah
                 %td.text-right
-                  = link_to "Remove", competitor_path(competitor), method: :delete, data: {:confirm =>  "Are you sure?" }, :class => "text-danger"
+                  %a.btn.btn-danger.btn-xs(href="#{competitor_path(competitor)}" title="Remove competitor" data-method="delete" data-confirm="Are you sure you want to remove this competitor? This action will remove the competitor permanently") Remove
+
   %aside.pull-right.last
     %h2.panelHeading Recent matches
     .panel
