@@ -1,12 +1,14 @@
 %div.col-large.centeredContainer.container-small-offset
-  - if notice
-    .alert.alert-danger.alert-dismissable.text-left= notice
   %h1.panelHeading Match # #{@match.id} #{@match.finalized? ? '(final)' : nil}
   .panel
+    = render 'includes/message' unless flash.nil?
+    = render partial: 'includes/validation_errors', locals: {error_messages: @match.errors.full_messages} if @match.errors.any?
+
     - if @match.games.length > 0
       %table.table.table-striped
         %thead
           %th Game #
+          %th Date played
           %th #{@match.competitor_1_name}'s score
           %th #{@match.competitor_2_name}'s score
           %th Actions
@@ -16,6 +18,7 @@
             %tr
               %td
                 %span.badge= series += 1
+              %td= game.created_at.strftime("%m/%d/%Y")
               %td= game.competitor_1_score
               %td= game.competitor_2_score
               %td

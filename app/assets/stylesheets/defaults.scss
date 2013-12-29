@@ -105,6 +105,13 @@ aside {
     }
   }
 }
+.panel .alert {
+  margin: 0.5em;
+}
+.panel-full-padding .alert,
+.panel-padded .alert, {
+  margin: 0 0 1em 0;
+}
 .panel-padded {
   // Bottom padding comes from content
   padding: 1em 1em 0 1em;
@@ -112,7 +119,6 @@ aside {
 .panel-full-padding {
   padding: 1em;
 }
-
 .panel-block-link {
   padding: 0.5em;
   display:block;

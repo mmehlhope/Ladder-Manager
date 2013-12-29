@@ -31,7 +31,10 @@ class LaddersController < ApplicationController
 
     respond_to do |format|
       if @ladder.save
-        format.html { redirect_to @ladder, notice: 'Ladder was successfully created.' }
+        format.html {
+          flash[:success] = 'Ladder was successfully created.'
+          redirect_to @ladder
+        }
         format.json { render action: 'show', status: :created, location: @ladder }
       else
         format.html { render action: 'new' }
@@ -45,7 +48,10 @@ class LaddersController < ApplicationController
   def update
     respond_to do |format|
       if @ladder.update(ladder_params)
-        format.html { redirect_to @ladder, notice: 'Ladder was successfully updated.' }
+        format.html {
+          flash[:success] = 'Ladder was successfully updated.'
+          redirect_to @ladder
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -62,7 +68,10 @@ class LaddersController < ApplicationController
         format.html { redirect_to ladders_path }
         format.json { head :no_content }
       else
-        format.html { redirect_to @ladder, alert: "There was an error deleting this ladder"}
+        format.html {
+          flash[:error] = 'There was an error deleting this ladder. Please try again later.'
+          redirect_to @ladder
+        }
         format.json { render json: @ladder.errors,  status: :unprocessable_entity}
       end
     end
@@ -76,11 +85,12 @@ class LaddersController < ApplicationController
       error = "Ladder IDs can only be numbers, please try again."
     end
 
-    unless ladder.nil? or @error
+    unless ladder.nil? or error
       redirect_to ladder
     else
       error ||= "That Ladder ID was not found, please try again."
-      redirect_to root_path, alert: error
+      flash[:error] = error
+      redirect_to root_path
     end
   end
 

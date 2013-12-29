@@ -7,8 +7,7 @@
 %div.col-medium.centeredContainer.container-small-offset
   %h1.panelHeading Your ladders
   .panel.panel-full-padding
-    - if alert
-      .alert.alert-danger.alert-dismissable.text-left= alert
+    = render 'includes/message' unless flash.nil?
     - if @ladders.length > 0
       %table.table.table-striped
         %thead

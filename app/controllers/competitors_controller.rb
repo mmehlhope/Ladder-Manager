@@ -26,11 +26,13 @@ class CompetitorsController < ApplicationController
   # POST /competitors.json
   def create
     @competitor = @ladder.competitors.build(competitor_params)
-    success_msg = 'Competitors were successfully added to ' + @ladder.name
-
+    success_msg = @competitor.name + " was successfully added to the ladder"
     respond_to do |format|
       if @competitor.save
-        format.html { redirect_to @ladder, notice: success_msg }
+        format.html {
+          flash[:success] = success_msg
+          redirect_to @ladder
+        }
         format.json { render action: 'show', status: :created, location: @ladder }
       else
         format.html { render action: 'new' }
@@ -44,7 +46,10 @@ class CompetitorsController < ApplicationController
   def update
     respond_to do |format|
       if @competitor.update(competitor_params)
-        format.html { redirect_to competitor_path(@competitor), notice: 'Competitor was successfully updated.' }
+        format.html {
+          flash[:success] = 'Competitor was successfully updated.'
+          redirect_to competitor_path(@competitor)
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

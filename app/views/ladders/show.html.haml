@@ -1,9 +1,10 @@
-%p#notice= notice
 - blah = true # change me
 %section.content-wrapper.container-small-offset
   .col-medium.first
     %h1.panelHeading= @ladder.name
     .panel
+      = render 'includes/message' unless flash.nil?
+      = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
       %table.table.table-striped
         %thead
           %tr

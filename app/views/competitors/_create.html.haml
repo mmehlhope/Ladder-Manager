@@ -1,8 +1,5 @@
 = form_for([@ladder, @competitor]) do |f|
-  - if @competitor.errors.any?
-    %ul.alert.alert-danger.alert-dismissable.text-left
-      - @competitor.errors.full_messages.each do |msg|
-        %p= msg
+  = render partial: 'includes/validation_errors', locals: {error_messages: @competitor.errors.full_messages} if @competitor.errors.any?
   .field
     .form-group
       = f.text_field :name, :class => "form-control", :placeholder => "Competitor name"

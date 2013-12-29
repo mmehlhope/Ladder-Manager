@@ -1,0 +1,13 @@
+- flash.each do |key, msg|
+  - case key
+  - when :notice
+    - style = "alert-info"
+  - when :success
+    - style = "alert-success"
+  - when :alert
+    - style = "alert-warning"
+  - when :error
+    - style = "alert-danger"
+  .alert.alert-dismissable.text-left(class="#{style ? style : ''}")
+    %button.close(type="button" data-dismiss="alert") &times;
+    = msg

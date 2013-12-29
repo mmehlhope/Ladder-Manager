@@ -34,7 +34,10 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.save
-        format.html { redirect_to ladder_matches_path(@ladder), notice: 'Match was successfully created.' }
+        format.html {
+          flash[:success] = 'Match was successfully created.'
+          redirect_to ladder_matches_path(@ladder)
+        }
         format.json { render action: 'show', status: :created, location: @match }
       else
         format.html { render action: 'new' }
@@ -48,7 +51,10 @@ class MatchesController < ApplicationController
   def update
     respond_to do |format|
       if @match.update(match_params)
-        format.html { redirect_to match_path(@match), notice: 'Match was successfully updated.' }
+        format.html {
+          flash[:success] = 'Match was successfully updated.'
+          redirect_to match_path(@match)
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,11 +79,17 @@ class MatchesController < ApplicationController
 
         @match.update_player_stats
 
-        format.html { redirect_to match_path(@match), notice: 'Match was successfully finalized.' }
+        format.html {
+          flash[:success] = 'Match has been finalized. No further changes can be made to this match.'
+          redirect_to match_path(@match)
+        }
         format.json { head :ok }
       else
         errors = "There was an error finalizing the match" if errors.blank?
-        format.html { redirect_to match_path(@match), notice: errors }
+        format.html {
+          flash[:error] = errors
+          redirect_to match_path(@match)
+        }
         format.json { render json: { :msg => errors} }
       end
     end
@@ -88,7 +100,10 @@ class MatchesController < ApplicationController
   def destroy
     @match.destroy
     respond_to do |format|
-      format.html { redirect_to ladder_matches_path(@ladder) }
+      format.html {
+        flash[:success] = "Match has been successfully deleted."
+        redirect_to ladder_matches_path(@ladder)
+      }
       format.json { head :no_content }
     end
   end

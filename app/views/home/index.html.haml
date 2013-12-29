@@ -14,5 +14,4 @@
           %input.input-lg.form-control(name="id" type="text" placeholder="Enter existing ladder id")
           %span.input-group-btn
             = submit_tag("Load", :class => 'btn btn-primary btn-lg')
-    - if alert
-      .alert.alert-danger.alert-dismissable.text-left= alert
+    = render 'includes/message' unless flash.nil?

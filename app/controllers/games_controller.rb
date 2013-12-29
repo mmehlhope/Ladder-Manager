@@ -18,7 +18,10 @@ class GamesController < ApplicationController
     if @match.finalized?
       error_msg = 'Games cannot be added to a finalized match.'
       respond_to do |format|
-        format.html { redirect_to @match, notice: error_msg }
+        format.html {
+          flash[:error] = error_msg
+          redirect_to @match
+        }
         format.json { render json: {msg: error_msg } }
       end
     else
@@ -36,7 +39,10 @@ class GamesController < ApplicationController
     @game = @match.games.build(game_params)
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @match, notice: 'Game was successfully created.' }
+        format.html {
+          flash[:success] = 'Game was successfully added.'
+          redirect_to @match
+        }
         format.json { render action: 'show', status: :created, location: @game }
       else
         format.html { render action: 'new' }
@@ -50,7 +56,10 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html {
+          flash[:success] = 'Game was successfully updated.'
+          redirect_to @game
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
