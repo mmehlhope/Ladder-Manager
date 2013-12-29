@@ -8,11 +8,14 @@
         - @game.errors.full_messages.each do |msg|
           %li= msg
   .field
-    = f.label :competitor_1_score, "#{@match.competitor_1_name}'s score"
-    .input-group
-      = f.text_field :competitor_1_score, :class => "form-control"
-
-    = f.label :competitor_2_score, "#{@match.competitor_2_name}'s score"
-    .input-group
-      = f.text_field :competitor_2_score, :class => "form-control"
+    .form-group
+      = f.label :competitor_1_score, "#{@match.competitor_1_name}'s score"
+      .input-group
+        = f.text_field :competitor_1_score, :class => "form-control"
+  .field
+    .form-group
+      = f.label :competitor_2_score, "#{@match.competitor_2_name}'s score"
+      .input-group
+        = f.text_field :competitor_2_score, :class => "form-control"
   = f.submit :class => "btn btn-primary"
+  = link_to "cancel", match_path(@match)

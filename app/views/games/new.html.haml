@@ -1,8 +1,7 @@
-.col-md-8.centeredContainer
-  .panel.panel-default
-    .panel-heading.clearfix
-      %h2.panel-title Add new game to match #{@match.id}
-      .panel-actions
-        %a(href="#{match_path(@match)}") Back to match
-    .panel-body
-      = render 'create'
+%div.col-small.centeredContainer.container-large-offset
+  %h1.panelHeading
+    Add game to
+    %a(href="#{match_path(@match)}") Match #{@match.id}
+  .panel.panel-full-padding
+    = render 'includes/message' unless flash.nil?
+    = render 'create'
