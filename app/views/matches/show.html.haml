@@ -11,7 +11,7 @@
           %th Date played
           %th #{@match.competitor_1_name}'s score
           %th #{@match.competitor_2_name}'s score
-          %th Actions
+          %th
         %tbody
           - series = 0
           - @match.games.each do |game|
@@ -21,13 +21,18 @@
               %td= game.created_at.strftime("%m/%d/%Y")
               %td= game.competitor_1_score
               %td= game.competitor_2_score
-              %td
+              %td.text-right
+                %a.btn.btn-primary.btn-xs(href="#{edit_game_path(game)}" title="Edit game" class="#{@match.finalized? ? 'disabled' : ''}") Edit
+                %a.btn.btn-danger.btn-xs(href="#{game_path(game)}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{@match.finalized? ? 'disabled' : ''}") Delete
         - if !@match.finalized?
           %tfoot
             %tr
-              %td(colspan="4")
-                %a(href="#{new_match_game_path(@match)}") Record a new game
-                %a(href="#{finalize_match_path(@match)}") Finalize match
+              %td(colspan="5")
+                %a.btn.btn-success(href="#{new_match_game_path(@match)}" title="Add game" class="#{@match.finalized? ? 'disabled' : ''}") Add game
+                %a.btn.btn-warning(href="#{finalize_match_path(@match)}" title="Finalize match" class="#{@match.finalized? ? 'disabled' : ''}" data-confirm="If you finalize the match, it can no longer be edited. Additionally, competitor records and ratings will be permanently adjusted. Are you sure you wish to finalize this match?") Finalize match
     - else
-      %p There are no games recorded for this match
-      %a(href="#{new_match_game_path(@match)}") Record a new game
+      %p.alert.alert-info
+        %span.glyphicon.glyphicon-info-sign
+        There are currently no games added for this match.
+        %a(href="#{new_match_game_path(@match)}") Record a new game.
+  %a(href="#{ladder_matches_path(@ladder)}") Return to all matches

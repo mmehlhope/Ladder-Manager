@@ -16,7 +16,7 @@
             %th # of Games
             %th Status
             - if blah
-              %th.text-right Actions
+              %th.text-right
         %tbody
           - @matches.each do |match|
             %tr
@@ -31,7 +31,7 @@
               - if blah
                 %td.text-right
                   %a.btn.btn-success.btn-xs(href="#{new_match_game_path(match)}" title="Add game" class="#{match.finalized? ? 'disabled' : ''}") Add game
-                  %a.btn.btn-warning.btn-xs(href="#{finalize_match_path(match)}" title="Finalize match" class="#{match.finalized? ? 'disabled' : ''}") Finalize
+                  %a.btn.btn-warning.btn-xs(href="#{finalize_match_path(match)}" title="Finalize match" class="#{match.finalized? ? 'disabled' : ''}" data-confirm="If you finalize the match, it can no longer be edited. Additionally, competitor records and ratings will be permanently adjusted. Are you sure you wish to finalize this match?") Finalize
                   %a.btn.btn-danger.btn-xs(href="#{match_path(match)}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{match.finalized? ? 'disabled' : ''}") Delete
     - else
       .panel-body

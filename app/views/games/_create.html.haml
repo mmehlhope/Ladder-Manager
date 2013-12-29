@@ -1,21 +1,13 @@
 = form_for([@match, @game]) do |f|
-  - if @game.errors.any?
-    %div#error_explanation
-      %h2
-        = pluralize(@game.errors.count, "error")
-        prohibited this match from being saved:
-      %ul
-        - @game.errors.full_messages.each do |msg|
-          %li= msg
+  %p.alert.alert-info
+    %span.glyphicon.glyphicon-info-sign
+    Enter the numerical score for each competitor.
+  = render partial: 'includes/validation_errors', locals: {error_messages: @game.errors.full_messages} if @game.errors.any?
   .field
     .form-group
-      = f.label :competitor_1_score, "#{@match.competitor_1_name}'s score"
-      .input-group
-        = f.text_field :competitor_1_score, :class => "form-control"
+      = f.text_field :competitor_1_score, :placeholder => "#{@match.competitor_1_name}'s score", :class => "form-control"
   .field
     .form-group
-      = f.label :competitor_2_score, "#{@match.competitor_2_name}'s score"
-      .input-group
-        = f.text_field :competitor_2_score, :class => "form-control"
+      = f.text_field :competitor_2_score, :placeholder => "#{@match.competitor_2_name}'s score", :class => "form-control"
   = f.submit :class => "btn btn-primary"
   = link_to "cancel", match_path(@match)
