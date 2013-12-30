@@ -1,7 +1,6 @@
 %div.col-small.centeredContainer.container-large-offset
   %h1.panelHeading
-    Add game to
-    %a(href="#{match_path(@match)}") Match #{@match.id}
+    Add game to Match ##{@match.id}
   .panel.panel-full-padding
-    = render 'includes/message' unless flash.nil?
+    = render 'includes/message' if flash_message?
     = render 'create'

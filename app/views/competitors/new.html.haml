@@ -1,5 +1,5 @@
 %div.col-small.centeredContainer.container-large-offset
   %h1.panelHeading New Competitor
   .panel.panel-padded
-    = render 'includes/message' unless flash.nil?
+    = render 'includes/message' if flash_message?
     = render 'create'
