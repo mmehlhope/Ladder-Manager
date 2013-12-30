@@ -1,11 +1,9 @@
-- blah = false
+- blah = true
 %div.col-large.centeredContainer.container-small-offset
   %h1.panelHeading All matches
+  = render 'includes/message' if flash_message?
+  = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   .panel
-
-    = render 'includes/message' unless flash.nil?
-    = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
-
     - if @matches.length > 0
       %table.table.table-striped
         %thead
