@@ -36,7 +36,7 @@ class MatchesController < ApplicationController
       if @match.save
         format.html {
           flash[:success] = 'Match was successfully created.'
-          redirect_to ladder_matches_path(@ladder)
+          redirect_to match_path(@match)
         }
         format.json { render action: 'show', status: :created, location: @match }
       else

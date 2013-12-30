@@ -58,7 +58,7 @@ class GamesController < ApplicationController
       if @game.update(game_params)
         format.html {
           flash[:success] = 'Game was successfully updated.'
-          redirect_to @game
+          redirect_to @match
         }
         format.json { head :no_content }
       else
