@@ -14,17 +14,27 @@
             - if user_can_admin_ladder
               %th.text-right(style="width:15%;") Actions
         %tbody
-          - rank = 0
-          - @competitors.each do |competitor|
+          - if @competitors.size > 0
+            - rank = 0
+            - @competitors.each do |competitor|
+              %tr
+                %td
+                  %span.badge= rank += 1
+                %td= competitor.name
+                %td.text-center #{competitor.wins} - #{competitor.losses}
+                %td.text-center= competitor.rating
+                - if user_can_admin_ladder
+                  %td.text-right
+                    %a.btn.btn-danger.btn-xs(href="#{competitor_path(competitor)}" title="Remove competitor" data-method="delete" data-confirm="Are you sure you want to remove this competitor? This action will remove the competitor permanently") Remove
+          - else
             %tr
-              %td
-                %span.badge= rank += 1
-              %td= competitor.name
-              %td.text-center #{competitor.wins} - #{competitor.losses}
-              %td.text-center= competitor.rating
-              - if user_can_admin_ladder
-                %td.text-right
-                  %a.btn.btn-danger.btn-xs(href="#{competitor_path(competitor)}" title="Remove competitor" data-method="delete" data-confirm="Are you sure you want to remove this competitor? This action will remove the competitor permanently") Remove
+              %td(colspan="#{user_can_admin_ladder ? 5 : 4}")
+                .alert.alert-info
+                  %span.glyphicon.glyphicon-info-sign
+                  There are currently no competitors added to this ladder.
+                  - if user_can_admin_ladder
+                    %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
+                    to begin.
 
   %aside.pull-right.last
     %h2.panelHeading Recent matches
@@ -69,6 +79,6 @@
           .field
             .input-group
               %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
-              %input.form-control(name="password" type="text" placeholder="Administrator password")
+              %input.form-control(name="password" type="password" placeholder="Administrator password")
               %span.input-group-btn
                 = submit_tag("Submit", :class => 'btn btn-primary')
