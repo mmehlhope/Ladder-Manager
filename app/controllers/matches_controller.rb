@@ -2,6 +2,8 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy, :finalize]
   before_action :set_ladder
   before_action :get_all_ladder_competitors, only: [:new, :create, :edit]
+  before_action :ensure_user_can_admin_ladder, only: [:new, :create, :edit, :update, :destroy]
+
 
   # GET /matches
   # GET /matches.json

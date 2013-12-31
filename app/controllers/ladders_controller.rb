@@ -1,5 +1,6 @@
 class LaddersController < ApplicationController
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
 
   # GET /ladders
   # GET /ladders.json

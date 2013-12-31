@@ -1,6 +1,9 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :set_match
+  before_action :set_ladder
+  before_action :ensure_user_can_admin_ladder, only: [:new, :create, :edit, :update, :destroy]
+
 
   # GET /games
   # GET /games.json
@@ -81,12 +84,16 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find(params[:id])
+      @game = Game.find_by_id(params[:id])
     end
 
     def set_match
       id = params[:match_id] || @game.match_id
-      @match = Match.find(id)
+      @match = Match.find_by_id(id)
+    end
+
+    def set_ladder
+      @ladder = @match.ladder
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
