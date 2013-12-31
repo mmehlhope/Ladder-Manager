@@ -13,11 +13,11 @@ module MatchesHelper
   end
 
   def competitor_1_name
-    get_competitor_1.try(:name) || "N/A"
+    get_competitor_1.try(:name) || "(deleted)"
   end
 
   def competitor_2_name
-    get_competitor_2.try(:name) || "N/A"
+    get_competitor_2.try(:name) || "(deleted)"
   end
 
   def winning_competitor

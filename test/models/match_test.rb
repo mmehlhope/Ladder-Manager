@@ -66,10 +66,10 @@ class MatchTest < ActiveSupport::TestCase
     assert_equal "Andrew", @match.competitor_1_name
   end
 
-  test "should return n/a as name" do
+  test "should return deleted as name" do
     assert_equal "Andrew", @match.competitor_1_name
     @match.get_competitor_1.destroy
-    assert_equal "N/A", @match.competitor_1_name
+    assert_equal "(deleted)", @match.competitor_1_name
   end
 
 
