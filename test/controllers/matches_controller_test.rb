@@ -21,16 +21,14 @@ class MatchesControllerTest < ActionController::TestCase
   end
 
   test "should create match" do
-
     assert_difference('Match.count') do
       post :create, match: {:competitor_1 => @c1.id, :competitor_2 => @c2.id}, ladder_id: @ladder.id
     end
-
-    assert_redirected_to ladder_matches_path(@ladder)
+    assert_redirected_to match_path(Match.last)
   end
 
   test "should show match" do
-    get :show, id: @match
+    get :show, id: @match, ladder_id: @ladder.id
     assert_response :success
   end
 
