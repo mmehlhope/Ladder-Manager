@@ -61,7 +61,7 @@
         %a.panel-block-link(href="#{edit_ladder_path}" title="Edit ladder") Edit ladder
         %a.panel-block-link(href="#{new_ladder_competitor_path(@ladder)}" title="Add competitor") Add competitor
         %a.panel-block-link(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
-        %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-ladder_id="#{@ladder.id}" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
+        %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
         %a.panel-block-link(href="#{session_path}" data-method="delete" title="Sign out") Sign out
       - else
         = render 'includes/message' if flash_message?
