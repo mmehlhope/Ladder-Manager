@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231051456) do
+ActiveRecord::Schema.define(version: 20131231055249) do
 
   create_table "competitors", force: true do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20131231051456) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "admin_email"
+    t.text     "password_digest"
   end
 
   create_table "matches", force: true do |t|

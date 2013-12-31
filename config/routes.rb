@@ -1,5 +1,5 @@
 RailsCompetitionPlatform::Application.routes.draw do
-  # General User / Admin
+  resources :sessions
   resources :users
 
   # Ladder, competitors, matches, games

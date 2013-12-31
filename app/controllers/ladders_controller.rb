@@ -10,8 +10,9 @@ class LaddersController < ApplicationController
   # GET /ladders/1
   # GET /ladders/1.json
   def show
-    # Sort competitors in descending order by rating
+    # Sort competitors highest -> lowest rating
     @competitors = @ladder.competitors.sort { |a,b| b.rating <=> a.rating }
+    # Sort matches newest -> oldest creation date
     @matches = @ladder.matches.limit(5).sort { |a,b| b.created_at <=> a.created_at }
   end
 
@@ -31,6 +32,10 @@ class LaddersController < ApplicationController
 
     respond_to do |format|
       if @ladder.save
+
+        # set session admin
+        session[:user_can_admin] = [@ladder.id]
+
         format.html {
           flash[:success] = 'Ladder was successfully created.'
           redirect_to @ladder
@@ -95,13 +100,12 @@ class LaddersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_ladder
-      @ladder = Ladder.find(params[:id])
+      @ladder = Ladder.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ladder_params
-      params.require(:ladder).permit(:name, :admin_email)
+      params.require(:ladder).permit(:name, :admin_email, :password_digest, :password, :password_confirmation)
     end
 end
