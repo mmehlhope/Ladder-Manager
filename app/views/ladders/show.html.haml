@@ -1,8 +1,7 @@
-- blah = true # change me
 %section.content-wrapper.container-small-offset
   .col-medium.first
     %h1.panelHeading= @ladder.name
-    = render 'includes/message' if flash_message?
+    = render 'includes/message' if flash_message? && user_can_admin_ladder
     = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
     .panel
       %table.table.table-striped
@@ -12,7 +11,7 @@
             %th(style="width:25%;") Name
             %th.text-center(style="width:25%;") Record
             %th.text-center(style="width:25%;") Rating
-            - if blah
+            - if user_can_admin_ladder
               %th.text-right(style="width:15%;") Actions
         %tbody
           - rank = 0
@@ -23,14 +22,15 @@
               %td= competitor.name
               %td.text-center #{competitor.wins} - #{competitor.losses}
               %td.text-center= competitor.rating
-              - if blah
+              - if user_can_admin_ladder
                 %td.text-right
                   %a.btn.btn-danger.btn-xs(href="#{competitor_path(competitor)}" title="Remove competitor" data-method="delete" data-confirm="Are you sure you want to remove this competitor? This action will remove the competitor permanently") Remove
 
   %aside.pull-right.last
     %h2.panelHeading Recent matches
+    - matches_exist = @matches.size > 0
     .panel
-      - if @matches.size > 0
+      - if matches_exist
         %table.table.table-striped
           %thead
             %tr
@@ -49,19 +49,25 @@
               %tr
                 %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
       - else
-        %span There are no recent matches
+        .alert.alert-info
+          There are no recent matches. Once you've added 2 or more competitors, select
+          %em Record a match
+          from the admin panel.
 
-    %h2.panelHeading #{blah ? 'Admin Options' : 'Admin login'}
-    %div(class="#{blah ? 'panel' : 'panel panel-full-padding'}")
-      - if blah
+    %h2.panelHeading #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
+    %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
+      - if user_can_admin_ladder
         %a.panel-block-link(href="#{edit_ladder_path}" title="Edit ladder") Edit ladder
         %a.panel-block-link(href="#{new_ladder_competitor_path(@ladder)}" title="Add competitor") Add competitor
         %a.panel-block-link(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
         %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
+        %a.panel-block-link(href="#{session_path}" data-method="delete" title="Sign out") Sign out
       - else
-        = form_tag(ladders_search_path, method: :post) do
+        = render 'includes/message' if flash_message?
+        = form_tag(sessions_path, method: :post) do
           .field
             .input-group
-              %input.form-control(name="admin_password" type="text" placeholder="Administrator password")
+              %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
+              %input.form-control(name="password" type="text" placeholder="Administrator password")
               %span.input-group-btn
                 = submit_tag("Submit", :class => 'btn btn-primary')

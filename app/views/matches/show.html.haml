@@ -1,11 +1,10 @@
-- blah = true
 %div.col-large.centeredContainer.container-small-offset
   %h1.panelHeading Match ##{@match.id} #{@match.finalized? ? '(final)' : nil}
 
   = render 'includes/message' if flash_message?
   = render partial: 'includes/validation_errors', locals: {error_messages: @match.errors.full_messages} if @match.errors.any?
 
-  - user_can_edit = blah && !@match.finalized?
+  - user_can_edit = user_can_admin_ladder && !@match.finalized?
   .panel
     %table.table.table-striped
       %thead
