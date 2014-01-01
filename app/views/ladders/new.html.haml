@@ -1,5 +1,5 @@
 - content_for(:title, "Create a New Ladder")
-%div.col-small.centeredContainer.container-large-offset
+%section.col-small.centeredContainer.container-large-offset
   %h1.panelHeading= yield(:title)
   .panel.panel-padded
     = render 'includes/message' if flash_message?
