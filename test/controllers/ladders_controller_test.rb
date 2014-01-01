@@ -3,6 +3,7 @@ require 'test_helper'
 class LaddersControllerTest < ActionController::TestCase
   setup do
     @ladder = ladders(:ladder_one)
+    session[:user_can_admin] = [@ladder.id]
   end
 
   test "should get index" do

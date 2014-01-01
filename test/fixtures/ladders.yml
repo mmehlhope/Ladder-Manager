@@ -2,6 +2,8 @@
 
 ladder_one:
   name: "Ladder One"
+  admin_email: "test@test.com"
 
 ladder_two:
   name: "Ladder Two"
+  admin_email: "test@test.com"

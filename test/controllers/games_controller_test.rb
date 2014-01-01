@@ -4,9 +4,12 @@ class GamesControllerTest < ActionController::TestCase
   setup do
     @game   = games(:game_one)
     @match  = matches(:match_one)
+    @ladder = ladders(:ladder_one)
+    @match.ladder = @ladder
     c1      = competitors(:competitor_one)
     c2      = competitors(:competitor_two)
     @match.competitors << [c1, c2]
+    session[:user_can_admin] = [@match.ladder.id]
   end
 
   test "should get index" do

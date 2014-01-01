@@ -7,6 +7,7 @@ class MatchesControllerTest < ActionController::TestCase
     @c1 = competitors(:competitor_one)
     @c2 = competitors(:competitor_two)
     @match.competitors << [@c1,@c2]
+    session[:user_can_admin] = [@ladder.id]
   end
 
   test "should get index" do
