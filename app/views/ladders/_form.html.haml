@@ -1,5 +1,5 @@
 = form_for(@ladder) do |f|
-  %p.alert.alert-info
+  .alert.alert-info
     %span.glyphicon.glyphicon-info-sign
     All fields are required.
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
