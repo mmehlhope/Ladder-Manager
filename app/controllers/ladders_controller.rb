@@ -71,7 +71,7 @@ class LaddersController < ApplicationController
   def destroy
     respond_to do |format|
       if @ladder.destroy
-        format.html { redirect_to ladders_path }
+        format.html { redirect_to root_path }
         format.json { head :no_content }
       else
         format.html {
