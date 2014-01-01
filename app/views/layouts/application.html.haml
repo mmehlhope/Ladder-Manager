@@ -1,8 +1,7 @@
 !!!
 %html
   %head
-    %title
-      Ladder Manager - #{yield :title}
+    %title Ladder Manager - #{yield :title}
     #{stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true}
     #{requirejs_include_tag "application"}
     #{csrf_meta_tags}
