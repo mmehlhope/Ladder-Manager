@@ -1,9 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_ladder
 
-  def new
-  end
-
   def create
     if @ladder && @ladder.authenticate(params[:password])
       session[:user_can_admin] = [@ladder.id]
