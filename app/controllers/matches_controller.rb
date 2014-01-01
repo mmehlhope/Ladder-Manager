@@ -1,8 +1,8 @@
 class MatchesController < ApplicationController
-  before_action :set_match, only: [:show, :edit, :update, :destroy, :finalize]
+  before_action :set_match, except: [:index, :new]
   before_action :set_ladder
   before_action :get_all_ladder_competitors, only: [:new, :create, :edit]
-  before_action :ensure_user_can_admin_ladder, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_user_can_admin_ladder, except: [:index, :show]
 
 
   # GET /matches
@@ -71,7 +71,7 @@ class MatchesController < ApplicationController
     end
   end
 
-  # GET /matches/1/finalize
+  # POST /matches/1/finalize
   def finalize
 
     # Validate

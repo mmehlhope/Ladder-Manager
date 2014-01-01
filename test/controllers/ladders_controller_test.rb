@@ -3,6 +3,8 @@ require 'test_helper'
 class LaddersControllerTest < ActionController::TestCase
   setup do
     @ladder = ladders(:ladder_one)
+    @c1     = competitors(:competitor_one)
+    @c2     = competitors(:competitor_two)
     session[:user_can_admin] = [@ladder.id]
   end
 
@@ -19,7 +21,14 @@ class LaddersControllerTest < ActionController::TestCase
 
   test "should create ladder" do
     assert_difference('Ladder.count') do
-      post :create, ladder: { name: @ladder.name }
+      post :create, ladder: {
+        name: @ladder.name,
+        admin_email: "test@test.com",
+        competitor_1: @c1.id,
+        competitor_1: @c2.id,
+        password: "test",
+        password_confirmation: "test"
+      }
     end
 
     assert_redirected_to ladder_path(assigns(:ladder))
@@ -45,6 +54,6 @@ class LaddersControllerTest < ActionController::TestCase
       delete :destroy, id: @ladder
     end
 
-    assert_redirected_to ladders_path
+    assert_redirected_to root_path
   end
 end

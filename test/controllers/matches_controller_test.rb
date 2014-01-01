@@ -29,12 +29,12 @@ class MatchesControllerTest < ActionController::TestCase
   end
 
   test "should show match" do
-    get :show, id: @match, ladder_id: @ladder.id
+    get :show, id: @match
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @match, ladder_id: @ladder.id
+    get :edit, id: @match
     assert_response :success
   end
 
@@ -45,7 +45,7 @@ class MatchesControllerTest < ActionController::TestCase
 
   test "should destroy match" do
     assert_difference('Match.count', -1) do
-      delete :destroy, id: @match, ladder_id: @ladder.id
+      delete :destroy, id: @match
     end
 
     assert_redirected_to ladder_matches_path(@ladder)

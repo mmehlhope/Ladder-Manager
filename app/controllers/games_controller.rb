@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :set_match
   before_action :set_ladder
-  before_action :ensure_user_can_admin_ladder, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_user_can_admin_ladder, except: [:index, :show]
 
 
   # GET /games

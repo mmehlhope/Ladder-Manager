@@ -8,10 +8,12 @@ match_one:
   competitor_1: <%= ActiveRecord::FixtureSet.identify(:competitor_one) %>
   competitor_2: <%= ActiveRecord::FixtureSet.identify(:competitor_two) %>
   finalized: false
+  ladder: ladder_one
   winner_id: NULL
 
 match_two:
   competitor_1: <%= ActiveRecord::FixtureSet.identify(:competitor_three) %>
   competitor_2: <%= ActiveRecord::FixtureSet.identify(:competitor_four) %>
   winner_id: NULL
+  ladder: ladder_one
   finalized: false
