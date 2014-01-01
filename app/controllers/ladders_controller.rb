@@ -40,7 +40,7 @@ class LaddersController < ApplicationController
         LadderMailer.welcome_email(@ladder).deliver
 
         format.html {
-          flash[:success] = 'Ladder was successfully created.'
+          flash[:success] = "Ladder was successfully created."
           redirect_to @ladder
         }
         format.json { render action: 'show', status: :created, location: @ladder }

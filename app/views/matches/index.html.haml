@@ -3,17 +3,18 @@
   %h1.panelHeading= yield(:title)
   = render 'includes/message' if flash_message?
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
+  - matches_exist = @matches.count > 0
   .panel
-    - if @matches.length > 0
-      %table.table.table-striped
-        %thead
-          %tr.breadcrumb-bar
-            %th.breadcrumbs(colspan="5")
-              %a(href="#{ladder_path(@ladder)}") #{@ladder.name}
-              &#47; matches
-            - if user_can_admin_ladder
-              %th.text-right
-                %a.btn.btn-success.btn-xs(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
+    %table.table.table-striped
+      %thead
+        %tr.breadcrumb-bar
+          %th.breadcrumbs(colspan="#{matches_exist ? 5 : 1}")
+            %a(href="#{ladder_path(@ladder)}") #{@ladder.name}
+            &#47; matches
+          - if user_can_admin_ladder
+            %th.text-right
+              %a.btn.btn-success.btn-xs(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
+        - if matches_exist
           %tr
             %th ID
             %th Competitors
@@ -22,6 +23,7 @@
             %th Status
             - if user_can_admin_ladder
               %th.text-right
+      - if matches_exist
         %tbody
           - @matches.each do |match|
             %tr
@@ -38,8 +40,12 @@
                   %a.btn.btn-success.btn-xs(href="#{new_match_game_path(match)}" title="Add game" class="#{match.finalized? ? 'disabled' : ''}") Add game
                   %a.btn.btn-warning.btn-xs(href="#{finalize_match_path(match)}" title="Finalize match" class="#{match.finalized? ? 'disabled' : ''}" data-confirm="If you finalize the match, it can no longer be edited. Additionally, competitor records and ratings will be permanently adjusted. Are you sure you wish to finalize this match?") Finalize
                   %a.btn.btn-danger.btn-xs(href="#{match_path(match)}" title="Delete" data-method="delete" data-confirm="Are you sure?" class="#{match.finalized? ? 'disabled' : ''}") Delete
-    - else
-      .panel-body
-        %p There have been no matches recorded for #{@ladder.name}.
-        - if user_can_admin_ladder
-          %a= link_to 'Record a new match', new_ladder_match_path
+      - else
+        %tbody
+          %tr
+            %td(colspan="#{user_can_admin_ladder ? 2 : 1}")
+              %p.alert.alert-info
+                %span.glyphicon.glyphicon-info-sign
+                There have been no matches recorded for this match.
+                - if user_can_admin_ladder
+                  %a(href="#{new_ladder_match_path(@ladder)}") Record a match

@@ -1,7 +1,7 @@
 :coffeescript
   require ['views/matches/new'], (NewMatch) ->
     competitors_hash = #{competitors_hash.to_json}
-    # NewMatch.init(competitors_hash)
+    NewMatch.init(competitors_hash)
 
 = form_for([@ladder, @match]) do |f|
   - if @match.errors.any?
