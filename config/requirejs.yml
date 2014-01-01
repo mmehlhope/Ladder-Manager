@@ -1,5 +1,9 @@
 paths:
-  'bootstrap' : 'bootstrap.min'
+  bootstrap: bootstrap.min
 shim:
-  'jquery_ujs': ['jquery']
-  'bootstrap' : ['jquery']
+  jquery:
+    exports: '$'
+  jquery_ujs:
+    - jquery
+  bootstrap:
+    - jquery
