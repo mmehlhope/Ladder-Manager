@@ -19,8 +19,8 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: elo_production
+  database: rails
   pool: 5
-  username: root
-  password:
+  username: rails
+  password: MMgwMx0mTH
   socket: /tmp/mysql.sock
