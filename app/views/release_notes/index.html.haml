@@ -1,0 +1,27 @@
+- content_for(:title, "Release notes")
+%section.col-medium.centeredContainer.container-small-offset
+  %h1.panelHeading= yield(:title)
+  .panel.panel-full-padding
+    = render 'includes/message' if flash_message?
+    .alert.alert-info
+      %span.glyphicon.glyphicon-info-sign
+      Have a suggestion?
+      %a(href="mailto:mmehlhope@gmail.com") Submit feedback
+    %h2 Version 0.0.1
+    %p.text-muted January 1st, 2014
+    %h4 Additions
+    %ul
+      %li Users can create new ladders and set up an administrator for said ladder.
+      %li Users can view ladders, matches, and games associated with a ladder.
+      %li Administrators of a ladder can add, remove, and edit competitors
+      %li Administrators of a ladder can add, remove, and edit matches
+      %li Administrators of a ladder can add, remove, and edit games
+      %li
+        Administrators of a ladder can finalize a match, resulting in the adjustment of each
+        competitor's ELO rating and record.
+      %li Administrators can edit the name and email associated with their ladder.
+    %h4 TO-DOs
+    %ul
+      %li Administrators can not currently change or recover their password.
+      %li Administrators do not get an email containing their ladder credentials
+      %li It is tedious to enter one competitor at a time to a ladder

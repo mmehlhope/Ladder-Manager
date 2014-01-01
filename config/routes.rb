@@ -14,6 +14,7 @@ RailsCompetitionPlatform::Application.routes.draw do
 
   # Custom routes
   post '/ladders/search', to: "ladders#search"
+  get '/release_notes', to: "release_notes#index"
 
   # You can have the root of your site routed with "root"
   root 'home#index'
