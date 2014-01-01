@@ -2,5 +2,8 @@
 %div.col-small.centeredContainer.container-large-offset
   %h1.panelHeading= yield(:title)
   .panel.panel-full-padding
+    .alert.alert-info
+      %span.glyphicon.glyphicon-info-sign
+      Select your competitors for the match.
     = render 'includes/message' if flash_message?
-    = render 'create'
+    = render partial: 'create', locals: {competitors_hash: @competitors_hash}

@@ -19,6 +19,7 @@ class MatchesController < ApplicationController
   # GET /matches/new
   def new
     @match = @ladder.matches.build
+    @competitors_hash = @competitors.inject({}) {|h, comp| h.merge({comp.name => comp.id})}
   end
 
   # GET /matches/1/edit
@@ -28,22 +29,27 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
-    @match = @ladder.matches.build(match_params)
+    if match_params[:competitor_1].blank? || match_params[:competitor_2].blank?
+      flash[:error] = "Two competitors must be selected to create a match."
+      redirect_to new_ladder_match_path(@ladder)
+    else
+      @match = @ladder.matches.build(match_params)
 
-    # Find competitors and add them to the match association
-    competitors = Competitor.find([match_params[:competitor_1], match_params[:competitor_2]])
-    @match.competitors << competitors
+      # Find competitors and add them to the match association
+      competitors = Competitor.find([match_params[:competitor_1], match_params[:competitor_2]])
+      @match.competitors << competitors
 
-    respond_to do |format|
-      if @match.save
-        format.html {
-          flash[:success] = 'Match was successfully created.'
-          redirect_to match_path(@match)
-        }
-        format.json { render action: 'show', status: :created, location: @match }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @match.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @match.save
+          format.html {
+            flash[:success] = 'Match was successfully created.'
+            redirect_to match_path(@match)
+          }
+          format.json { render action: 'show', status: :created, location: @match }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @match.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
