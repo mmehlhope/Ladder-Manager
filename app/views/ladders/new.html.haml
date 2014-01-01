@@ -1,5 +1,6 @@
+- content_for(:title, "Create a New Ladder")
 %div.col-small.centeredContainer.container-large-offset
-  %h1.panelHeading New Ladder
+  %h1.panelHeading= yield(:title)
   .panel.panel-padded
     = render 'includes/message' if flash_message?
     = render 'form'

@@ -1,6 +1,7 @@
+- content_for(:title, @ladder.name)
 %section.content-wrapper.container-small-offset
   .col-medium.first
-    %h1.panelHeading= @ladder.name
+    %h1.panelHeading= yield(:title)
     = render 'includes/message' if flash_message? && user_can_admin_ladder
     = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
     .panel
@@ -61,9 +62,8 @@
       - else
         .alert.alert-info
           %span.glyphicon.glyphicon-info-sign
-          There are no recent matches. Once you've added 2 or more competitors, select
-          %em Record a match
-          from the admin panel.
+          There are no recent matches. Once you've added 2 or more competitors, you can
+          %a(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
 
     %h2.panelHeading #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
     %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")

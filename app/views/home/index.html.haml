@@ -1,11 +1,15 @@
+- content_for(:title, "ELO ladders made beautifully simple")
 = content_for :head do
   #{stylesheet_link_tag "home", media: "all"}
 
 %div.col-medium.container-large-offset.centeredContainer.text-center
   %h1.titleize Ladder Manager
-  %h2.tagline Online ladders have never been easier
+  %h2.tagline
+    Compete. Record. Compare.
+    %br
+    Ranked ladders made beautifully simple.
   %div.col-small.centeredContainer
-    %a.btn.btn-primary.btn-lg.btn-block(href="#{new_ladder_path}" title="Create new ladder") Create New Ladder
+    %a.btn.btn-primary.btn-lg.btn-block(href="#{new_ladder_path}" title="Create new ladder") Create a New Ladder
     %p.spacer-text
       or
     = form_tag(ladders_search_path, method: :post) do

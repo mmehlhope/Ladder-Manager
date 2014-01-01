@@ -1,6 +1,6 @@
+- content_for(:title, "Add Game to Match ##{@match.id}" )
 %div.col-small.centeredContainer.container-large-offset
-  %h1.panelHeading
-    Add game to Match ##{@match.id}
+  %h1.panelHeading= yield(:title)
   .panel.panel-full-padding
     = render 'includes/message' if flash_message?
     = render 'create'
