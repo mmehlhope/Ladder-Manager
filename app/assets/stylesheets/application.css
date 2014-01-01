@@ -11,4 +11,5 @@
  *= require_self
  *= require _bootstrap
  *= require defaults
+ *= require home
  */
