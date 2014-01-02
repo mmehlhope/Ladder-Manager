@@ -166,6 +166,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store
+  activesupport
   backbonejs-rails
   bcrypt-ruby
   capistrano
