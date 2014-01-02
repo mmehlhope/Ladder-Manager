@@ -48,7 +48,7 @@ end
 gem 'activerecord-session_store'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
 gem 'unicorn'
