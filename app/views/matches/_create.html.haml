@@ -1,17 +1,10 @@
 :coffeescript
-  require ['views/matches/new'], (NewMatch) ->
+  require ['matches/new'], (NewMatch) ->
     competitors_hash = #{competitors_hash.to_json}
     NewMatch.init(competitors_hash)
 
 = form_for([@ladder, @match]) do |f|
-  - if @match.errors.any?
-    %div#error_explanation
-      %h2
-        = pluralize(@match.errors.count, "error")
-        prohibited this match from being saved:
-      %ul
-        - @match.errors.full_messages.each do |msg|
-          %li= msg
+  = render partial: 'includes/validation_errors', locals: {error_messages: @match.errors.full_messages} if @match.errors.any?
   .field
     .form-group
       = f.select :competitor_1, options_for_select(competitors_hash), {}, {:class => "form-control"}
