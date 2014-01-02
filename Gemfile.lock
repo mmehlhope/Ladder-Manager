@@ -1,4 +1,12 @@
 GIT
+  remote: git@github.com:mmehlhope/rvm.git
+  revision: 49c93afc2bfab27e325cca2a4fef38ae0d48c66c
+  specs:
+    capistrano-rvm (0.1.0)
+      capistrano (~> 3.0)
+      sshkit (>= 1.2)
+
+GIT
   remote: git@github.com:scalient/requirejs-rails.git
   revision: e0932125e1d5e5ef823a19955899a0047dd904ae
   specs:
@@ -52,9 +60,6 @@ GEM
     capistrano-rails (1.1.0)
       capistrano (>= 3.0.0)
       capistrano-bundler (>= 1.0.0)
-    capistrano-rvm (0.1.0)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -165,7 +170,7 @@ DEPENDENCIES
   bcrypt-ruby
   capistrano
   capistrano-rails
-  capistrano-rvm
+  capistrano-rvm!
   coffee-rails
   debugger
   haml

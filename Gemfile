@@ -56,7 +56,7 @@ gem 'unicorn'
 # Use Capistrano for deployment
 gem 'capistrano', group: [:development]
 gem 'capistrano-rails', group: [:development]
-gem 'capistrano-rvm', group: [:development]
+gem 'capistrano-rvm', git: 'git@github.com:mmehlhope/rvm.git'
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
