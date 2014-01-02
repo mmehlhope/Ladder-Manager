@@ -24,3 +24,12 @@ production:
   username: rails
   password: MKv6QJyEAv
   socket: /var/run/mysqld/mysqld.sock
+
+mock_production:
+  adapter: mysql
+  encoding: utf8
+  database: elo_production
+  pool: 5
+  username: root
+  password:
+  socket: /tmp/mysql.sock
