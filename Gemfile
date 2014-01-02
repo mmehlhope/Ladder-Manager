@@ -19,7 +19,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 
 # Requirejs
-gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
+gem 'requirejs-rails', :git => 'git@github.com:scalient/requirejs-rails.git'
 
 # Backbone
 gem 'backbonejs-rails'
