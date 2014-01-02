@@ -37,8 +37,11 @@ class LaddersController < ApplicationController
         # set session admin
         session[:user_can_admin] = [@ladder.id]
         # send welcome email
-        # LadderMailer.welcome_email(@ladder).deliver
-
+        begin
+          LadderMailer.welcome_email(@ladder).deliver
+        rescue
+          flash[:alert] = "Your welcome email failed to send. Please bookmark this page for future reference."
+        end
         format.html {
           flash[:success] = "Ladder was successfully created."
           redirect_to @ladder

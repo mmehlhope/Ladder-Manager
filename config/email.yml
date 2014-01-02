@@ -1,14 +1,16 @@
 development:
-  :address: smtp.gmail.com
+  :address: smtp.mandrillapp.com
   :port: 587
-  :authentication: plain
-  :user_name: mmehlhope
-  :password: secksi02
+  :authentication: login
+  :user_name: mmehlhope@gmail.com
+  :password: bDZQ34pPtJY65S9AvEIIvA
   :enable_starttls_auto: true
+  :domain: laddermanager.com
 production:
-  :address: smtp.gmail.com
+  :address: smtp.mandrillapp.com
   :port: 587
-  :authentication: plain
-  :user_name: mmehlhope
-  :password: secksi02
+  :authentication: login
+  :user_name: mmehlhope@gmail.com
+  :password: bDZQ34pPtJY65S9AvEIIvA
   :enable_starttls_auto: true
+  :domain: laddermanager.com
