@@ -19,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # Requirejs
-gem 'requirejs-rails', :git => 'git@github.com:scalient/requirejs-rails.git'
+gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
 
 # Backbone
 gem 'backbonejs-rails'
@@ -41,7 +41,7 @@ gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', :require => false
+  gem 'sdoc', require: false
 end
 
 # Active Record session store
@@ -54,9 +54,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano', :group => [:development]
-gem 'capistrano-rails', :group => [:development]
-gem 'capistrano-rvm', :group => [:development]
+gem 'capistrano', group: [:development]
+gem 'capistrano-rails', group: [:development]
+gem 'capistrano-rvm', group: [:development]
 
 # Use debugger
-gem 'debugger', :group => [:development, :test]
+gem 'debugger', group: [:development, :test]
