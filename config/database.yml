@@ -22,5 +22,5 @@ production:
   database: rails
   pool: 5
   username: rails
-  password: MMgwMx0mTH
+  password: MKv6QJyEAv
   socket: /tmp/mysql.sock
