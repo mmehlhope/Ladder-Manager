@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 
 # MySQL for AR
 gem 'mysql'
@@ -54,7 +54,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+gem 'capistrano', group: :development
 
 # Use debugger
 gem 'debugger', group: [:development, :test]
