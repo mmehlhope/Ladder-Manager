@@ -32,6 +32,9 @@ class MatchesController < ApplicationController
     if match_params[:competitor_1].blank? || match_params[:competitor_2].blank?
       flash[:error] = "Two competitors must be selected to create a match."
       redirect_to new_ladder_match_path(@ladder)
+    elsif match_params[:competitor_1] == match_params[:competitor_2]
+      flash[:error] = "A competitor cannot compete against him or herself. Please select another opponent."
+      redirect_to new_ladder_match_path(@ladder)
     else
       @match = @ladder.matches.build(match_params)
 
