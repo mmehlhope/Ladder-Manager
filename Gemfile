@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-gem 'activesupport'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
@@ -20,7 +19,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 
 # Requirejs
-gem 'requirejs-rails', :git => 'git@github.com:scalient/requirejs-rails.git'
+gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
 
 # Backbone
 gem 'backbonejs-rails'
@@ -42,7 +41,7 @@ gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', :require => false
+  gem 'sdoc', require: false
 end
 
 # Active Record session store
@@ -55,9 +54,9 @@ gem 'bcrypt-ruby'
 gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano', :group => [:development]
-gem 'capistrano-rails', :group => [:development]
-gem 'capistrano-rvm', :git => 'git@github.com:mmehlhope/rvm.git'
+# gem 'capistrano', group: [:development]
+# gem 'capistrano-rails', group: [:development]
+# gem 'capistrano-rvm',
 
 # Use debugger
-gem 'debugger', :group => [:development, :test]
+gem 'debugger', group: [:development, :test]
