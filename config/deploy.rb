@@ -1,23 +1,14 @@
 set :application, 'ladder_manager'
 set :repo_url, 'git@github.com:mmehlhope/Ladder-Manager.git'
-set :user, 'ladder_manager'
-set :deploy_to, "/home/ladder_manager/ladder_manager_app" # Set deploy_to to /home/USERNAME/APPLICATION
 set :user_sudo, false
-set :rails_env, "production" # sets your server environment to Production mode
+set :branch, 'master'
+
+set :deploy_to, '/home/ladder_manager/ladder_manager_app/'
 set :scm, :git
 set :pty, true
 
-role :web, "162.243.208.189" # Your HTTP server, Apache/etc
-role :app, "162.243.208.189"
-role :db, "162.243.208.189", :primary => true
-
-
-
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-
-
-# set :format, :pretty
 # set :log_level, :debug
+# set :format, :pretty
 
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
