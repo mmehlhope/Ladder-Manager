@@ -62,8 +62,10 @@
       - else
         .alert.alert-info
           %span.glyphicon.glyphicon-info-sign
-          There are no recent matches. Once you've added 2 or more competitors, you can
-          %a(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
+          There are no recent matches.
+          - if user_can_admin_ladder
+            Once you've added 2 or more competitors, you can
+            %a(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
 
     %h2.panelHeading #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
     %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
