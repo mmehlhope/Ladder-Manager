@@ -10,13 +10,13 @@ gem 'rails', '4.0.0'
 gem 'mysql'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # Requirejs
 gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
@@ -48,7 +48,7 @@ end
 gem 'activerecord-session_store'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby'
 
 # Use unicorn as the app server
 gem 'unicorn'
