@@ -1,3 +1,6 @@
+modules:
+  - name: application
+  - name: views/matches/new
 paths:
   bootstrap: bootstrap.min
 shim:
