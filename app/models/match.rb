@@ -12,9 +12,9 @@ class Match < ActiveRecord::Base
   # winner in the series (yet).
   def determine_match_winner
     # CURRENTLY ASSUMES ONLY TWO COMPETITOR IDS
-    winners = games.collect { |game| game.winner_id } # [1,2,2,2,1]
+    winners = games.collect { |game| game.winner_id }.compact # [1,2,2,2,1]
     wins    = winners.group_by { |e| e }.values       # [[1,1], [2,2,2]]
-
+    debugger
     if (wins.length > 1 && wins[0].size != wins[1].size) || wins.length == 1
       ret = wins.max_by(&:size).try(:first)
     else
