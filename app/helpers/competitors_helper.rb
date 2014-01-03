@@ -13,7 +13,7 @@ module CompetitorsHelper
   ################
 
   def matches_played
-    matches.select(&:finalized?).count
+    matches.select(&:finalized?).size
   end
 
   def games_played
