@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.json
   def index
-    @matches = @ladder.matches.sort { |a,b| b.created_at <=> a.created_at }
+    @matches = @ladder.matches.order("created_at desc")
   end
 
   # GET /matches/1

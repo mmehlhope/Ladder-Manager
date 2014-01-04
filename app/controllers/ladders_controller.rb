@@ -12,9 +12,9 @@ class LaddersController < ApplicationController
   # GET /ladders/1.json
   def show
     # Sort competitors highest -> lowest rating
-    @competitors = @ladder.competitors.sort { |a,b| b.rating <=> a.rating }
+    @competitors = @ladder.competitors.order("rating desc")
     # Sort matches newest -> oldest creation date
-    @matches = @ladder.matches.limit(5).sort { |a,b| b.created_at <=> a.created_at }
+    @matches = @ladder.matches.order("created_at desc").limit(5)
   end
 
   # GET /ladders/new
