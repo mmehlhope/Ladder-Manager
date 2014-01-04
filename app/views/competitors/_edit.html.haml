@@ -1,0 +1,9 @@
+= form_for([@competitor]) do |f|
+  = render partial: 'includes/validation_errors', locals: {error_messages: @competitor.errors.full_messages} if @competitor.errors.any?
+  .field
+    .form-group
+      = f.text_field :name, :class => "form-control", :placeholder => "Competitor name"
+  .field.text-left
+    .form-group
+      = f.submit :class => "btn btn-primary"
+      = link_to "Cancel", ladder_path(@ladder)

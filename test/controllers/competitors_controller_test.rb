@@ -37,7 +37,7 @@ class CompetitorsControllerTest < ActionController::TestCase
 
   test "should update competitor" do
     patch :update, id: @competitor, competitor: { name: @competitor.name }
-    assert_redirected_to competitor_path(assigns(:competitor))
+    assert_redirected_to ladder_path(@ladder)
   end
 
   test "should destroy competitor" do

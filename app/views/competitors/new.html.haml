@@ -1,5 +1,6 @@
+- content_for(:title, "New Competitor")
 %div.col-small.centeredContainer.container-large-offset
-  %h1.panelHeading New Competitor
+  %h1.panelHeading= yield(:title)
   .panel.panel-padded
     = render 'includes/message' if flash_message?
     = render 'create'
