@@ -47,8 +47,8 @@ class CompetitorsController < ApplicationController
     respond_to do |format|
       if @competitor.update(competitor_params)
         format.html {
-          flash[:success] = 'Competitor was successfully updated.'
-          redirect_to competitor_path(@competitor)
+          flash[:success] = "#{@competitor.name} was successfully updated."
+          redirect_to ladder_path(@ladder)
         }
         format.json { head :no_content }
       else
