@@ -4,8 +4,15 @@
     %h1.panelHeading= yield(:title)
     = render 'includes/message' if flash_message? && user_can_admin_ladder
     = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
+    - competitors_exist = @competitors.size > 0
     .panel
       %table.table.table-striped
+        - if user_can_admin_ladder
+          %thead
+            %tr.breadcrumb-bar
+              %th.text-right(colspan="5")
+                %a.btn.btn-info.btn-xs(href="#{edit_ladder_path(@ladder)}" title="Edit Ladder") Rename
+                %a.btn.btn-success.btn-xs(href="#{new_ladder_competitor_path(@ladder)}" title="Add Competitor") Add Competitor
         %thead
           %tr
             %th(style="width:1%;") Rank
@@ -26,7 +33,7 @@
                 %td.text-center= competitor.rating
                 - if user_can_admin_ladder
                   %td.text-right
-                    %a.btn.btn-info.btn-xs(href="#{edit_competitor_path(competitor)}" title="Edit competitor") Edit
+                    %a.btn.btn-info.btn-xs(href="#{edit_competitor_path(competitor)}" title="Rename competitor") Rename
                     %a.btn.btn-danger.btn-xs(href="#{competitor_path(competitor)}" title="Remove competitor" data-method="delete" data-confirm="Are you sure you want to remove this competitor? This action will remove the competitor permanently") Remove
           - else
             %tr
@@ -44,20 +51,23 @@
     .panel
       - if matches_exist
         %table.table.table-striped
+          - if user_can_admin_ladder
+            %thead
+              %tr.breadcrumb-bar
+                %th.text-right(colspan="3")
+                  %a.btn.btn-success.btn-xs(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
           %thead
             %tr
-              %th ID
               %th Competitors
-              %th.text-right Date
+              %th.text-right When?
             %tbody
               - @matches.each do |match|
                 %tr
-                  %td= link_to match.id, match
                   %td
                     = match.competitor_1_name
                     vs.
                     = match.competitor_2_name
-                  %td.text-right= match.created_at.strftime("%m/%d/%Y")
+                  %td.text-right= link_to time_ago_in_words(match.created_at).capitalize + " ago", match
               %tr
                 %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
       - else
@@ -71,9 +81,6 @@
     %h2.panelHeading #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
     %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
       - if user_can_admin_ladder
-        %a.panel-block-link(href="#{edit_ladder_path}" title="Edit ladder") Edit ladder
-        %a.panel-block-link(href="#{new_ladder_competitor_path(@ladder)}" title="Add competitor") Add competitor
-        %a.panel-block-link(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
         %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
         %a.panel-block-link(href="#{session_path}" data-method="delete" title="Sign out") Sign out
       - else
