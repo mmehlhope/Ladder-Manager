@@ -4,6 +4,6 @@ class LadderMailer < ActionMailer::Base
   def welcome_email(ladder)
     @ladder = ladder
     @url  = "http://laddermanager.com/ladders/#{@ladder.id}"
-    mail(to: @ladder.admin_email, subject: "New ladder: #{@ladder.name}")
+    mail(from: "new-ladder@laddermanager.com", to: @ladder.admin_email, subject: "Your new ladder: #{@ladder.name}")
   end
 end
