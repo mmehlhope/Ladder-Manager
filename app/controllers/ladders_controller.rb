@@ -59,12 +59,17 @@ class LaddersController < ApplicationController
   def update
     respond_to do |format|
       if @ladder.update(ladder_params)
+
+        if user_is_submitting_preferences?
+          successMsg = 'Admin preferences have been successfully updated.'
+          # Send password changed notice
+          LadderMailer.password_changed(@ladder).deliver
+          debugger
+        else
+          successMsg = 'Ladder was successfully updated.'
+        end
+
         format.html {
-          if user_is_submitting_preferences?
-            successMsg = 'Admin preferences have been successfully updated.'
-          else
-            successMsg = 'Ladder was successfully updated.'
-          end
           flash[:success] = successMsg
           redirect_to @ladder
         }
