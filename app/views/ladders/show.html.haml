@@ -82,6 +82,7 @@
     %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
       - if user_can_admin_ladder
         %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
+        %a.panel-block-link(href="#{admin_preferences_path(@ladder)}" title="Edit ladder administrator preferences") Edit preferences
         %a.panel-block-link(href="#{session_path}" data-method="delete" title="Sign out") Sign out
       - else
         = render 'includes/message' if flash_message?

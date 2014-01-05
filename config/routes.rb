@@ -7,15 +7,17 @@ RailsCompetitionPlatform::Application.routes.draw do
     resources :competitors
     resources :matches do
       get 'finalize', on: :member
-
       resources :games
     end
   end
 
-  # Custom routes
-  post '/ladders/search', to: "ladders#search"
+  #################
+  # Custom routes #
+  #################
+  get '/ladders/:id/admin_preferences', to: "ladders#admin_preferences", as: :admin_preferences
   get '/release_notes', to: "release_notes#index"
+  post '/ladders/search', to: "ladders#search"
 
-  # You can have the root of your site routed with "root"
+  # Home page
   root 'home#index'
 end
