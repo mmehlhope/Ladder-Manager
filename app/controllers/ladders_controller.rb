@@ -64,7 +64,6 @@ class LaddersController < ApplicationController
           successMsg = 'Admin preferences have been successfully updated.'
           # Send password changed notice
           LadderMailer.password_changed(@ladder).deliver
-          debugger
         else
           successMsg = 'Ladder was successfully updated.'
         end
