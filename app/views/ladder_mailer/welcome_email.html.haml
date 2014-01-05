@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta(content="text/html" charset="UTF-8" http-equiv='Content-Type')
+  %body
+    %h1 Congrats on your new ladder!
+    %h2
+      Your new ladder, "#{@ladder.name}", can be found here:
+      %a(href="#{@url}" title="#{@ladder.name}") #{@url}
+    %p
+      If you're searching for it from the home page, you can use the following ladder id:
+      %strong #{@ladder.id}
+    %p
+      Ladder Manager is still in its infancy, so if you have any feedback or suggestions,
+      please press the "submit feedback" button on the site, I'd love to hear from you!
+    %p
+      Enjoy your new ladder!
+      %br
+      %br
+      Matt - Developer of
+      %a(href="http://www.laddermanager.com" title="Ladder Manager") LadderManager.com
