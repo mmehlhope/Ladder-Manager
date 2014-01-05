@@ -1,5 +1,5 @@
 class LaddersController < ApplicationController
-  before_action :set_ladder, only: [:show, :edit, :update, :destroy]
+  before_action :set_ladder, only: [:show, :edit, :admin_preferences, :update, :destroy]
   before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
 
   # GET /ladders
@@ -59,13 +59,23 @@ class LaddersController < ApplicationController
   def update
     respond_to do |format|
       if @ladder.update(ladder_params)
+
+        if user_is_submitting_preferences?
+          successMsg = 'Admin preferences have been successfully updated.'
+          # Send password changed notice
+          LadderMailer.password_changed(@ladder).deliver
+        else
+          successMsg = 'Ladder was successfully updated.'
+        end
+
         format.html {
-          flash[:success] = 'Ladder was successfully updated.'
+          flash[:success] = successMsg
           redirect_to @ladder
         }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        action = user_is_submitting_preferences? ? 'admin_preferences' : 'edit'
+        format.html { render action: action }
         format.json { render json: @ladder.errors, status: :unprocessable_entity }
       end
     end
@@ -105,7 +115,12 @@ class LaddersController < ApplicationController
     end
   end
 
+  # GET /ladders/1/admin_preferences
+  def admin_preferences
+  end
+
   private
+
     def set_ladder
       @ladder = Ladder.find_by_id(params[:id])
     end
@@ -114,4 +129,9 @@ class LaddersController < ApplicationController
     def ladder_params
       params.require(:ladder).permit(:name, :admin_email, :password_digest, :password, :password_confirmation)
     end
+
+    def user_is_submitting_preferences?
+      request.referer =~ /admin_preferences/ || !ladder_params[:password_confirmation].blank?
+    end
+
 end

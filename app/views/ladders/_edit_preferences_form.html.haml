@@ -1,0 +1,14 @@
+= form_for(@ladder) do |f|
+  = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
+  .field
+    .form-group
+      = f.text_field :admin_email, :class => "form-control", :placeholder => "Administrator email"
+    .form-group
+      = f.password_field :password, :class => "form-control", :placeholder => "New password (optional)"
+  .field
+    .form-group
+      = f.password_field :password_confirmation, :class => "form-control", :placeholder => "Verify new password"
+  .field.text-left
+    .form-group
+      = f.submit :value => "Save preferences", :class => "btn btn-primary"
+      = link_to "Cancel", ladder_path(@ladder)

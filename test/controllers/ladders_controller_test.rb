@@ -49,6 +49,18 @@ class LaddersControllerTest < ActionController::TestCase
     assert_redirected_to ladder_path(assigns(:ladder))
   end
 
+  test "should change admin password" do
+    patch :update, id: @ladder, ladder: { password: 'test', password_confirmation: 'test'}
+    assert_equal flash[:success], "Admin preferences have been successfully updated.", "Admin preferences success message"
+    assert_redirected_to ladder_path(assigns(:ladder))
+  end
+
+  test "should not change admin password" do
+    patch :update, id: @ladder, ladder: { password: 'test', password_confirmation: 'tacos'}
+    assert assigns(:ladder).errors.size == 1
+    assert_template 'admin_preferences', 'Admin preferences was rendered'
+  end
+
   test "should destroy ladder" do
     assert_difference('Ladder.count', -1) do
       delete :destroy, id: @ladder
