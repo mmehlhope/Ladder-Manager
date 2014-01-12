@@ -1,0 +1,18 @@
+= form_for(@user) do |f|
+  .alert.alert-info
+    %span.glyphicon.glyphicon-info-sign
+    All fields are required.
+  = render partial: 'includes/validation_errors', locals: {error_messages: @user.errors.full_messages} if @user.errors.any?
+  .field
+    .form-group
+      = f.text_field :name, :class => "form-control", :placeholder => "Username"
+    .form-group
+      = f.text_field :email, :class => "form-control", :placeholder => "Email"
+    .form-group
+      = f.password_field :password, :class => "form-control", :placeholder => "Password"
+    .form-group
+      = f.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirm password"
+  .field.text-left
+    .form-group
+      = f.submit :class => "btn btn-primary"
+      = link_to "Cancel", root_path
