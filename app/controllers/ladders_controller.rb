@@ -1,4 +1,5 @@
 class LaddersController < ApplicationController
+  before_action :verify_user, only: [:new, :create, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :admin_preferences, :update, :destroy]
   before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
 
@@ -19,7 +20,7 @@ class LaddersController < ApplicationController
 
   # GET /ladders/new
   def new
-    @ladder = Ladder.new
+    @ladder = current_user.ladders.build
   end
 
   # GET /ladders/1/edit
@@ -29,13 +30,10 @@ class LaddersController < ApplicationController
   # POST /ladders
   # POST /ladders.json
   def create
-    @ladder = Ladder.new(ladder_params)
+    @ladder = current_user.ladders.build(ladder_params)
 
     respond_to do |format|
       if @ladder.save
-
-        # set session admin
-        session[:user_can_admin] = [@ladder.id]
         # send welcome email
         begin
           LadderMailer.welcome_email(@ladder).deliver
@@ -127,11 +125,13 @@ class LaddersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ladder_params
-      params.require(:ladder).permit(:name, :admin_email, :password_digest, :password, :password_confirmation)
+      params.require(:ladder).permit(:name)
     end
 
-    def user_is_submitting_preferences?
-      request.referer =~ /admin_preferences/ || !ladder_params[:password_confirmation].blank?
+    def verify_user
+      if current_user.nil?
+        redirect_to_root_with_error("You must login before you can create a ladder", login_path)
+      end
     end
 
 end
