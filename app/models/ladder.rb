@@ -1,4 +1,5 @@
 class Ladder < ActiveRecord::Base
+  belongs_to :user
   has_many :competitors, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_secure_password
