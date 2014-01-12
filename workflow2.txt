@@ -1,0 +1,128 @@
+LadderManager.com
+
+Home Page
+  > Login / Sign up
+    -> User#Login/Signup
+  - Ladder Search
+    - Input name or ladder id
+     -> Ladder#SearchResults
+  * What is LM?
+    - Ranked ladders
+    - Manage ladders
+    - Challenge other players
+    - Brag?
+
+User Sign up
+  - New Ladder name
+  - Your Email (unique)
+  - Password
+  - Confirm password
+  > Already have an account?
+    -> Ladder#login
+
+User Login
+  - Email
+  - Password
+  > Forgot password?
+    -> User#password_reset
+  > Don't have an account?
+    -> User#Signup
+
+User Account Page
+  > Create new ladder
+  - List of existing ladders?
+  - Change password
+  - Change email
+
+User#password_reset
+  - Input admin email address
+   -> Send email with temp password
+
+Ladder#new
+  - Input Ladder Name
+  @ Directly tied into user account page?
+
+Ladder#show
+  - List of ladder competitors
+    - Include rank, name, record, rating
+
+  @ Really necessary? Do you control from backend or page itself?
+  - Admin Panel??
+    - Input admin password
+      - Doing so unlocks admin panel
+    ________________________________
+
+    > Add competitor(s)
+      -> Competitors#new
+    > Record matches
+      -> Matches#new
+    > Edit ladder
+      -> Ladder#edit
+  - Recent Matches
+    - List of recent matches
+      - Competitor1 vs. Competitor2
+      > Details link
+        -> Matches#show
+    > Show all matches link
+      -> Matches#index
+
+Ladder#edit
+  - Input ladder name
+  - Delete Ladder
+  @ A part of the admin panel?
+
+Matches#new
+  - Select competitor 1
+  - Select competitor 2
+  @-> Games#new or Matches#show?
+
+Matches#index
+  - List of all matches in ladder, newest first
+    > Match ID
+      -> Matches#show
+    - Competitor 1 vs. Competitor 2
+    - Date created
+    - Status
+    - Highlight Victor (if any)
+  > Edit (if no games)
+    -> Matches#edit
+  > Add Game (if admin)
+    -> Games#new
+  > Finalize (if admin)
+  > Delete (if admin)
+
+Matches#show
+  @ MAKE THIS PAGE SPECTACULAR
+  - PROFILE IMAGE vs. PROFILE IMAGE
+  > Competitor 1
+    -> Competitors#show
+  > Competitor 2
+    -> Competitors#show
+  - Date created
+  - List of games played (if any)
+  - Victor (if final)
+
+Matches#edit
+  - Change competitor 1
+  - Change competitor 2
+
+Competitors#new
+  - Input competitor(s)? name
+  @ Should be a part of user account page?
+
+Competitors#show
+  @ MAKE THIS PAGE SPECTACULAR
+  - PROFILE IMAGE
+  - Rank?
+  - Name
+  - Record
+  - rating
+  - Match history
+    > Match ID
+    > vs. Opponent
+    - Date
+    - Number of games played
+    - Win/Loss/Tie/Undetermined
+
+Competitors#edit
+  - Input new competitor name
