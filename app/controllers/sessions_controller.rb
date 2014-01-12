@@ -1,26 +1,30 @@
 class SessionsController < ApplicationController
-  before_action :set_ladder
+  before_action :set_user_by_email, only: [:create]
 
   def create
-    if @ladder && @ladder.authenticate(params[:password])
-      session[:user_can_admin] = [@ladder.id]
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       flash[:success] = "You have been successfully logged in."
-    else
+      redirect_to user_path(@user)
+    elsif @user && !@user.authenticate(params[:password])
       flash[:error] = "The password you entered was invalid."
+      redirect_to login_path
+    else
+      flash[:error] = "A user with that email address was not found."
+      redirect_to login_path
     end
-    redirect_to ladder_path(@ladder)
   end
 
   def destroy
-    session[:user_can_admin] = nil
+    session[:user_id] = nil
     flash[:success] = "You have been successfully logged out."
-    redirect_to ladder_path(@ladder)
+    redirect_to request.referer
   end
 
   private
 
-    def set_ladder
-      id = params[:id] ||= params[:ladder_id]
-      @ladder = Ladder.find_by_id(id)
+    def set_user_by_email
+      email = params[:email]
+      @user = User.find_by_email(email)
     end
 end
