@@ -2,15 +2,15 @@
 
 @import 'colors';
 
-$basePx        : 12px;
-$smallPx       : 14px;
-$headerPx      : 16px;
-$mediumPx      : 18px;
-$largePx       : 24px;
-$titlePx       : 48px;
+$baseEm        : 1.2em;
+$smallEm       : 1.4em;
+$headerEm      : 1.6em;
+$mediumEm      : 1.8em;
+$largeEm       : 2.4em;
+$titleEm       : 4.8em;
 
-$panelHeaderPx   : 36px;
-$sidebarHeaderPx : $largePx;
+$panelHeaderEm   : 3.6em;
+$sidebarHeaderEm : $largeEm;
 
 
 @mixin century-gothic {
@@ -23,23 +23,23 @@ $sidebarHeaderPx : $largePx;
 .titleize {
   @include century-gothic;
   color: #fff;
-  font-size: 48px;
+  font-size: 48em;
   font-weight: bold;
   line-height: 1em;
   letter-spacing: 1px;
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2em 3em rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
 }
 
 .panelHeading {
   color: $panelTitleColor;
-  font-size: $panelHeaderPx;
+  font-size: $panelHeaderEm;
   font-weight: 300;
   margin-top: 0;
 }
 aside .panelHeading {
   color: $panelTitleColor;
   font-weight: 300;
-  font-size: $sidebarHeaderPx;
-  margin-top: $panelHeaderPx - $sidebarHeaderPx +1;
+  font-size: $sidebarHeaderEm;
+  margin-top: $panelHeaderEm - $sidebarHeaderEm +1;
 }

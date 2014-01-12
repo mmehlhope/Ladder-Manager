@@ -1,5 +1,6 @@
 @import 'colors';
 @import 'type';
+@import 'helpers';
 
 $xSmallContainerWidth : 240px;
 $sidebarContainerWidth: 380px;
@@ -10,7 +11,7 @@ $xLargeContainerWidth : 1100px;
 
 // Layout
 body {
-  background:$bodyBg image-url("ladder-manager-bg.jpg")  center -250px no-repeat;
+  background:$bodyBg image-url('ladder-manager-bg.jpg') center -250px no-repeat;
   background-attachment: fixed;
 }
 
@@ -39,7 +40,7 @@ header {
 .header-wrapper {
   width: $xLargeContainerWidth;
   line-height: 2.25em;
-  font-size: $headerPx;
+  font-size: $headerEm;
   font-weight: 300;
   letter-spacing: 1px;
 }
@@ -147,29 +148,5 @@ aside {
 
   &:last-child {
     border: 0;
-  }
-}
-
-// OO Styles
-.centeredContainer {
-  float:none;
-  margin-left: auto;
-  margin-right: auto;
-}
-.pull-left {
-  float: left !important;
-}
-.pull-right {
-  float: right !important;
-}
-
-.clearfix {
-  &:before,
-  &:after {
-    content: " ";
-    display: table;
-  }
-  &:after {
-    clear: both;
   }
 }
