@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231055249) do
+ActiveRecord::Schema.define(version: 20140112180916) do
 
   create_table "competitors", force: true do |t|
     t.string   "name"
@@ -49,7 +49,10 @@ ActiveRecord::Schema.define(version: 20131231055249) do
     t.datetime "updated_at"
     t.string   "admin_email"
     t.text     "password_digest"
+    t.integer  "user_id"
   end
+
+  add_index "ladders", ["user_id"], name: "index_ladders_on_user_id", using: :btree
 
   create_table "matches", force: true do |t|
     t.datetime "created_at"
@@ -77,9 +80,10 @@ ActiveRecord::Schema.define(version: 20131231055249) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "password_digest"
+    t.string   "email"
   end
 
 end
