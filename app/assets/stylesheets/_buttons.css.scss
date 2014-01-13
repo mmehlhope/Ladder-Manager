@@ -1,6 +1,9 @@
 @import 'colors';
 
-.button {
+.btn,
+a.btn,
+input[type="submit"].btn,
+input[type="reset"].btn {
   font-size: 0.75em;
   text-transform: uppercase;
   text-decoration: none;
@@ -16,15 +19,15 @@
     outline: none;
     border-color: $inputFocusBorderColor;
   }
-  &:active {
-    background-color: $primaryButtonBg;
-  }
   &:hover {
+    background-color: darken($defaultButtonBg, 5%);
+  }
+  &:active {
     color: $primaryButtonText;
     background-color: $primaryButtonBg;
   }
 
-  &.button-primary {
+  &.btn-primary {
     color: #fff;
     text-shadow: 0 0 1px #000;
     background: $primaryButtonBg; /* Old browsers */
@@ -38,11 +41,11 @@
     background: linear-gradient(to bottom, $primaryButtonHighlight 50%, $primaryButtonBg 50%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primaryButtonHighlight', endColorstr='$primaryButtonBg',GradientType=0 ); /* IE6-8 */
 
-    &:active, &:focus {
-      background: $defaultButtonText;
-    }
     &:hover {
       background: $primaryButtonHighlight;
+    }
+    &:active, &:focus {
+      background: $defaultButtonText;
     }
   }
 }
