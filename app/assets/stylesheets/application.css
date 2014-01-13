@@ -11,5 +11,5 @@
  *= require_self
  *= require _normalize
  *= require defaults
- *= require home
+ *= require users
  */

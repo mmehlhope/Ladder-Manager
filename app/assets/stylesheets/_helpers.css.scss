@@ -1,4 +1,8 @@
-// OO Styles
+///////////////
+// OO Styles //
+///////////////
+
+// Positional
 .centeredContainer {
   float:none;
   margin-left: auto;
@@ -10,7 +14,6 @@
 .pull-right {
   float: right !important;
 }
-
 .clearfix {
   &:before,
   &:after {
@@ -22,6 +25,29 @@
 
   }
 }
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+
+// Dimensional
+.block {
+  display: block;
+}
+
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+
+// Accessibility
 .hide-text {
   text-indent: 100%;
   white-space: nowrap;

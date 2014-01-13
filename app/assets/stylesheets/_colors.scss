@@ -1,9 +1,22 @@
 // Colors
 
 // General
-$bodyBg             : #fff;
-$headerBg           : #333;
-$link               : #428BCA;
+$bodyBg: #fff;
+$bodyText: #242424;
+$headerBg: #333;
+$link: #428BCA;
+
+// Buttons
+$defaultButtonBg: #fff;
+$defaultButtonText: $bodyText;
+$primaryButtonBg: $bodyText;
+$primaryButtonHighlight: lighten($primaryButtonBg, 5%);
+$primaryButtonText: #fff;
+
+
+// Forms
+$inputBorderColor: #bdbdbd;
+$inputFocusBorderColor: $bodyText;
 
 // Panels
 $panelHeaderBg      : #2C333A;

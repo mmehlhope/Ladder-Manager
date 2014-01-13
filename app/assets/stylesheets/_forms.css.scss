@@ -1,0 +1,48 @@
+@import 'colors';
+
+form {
+  &.paneled {
+    padding: 1em;
+    border-radius: 0.4em;
+    box-shadow: 0 0 0.75em rgba(0,0,0,0.2);
+    background: $bodyBg;
+    margin-bottom:1em;
+  }
+  &.full-width {
+    input[type="text"],
+    input[type="password"],
+    input[type="search"],
+    input[type="date"],
+    fieldset,
+    textarea,
+    select {
+      width: 100%;
+    }
+  }
+  .form-group {
+    margin-bottom: 1em;
+  }
+}
+
+input[type="text"],
+input[type="password"],
+input[type="search"],
+textarea {
+  // box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.2);
+  border-radius: 0.3em;
+  border: 1px solid $inputBorderColor;
+  padding: 0.625em 1em;
+  color: $defaultButtonText;
+
+  &:focus {
+     border-color: $inputFocusBorderColor;
+    outline: none;
+  }
+}
+
+input[type="text"][disabled],
+input[type="radio"][disabled],
+input[type="checkbox"][disabled],
+fieldset[disabled] > * {
+  cursor: not-allowed;
+}
