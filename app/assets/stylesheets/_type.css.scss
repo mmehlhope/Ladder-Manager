@@ -20,6 +20,22 @@ $sidebarHeaderEm : $largeEm;
   text-shadow: 0 2px 3px rgba(0,0,0,0.3)
 }
 
+// Links
+
+a {
+  text-decoration: none;
+  color: $link;
+
+  &:visited {
+    color: $link;
+  }
+  &:hover {
+    color: lighten($link, 10%);
+  }
+  &:active, &:focus {
+    color: darken($link, 10%);
+  }
+}
 .titleize {
   @include century-gothic;
   color: #fff;
