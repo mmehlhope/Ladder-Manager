@@ -1,8 +1,9 @@
-= form_tag(sessions_path, method: :post) do
+= form_tag(sessions_path, class: 'full-width paneled', method: :post) do
   .field
     .form-group
       %input.form-control(name="email" type="text" placeholder="Account email")
   .field
-    .form_group
+    .form-group
       %input.form-control(name="password" type="password" placeholder="Password")
-  = submit_tag("Submit", :class => 'btn btn-primary')
+  = submit_tag("Log in", :class => 'button button-primary')
+  %a.button(href="#{root_path}" title="Cancel") Create Account

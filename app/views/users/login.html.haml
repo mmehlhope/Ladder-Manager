@@ -1,6 +1,6 @@
 - content_for(:title, "Login")
-%section.col-small.centeredContainer.container-large-offset
-  %h1.panelHeading= yield(:title)
-  .panel.panel-padded
-    = render 'includes/message' if flash_message?
-    = render 'user_login_form'
+%section.col-xsmall.centeredContainer.container-small-offset
+  .text-center
+    = image_tag('ladder-manager-logo-black.svg', :class => "logo", :width => '10em')
+  = render 'includes/message' if flash_message?
+  = render 'user_login_form'
