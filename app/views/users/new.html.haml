@@ -1,0 +1,8 @@
+- content_for(:title, "Create an account")
+- content_for(:description, "Create a Ladder Manager account")
+%section.col-xsmall.centeredContainer.container-small-offset
+  .text-center
+    = image_tag('ladder-manager-logo-black.svg', :class => "logo")
+  = render 'includes/message' if flash_message?
+  = render 'form'
+  %a(href="#{root_path}" title="Back to Ladder Manager home page") Back to home
