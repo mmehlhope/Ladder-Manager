@@ -89,7 +89,8 @@
         = form_tag(sessions_path, method: :post) do
           .field
             .input-group
-              %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
-              %input.form-control(name="password" type="password" placeholder="Administrator password")
+              / %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
+              %input.form-control(name="email" type="text" placeholder="User email")
+              %input.form-control(name="password" type="password" placeholder="password")
               %span.input-group-btn
                 = submit_tag("Submit", :class => 'btn btn-primary')
