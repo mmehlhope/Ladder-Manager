@@ -19,26 +19,37 @@ body, html {
 }
 
 header {
+  background: $headerBg;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  color: $bodyBg;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  color: $bodyBg;
-  background: $headerBg;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.3)
 }
 .header-wrapper {
-  width: $maxContainerWidth;
+  letter-spacing: 1px;
   line-height: 2.25em;
   font-size: $headerEm;
   font-weight: 300;
-  letter-spacing: 1px;
+  width: $maxContainerWidth;
 }
 
 .content-wrapper {
-  max-width: $maxContainerWidth;
-  margin: 0 auto;
-  overflow: auto;
+  height: 100%;
+  min-height: 100%;
+  width:100%;
+}
+
+.sidebar {
+  background: $bodyText;
+  float: left;
+  min-height: 100%;
+  width: $sidebarContainerWidth;
+}
+.main {
+  margin-left: $sidebarContainerWidth;
+  min-height: 100%;
 }
 
 // Breadcrumbs
@@ -84,6 +95,8 @@ header {
     }
   }
 }
+
+
 // .panel .alert {
 //   margin: 0.5em;
 // }
