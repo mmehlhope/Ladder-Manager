@@ -1,6 +1,6 @@
 = content_for(:title, "All Matches")
 %section.col-large.centeredContainer.container-small-offset
-  %h1.panelHeading= yield(:title)
+  %h1= yield(:title)
   = render 'includes/message' if flash_message?
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   - matches_exist = @matches.count > 0

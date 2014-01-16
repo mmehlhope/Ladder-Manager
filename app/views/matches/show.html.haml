@@ -1,6 +1,6 @@
 - content_for(:title, "Match ##{@match.id} #{@match.finalized? ? '(final)' : nil}")
 %section.col-large.centeredContainer.container-small-offset
-  %h1.panelHeading= yield(:title)
+  %h1= yield(:title)
 
   = render 'includes/message' if flash_message?
   = render partial: 'includes/validation_errors', locals: {error_messages: @match.errors.full_messages} if @match.errors.any?

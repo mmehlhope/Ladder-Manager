@@ -1,6 +1,6 @@
 - content_for(:title, "Release notes")
 %section.col-medium.centeredContainer.container-small-offset
-  %h1.panelHeading= yield(:title)
+  %h1= yield(:title)
   .panel.panel-full-padding
     = render 'includes/message' if flash_message?
     .alert.alert-info

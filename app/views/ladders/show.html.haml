@@ -1,7 +1,7 @@
 - content_for(:title, @ladder.name)
 %section.content-wrapper.container-small-offset
-  .col-medium.first
-    %h1.panelHeading= yield(:title)
+  .ladder
+    %h1= yield(:title)
     = render 'includes/message' if flash_message? && user_can_admin_ladder
     = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
     - competitors_exist = @competitors.size > 0
@@ -45,8 +45,8 @@
                     %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
                     to begin.
 
-  %aside.pull-right.last
-    %h2.panelHeading Recent matches
+  %section
+    %h2 Recent matches
     - matches_exist = @matches.size > 0
     .panel
       - if matches_exist
@@ -78,7 +78,7 @@
             Once you've added 2 or more competitors, you can
             %a(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
 
-    %h2.panelHeading #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
+    %h2 #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
     %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
       - if user_can_admin_ladder
         %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
