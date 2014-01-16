@@ -6,7 +6,7 @@ class LaddersController < ApplicationController
   # GET /ladders
   # GET /ladders.json
   def index
-    @ladders = Ladder.all
+    @ladders = current_user.ladders
   end
 
   # GET /ladders/1
