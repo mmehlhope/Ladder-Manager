@@ -8,6 +8,9 @@ form {
     background: $bodyBg;
     margin-bottom:1em;
   }
+  &.padded {
+    padding: 1em;
+  }
   &.full-width {
     input[type="text"],
     input[type="password"],
@@ -19,9 +22,20 @@ form {
       width: 100%;
     }
   }
+  .input-group {
+    position: relative
+  }
   .form-group {
     margin-bottom: 1em;
   }
+}
+.search-button {
+  background: 0;
+  border: 0;
+  color: $defaultButtonText;
+  position: absolute;
+  right: 0.25em;
+  top: 0.6em;
 }
 
 input[type="text"],
