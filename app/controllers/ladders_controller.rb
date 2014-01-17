@@ -130,7 +130,7 @@ class LaddersController < ApplicationController
 
     def verify_user
       if current_user.nil?
-        redirect_to_root_with_error("You must login before you can create a ladder", login_path)
+        redirect_with_error("You must login before you can create a ladder", login_path)
       end
     end
 
