@@ -1,0 +1,29 @@
+%aside
+  .logo-container.text-center
+    = image_tag('ladder-manager-logo-white.svg', :class => 'logo')
+  .search
+    = form_tag(ladders_search_path, method: :post, class: 'full-width') do
+      .input-group
+        %input.form-control(type="search" name="search" placeholder="Search for a ladder")
+        %button.search-button(type="submit")
+          %span.glyphicon.glyphicon-search
+
+  - if current_user
+    %ul.sidebar-menu.user-options
+      %li(class="#{request.fullpath =~ /users\/[0-9]+/ ? 'active' : nil}")
+        %a(href="#{user_path(current_user)}" title="My profile")
+          %span.glyphicon.glyphicon-user
+          My profile
+      %li(class="#{request.fullpath =~ /ladders\/*[0-9]*/ ? 'active' : nil}")
+        %a(href="#{ladders_path}" title="My ladders")
+          %span.glyphicon.glyphicon-list
+          My ladders
+      %li
+        %a(href="#{ladders_path}" title="My challanges")
+          %span.glyphicon.glyphicon-flash
+          My challenges
+      %li
+        %a(href="#{session_path(current_user)}" title="My challanges" data-method="delete")
+          %span.glyphicon.glyphicon-off
+          Sign out
+  - else
