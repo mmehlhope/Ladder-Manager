@@ -1,8 +1,7 @@
 - content_for(:title, "Login")
 - content_for(:description, "Log in to your Ladder Manager user account")
-%section.col-xsmall.centeredContainer.container-small-offset
-  .text-center
-    = image_tag('ladder-manager-logo-black.svg', :class => "logo")
-  = render 'includes/message' if flash_message?
-  = render 'user_login_form'
-  %a(href="#{new_user_path}" title="Create an account") Don't have an account? Create one!
+%section.main
+  %section.col-xsmall.centeredContainer.container-large-offset
+    = render 'includes/message' if flash_message?
+    = render 'user_login_form'
+    %a(href="#{new_user_path}" title="Create an account") Don't have an account? Create one!
