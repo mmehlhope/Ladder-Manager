@@ -12,6 +12,11 @@ $defaultButtonText: $bodyText;
 $primaryButtonBg: $bodyText;
 $primaryButtonHighlight: lighten($primaryButtonBg, 5%);
 $primaryButtonText: #fff;
+$dangerButtonBg: #850000;
+$dangerButtonHighlight: #920d0d;
+$successButtonBg: #008516;
+$successButtonHighlight: #0d9223;
+
 
 
 // Forms
