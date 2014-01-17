@@ -1,0 +1,58 @@
+aside {
+  background: $bodyText;
+  border-right: 1px solid $primaryButtonHighlight;
+  float: left;
+  min-height: 100%;
+  width: $sidebarContainerWidth;
+
+  .logo-container {
+    // border-bottom: 1px solid $primaryButtonHighlight;
+    padding: 1.5em 3em;
+  }
+
+  .logo {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.search {
+  padding: 0 2em 1em;
+
+  input[type="search"] {
+    border: 0;
+    color: #fff;
+    background: darken($primaryButtonBg, 5%);
+    padding-right: 2.5em;
+  }
+  .search-button {
+    color: #fff;
+  }
+}
+
+.sidebar-menu {
+  padding: 0;
+  margin: 0;
+
+  li:first-child a {
+    border-top: 0;
+  }
+  li.active a {
+    color: #fff;
+    border-left-color: $successButtonHighlight;
+    background: darken($primaryButtonBg, 5%);
+  }
+  a {
+    // border-bottom: 1px solid $primaryButtonHighlight;
+    color: #646464;
+    display: block;
+    padding: 0.75em 0 0.75em 2em;
+    border-left: 5px solid transparent;
+
+    &:hover, &:active, &:focus {
+      background: darken($primaryButtonBg, 5%);
+      color: #fff;
+      border-left: 5px solid $successButtonHighlight;
+    }
+  }
+}
