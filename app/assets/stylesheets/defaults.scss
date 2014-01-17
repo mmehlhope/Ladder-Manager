@@ -5,11 +5,12 @@
 @import 'buttons';
 @import 'forms';
 @import 'helpers';
+@import 'sidebar';
 @import 'glyphicons';
 
 // Layout
 body {
-  background:$bodyBg image-url('furley_bg.png');
+  background: $bodyBg image-url('furley_bg.png');
   color: $defaultButtonText;
 }
 
@@ -27,6 +28,7 @@ header {
   left: 0;
   right: 0;
 }
+
 .header-wrapper {
   letter-spacing: 1px;
   line-height: 2.25em;
@@ -41,15 +43,10 @@ header {
   width:100%;
 }
 
-.sidebar {
-  background: $bodyText;
-  float: left;
-  min-height: 100%;
-  width: $sidebarContainerWidth;
-}
 .main {
   margin-left: $sidebarContainerWidth;
   min-height: 100%;
+  padding: 1.5em 3em;
 }
 
 // Breadcrumbs
