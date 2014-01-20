@@ -83,6 +83,6 @@ class CompetitorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def competitor_params
-      params.require(:competitor).permit(:name, :rating)
+      params.require(:competitor).permit(:name)
     end
 end
