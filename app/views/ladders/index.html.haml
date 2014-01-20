@@ -22,7 +22,8 @@
             %td= ladder.created_at.strftime("%B %d, %Y")
             %td= ladder.competitors.size
             %td.text-right
-              #{link_to 'Manage', edit_ladder_path(ladder), :class => 'btn btn-small btn-success'}
+              %a.btn.icon-only(href="#{edit_ladder_path(ladder)}" title="Manage Ladder")
+                %span.glyphicon.glyphicon-cog
   - else
     %p You have no ladders currently, would you like to
     %a= link_to 'create one', new_ladder_path
