@@ -17,6 +17,7 @@ table {
   }
   tr td {
     border-top: 1px solid $tableBorder;
+    color: $sidebarLinkColor;
   }
   tr:first-child td {
     border: none;
