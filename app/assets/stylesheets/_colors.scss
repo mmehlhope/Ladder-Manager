@@ -18,7 +18,6 @@ $successButtonBg: #008516;
 $successButtonHighlight: #0d9223;
 
 
-
 // Forms
 $inputBorderColor: #bdbdbd;
 $inputFocusBorderColor: $bodyText;
@@ -29,7 +28,7 @@ $panelTitleColor    : $headerBg;
 
 // Tables
 $tableBg            : $bodyBg;
-$tableBorder        : #ddd;
+$tableBorder        : lighten($inputBorderColor, 20%);
 
 // Breadcrumbs
 $breadcrumbBg       : #343C46;

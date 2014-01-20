@@ -1,0 +1,66 @@
+// Layout
+body {
+  background: $bodyBg image-url('furley_bg.png');
+}
+
+body, html {
+  height: 100%;
+  min-height: 100%;
+}
+
+header {
+  background: $headerBg;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  color: $bodyBg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.header-wrapper {
+  letter-spacing: 1px;
+  line-height: 2.25em;
+  font-size: $headerEm;
+  font-weight: 300;
+  width: $maxContainerWidth;
+}
+
+.content-wrapper {
+  height: 100%;
+  min-height: 100%;
+  width:100%;
+}
+
+.main {
+  margin-left: $sidebarContainerWidth;
+  min-height: 100%;
+  padding: 1.5em 3em;
+}
+
+// Breadcrumbs
+.breadcrumb-bar > th {
+  background: $breadcrumbBg;
+}
+.breadcrumb-bar .breadcrumbs {
+  color: $breadcrumbColor;
+  font-weight: normal;
+  a {
+    color: $breadcrumbLinkColor;
+  }
+}
+.breadcrumb-bar > th:first-child {
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-left-radius: 4px;
+}
+.breadcrumb-bar > th:last-child {
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-right-radius: 4px;
+}
+
+.panel {
+  background: #fff;
+  padding: 1em;
+}

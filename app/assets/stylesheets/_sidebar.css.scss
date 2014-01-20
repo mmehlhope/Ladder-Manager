@@ -1,8 +1,8 @@
 aside {
   background: $bodyText;
-  border-right: 1px solid $primaryButtonHighlight;
   float: left;
   min-height: 100%;
+  position: fixed;
   width: $sidebarContainerWidth;
 
   .logo-container {
