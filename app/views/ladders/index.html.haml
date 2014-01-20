@@ -4,25 +4,25 @@
       LadderPageView.init()
     )
 
-%section.col-medium.centeredContainer.container-small-offset
-  %h1 Your ladders
-  .panel.panel-full-padding
-    = render 'includes/message' if flash_message?
-    - if @ladders.length > 0
-      %table.table.table-striped
-        %thead
+%section.main
+  %h1 My ladders
+  = render 'includes/message' if flash_message?
+  - if @ladders.length > 0
+    %table
+      %thead
+        %tr
+          %th Name
+          %th Created
+          %th # Competitors
+          %th
+      %tbody
+        - @ladders.each do |ladder|
           %tr
-            %th Name
-            %th Created
-            %th
-        %tbody
-          - @ladders.each do |ladder|
-            %tr
-              %td= link_to ladder.name, ladder_path(ladder)
-              %td= ladder.created_at.strftime("%B %d, %Y")
-              %td
-                #{link_to 'Rename', edit_ladder_path(ladder)},
-                #{link_to 'Delete', ladder, method: :delete, data: { confirm: 'Are you sure?' }}
-    - else
-      %p You have no ladders currently, would you like to
-      %a= link_to 'create one', new_ladder_path
+            %td= link_to ladder.name, ladder_path(ladder)
+            %td= ladder.created_at.strftime("%B %d, %Y")
+            %td= ladder.competitors.size
+            %td.text-right
+              #{link_to 'Manage', edit_ladder_path(ladder), :class => 'btn btn-small btn-success'}
+  - else
+    %p You have no ladders currently, would you like to
+    %a= link_to 'create one', new_ladder_path
