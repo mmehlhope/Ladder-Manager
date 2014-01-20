@@ -2,7 +2,8 @@
 %section.main
   .ladder-header.clearfix
     %h1.pull-left= yield(:title)
-    %a.btn.btn-success.pull-right(href="#{edit_ladder_path(@ladder)}") Manage
+    %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}")
+      Manage
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   - competitors_exist = @competitors.size > 0
@@ -21,7 +22,10 @@
             %td
               %span.badge= rank += 1
             %td= link_to competitor.name, competitor_path(competitor)
-            %td= competitor.rating
+            %td
+              .rating-bg
+                .rating-bar(style="width: #{competitor.percent_of_highest_competitor}%")
+                  =competitor.rating
             %td.text-center #{competitor.wins} - #{competitor.losses}
       - else
         %tr
