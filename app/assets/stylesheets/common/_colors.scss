@@ -7,19 +7,28 @@ $headerBg: #333;
 $link: #428BCA;
 $sidebarLinkColor: #646464;
 
-// Buttons
+/////////////
+// Buttons //
+/////////////
 $defaultButtonBg: #fff;
 $defaultButtonText: $bodyText;
+// primary
+$primaryButtonText: #fff;
 $primaryButtonBg: $bodyText;
 $primaryButtonHighlight: lighten($primaryButtonBg, 5%);
-$primaryButtonText: #fff;
-$dangerButtonBg: #850000;
-$dangerButtonHighlight: #920d0d;
-$successButtonBg: #008516;
-$successButtonHighlight: #0d9223;
+// danger
+$dangerButtonBg: #bb0000;
+$dangerButtonHighlight: lighten($dangerButtonBg, 5%);
+// success
+$successButtonBg: #00bb00;
+$successButtonHighlight: lighten($successButtonBg, 5%);
+// info
+$infoButtonBg: #0065bb;
+$infoButtonHighlight: lighten($infoButtonBg, 5%);
 
-
-// Forms
+///////////
+// Forms //
+///////////
 $inputBorderColor: #bdbdbd;
 $inputFocusBorderColor: $bodyText;
 

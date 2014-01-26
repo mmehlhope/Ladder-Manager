@@ -3,6 +3,7 @@
 table {
   width: 100%;
   background: $tableBg;
+  margin-bottom: 2em;
   box-shadow: 0 10px 10px -8px $inputBorderColor;
 
   th, td {
@@ -10,10 +11,10 @@ table {
     padding: 1em;
   }
   tr th {
-    background: $bodyText;
-    border-bottom: 3px solid $tableBorder;
-    color: $bodyBg;
-    font-weight: normal;
+    background: $bodyBg;
+    border-bottom: 2px solid $tableBorder;
+    color: $bodyText;
+    font-weight: 700;
   }
   tr td {
     border-top: 1px solid $tableBorder;

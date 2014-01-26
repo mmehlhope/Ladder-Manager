@@ -4,8 +4,11 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
 
-@function emCalc($pixelBasedNum){
-  @return $pixelBasedNum / $emBase * 1em
+@function emCalc($pixelBasedNum) {
+  @return $pixelBasedNum / $emBaseInPx * 1em;
+}
+@function newEmCalc($existingEmVal, $newEmVal) {
+  @return ($existingEmVal / $newEmVal) * 1em;
 }
 
 @mixin text-shadow {
@@ -20,7 +23,7 @@
   font-weight: $weight;
 }
 
-$emBase          : 10px; //default
+$emBaseInPx      : 10px; //default
 $baseEm          : emCalc(12px);
 $smallEm         : emCalc(14px);
 $headerEm        : emCalc(16px);
@@ -28,10 +31,13 @@ $mediumEm        : emCalc(18px);
 $largeEm         : emCalc(24px);
 $sidebarHeaderEm : $largeEm;
 
+html {
+  font-size: 62.5%;
+}
 body {
   @include body-font;
   color: $defaultButtonText;
-
+  font-size: $smallEm;
 }
 
 section h1,
@@ -45,7 +51,7 @@ section h6 {
 }
 section h1 {
   font-size: $largeEm;
-  margin: 0 0 0.5em;
+  margin: 0;
 }
 
 // Links

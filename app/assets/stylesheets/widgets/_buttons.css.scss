@@ -1,18 +1,20 @@
 @import '../common/colors';
+@import '../common/type';
 
 .btn,
 a.btn,
 input[type="submit"].btn,
 input[type="reset"].btn {
-  font-size: 1em;
-  text-decoration: none;
   color: $defaultButtonText;
+  background-color: $defaultButtonBg;
   border: 0;
   border-radius: 0.3em;
   border: 1px solid transparent;
   border-color: $inputBorderColor;
+  font-size: emCalc($emBaseInPx);
+  display: inline-block;
   padding: 0.75em 1.5em;
-  background-color: $defaultButtonBg;
+  text-decoration: none;
 
   &:focus {
     outline: none;
@@ -29,17 +31,8 @@ input[type="reset"].btn {
 
   &.btn-primary {
     color: #fff;
-    background: $primaryButtonBg; /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    // background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMyOTI5MjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMyNDI0MjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    // background: -moz-linear-gradient(top, $primaryButtonHighlight 50%, $primaryButtonBg 50%); /* FF3.6+ */
-    // background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,$primaryButtonHighlight), color-stop(50%,$primaryButtonBg)); /* Chrome,Safari4+ */
-    // background: -webkit-linear-gradient(top, $primaryButtonHighlight 50%, $primaryButtonBg 50%); /* Chrome10+,Safari5.1+ */
-    // background: -o-linear-gradient(top, $primaryButtonHighlight 50%, $primaryButtonBg 50%); /* Opera 11.10+ */
-    // background: -ms-linear-gradient(top, $primaryButtonHighlight 50%, $primaryButtonBg 50%); /* IE10+ */
-    // background: linear-gradient(to bottom, $primaryButtonHighlight 50%, $primaryButtonBg 50%); /* W3C */
+    background: $primaryButtonBg;
     border-color: $primaryButtonBg;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$primaryButtonHighlight', endColorstr='$primaryButtonBg',GradientType=0 ); /* IE6-8 */
 
     &:hover {
       background: $primaryButtonHighlight;
@@ -50,17 +43,8 @@ input[type="reset"].btn {
   }
   &.btn-success {
     color: $primaryButtonText;
-    background: #09bb00; /* Old browsers */
-    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-    // background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMyOTI5MjkiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiMyNDI0MjQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-    // background: -moz-linear-gradient(top, $successButtonHighlight 50%, $successButtonBg 50%); /* FF3.6+ */
-    // background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,$successButtonHighlight), color-stop(50%,$successButtonBg)); /* Chrome,Safari4+ */
-    // background: -webkit-linear-gradient(top, $successButtonHighlight 50%, $successButtonBg 50%); /* Chrome10+,Safari5.1+ */
-    // background: -o-linear-gradient(top, $successButtonHighlight 50%, $successButtonBg 50%); /* Opera 11.10+ */
-    // background: -ms-linear-gradient(top, $successButtonHighlight 50%, $successButtonBg 50%); /* IE10+ */
-    // background: linear-gradient(to bottom, $successButtonHighlight 50%, $successButtonBg 50%); /* W3C */
-    border-color: #09bb00;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$successButtonHighlight', endColorstr='$successButtonBg',GradientType=0 ); /* IE6-8 */
+    background: $successButtonBg;
+    border-color: $successButtonHighlight;
 
     &:hover {
       background: $successButtonHighlight;
@@ -69,10 +53,36 @@ input[type="reset"].btn {
       background: $defaultButtonText;
     }
   }
+  &.btn-danger {
+    color: $primaryButtonText;
+    background: $dangerButtonBg;
+    border-color: $dangerButtonHighlight;
+
+    &:hover {
+      background: $dangerButtonHighlight;
+    }
+    &:active, &:focus {
+      background: $defaultButtonText;
+    }
+  }
+  &.btn-info {
+    color: $primaryButtonText;
+    background: $infoButtonBg;
+    border-color: $infoButtonHighlight;
+
+    &:hover {
+      background: $infoButtonHighlight;
+    }
+    &:active, &:focus {
+      background: $defaultButtonText;
+    }
+  }
   &.btn-small {
-    padding: 0.5em 1em;
+    font-size: newEmCalc(1, 1.2);
+    padding: 0.5em 1.5em;
   }
   &.icon-only {
+    font-size: newEmCalc(1, 1.2);
     padding: 0.3em 0.5em 0.25em;
 
     .glyphicon {
