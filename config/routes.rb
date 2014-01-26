@@ -1,5 +1,7 @@
 RailsCompetitionPlatform::Application.routes.draw do
+
   resources :sessions, only: [:create, :destroy]
+  resources :organizations
   resources :users
 
   # Ladder, competitors, matches, games
@@ -17,6 +19,7 @@ RailsCompetitionPlatform::Application.routes.draw do
   get  '/ladders/:id/admin_preferences', to: "ladders#admin_preferences", as: :admin_preferences
   post '/ladders/search', to: "ladders#search"
   get  '/release_notes', to: "release_notes#index"
+  get  '/dashboard', to: "dashboard#index"
   get  '/login', to: "users#login"
 
   # Home page
