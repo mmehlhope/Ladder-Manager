@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:login, :show, :edit, :update, :destroy]
-  before_action :verify_user, except: [:login, :new, :create]
+  before_action :verify_user, except: [:login, :new, :create, :show]
 
   # GET /login
   def login
@@ -23,9 +23,13 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-
-    @user = User.new(user_params)
-
+    @organization = Organization.new(org_params)
+    if @organization.save
+      params = user_params
+      params[:organization_id] = @organization.id
+      debugger
+      @user = User.new(params)
+    end
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
@@ -70,7 +74,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :email)
+      params.require(:user).permit(:name, :password, :password_confirmation, :email, :organization_id)
+    end
+
+    def org_params
+      params.require(:organization).permit(:name)
     end
 
     def verify_user

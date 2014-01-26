@@ -7,6 +7,10 @@ module ApplicationHelper
     @current_user ||= User.find_by_id(session[:user_id])
   end
 
+  def current_org
+    @current_organization ||= current_user.organization
+  end
+
   def ensure_user_can_admin_ladder
     unless user_can_admin_ladder
       flash[:error] = "Please login to edit the ladder."
@@ -15,9 +19,8 @@ module ApplicationHelper
   end
 
   def user_can_admin_ladder
-    # If user isn't logged in, clearly can't admin. If the user is logged in but the ladder
-    # does not belong to them, they also cannot admin it.
-    current_user.nil? ? false : (current_user.ladders.find_by_id(params[:id]).nil? ? false : true)
+    # If user isn't logged in or ladder does not belong to that user's organization, no dice.
+    current_user.nil? ? false : (current_org.ladders.find_by_id(params[:id]).nil? ? false : true)
   end
 
   ####################

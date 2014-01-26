@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:success] = "You have been successfully logged in."
-      redirect_to user_path(@user)
+      redirect_to dashboard_path
     elsif @user && !@user.authenticate(params[:password])
       flash[:error] = "The password you entered was invalid."
       redirect_to login_path

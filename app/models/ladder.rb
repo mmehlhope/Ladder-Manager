@@ -1,7 +1,8 @@
 class Ladder < ActiveRecord::Base
   include LaddersHelper
 
-  belongs_to :user
+  belongs_to :organization
+
   has_many :competitors, dependent: :destroy
   has_many :matches, dependent: :destroy
 

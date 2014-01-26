@@ -6,7 +6,7 @@ class LaddersController < ApplicationController
   # GET /ladders
   # GET /ladders.json
   def index
-    @ladders = current_user.ladders
+    @ladders = current_org.ladders
   end
 
   # GET /ladders/1
@@ -20,7 +20,7 @@ class LaddersController < ApplicationController
 
   # GET /ladders/new
   def new
-    @ladder = current_user.ladders.build
+    @ladder = current_org.ladders.build
   end
 
   # GET /ladders/1/edit
@@ -30,7 +30,7 @@ class LaddersController < ApplicationController
   # POST /ladders
   # POST /ladders.json
   def create
-    @ladder = current_user.ladders.build(ladder_params)
+    @ladder = current_org.ladders.build(ladder_params)
 
     respond_to do |format|
       if @ladder.save
@@ -111,10 +111,6 @@ class LaddersController < ApplicationController
       flash[:error] = error
       redirect_to root_path
     end
-  end
-
-  # GET /ladders/1/admin_preferences
-  def admin_preferences
   end
 
   private
