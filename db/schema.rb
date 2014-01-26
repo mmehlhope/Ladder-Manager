@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140112230512) do
+ActiveRecord::Schema.define(version: 20140124062647) do
 
   create_table "competitors", force: true do |t|
     t.string   "name"
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 20140112230512) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "organization_id"
   end
 
-  add_index "ladders", ["user_id"], name: "index_ladders_on_user_id", using: :btree
+  add_index "ladders", ["organization_id"], name: "index_ladders_on_organization_id", using: :btree
 
   create_table "matches", force: true do |t|
     t.datetime "created_at"
@@ -65,6 +65,12 @@ ActiveRecord::Schema.define(version: 20140112230512) do
   add_index "matches", ["competitor_1"], name: "index_matches_on_competitor_1", using: :btree
   add_index "matches", ["competitor_2"], name: "index_matches_on_competitor_2", using: :btree
   add_index "matches", ["ladder_id"], name: "index_matches_on_ladder_id", using: :btree
+
+  create_table "organizations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -82,8 +88,10 @@ ActiveRecord::Schema.define(version: 20140112230512) do
     t.datetime "updated_at"
     t.text     "password_digest"
     t.string   "email"
+    t.integer  "organization_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
 
 end
