@@ -1,7 +1,5 @@
 - content_for(:title, "User profile")
 - content_for(:description, "Edit your ladder manager user profile")
-%section.col-xsmall.centeredContainer.container-small-offset
+%section.main
   = render 'includes/message' if flash_message?
   = render 'form'
-  %a(href="#{user_path(@user)}" title="User page") User page
-

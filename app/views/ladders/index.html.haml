@@ -7,7 +7,7 @@
 %section.main
   %h1 My ladders
   = render 'includes/message' if flash_message?
-  - if @ladders.length > 0
+  - if @ladders.size > 0
     %table
       %thead
         %tr

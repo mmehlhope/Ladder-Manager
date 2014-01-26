@@ -1,9 +1,13 @@
 - content_for(:title, @ladder.name)
 %section.main
-  .ladder-header.clearfix
+  %header.clearfix
+    %ul.breadcrumbs
+      %li
+        Ladder Overview
     %h1.pull-left= yield(:title)
-    %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}")
+    %a.btn.btn-small.btn-info.pull-right(href="#{edit_ladder_path(@ladder)}")
       Manage
+
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   - competitors_exist = @competitors.size > 0
@@ -67,20 +71,20 @@
                 - elsif user_can_admin_ladder && !@ladder.can_record_match?
                   Add your first 2 competitors then you can record a match between them.
 
-    %h2 #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
+    / %h2 #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
 
-    %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
-      - if user_can_admin_ladder
-        %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
-        %a.panel-block-link(href="#{admin_preferences_path(@ladder)}" title="Edit ladder administrator preferences") Edit preferences
-        %a.panel-block-link(href="#{session_path}" data-method="delete" title="Sign out") Sign out
-      - else
-        = render 'includes/message' if flash_message?
-        = form_tag(sessions_path, method: :post) do
-          .field
-            .input-group
-              / %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
-              %input.form-control(name="email" type="text" placeholder="User email")
-              %input.form-control(name="password" type="password" placeholder="password")
-              %span.input-group-btn
-                = submit_tag("Submit", :class => 'btn btn-primary')
+    / %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
+    /   - if user_can_admin_ladder
+    /     %a.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
+    /     %a(href="#{admin_preferences_path(@ladder)}" title="Edit ladder administrator preferences") Edit preferences
+    /     %a(href="#{session_path}" data-method="delete" title="Sign out") Sign out
+    /   - else
+    /     = render 'includes/message' if flash_message?
+    /     = form_tag(sessions_path, method: :post) do
+    /       .field
+    /         .input-group
+    /           / %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
+    /           %input.form-control(name="email" type="text" placeholder="User email")
+    /           %input.form-control(name="password" type="password" placeholder="password")
+    /           %span.input-group-btn
+    /             = submit_tag("Submit", :class => 'btn btn-primary')

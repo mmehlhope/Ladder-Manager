@@ -10,20 +10,29 @@
 
   - if current_user
     %ul.sidebar-menu.user-options
-      %li(class="#{request.fullpath =~ /users\/[0-9]+/ ? 'active' : nil}")
-        %a(href="#{user_path(current_user)}" title="My profile")
+      %li(class="#{request.fullpath =~ /dashboard/ ? 'active' : nil}")
+        %a(href="#{dashboard_path}" title="Dashboard")
+          %span.glyphicon.glyphicon-dashboard
+          Dashboard
+      %li
+        %a(href="#{ladders_path}" title="Notifications")
+          %span.glyphicon.glyphicon-envelope
+          View Notifications
+      %li
+        %a(href="#{organization_path(current_org)}" title="My Organization")
+          %span.glyphicon.glyphicon-globe
+          Manage Organization
+      %li
+        %a(href="#{user_path(current_user)}" title="My Account")
           %span.glyphicon.glyphicon-user
-          My profile
-      %li(class="#{request.fullpath =~ /ladders\/*[0-9]*/ ? 'active' : nil}")
-        %a(href="#{ladders_path}" title="My ladders")
-          %span.glyphicon.glyphicon-list
-          My ladders
+          Manage Account
       %li
-        %a(href="#{ladders_path}" title="My challanges")
-          %span.glyphicon.glyphicon-flash
-          My challenges
-      %li
-        %a(href="#{session_path(current_user)}" title="My challanges" data-method="delete")
+        %a(href="#{session_path(current_user)}" title="Sign out" data-method="delete")
           %span.glyphicon.glyphicon-off
           Sign out
   - else
+    %ul.sidebar-menu.user-options
+      %li
+        %a(href="#{login_path}" title="My challanges")
+          %span.glyphicon.glyphicon-off
+          Sign in

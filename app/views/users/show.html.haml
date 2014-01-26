@@ -1,6 +1,6 @@
 .main
   %strong #{@user.name}
   %strong #{@user.email}
-  - @user.ladders.each do |ladder|
+  - current_org.ladders.each do |ladder|
     %br
     = link_to ladder.name, ladder_path(ladder)
