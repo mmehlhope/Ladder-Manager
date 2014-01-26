@@ -1,0 +1,7 @@
+- content_for :head do
+  = stylesheet_link_tag('views/users')
+%section.main
+  = render 'includes/message' if flash_message?
+  %h1 #{@organization.name}
+  %h2= link_to 'Edit', edit_organization_path(@organization)
+  %h2= link_to 'Create new ladder', new_ladder_path
