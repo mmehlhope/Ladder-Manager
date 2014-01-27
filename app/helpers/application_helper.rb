@@ -19,8 +19,13 @@ module ApplicationHelper
   end
 
   def user_can_admin_ladder
+    unless params[:match_id]
+      id = params[:id] || params[:ladder_id]
+    else
+      id = Match.find_by_id(params[:match_id]).ladder.id
+    end
     # If user isn't logged in or ladder does not belong to that user's organization, no dice.
-    current_user.nil? ? false : (current_org.ladders.find_by_id(params[:id]).nil? ? false : true)
+    current_user.nil? ? false : (current_org.ladders.find_by_id(id).nil? ? false : true)
   end
 
   ####################
