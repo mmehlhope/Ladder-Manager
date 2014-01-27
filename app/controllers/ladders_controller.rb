@@ -57,23 +57,15 @@ class LaddersController < ApplicationController
   def update
     respond_to do |format|
       if @ladder.update(ladder_params)
-
-        if user_is_submitting_preferences?
-          successMsg = 'Admin preferences have been successfully updated.'
-          # Send password changed notice
-          LadderMailer.password_changed(@ladder).deliver
-        else
-          successMsg = 'Ladder was successfully updated.'
-        end
+        successMsg = 'Ladder was successfully updated.'
 
         format.html {
           flash[:success] = successMsg
-          redirect_to @ladder
+          redirect_to edit_ladder_path(@ladder)
         }
         format.json { head :no_content }
       else
-        action = user_is_submitting_preferences? ? 'admin_preferences' : 'edit'
-        format.html { render action: action }
+        format.html { render action: 'edit' }
         format.json { render json: @ladder.errors, status: :unprocessable_entity }
       end
     end
