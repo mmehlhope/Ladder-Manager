@@ -19,4 +19,9 @@ module LaddersHelper
   def can_record_match?
     competitors.size >= 2
   end
+
+  def active?
+    # ladder was updated within the last 30 days
+    updated_at >= 30.days.ago
+  end
 end
