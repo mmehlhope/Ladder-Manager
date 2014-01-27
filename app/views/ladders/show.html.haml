@@ -1,12 +1,16 @@
 - content_for(:title, @ladder.name)
 %section.main
   %header.clearfix
-    %ul.breadcrumbs
-      %li
-        Ladder Overview
-    %h1.pull-left= yield(:title)
-    %a.btn.btn-small.btn-info.pull-right(href="#{edit_ladder_path(@ladder)}")
-      Manage
+    .ladder-props
+      %h1= yield(:title)
+      %dl
+        %dt
+          Organized by:
+        %dd
+          %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
+        %dt Status:
+        %dd #{@ladder.active? ? 'Active' : 'Inactive'}
+    %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}") Manage ladder
 
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
@@ -42,7 +46,8 @@
                 to begin.
 
   %section
-    %h2 Recent matches
+    .table-header.clearfix
+      %h2.pull-left Recent matches
     %table
       %thead
         %tr
@@ -66,25 +71,8 @@
                 %span.glyphicon.glyphicon-info-sign
                 There are no recent matches.
                 - if user_can_admin_ladder && @ladder.can_record_match?
-                  %a(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record the first match
-                  between your competitors.
+                  Go to the
+                  %a(href="#{edit_ladder_path(@ladder)}" title="Manage ladder") ladder management
+                  page to add matches between competitors.
                 - elsif user_can_admin_ladder && !@ladder.can_record_match?
                   Add your first 2 competitors then you can record a match between them.
-
-    / %h2 #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
-
-    / %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
-    /   - if user_can_admin_ladder
-    /     %a.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
-    /     %a(href="#{admin_preferences_path(@ladder)}" title="Edit ladder administrator preferences") Edit preferences
-    /     %a(href="#{session_path}" data-method="delete" title="Sign out") Sign out
-    /   - else
-    /     = render 'includes/message' if flash_message?
-    /     = form_tag(sessions_path, method: :post) do
-    /       .field
-    /         .input-group
-    /           / %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
-    /           %input.form-control(name="email" type="text" placeholder="User email")
-    /           %input.form-control(name="password" type="password" placeholder="password")
-    /           %span.input-group-btn
-    /             = submit_tag("Submit", :class => 'btn btn-primary')
