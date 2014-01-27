@@ -11,6 +11,30 @@ body, html {
 
 header {
   margin-bottom: 1em;
+
+  .ladder-props {
+    float: left;
+    dl {
+      margin: 0;
+      dt, dd { display: inline-block; }
+      dt {
+        color: $sidebarLinkColor;
+        border-left: 1px solid $sidebarLinkColor;
+        padding: 0 0 0 0.5em;
+        &:first-child {
+          padding: 0;
+          border: none;
+        }
+      }
+      dd {
+        margin: 0;
+        padding: 0 0.5em 0 0;
+      }
+    }
+  }
+}
+.table-header {
+  margin-bottom: 1em;
 }
 
 .content-wrapper {

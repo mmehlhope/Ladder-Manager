@@ -48,6 +48,7 @@ section h5,
 section h6 {
   @include header-font;
   line-height: 1;
+  margin: 0;
 }
 section h1 {
   font-size: $largeEm;
