@@ -4,7 +4,7 @@
   background-color: $tableBorder;
 
   .rating-bar {
-    background-color: $link;
+    background-color: $ratingBar;
     color: $bodyBg;
     height:1.25em;
     line-height: 1.25em;
@@ -16,7 +16,7 @@
     &:after {
       border-bottom: 9px solid transparent;  /* left arrow slant */
       border-top: 9px solid transparent; /* right arrow slant */
-      border-left: 8px solid $link; /* bottom, add background color here */
+      border-left: 8px solid $ratingBar; /* bottom, add background color here */
       content: " ";
       font-size: 0;
       height: 0;
