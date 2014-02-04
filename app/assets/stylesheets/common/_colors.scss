@@ -1,15 +1,18 @@
-// Colors
+////////////
+// Colors //
+////////////
 
 // General
 $bodyBg: #fff;
 $bodyText: #242424;
 $headerBg: #333;
-$link: #ff7e00;
+$link: #D3643B;
 $sidebarLinkColor: #646464;
 
 /////////////
 // Buttons //
 /////////////
+
 $defaultButtonBg: #fff;
 $defaultButtonText: $bodyText;
 // primary
@@ -32,6 +35,10 @@ $infoButtonHighlight: lighten($infoButtonBg, 5%);
 $inputBorderColor: #bdbdbd;
 $inputFocusBorderColor: $bodyText;
 
+//////////
+// Misc //
+//////////
+
 // Panels
 $panelHeaderBg      : #2C333A;
 $panelTitleColor    : $headerBg;
@@ -44,3 +51,7 @@ $tableBorder        : lighten($inputBorderColor, 20%);
 $breadcrumbBg       : #343C46;
 $breadcrumbColor    : $tableBorder;
 $breadcrumbLinkColor: lighten($link, 20%);
+$breadcrumbBorder   : lighten($sidebarLinkColor, 50%);
+
+// Ratings
+$ratingBar         : #94C7B6;
