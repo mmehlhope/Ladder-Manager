@@ -4,7 +4,6 @@ table {
   width: 100%;
   background: $tableBg;
   margin-bottom: 2em;
-  box-shadow: 0 10px 10px -8px $inputBorderColor;
 
   th, td {
     text-align: left;
@@ -18,9 +17,22 @@ table {
   }
   tr td {
     border-top: 1px solid $tableBorder;
-    color: $sidebarLinkColor;
+    font-size: 1.1em;
+    vertical-align: top;
+
+    a, a:visited, a:active {
+      font-weight: bold;
+      color: $bodyText;
+    }
   }
   tr:first-child td {
     border: none;
+  }
+
+  .detail {
+    display: block;
+    padding: 0.24em 0 0;
+    color: $sidebarLinkColor;
+    font-size: 0.8em;
   }
 }
