@@ -11,6 +11,13 @@ module CompetitorsHelper
   ################
   # STAT HELPERS #
   ################
+  def last_match_played_date
+    last_match_played.created_at
+  end
+
+  def last_match_played
+    matches.last
+  end
 
   def matches_played
     matches.select(&:finalized?).size
