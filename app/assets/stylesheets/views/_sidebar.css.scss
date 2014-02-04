@@ -1,3 +1,5 @@
+@import '../common/grid';
+
 aside {
   background: $bodyText;
   float: left;
@@ -39,7 +41,7 @@ aside {
   }
   li.active a, li a:hover {
     color: #fff;
-    border-left-color: $successButtonHighlight;
+    border-left-color: $link;
     background: darken($primaryButtonBg, 5%);
   }
   a, a:visited {
@@ -50,6 +52,26 @@ aside {
 
     &:active, &:focus {
       color: $bodyBg;
+    }
+  }
+}
+
+@include breakpoint(tablet) {
+  aside {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 4em;
+    min-height: 0;
+    .sidebar-menu, .search {
+      display: none;
+    }
+    .logo-container {
+      width: 5em;
+      padding: 0;
+      text-align: left;
     }
   }
 }

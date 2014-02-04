@@ -1,7 +1,8 @@
-// Layout
+@import '../common/grid';
 
+// Layout
 body {
-  background: $bodyBg image-url('furley_bg.png');
+  background: $bodyBg;
 }
 
 body, html {
@@ -10,12 +11,13 @@ body, html {
 }
 
 header {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 
   .ladder-props {
     float: left;
+
     dl {
-      margin: 0;
+      margin: 0.5em 0 0;
       dt, dd { display: inline-block; }
       dt {
         color: $sidebarLinkColor;
@@ -49,7 +51,29 @@ header {
   padding: 1.5em 3em;
 }
 
+
 .panel {
   background: #fff;
   padding: 1em;
+}
+
+@include breakpoint(tablet) {
+  .main {
+    margin: 4em 0 0;
+    padding: 1em;
+  }
+}
+
+@include breakpoint(phone) {
+  header {
+    .ladder-props {
+      float: none;
+    }
+    .btn, a.btn {
+      display: block;
+      float: none !important;
+      margin: 1em 0 0;
+      text-align: center;
+    }
+  }
 }

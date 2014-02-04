@@ -1,3 +1,15 @@
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (max-width: 120em) { @content; }
+  }
+  @else if $point == tablet {
+    @media (max-width: 57em) { @content; }
+  }
+  @else if $point == phone {
+    @media (max-width: 36em) { @content; }
+  }
+}
+
 $sidebarContainerWidth: 18em;
 $xSmallContainerWidth : 24em;
 $smallContainerWidth  : 36em;
@@ -26,9 +38,6 @@ $maxContainerWidth    : 70em;
 
 .col-xsmall {
   width: $xSmallContainerWidth;
-}
-aside {
-  width: $sidebarContainerWidth;
 }
 .col-small {
   width: $smallContainerWidth;

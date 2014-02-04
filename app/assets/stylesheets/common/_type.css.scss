@@ -1,5 +1,4 @@
 // Typography
-
 @import 'colors';
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
@@ -19,7 +18,7 @@
   font-weight: $weight;
 }
 @mixin header-font($weight: 600) {
-  font-family: 'Source Sans Pro', serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: $weight;
 }
 
@@ -28,7 +27,7 @@ $baseEm          : emCalc(12px);
 $smallEm         : emCalc(14px);
 $headerEm        : emCalc(16px);
 $mediumEm        : emCalc(18px);
-$largeEm         : emCalc(24px);
+$largeEm         : emCalc(30px);
 $sidebarHeaderEm : $largeEm;
 
 html {
@@ -53,6 +52,13 @@ section h6 {
 section h1 {
   font-size: $largeEm;
   margin: 0;
+
+  @include breakpoint(tablet) {
+    font-size: 2em;
+  }
+  @include breakpoint(phone) {
+    font-size: 1.8em;
+  }
 }
 
 // Links
