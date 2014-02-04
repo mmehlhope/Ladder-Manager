@@ -77,6 +77,16 @@ input[type="reset"].btn {
       background: $defaultButtonText;
     }
   }
+  &.btn-neutral {
+    color: $bodyText;
+    background: $tableBorder;
+    border-color: $tableBorder;
+  }
+  &.btn-link {
+    color: $link;
+    background: transparent;
+    border-color: transparent;
+  }
   &.btn-small {
     font-size: newEmCalc(1, 1.2);
     padding: 0.5em 1.5em;
