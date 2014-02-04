@@ -58,10 +58,7 @@
                     to begin.
     .tab-pane#recent-matches
       %table
-        %thead
-          %tr
-            %th Competitors
-            %th.text-right When?
+
         %tbody
           - if @ladder.has_matches?
             - @matches.each do |match|
