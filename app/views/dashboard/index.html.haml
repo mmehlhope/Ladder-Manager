@@ -5,39 +5,47 @@
   = render 'includes/message' if flash_message?
   %header.clearfix
     %h1= yield(:title)
-  %table
-    %thead
-      %tr
-        %th
-          %span.glyphicon.glyphicon-inbox
-        %th Message
-        %th Age
-    %tbody
-      - if current_org
-        / - current_org.notifications.each do |ladder|
-        - 5.times do
+  %ul.navigation
+    %li.active
+      %a.btn.btn-link(href="#notifications" data-toggle="tab") Notifications
+    %li
+      %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
+  .tab-content
+    .tab-pane#notifications.active
+      %table
+        %thead
           %tr
-            %td
-              %a.btn.btn-primary.icon-only(href="#")
-                %span.glyphicon.glyphicon-ok
-            %td This is an example notification This is an example notification This is an example notification
-            %td 4 hours ago
-  %table
-    %thead
-      %tr
-        %th Ladder name
-        %th Date created
-        %th Num. Competitors
-        %th
-    %tbody
-      - if current_org.has_ladders?
-        - current_org.ladders.each do |ladder|
+            %th
+              %span.glyphicon.glyphicon-inbox
+            %th Message
+            %th Age
+        %tbody
+          - if current_org
+            / - current_org.notifications.each do |ladder|
+            - 5.times do
+              %tr
+                %td
+                  %a.btn.btn-primary.icon-only(href="#")
+                    %span.glyphicon.glyphicon-ok
+                %td This is an example notification This is an example notification This is an example notification
+                %td 4 hours ago
+    .tab-pane#ladders
+      %table
+        %thead
           %tr
-            %td= link_to ladder.name, ladder_path(ladder)
-            %td= ladder.created_at.strftime("%B %d, %Y")
-            %td= ladder.competitors.size
-            %td.text-right
-              %a.btn.btn-small.btn-primary(href="#{edit_ladder_path(ladder)}") Manage
-      - else
-        %tr
-          %td(colspan="3") No ladders have been created
+            %th Ladder name
+            %th Date created
+            %th Num. Competitors
+            %th
+        %tbody
+          - if current_org.has_ladders?
+            - current_org.ladders.each do |ladder|
+              %tr
+                %td= link_to ladder.name, ladder_path(ladder)
+                %td= ladder.created_at.strftime("%B %d, %Y")
+                %td= ladder.competitors.size
+                %td.text-right
+                  %a.btn.btn-small.btn-primary(href="#{edit_ladder_path(ladder)}") Manage
+          - else
+            %tr
+              %td(colspan="3") No ladders have been created
