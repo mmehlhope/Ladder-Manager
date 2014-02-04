@@ -19,11 +19,6 @@ table {
     border-top: 1px solid $tableBorder;
     font-size: 1.1em;
     vertical-align: top;
-
-    a, a:visited, a:active {
-      font-weight: bold;
-      color: $bodyText;
-    }
   }
   tr:first-child td {
     border: none;
