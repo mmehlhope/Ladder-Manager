@@ -2,19 +2,25 @@
 @import '../common/helpers';
 
 .navigation {
+  background: $tableBorder;
+  border-top: 3px solid $tableBorder;
   clear: both;
   list-style: none;
-  margin: 1em 0;
-  padding: 0;
+  margin: 1em -3em 1em -3em;
+  padding: 0 3em;
   @include clearfix;
 
   li {
     display: block;
     float: left;
-    border-bottom: 1px solid $sidebarLinkColor;
+
+    a {
+      padding: 1em 1.5em;
+      border-radius: 0;
+    }
+    // border-bottom: 1px solid $ssidebarLinkColor;
     &.active {
-      border: 1px solid $sidebarLinkColor;
-      border-bottom: none;
+      background: $bodyBg;
     }
   }
   li.active a {
