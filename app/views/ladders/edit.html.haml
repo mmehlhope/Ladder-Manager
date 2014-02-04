@@ -8,62 +8,70 @@
       %h1= yield(:title)
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
-
-  = render 'edit_form'
-
-  - competitors_exist = @ladder.competitors.size > 0
-  %table
-    %thead
-      %tr
-        %th Competitor name
-        %th New name
-        %th.text-right
-    %tbody
-      - if @ladder.competitors.size > 0
-        - rank = 0
-        - @ladder.competitors.each do |competitor|
+  %ul.navigation
+    %li.active
+      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Ladder
+    %li
+      %a.btn.btn-link(href="#matchOpts" data-toggle="tab") Matches
+    %li
+      %a.btn.btn-link(href="#competitorOpts" data-toggle="tab") Competitors
+  .tab-content
+    .tab-pane#ladderOpts.active
+      = render 'edit_form'
+    .tab-pane#competitorOpts
+      - competitors_exist = @ladder.competitors.size > 0
+      %table
+        %thead
           %tr
-            %td= link_to competitor.name, competitor_path(competitor)
-            %td
-            %td
-      - else
-        %tr
-          %td(colspan="#{user_can_admin_ladder ? 5 : 4}")
-            .alert.alert-info
-              %span.glyphicon.glyphicon-info-sign
-              There are currently no competitors added to this ladder.
-              - if user_can_admin_ladder
-                %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
-                to begin.
-
-  %section
-    .table-header.clearfix
-      %h2.pull-left Add / Edit Matches
-    %table
-      %thead
-        %tr
-          %th Competitors
-          %th.text-right When?
-      %tbody
-        - if @ladder.has_matches?
-          - @ladder.matches.each do |match|
+            %th Competitor name
+            %th New name
+            %th.text-right
+        %tbody
+          - if @ladder.competitors.size > 0
+            - rank = 0
+            - @ladder.competitors.each do |competitor|
+              %tr
+                %td= link_to competitor.name, competitor_path(competitor)
+                %td
+                %td
+          - else
             %tr
-              %td
-                = match.competitor_1_name
-                vs.
-                = match.competitor_2_name
-              %td.text-right= link_to time_ago_in_words(match.created_at).capitalize + " ago", match
+              %td(colspan="#{user_can_admin_ladder ? 5 : 4}")
+                .alert.alert-info
+                  %span.glyphicon.glyphicon-info-sign
+                  There are currently no competitors added to this ladder.
+                  - if user_can_admin_ladder
+                    %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
+                    to begin.
+
+    .tab-pane#matchOpts
+      .table-header.clearfix
+        %h2.pull-left Add / Edit Matches
+      %table
+        %thead
           %tr
-            %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
-        - else
-          %tr
-            %td(colspan="2")
-              .alert.alert-info
-                %span.glyphicon.glyphicon-info-sign
-                There are no recent matches.
-                - if user_can_admin_ladder && @ladder.can_record_match?
-                  Go to the
-                  %a(href="#{edit_ladder_path(@ladder)}" title="Manage ladder") ladder management
-                  page to add matches between competitors.
-                - elsif user_can_admin_ladder && !@ladder.can_record_match?
-                  Add your first 2 competitors then you can record a match between them.
+            %th Competitors
+            %th.text-right When?
+        %tbody
+          - if @ladder.has_matches?
+            - @ladder.matches.each do |match|
+              %tr
+                %td
+                  = match.competitor_1_name
+                  vs.
+                  = match.competitor_2_name
+                %td.text-right= link_to time_ago_in_words(match.created_at).capitalize + " ago", match
+            %tr
+              %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
+          - else
+            %tr
+              %td(colspan="2")
+                .alert.alert-info
+                  %span.glyphicon.glyphicon-info-sign
+                  There are no recent matches.
+                  - if user_can_admin_ladder && @ladder.can_record_match?
+                    Go to the
+                    %a(href="#{edit_ladder_path(@ladder)}" title="Manage ladder") ladder management
+                    page to add matches between competitors.
+                  - elsif user_can_admin_ladder && !@ladder.can_record_match?
+                    Add your first 2 competitors then you can record a match between them.
