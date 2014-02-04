@@ -6,10 +6,41 @@
   clear:both;
   color: $sidebarLinkColor;
   display: block;
-  margin: -1.5em 0 2em;
-  padding: 0.5em 0;
+  margin: -1.5em -3em 2em -3em;
+  padding: 1.5em 3em;
 
   li {
     display: inline-block;
+    padding: 0 1.5em 0 0.5em;
+    position: relative;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:after {
+      border-bottom: 11px solid transparent;  /* left arrow slant */
+      border-top: 11px solid transparent; /* right arrow slant */
+      border-left: 11px solid #fff; /* bottom, add background color here */
+      content: " ";
+      font-size: 0;
+      height: 0;
+      line-height: 0;
+      position: absolute;
+      top: -3px;
+      right: 0;
+      width: 0;
+    }
+    &:before {
+      border-bottom: 11px solid transparent;  /* left arrow slant */
+      border-top: 11px solid transparent; /* right arrow slant */
+      border-left: 11px solid $sidebarLinkColor; /* bottom, add background color here */
+      content: " ";
+      font-size: 0;
+      height: 0;
+      line-height: 0;
+      position: absolute;
+      top: -3px;
+      right: -1px;
+      width: 0;
+    }
   }
 }
