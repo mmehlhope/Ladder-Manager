@@ -11,36 +11,50 @@
 
   li {
     display: inline-block;
-    padding: 0 1.5em 0 0.5em;
+    padding: 0 0.5em 0 1.5em;
     position: relative;
+
+    // First element does not need an arrow
     &:first-child {
       padding-left: 0;
+      &:after {
+        content: none;
+      }
+      &:before {
+        content: none;
+      }
     }
     &:after {
-      border-bottom: 11px solid transparent;  /* left arrow slant */
-      border-top: 11px solid transparent; /* right arrow slant */
-      border-left: 11px solid #fff; /* bottom, add background color here */
+      border-bottom: 9px solid transparent;  /* left arrow slant */
+      border-top: 9px solid transparent; /* right arrow slant */
+      border-left: 9px solid #fff; /* bottom, add background color here */
       content: " ";
       font-size: 0;
       height: 0;
       line-height: 0;
       position: absolute;
-      top: -3px;
-      right: 0;
+      top: 1px;
+      left: 0;
       width: 0;
     }
     &:before {
-      border-bottom: 11px solid transparent;  /* left arrow slant */
-      border-top: 11px solid transparent; /* right arrow slant */
-      border-left: 11px solid $sidebarLinkColor; /* bottom, add background color here */
+      border-bottom: 9px solid transparent;  /* left arrow slant */
+      border-top: 9px solid transparent; /* right arrow slant */
+      border-left: 9px solid $sidebarLinkColor; /* bottom, add background color here */
       content: " ";
       font-size: 0;
       height: 0;
       line-height: 0;
       position: absolute;
-      top: -3px;
-      right: -1px;
+      top: 1px;
+      left: 1px;
       width: 0;
+    }
+    &.last {
+      &:after,
+      &:before {
+        content: "";
+      }
     }
   }
 }
