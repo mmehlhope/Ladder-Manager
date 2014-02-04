@@ -14,23 +14,27 @@
     display: block;
     float: left;
 
-    a {
-      padding: 1em 1.5em;
-      border-radius: 0;
+    a,
+    a:visited {
+        background-color: $defaultButtonBg;
+        display: inline-block;
+        padding: 1em 1.5em;
+        text-decoration: none;
     }
-    // border-bottom: 1px solid $ssidebarLinkColor;
     &.active {
       background: $bodyBg;
     }
   }
-  li.active a {
+  li.active a,
+  li.active a:visited,
+  li.active a:hover,
+  li.active a:active {
     color: $bodyText;
-    // background: $tableBorder;
-    // border-color: $tableBorder;
   }
 }
 
 .tab-content {
+  padding: 1.5em 0;
   .tab-pane {
     display: none;
     &.active {

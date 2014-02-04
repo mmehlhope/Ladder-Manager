@@ -2,7 +2,7 @@
 @import '../common/type';
 
 .btn,
-a.btn,
+a.btn, a.btn:visited,
 input[type="submit"].btn,
 input[type="reset"].btn {
   color: $defaultButtonText;
