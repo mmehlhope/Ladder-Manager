@@ -1,60 +1,53 @@
-- content_for(:title, "Match ##{@match.id} #{@match.finalized? ? '(final)' : nil}")
-%section.col-large.centeredContainer.container-small-offset
-  %h1= yield(:title)
+- content_for(:title, "Match details")
+%section.main
+  %header.clearfix
+    %ul.breadcrumbs
+      %li= link_to @ladder.name, ladder_path(@ladder)
+      %li= link_to 'Matches', ladder_matches_path(@ladder)
+      %li Match details
+    .ladder-props
+      %h1= yield(:title)
+      %dl
+        %dt Games played:
+        %dd #{@match.games.size}
+        %dt Status:
+        %dd #{@match.finalized? ? 'Final' : 'In progress'}
+        %dt Winner:
+        %dd #{@match.winning_competitor ? (link_to @match.winning_competitor.name, competitor_path(@match.winning_competitor)) : 'Undetermined'}
+    .btn-group.pull-right
+      %a.btn.btn-primary(href="#{new_match_game_path(@match)}") Add game
+      %a.btn.btn-neutral(href="#{finalize_match_path(@match)}") Finalize match
+
 
   = render 'includes/message' if flash_message?
   = render partial: 'includes/validation_errors', locals: {error_messages: @match.errors.full_messages} if @match.errors.any?
 
-  - user_can_edit = user_can_admin_ladder && !@match.finalized?
-  - games_exist = @match.games.count > 0
-  .panel
-    %table.table.table-striped
-      %thead
-        %tr.breadcrumb-bar
-          %th.breadcrumbs(colspan="#{games_exist ? 4 : 1}")
-            %a(href="#{ladder_path(@ladder)}") #{@ladder.name}
-            &#47;
-            %a(href="#{ladder_matches_path(@ladder)}") All matches
-            &#47;
-            Match ##{@match.id}
-          - if user_can_edit
-            %th.text-right
-              %a.btn.btn-success.btn-xs(href="#{new_match_game_path(@match)}" title="Add a game") Add game
-              %a.btn.btn-danger.btn-xs(href="#{match_path(@match)}" title="Delete match" data-method="delete" data-confirm="Are you sure you want to delete this entire match? All games associated will also be deleted.") Delete match
-        - if games_exist
+  %table
+    %tbody
+      - if @match.has_games?
+        - series = 0
+        - @match.games.each do |game|
           %tr
-            %th Game #
-            %th Date played
-            %th #{@match.competitor_1_name}'s score
-            %th #{@match.competitor_2_name}'s score
-            - if user_can_edit
-              %th
-      - if games_exist
-        %tbody
-          - series = 0
-          - @match.games.each do |game|
-            %tr
-              %td
-                %span.badge= series += 1
-              %td= game.created_at.strftime("%m/%d/%Y")
-              %td= game.competitor_1_score
-              %td= game.competitor_2_score
-              - if user_can_edit
-                %td.text-right
-                  %a.btn.btn-primary.btn-xs(href="#{edit_game_path(game)}" title="Edit game") Edit
-                  %a.btn.btn-danger.btn-xs(href="#{game_path(game)}" title="Delete" data-method="delete" data-confirm="Are you sure?") Delete
-        - if user_can_edit
-          %tfoot
-            %tr
-              %td(colspan="5")
-                %a.btn.btn-success(href="#{new_match_game_path(@match)}" title="Add game") Add game
-                %a.btn.btn-warning(href="#{finalize_match_path(@match)}" title="Finalize match" data-confirm="If you finalize the match, it can no longer be edited. Additionally, competitor records and ratings will be permanently adjusted. Are you sure you wish to finalize this match?") Finalize match
+            %td
+              %span.badge
+                = series += 1
+            %td
+              = game.competitor_1_score
+              .detail #{@match.competitor_1_name}'s score
+            %td
+              = game.competitor_2_score
+              .detail #{@match.competitor_2_name}'s score
+            %td
+              = game.created_at.strftime("%m/%d/%Y")
+              .detail Date played
+            %td.text-right
+              %a.btn.btn-neutral.btn-small(href="#") Update game
+
       - else
-        %tbody
-          %tr
-            %td(colspan="#{user_can_edit ? 2 : 1}")
-              %p.alert.alert-info
-                %span.glyphicon.glyphicon-info-sign
-                There are currently no games added for this match.
-                - if user_can_edit
-                  %a(href="#{new_match_game_path(@match)}") Add a game to this match
+        %tr
+          %td
+            %p.alert.alert-info
+              %span.glyphicon.glyphicon-info-sign
+              There are currently no games added for this match.
+              / - if user_can_edit
+              / %a(href="#{new_match_game_path(@match)}") Add a game to this match
