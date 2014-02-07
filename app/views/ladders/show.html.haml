@@ -80,4 +80,6 @@
                   .detail Last updated
             %tr
               %td.text-right(colspan="5")
-                %a.btn.btn-small.btn-neutral(href="#{ladder_matches_path(@ladder)}" title="View all matches") View all matches
+                .btn-group
+                  %a.btn.btn-small.btn-primary(href="#{new_ladder_match_path(@ladder)}" title="New match") Record a new match
+                  %a.btn.btn-small.btn-neutral(href="#{ladder_matches_path(@ladder)}" title="View all matches") View all matches
