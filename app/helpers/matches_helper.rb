@@ -32,6 +32,10 @@ module MatchesHelper
   # STATE HELPERS #
   #################
 
+  def has_games?
+    games.size > 0
+  end
+
   def finalized?
     finalized
   end
