@@ -19,8 +19,8 @@
 
   %table
     %tbody
-      - if @ladder.has_matches?
-        - @ladder.matches.each do |match|
+      - if @matches
+        - @matches.each do |match|
           %tr
             %td
               = link_to match.competitor_1_name, competitor_path(match.competitor_1)

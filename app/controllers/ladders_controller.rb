@@ -15,7 +15,7 @@ class LaddersController < ApplicationController
     # Sort competitors highest -> lowest rating
     @competitors = @ladder.rating_desc
     # Sort matches newest -> oldest creation date
-    @matches = @ladder.matches.order("created_at desc").limit(5)
+    @matches = @ladder.matches.order("updated_at desc").limit(5)
   end
 
   # GET /ladders/new
