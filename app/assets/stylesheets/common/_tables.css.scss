@@ -1,9 +1,10 @@
 @import 'colors';
 
 table {
-  width: 100%;
   background: $tableBg;
+  font-size: 1em;
   margin-bottom: 2em;
+  width: 100%;
 
   th, td {
     text-align: left;

@@ -79,8 +79,15 @@ input[type="reset"].btn {
   }
   &.btn-neutral {
     color: $bodyText;
-    background: $tableBorder;
-    border-color: $tableBorder;
+    background: $neutralButtonBg;
+
+    &:hover {
+      background: $neutralButtonHighlight;
+    }
+    &:active, &:focus {
+      color: $bodyBg;
+      background: $defaultButtonText;
+    }
   }
   &.btn-link {
     color: $link;
