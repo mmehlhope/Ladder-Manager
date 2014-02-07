@@ -29,6 +29,7 @@
             %th
             %th
             %th
+            %th
         %tbody
           - if @competitors.size > 0
             - rank = 0
@@ -58,27 +59,25 @@
                     to begin.
     .tab-pane#recent-matches
       %table
-
         %tbody
-          - if @ladder.has_matches?
+          - if @matches
             - @matches.each do |match|
               %tr
                 %td
-                  = match.competitor_1_name
-                  vs.
-                  = match.competitor_2_name
-                %td.text-right= link_to time_ago_in_words(match.created_at).capitalize + " ago", match
+                  = link_to match.competitor_1_name, competitor_path(match.competitor_1)
+                  .detail Competitor 1
+                %td
+                  = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+                  .detail Competitor 2
+                %td
+                  #{match.finalized ? 'Final' : 'In progress'}
+                  .detail Status
+                %td
+                  = match.games.size
+                  .detail Games
+                %td.text-right
+                  = link_to time_ago_in_words(match.updated_at).capitalize + " ago", match
+                  .detail Last updated
             %tr
-              %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
-          - else
-            %tr
-              %td(colspan="2")
-                .alert.alert-info
-                  %span.glyphicon.glyphicon-info-sign
-                  There are no recent matches.
-                  - if user_can_admin_ladder && @ladder.can_record_match?
-                    Go to the
-                    %a(href="#{edit_ladder_path(@ladder)}" title="Manage ladder") ladder management
-                    page to add matches between competitors.
-                  - elsif user_can_admin_ladder && !@ladder.can_record_match?
-                    Add your first 2 competitors then you can record a match between them.
+              %td.text-right(colspan="5")
+                %a.btn.btn-small.btn-neutral(href="#{ladder_matches_path(@ladder)}" title="View all matches") View all matches
