@@ -10,24 +10,26 @@
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %ul.navigation
     %li.active
-      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Ladder
+      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Edit details
     %li
       %a.btn.btn-link(href="#matchOpts" data-toggle="tab") Matches
     %li
       %a.btn.btn-link(href="#competitorOpts" data-toggle="tab") Competitors
   .tab-content
+
     .tab-pane#ladderOpts.active
       = render 'edit_form'
+
     .tab-pane#competitorOpts
-      - competitors_exist = @ladder.competitors.size > 0
+      %h2 Edit Competitors
       %table
         %thead
           %tr
-            %th Competitor name
-            %th New name
-            %th.text-right
+            %th
+            %th
+            %th
         %tbody
-          - if @ladder.competitors.size > 0
+          - if @ladder.has_competitors?
             - rank = 0
             - @ladder.competitors.each do |competitor|
               %tr
@@ -45,22 +47,36 @@
                     to begin.
 
     .tab-pane#matchOpts
-      .table-header.clearfix
-        %h2.pull-left Add / Edit Matches
+      %h2 Edit Matches
       %table
         %thead
           %tr
-            %th Competitors
-            %th.text-right When?
+            %th
+            %th
+            %th
+            %th
         %tbody
           - if @ladder.has_matches?
             - @ladder.matches.each do |match|
               %tr
                 %td
-                  = match.competitor_1_name
+                  = link_to match.competitor_1_name, competitor_path(match.competitor_1)
                   vs.
-                  = match.competitor_2_name
-                %td.text-right= link_to time_ago_in_words(match.created_at).capitalize + " ago", match
+                  = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+                  .detail Competitors
+                %td
+                  = match.games.size
+                  .detail Games
+                %td.text-right
+                  = link_to time_ago_in_words(match.updated_at).capitalize + " ago", match
+                  .detail Last updated
+                - if match.games.size > 0
+                  %table
+                    - match.games.each do |game|
+                      %tbody
+                        %tr
+                          %td= game.competitor_1_score
+                          %td= game.competitor_2_score
             %tr
               %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
           - else
