@@ -9,7 +9,7 @@
         %dd
           %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
         %dt Status:
-        %dd #{@ladder.active? ? 'Active' : 'Inactive'}
+        %dd(class="#{@ladder.active? ? 'success-text' : 'danger-text'}") #{@ladder.active? ? 'Active' : 'Inactive'}
     %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}") Manage ladder
   %ul.navigation
     %li.active
@@ -23,19 +23,12 @@
     .tab-pane#rankings.active
       - competitors_exist = @competitors.size > 0
       %table
-        %thead
-          %tr
-            %th(style="width:1%;")
-            %th
-            %th
-            %th
-            %th
         %tbody
           - if @competitors.size > 0
             - rank = 0
             - @competitors.each do |competitor|
               %tr
-                %td
+                %td(width="1%")
                   %span.badge= rank += 1
                 %td
                   = link_to competitor.name, competitor_path(competitor)
@@ -65,9 +58,13 @@
               %tr
                 %td
                   = link_to match.competitor_1_name, competitor_path(match.competitor_1)
+                  - if match.competitor_1_is_winner? && match.finalized?
+                    %span.badge.success-bg.success-text Winner!
                   .detail Competitor 1
                 %td
                   = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+                  - if match.competitor_2_is_winner? && match.finalized?
+                    %span.badge.success-bg.success-text Winner!
                   .detail Competitor 2
                 %td
                   #{match.finalized ? 'Final' : 'In progress'}
@@ -80,6 +77,4 @@
                   .detail Last updated
             %tr
               %td.text-right(colspan="5")
-                .btn-group
-                  %a.btn.btn-small.btn-primary(href="#{new_ladder_match_path(@ladder)}" title="New match") Record a new match
-                  %a.btn.btn-small.btn-neutral(href="#{ladder_matches_path(@ladder)}" title="View all matches") View all matches
+                %a.btn.btn-small.btn-neutral(href="#{ladder_matches_path(@ladder)}" title="View all matches") View all matches

@@ -8,7 +8,7 @@
       %h1= yield(:title)
       %dl
         %dt Ladder:
-        %dd #{@ladder.name}
+        %dd= link_to @ladder.name, ladder_path(@ladder)
         %dt Total matches:
         %dd #{@ladder.matches.size}
     .btn-group.pull-right
@@ -24,9 +24,13 @@
           %tr
             %td
               = link_to match.competitor_1_name, competitor_path(match.competitor_1)
+              - if match.competitor_1_is_winner? && match.finalized?
+                %span.badge.success-bg.success-text Winner!
               .detail Competitor 1
             %td
               = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+              - if match.competitor_2_is_winner? && match.finalized?
+                %span.badge.success-bg.success-text Winner!
               .detail Competitor 2
             %td
               #{match.finalized ? 'Final' : 'In progress'}

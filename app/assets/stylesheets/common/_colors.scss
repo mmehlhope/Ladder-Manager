@@ -53,9 +53,11 @@ $primaryButtonHighlight: lighten($primaryButtonBg, 5%);
 // danger
 $dangerButtonBg: #bb0000;
 $dangerButtonHighlight: lighten($dangerButtonBg, 5%);
+$dangerButtonTint: lighten($dangerButtonBg, 50%);
 // success
 $successButtonBg: #00bb00;
 $successButtonHighlight: lighten($successButtonBg, 5%);
+$successButtonTint: lighten($successButtonBg, 50%);
 // info
 $infoButtonBg: #0065bb;
 $infoButtonHighlight: lighten($infoButtonBg, 5%);

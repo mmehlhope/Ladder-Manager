@@ -72,8 +72,11 @@
 
 // color
 .success-text { color: $successButtonBg; }
+.success-bg { background-color: $successButtonTint; }
 .danger-text { color: $dangerButtonBg; }
+.danger-bg { background-color: $dangerButtonTint; }
 .info-text { color: $infoButtonBg; }
+.info-bg { background-color: $infoButtonBg; }
 
 // Accessibility
 .hide-text {

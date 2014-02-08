@@ -28,6 +28,14 @@ module MatchesHelper
     competitors.where.not(id: winner_id).try(:first)
   end
 
+  def competitor_1_is_winner?
+    competitor_1 == winner_id
+  end
+
+  def competitor_2_is_winner?
+    competitor_2 == winner_id
+  end
+
   #################
   # STATE HELPERS #
   #################
