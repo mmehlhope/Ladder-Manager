@@ -1,0 +1,20 @@
+%td.status
+  .detail Status
+  #{if @match.isFinalized() is true then 'Final' else 'In progress'}
+%td.competitor
+  .detail Competitor 1
+  Bob
+  - if @match.competitor_1_is_winner() && @match.isFinalized()
+    %span.badge.success-bg.success-text Winner!
+%td.competitor
+  .detail Competitor 2
+  Steve
+  - if @match.competitor_2_is_winner() && @match.isFinalized()
+    %span.badge.success-bg.success-text Winner!
+%td.numGames
+  .detail
+    Games
+%td.text-right
+  .detail Last updated
+  = @match.updated_at
+  / {distance_of_time_in_words(Time.now, @match.updated_at).capitalize} ago

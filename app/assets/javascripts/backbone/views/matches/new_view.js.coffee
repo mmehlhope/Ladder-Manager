@@ -14,10 +14,11 @@ define (require, exports, module) ->
       # @updateOtherCompetitor()
       # $('#match_competitor_1').on('change', $.proxy(@updateOtherCompetitor, this))
       @competitors = competitor_hash
+      @ladder =
       this
 
     render: () ->
-      @$el.append(NewMatch_t({competitors: @competitors}))
+      @$el.append(NewMatch_t({competitors: @competitors, ladder: @ladder}))
       this
 
     updateOtherCompetitor: (e) ->

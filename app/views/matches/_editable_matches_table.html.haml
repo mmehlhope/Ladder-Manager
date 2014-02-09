@@ -24,7 +24,7 @@
                 %a(href="#" data-toggle="show-games" tite="Show / Hide games") Show
             = match.games.size
           %td.text-right
-            %a.btn.btn-small.btn-primary(href="#{finalize_match_path(match)}" title="Finalize") Finalize
+            %a.btn.btn-small.btn-neutral(href="#{finalize_match_path(match)}" title="Finalize") Finalize
         - if match.has_games?
           %tr
             %td.games-table-wrapper(colspan="5")
