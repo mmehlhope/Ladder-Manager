@@ -1,0 +1,28 @@
+%table.bordered-table
+  %tbody
+    - if @matches
+      - @matches.each do |match|
+        %tr
+          %td.status
+            .detail Status
+            #{match.finalized ? 'Final' : 'In progress'}
+          %td.competitor
+            .detail Competitor 1
+            = link_to match.competitor_1_name, competitor_path(match.competitor_1)
+            - if match.competitor_1_is_winner? && match.finalized?
+              %span.badge.success-bg.success-text Winner!
+          %td.competitor
+            .detail Competitor 2
+            = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+            - if match.competitor_2_is_winner? && match.finalized?
+              %span.badge.success-bg.success-text Winner!
+          %td.numGames
+            .detail Games
+            = match.games.size
+          %td.text-right
+            %a.btn.btn-small.btn-primary(href="#{finalize_match_path(match)}" title="Finalize") Finalize
+        - if match.has_games?
+          %tr
+            %td.games-table-wrapper(colspan="5")
+              = render partial: 'games/editable_games_sub_table', locals: {games: match.games}
+
