@@ -12,19 +12,5 @@
     padding: 0 0.5em;
     position:relative;
     text-align: right;
-
-    &:after {
-      border-bottom: 9px solid transparent;  /* left arrow slant */
-      border-top: 9px solid transparent; /* right arrow slant */
-      border-left: 8px solid $ratingBar; /* bottom, add background color here */
-      content: " ";
-      font-size: 0;
-      height: 0;
-      line-height: 0;
-      position: absolute;
-      top: 0;
-      right: -8px;
-      width: 0;
-    }
   }
 }
