@@ -49,8 +49,12 @@ textarea {
   color: $defaultButtonText;
 
   &:focus {
-     border-color: $inputFocusBorderColor;
+    border-color: $inputFocusBorderColor;
     outline: none;
+  }
+  &.input-small {
+    font-size: 0.83333em;
+    padding: 0.5em 1em;
   }
 }
 
