@@ -2,13 +2,13 @@ class MatchesController < ApplicationController
   before_action :set_match, except: [:index, :new]
   before_action :set_ladder
   before_action :get_all_ladder_competitors, only: [:new, :create, :edit]
-  before_action :ensure_user_can_admin_ladder, except: [:index, :show]
+  # before_action :ensure_user_can_admin_ladder, except: [:index, :show]
 
 
   # GET /matches
   # GET /matches.json
   def index
-    @matches = @ladder.matches.order("created_at desc")
+    @matches = @ladder.matches.order("updated_at desc")
   end
 
   # GET /matches/1
@@ -76,7 +76,6 @@ class MatchesController < ApplicationController
 
   # POST /matches/1/finalize
   def finalize
-
     # Validate
     errors = "Match was already finalized" if @match.finalized?
     errors = "Match must contain at least one game to be finalized" if @match.games.count == 0
