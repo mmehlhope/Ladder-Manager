@@ -1,4 +1,0 @@
-define ['jquery'], ($) ->
-
-  LadderPageView =
-    init: () ->
