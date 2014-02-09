@@ -1,4 +1,4 @@
-RailsCompetitionPlatform::Application.routes.draw do
+LadderManager::Application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
   resources :organizations
