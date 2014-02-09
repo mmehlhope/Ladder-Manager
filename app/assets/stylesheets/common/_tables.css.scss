@@ -10,7 +10,7 @@ table {
     text-align: left;
     padding: 1em;
   }
-  tr th {
+  th {
     background: $bodyBg;
     border-bottom: 2px solid $tableBorder;
     color: $bodyText;
@@ -19,7 +19,7 @@ table {
   }
   td {
     border-top: 1px solid $tableBorder;
-    font-size: 1.1em;
+    font-size: 1.2em;
     vertical-align: top;
 
     div.cell {
@@ -27,10 +27,25 @@ table {
       padding: 1em;
     }
     &.games-table-wrapper {
+      border-top: 1px solid $inputBorderColor;
       position: relative;
       padding: 0;
 
       &:before {
+        content: " ";
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 12px solid $inputBorderColor;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        position: absolute;
+        top: -12px;
+        bottom: 100%;
+        left: 635px;
+        width: 0;
+      }
+      &:after {
         content: " ";
         border-left: 12px solid transparent;
         border-right: 12px solid transparent;
@@ -45,7 +60,8 @@ table {
         width: 0;
       }
     }
-    &.game {
+    &.game,
+    &.no-padding {
       padding: 0;
     }
   }
@@ -62,7 +78,7 @@ table {
 
   // columns
   .status, .number {
-    width: 120px;
+    width: 150px;
   }
   .competitor {
     width: 250px;
@@ -72,20 +88,25 @@ table {
   }
 
   &.games-table {
+    color: $sidebarLinkColor;
     margin: 0;
+
     th, td {
       background: $tableBorder;
       font-size: 1em;
     }
     th {
       border-bottom: 1px solid $bodyBg;
-      color: $bodyText;
+      color: $sidebarLinkColor;
       font-size: 0.8em;
       font-weight: normal;
       padding: 0.5em 1.3em;
     }
     td {
       border-top: 1px solid $bodyBg;
+    }
+    div.cell {
+      padding: 0.5em 1em;
     }
   }
   &.bordered-table {
