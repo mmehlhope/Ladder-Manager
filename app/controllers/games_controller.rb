@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :set_match
   before_action :set_ladder
-  before_action :ensure_user_can_admin_ladder, except: [:index, :show]
+  # before_action :ensure_user_can_admin_ladder, except: [:index, :show]
 
 
   # GET /games
@@ -61,7 +61,7 @@ class GamesController < ApplicationController
       if @game.update(game_params)
         format.html {
           flash[:success] = 'Game was successfully updated.'
-          redirect_to @match
+          redirect_to edit_ladder_path(@match.ladder)
         }
         format.json { head :no_content }
       else
