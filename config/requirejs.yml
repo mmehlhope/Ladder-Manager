@@ -1,12 +1,11 @@
+optimize: none
 modules:
   - name: application
-  - name: views/matches/new
 paths:
-  bootstrap: bootstrap
-shim:
-  jquery:
-    exports: '$'
-  jquery_ujs:
-    - jquery
-  bootstrap:
-    - jquery
+  text: 'requirejs-text'
+  views: 'backbone/views'
+shims:
+  requirejs:
+    deps:
+      - hamlcoffee
+      - text
