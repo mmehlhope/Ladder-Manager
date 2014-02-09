@@ -15,11 +15,39 @@ table {
     border-bottom: 2px solid $tableBorder;
     color: $bodyText;
     font-weight: 700;
+
   }
-  tr td {
+  td {
     border-top: 1px solid $tableBorder;
     font-size: 1.1em;
     vertical-align: top;
+
+    div.cell {
+      float: left;
+      padding: 1em;
+    }
+    &.games-table-wrapper {
+      position: relative;
+      padding: 0;
+
+      &:before {
+        content: " ";
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 12px solid $tableBorder;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        position: absolute;
+        top: -11px;
+        bottom: 100%;
+        left: 635px;
+        width: 0;
+      }
+    }
+    &.game {
+      padding: 0;
+    }
   }
   tr:first-child td {
     border: none;
@@ -27,8 +55,40 @@ table {
 
   .detail {
     display: block;
-    padding: 0.24em 0 0;
+    padding: 0 0 0.25em;
     color: $sidebarLinkColor;
     font-size: 0.8em;
+  }
+
+  // columns
+  .status, .number {
+    width: 120px;
+  }
+  .competitor {
+    width: 250px;
+  }
+  .numGames {
+    width: 120px;
+  }
+
+  &.games-table {
+    margin: 0;
+    th, td {
+      background: $tableBorder;
+      font-size: 1em;
+    }
+    th {
+      border-bottom: 1px solid $bodyBg;
+      color: $bodyText;
+      font-size: 0.8em;
+      font-weight: normal;
+      padding: 0.5em 1.3em;
+    }
+    td {
+      border-top: 1px solid $bodyBg;
+    }
+  }
+  &.bordered-table {
+    border: 1px solid $tableBorder;
   }
 }
