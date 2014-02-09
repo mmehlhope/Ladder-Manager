@@ -35,9 +35,6 @@ header {
     }
   }
 }
-.table-header {
-  margin-bottom: 1em;
-}
 
 .content-wrapper {
   height: 100%;
@@ -50,8 +47,10 @@ header {
   min-height: 100%;
   padding: 1.5em 3em;
 }
-
-
+.section-header {
+  overflow: auto;
+  margin-bottom: 1em;
+}
 .panel {
   background: #fff;
   padding: 1em;
