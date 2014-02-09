@@ -27,6 +27,7 @@ input[type="reset"].btn {
   &:active {
     color: $primaryButtonText;
     background-color: $primaryButtonBg;
+    border-color: $primaryButtonBg;
   }
 
   &.btn-primary {
