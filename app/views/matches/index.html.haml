@@ -12,44 +12,9 @@
         %dt Total matches:
         %dd #{@ladder.matches.size}
     .btn-group.pull-right
-      %a.btn.btn-primary(href="#{new_ladder_match_path(@ladder)}") Record a new match
+      %a.btn.btn-primary(href="#{edit_ladder_path(@ladder)}") Manage ladder
 
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
 
-  %table
-    %tbody
-      - if @matches
-        - @matches.each do |match|
-          %tr
-            %td
-              = link_to match.competitor_1_name, competitor_path(match.competitor_1)
-              - if match.competitor_1_is_winner? && match.finalized?
-                %span.badge.success-bg.success-text Winner!
-              .detail Competitor 1
-            %td
-              = link_to match.competitor_2_name, competitor_path(match.competitor_2)
-              - if match.competitor_2_is_winner? && match.finalized?
-                %span.badge.success-bg.success-text Winner!
-              .detail Competitor 2
-            %td
-              #{match.finalized ? 'Final' : 'In progress'}
-              .detail Status
-            %td
-              = match.games.size
-              .detail Games
-            %td.text-right
-              = link_to time_ago_in_words(match.updated_at).capitalize + " ago", match
-              .detail Last updated
-      - else
-        %tr
-          %td(colspan="2")
-            .alert.alert-info
-              %span.glyphicon.glyphicon-info-sign
-              There are no recent matches.
-              - if user_can_admin_ladder && @ladder.can_record_match?
-                Go to the
-                %a(href="#{edit_ladder_path(@ladder)}" title="Manage ladder") ladder management
-                page to add matches between competitors.
-              - elsif user_can_admin_ladder && !@ladder.can_record_match?
-                Add your first 2 competitors then you can record a match between them.
+  = render partial: 'matches/matches_table', locals: {matches: @matches}

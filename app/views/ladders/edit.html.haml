@@ -38,56 +38,23 @@
                 %td
           - else
             %tr
-              %td(colspan="#{user_can_admin_ladder ? 5 : 4}")
+              %td(colspan="5")
                 .alert.alert-info
                   %span.glyphicon.glyphicon-info-sign
                   There are currently no competitors added to this ladder.
                   - if user_can_admin_ladder
                     %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
                     to begin.
+          %tr
+            %td.text-right(colspan="5")
+              %a.btn.btn-neutral(href="#{new_ladder_competitor_path(@ladder)}" title="New competitor") New competitor
 
     .tab-pane#matchOpts
-      %h2 Edit Matches
-      %table
-        %thead
-          %tr
-            %th
-            %th
-            %th
-            %th
-        %tbody
-          - if @ladder.has_matches?
-            - @ladder.matches.each do |match|
-              %tr
-                %td
-                  = link_to match.competitor_1_name, competitor_path(match.competitor_1)
-                  vs.
-                  = link_to match.competitor_2_name, competitor_path(match.competitor_2)
-                  .detail Competitors
-                %td
-                  = match.games.size
-                  .detail Games
-                %td.text-right
-                  = link_to time_ago_in_words(match.updated_at).capitalize + " ago", match
-                  .detail Last updated
-                - if match.games.size > 0
-                  %table
-                    - match.games.each do |game|
-                      %tbody
-                        %tr
-                          %td= game.competitor_1_score
-                          %td= game.competitor_2_score
-            %tr
-              %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
-          - else
-            %tr
-              %td(colspan="2")
-                .alert.alert-info
-                  %span.glyphicon.glyphicon-info-sign
-                  There are no recent matches.
-                  - if user_can_admin_ladder && @ladder.can_record_match?
-                    Go to the
-                    %a(href="#{edit_ladder_path(@ladder)}" title="Manage ladder") ladder management
-                    page to add matches between competitors.
-                  - elsif user_can_admin_ladder && !@ladder.can_record_match?
-                    Add your first 2 competitors then you can record a match between them.
+      .section-header
+        .pull-left
+          %h2 Edit Matches
+          %p
+            Finalized matches cannot be edited and thus are not shown.
+            = link_to 'View all matches', ladder_matches_path(@ladder)
+        %a.btn.btn-primary.pull-right(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
+      = render partial: 'matches/editable_matches_table'

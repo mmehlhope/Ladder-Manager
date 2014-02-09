@@ -31,19 +31,19 @@
                 %td(width="1%")
                   %span.badge= rank += 1
                 %td
+                  .detail Last Match: #{competitor.last_match_played ? competitor.last_match_played_date.strftime("%B %d, %Y") : 'never'}
                   = link_to competitor.name, competitor_path(competitor)
-                  .detail Last Played: #{competitor.last_match_played ? competitor.last_match_played_date.strftime("%B %d, %Y") : 'never'}
                 %td
-                  #{competitor.wins} - #{competitor.losses}
                   .detail Wins - Losses
+                  #{competitor.wins} - #{competitor.losses}
                 %td
+                  .detail Rating
                   .rating-bg
                     .rating-bar(style="width: #{competitor.percent_of_highest_competitor}%")
                       =competitor.rating
-                  .detail Rating
           - else
             %tr
-              %td(colspan="#{user_can_admin_ladder ? 5 : 4}")
+              %td(colspan="5")
                 .alert.alert-info
                   %span.glyphicon.glyphicon-info-sign
                   There are currently no competitors added to this ladder.
@@ -51,30 +51,4 @@
                     %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
                     to begin.
     .tab-pane#recent-matches
-      %table
-        %tbody
-          - if @matches
-            - @matches.each do |match|
-              %tr
-                %td
-                  = link_to match.competitor_1_name, competitor_path(match.competitor_1)
-                  - if match.competitor_1_is_winner? && match.finalized?
-                    %span.badge.success-bg.success-text Winner!
-                  .detail Competitor 1
-                %td
-                  = link_to match.competitor_2_name, competitor_path(match.competitor_2)
-                  - if match.competitor_2_is_winner? && match.finalized?
-                    %span.badge.success-bg.success-text Winner!
-                  .detail Competitor 2
-                %td
-                  #{match.finalized ? 'Final' : 'In progress'}
-                  .detail Status
-                %td
-                  = match.games.size
-                  .detail Games
-                %td.text-right
-                  = link_to time_ago_in_words(match.updated_at).capitalize + " ago", match
-                  .detail Last updated
-            %tr
-              %td.text-right(colspan="5")
-                %a.btn.btn-small.btn-neutral(href="#{ladder_matches_path(@ladder)}" title="View all matches") View all matches
+      = render partial: 'matches/matches_table', locals: {matches: @matches}
