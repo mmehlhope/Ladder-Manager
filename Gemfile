@@ -18,11 +18,12 @@ gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
 
+# Use haml coffee templates
+gem 'haml_coffee_assets'
+gem 'execjs'
+
 # Requirejs
 gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
-
-# Backbone
-gem 'backbonejs-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
