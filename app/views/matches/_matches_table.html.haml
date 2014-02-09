@@ -17,12 +17,16 @@
             - if match.competitor_2_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
           %td.numGames
-            .detail Games
-            = match.games.size
+            .detail
+              Games
+              - if match.has_games?
+                \-
+                %a(href="#" data-toggle="show-games" tite="Show / Hide games") Show
+            #{match.games.size}
           %td.text-right
             .detail Last updated
             #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
         - if match.has_games?
-          %tr
+          %tr.games-table-row
             %td.games-table-wrapper(colspan="5")
               = render partial: 'games/games_sub_table', locals: {games: match.games}

@@ -1,4 +1,4 @@
-%table.bordered-table
+%table#matches.bordered-table
   %tbody
     - if @matches
       - @matches.each do |match|
@@ -17,7 +17,11 @@
             - if match.competitor_2_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
           %td.numGames
-            .detail Games
+            .detail
+              Games
+              - if match.has_games?
+                \-
+                %a(href="#" data-toggle="show-games" tite="Show / Hide games") Show
             = match.games.size
           %td.text-right
             %a.btn.btn-small.btn-primary(href="#{finalize_match_path(match)}" title="Finalize") Finalize

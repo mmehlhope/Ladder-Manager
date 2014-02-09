@@ -9,9 +9,6 @@
     = yield :head
 
   %body
-    - exclude_header = @exclude_header || false
-    - unless exclude_header
-      / = render :partial => 'includes/header'
     %section.content-wrapper
       - exclude_sidebar = @exclude_sidebar || false
       - unless exclude_sidebar

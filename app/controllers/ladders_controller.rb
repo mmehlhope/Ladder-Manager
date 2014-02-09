@@ -26,6 +26,7 @@ class LaddersController < ApplicationController
   # GET /ladders/1/edit
   def edit
     @matches = @ladder.matches.order("updated_at desc").reject(&:finalized?)
+    @competitors = @ladder.competitors
   end
 
   # POST /ladders

@@ -1,4 +1,5 @@
 - content_for(:title, "Ladder Management")
+
 %section.main
   %header.clearfix
     %ul.breadcrumbs
@@ -56,5 +57,14 @@
           %p
             Finalized matches cannot be edited and thus are not shown.
             = link_to 'View all matches', ladder_matches_path(@ladder)
-        %a.btn.btn-primary.pull-right(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
+        %a.btn.btn-primary.pull-right(id="create-new-match" href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
       = render partial: 'matches/editable_matches_table'
+
+:coffeescript
+  require ['jquery', 'views/matches/new'], ($, NewMatchView) ->
+    $('#create-new-match').on 'click', (e) ->
+      e.preventDefault() if e
+      hash = #{@competitors.to_json}
+      newMatchView = new NewMatchView(hash)
+      $('#matches > tbody').prepend(newMatchView.render().el)
+
