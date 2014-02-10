@@ -20,6 +20,7 @@ define (require, exports, module) ->
       this
 
     render: () ->
-      @$el.empty().append(Games_t())
+      @$el.attr('id', 'games-for-match-' + @collection.models[0].get('match_id'))
+          .empty().append(Games_t())
       @$el.find('tbody').append(@children)
       this
