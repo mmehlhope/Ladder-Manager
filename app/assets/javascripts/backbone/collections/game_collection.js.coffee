@@ -5,3 +5,4 @@ define (require, exports, module) ->
 
   class GameCollection extends Backbone.Collection
     model: GameModel
+    url: '/games'

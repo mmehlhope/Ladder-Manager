@@ -5,3 +5,4 @@ define (require, exports, module) ->
 
   class MatchCollection extends Backbone.Collection
     model: MatchModel
+    url: '/matches'
