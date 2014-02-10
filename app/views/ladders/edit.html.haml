@@ -66,5 +66,6 @@
   require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view'], ($, MatchCollection, MatchIndexView) ->
     competitors = #{@matches_json}
     matchCollection = new MatchCollection(competitors)
+    matchCollection.ladder_id = #{@ladder.id}
     matchIndexview = new MatchIndexView(collection: matchCollection)
 
