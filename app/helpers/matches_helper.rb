@@ -1,4 +1,5 @@
 module MatchesHelper
+  include ActionView::Helpers::DateHelper
 
   ######################
   # COMPETITOR HELPERS #
@@ -48,4 +49,15 @@ module MatchesHelper
     finalized
   end
 
+  ##################
+  # STRING HELPERS #
+  ##################
+
+  def updated_how_long_ago
+    "#{distance_of_time_in_words(Time.now, updated_at).capitalize} ago"
+  end
+
+  def date_created
+    updated_at.strftime("%B %d, %Y")
+  end
 end

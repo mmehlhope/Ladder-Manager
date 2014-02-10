@@ -3,18 +3,17 @@
   #{if @match.isFinalized() is true then 'Final' else 'In progress'}
 %td.competitor
   .detail Competitor 1
-  Bob
+  = @match.get('competitor_1').name
   - if @match.competitor_1_is_winner() && @match.isFinalized()
     %span.badge.success-bg.success-text Winner!
 %td.competitor
   .detail Competitor 2
-  Steve
+  = @match.get('competitor_2').name
   - if @match.competitor_2_is_winner() && @match.isFinalized()
     %span.badge.success-bg.success-text Winner!
 %td.numGames
-  .detail
-    Games
+  .detail Games
+  = @match.get('games').length
 %td.text-right
   .detail Last updated
-  = @match.updated_at
-  / {distance_of_time_in_words(Time.now, @match.updated_at).capitalize} ago
+  = @match.get('last_updated')
