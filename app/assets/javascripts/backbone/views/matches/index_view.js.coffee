@@ -1,34 +1,33 @@
 define (require, exports, module) ->
 
-  $                = require 'jquery'
-  _                = require 'underscore'
-  Backbone         = require 'backbone'
-  MatchView        = require 'backbone/views/matches/match_view'
+  $                    = require 'jquery'
+  _                    = require 'underscore'
+  Backbone             = require 'backbone'
+  MatchView            = require 'backbone/views/matches/match_view'
+  GameCollection       = require 'backbone/collections/game_collection'
+  GameCollectionView   = require 'backbone/views/games/index_view'
 
   class MatchCollectionView extends Backbone.View
 
-    el: '#edit-matches table tbody'
-
-    tagName: 'table'
+    el: '#edit-matches table > tbody'
 
     initialize: () ->
       @children = []
       _(@collection.models).each((model) =>
-        console.log model
         matchView = new MatchView(model: model)
-        @children.push(matchView.render().el)
+        matchView = matchView.render().el
+
+        if model.get('games').length
+          gameCollection = new GameCollection(model.get('games'))
+          gameCollectionView = new GameCollectionView(collection: gameCollection)
+          gamesView = gameCollectionView.render().el
+          @children.push(matchView, gamesView)
+        else
+          @children.push(matchView)
       )
       @render()
       this
 
     render: () ->
-      console.log 'rendering collection view'
       @$el.empty().html(@children)
       this
-
-    addOne: () ->
-      _(@collection).each((model) =>
-        matchView = new MatchView(model: model)
-        @nodes.push(matchView.render.el())
-      )
-      @render()
