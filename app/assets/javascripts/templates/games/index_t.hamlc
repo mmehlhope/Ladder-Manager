@@ -1,8 +1,9 @@
-%td.games-table-wrapper(colspan="5")
-  %table.games-table
-    %thead
-      %th.status Game #
-      %th.competitor Competitor 1 Score
-      %th.competitor Competitor 2 Score
-      %th
-    %tbody
+%td.games-table-wrapper(colspan="6")
+  .table-wrap.collapse
+    %table.games-table
+      %thead
+        %th.status Game #
+        %th.competitor Competitor 1 Score
+        %th.competitor Competitor 2 Score
+        %th
+      %tbody
