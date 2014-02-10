@@ -1,0 +1,10 @@
+.section-header
+  .pull-left
+    %h2 Edit Matches
+    %p
+      Finalized matches cannot be edited and thus are not shown.
+      %a(href="/ladders/#{@matches.ladder_id}/matches" title="View all matches") View all matches
+  %a.btn.btn-primary.pull-right(id="record-new-match" href="/ladders/#{@matches.ladder_id}/matches/new" title="Record a new match") Record a new match
+%section#edit-matches
+  %table.bordered-table
+    %tbody

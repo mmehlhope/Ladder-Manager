@@ -3,10 +3,12 @@ define (require, exports, module) ->
   $          = require 'jquery'
   _          = require 'underscore'
   Backbone   = require 'backbone'
-  NewMatch_t = require 'templates/matches/new'
+  NewMatch_t = require 'templates/matches/new_match_t'
 
   class NewMatchView extends Backbone.View
+
     tagName: 'tr'
+
     events:
       'click .close-btn' : 'destroy'
 
@@ -40,6 +42,5 @@ define (require, exports, module) ->
         return false
 
     destroy: (e) ->
-      console.log 'firing'
       e.preventDefault();
       this.$el.remove()

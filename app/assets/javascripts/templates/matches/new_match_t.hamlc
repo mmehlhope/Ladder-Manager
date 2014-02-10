@@ -1,4 +1,4 @@
-%td.no-padding.success-bg(colspan="5")
+%td.no-padding.success-bg(colspan="6")
   - action_url = "/ladders/" + @ladder.id + "/matches/new"
   %form(action="#{action_url}" method="POST")
     .cell.status
