@@ -3,7 +3,7 @@ define (require, exports, module) ->
   $          = require 'jquery'
   _          = require 'underscore'
   Backbone   = require 'backbone'
-  Game_t    = require 'templates/games/game_t'
+  Game_t     = require 'templates/games/game_t'
 
   class GameView extends Backbone.View
 
