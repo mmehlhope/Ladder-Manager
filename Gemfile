@@ -48,6 +48,9 @@ end
 # Active Record session store
 gem 'activerecord-session_store'
 
+# serializer
+gem "active_model_serializers"
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
