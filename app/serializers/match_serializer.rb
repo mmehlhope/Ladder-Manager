@@ -3,7 +3,7 @@ class MatchSerializer < ActiveModel::Serializer
 
   def attributes
     hash = super
-    hash[:id] = object.id
+    hash[:id]                = object.id
     hash[:date_created]      = object.date_created
     hash[:last_updated]      = object.updated_how_long_ago
     hash[:winner_id]         = object.winner_id
@@ -16,7 +16,7 @@ class MatchSerializer < ActiveModel::Serializer
       id: object.competitor_2,
       name: object.competitor_2_name,
     }
-    hash[:ladder] = {
+    hash[:ladder]            = {
       ladder_id: object.ladder_id,
       ladder_name: object.ladder.name
     }
