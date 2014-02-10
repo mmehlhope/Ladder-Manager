@@ -8,10 +8,26 @@ define (require, exports, module) ->
   class MatchView extends Backbone.View
     tagName: 'tr'
 
+    events:
+      'click'                 : 'toggleGamesView'
+      'click .finalize-match' : 'finalize'
+
     initialize: () ->
       @listenTo(@model, 'change', @render)
       this
 
     render: () ->
-      @$el.append(Match_t(match: @model))
+      @$el.attr('id', 'match-' + @model.get('id'))
+          .append(Match_t(match: @model))
+
+      if @model.get('games').length
+        @$el.addClass('clickable')
+
       this
+
+    toggleGamesView: (e) ->
+      e.preventDefault()
+      $("#games-for-match-" + @model.get('id') + " .table-wrap").collapse('toggle')
+
+
+    finalize: () ->
