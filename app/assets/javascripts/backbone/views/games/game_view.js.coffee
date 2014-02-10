@@ -10,7 +10,6 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     initialize: () ->
-      console.log @model
       @listenTo(@model, 'change', @render)
       this
 
