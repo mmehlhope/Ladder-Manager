@@ -64,7 +64,7 @@
 
 :coffeescript
   require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view'], ($, MatchCollection, MatchIndexView) ->
-    competitors = #{@matches.to_json}
+    competitors = #{@matches_json}
     matchCollection = new MatchCollection(competitors)
     matchIndexview = new MatchIndexView(collection: matchCollection)
 

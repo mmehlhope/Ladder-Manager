@@ -24,4 +24,16 @@ module LaddersHelper
     # ladder was updated within the last 30 days
     updated_at >= 30.days.ago
   end
+
+  ################
+  # DATA HELPERS #
+  ################
+
+  def editable_matches
+    matches.order("updated_at desc").reject(&:finalized?)
+  end
+
+  def editable_matches_json
+    ActiveModel::ArraySerializer.new(editable_matches, each_serializer: MatchSerializer).to_json
+  end
 end
