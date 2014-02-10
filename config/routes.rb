@@ -8,7 +8,7 @@ LadderManager::Application.routes.draw do
   resources :ladders, shallow: true do
     resources :competitors
     resources :matches do
-      get 'finalize', on: :member
+      post 'finalize', on: :member
       resources :games
     end
   end
