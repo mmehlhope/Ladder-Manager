@@ -10,13 +10,15 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     events:
-      'click .close-btn' : 'destroy'
+      'click .close-btn'                   : 'destroy'
+      'submit form'                        : 'createMatch'
+      'change [name="match-competitor-1"]' : 'updateOtherCompetitor'
 
-    initialize: (competitor_hash={}) ->
-      # @updateOtherCompetitor()
-      # $('#match_competitor_1').on('change', $.proxy(@updateOtherCompetitor, this))
-      @competitors = competitor_hash
-      @ladder =
+    initialize: (params) ->
+      @competitors = params['competitors']
+      @ladder_id   = params['ladder']
+
+      @updateOtherCompetitor()
       this
 
     render: () ->
@@ -24,23 +26,38 @@ define (require, exports, module) ->
       this
 
     updateOtherCompetitor: (e) ->
-      comp_1_select = $('#match_competitor_1')
-      comp_2_select = $('#match_competitor_2')
+      comp_1_select = @$el.find('select[name="match-competitor-1"]')
+      comp_2_select = @$el.find('select[name="match-competitor-2"]')
 
       if comp_1_select.val() isnt ""
         # Build opponent array
-        opponent_hash = _.clone(@competitor_hash)
+        opponent_hash = _.clone(@competitors)
         delete opponent_hash[comp_1_select.find('option:selected').text()]
         options = []
         # Create new competitor select box excluding first selected competitor
-        _.each(opponent_hash, (val, key) ->
-          options.push '<option value=\"'+val+'\">'+key+'</option>'
+        _.each(opponent_hash, (competitor) ->
+          options.push '<option value=\"'+competitor.id+'\">'+competitor.name+'</option>'
         )
         comp_2_select.empty().prop('disabled', false)
         comp_2_select.append(options)
       else
         return false
 
+    createMatch: (e) ->
+      e.preventDefault()
+
+      $.ajax(
+        url: '/matches/' + @model.get('id') + '/finalize'
+        type: 'POST'
+        dataType: 'json'
+        success: (jqXHR, textStatus) =>
+          @destroy()
+        error: (jqXHR, textStatus, errorThrown) ->
+          console.log textStatus
+      )
+      this
+
     destroy: (e) ->
-      e.preventDefault();
+      e.preventDefault()
       this.$el.remove()
+      this

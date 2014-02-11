@@ -41,6 +41,9 @@ define (require, exports, module) ->
 
     showNewMatchForm: (e) ->
       e.preventDefault()
-      model = new MatchModel
-      newMatchView = new NewMatchView(model: model)
+
+      newMatchView = new NewMatchView(
+        competitors : @collection.competitors
+        ladder_id   : @collection.ladder_id
+      )
       @$el.find('table:first').prepend(newMatchView.render().el)
