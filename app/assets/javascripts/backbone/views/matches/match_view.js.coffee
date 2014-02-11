@@ -9,8 +9,8 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     events:
-      'click'                 : 'toggleGamesView'
-      'click .finalize-match' : 'finalize'
+      # 'click'                          : 'toggleGamesView'
+      'click [data-action="finalize"]' : 'finalize'
 
     initialize: () ->
       @listenTo(@model, 'change', @render)
@@ -30,4 +30,18 @@ define (require, exports, module) ->
       $("#games-for-match-" + @model.get('id') + " .table-wrap").collapse('toggle')
 
 
-    finalize: () ->
+    finalize: (e) ->
+      e.preventDefault()
+
+      $.ajax(
+        url: '/matches/' + @model.get('id') + '/finalize'
+        type: 'POST'
+        dataType: 'json'
+        success: (jqXHR, textStatus) =>
+          @destroy()
+        error: (jqXHR, textStatus, errorThrown) ->
+          console.log textStatus
+      )
+      this
+    destroy: () ->
+      @$el.fadeOut()
