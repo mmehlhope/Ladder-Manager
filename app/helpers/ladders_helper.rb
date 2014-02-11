@@ -36,4 +36,8 @@ module LaddersHelper
   def editable_matches_json
     ActiveModel::ArraySerializer.new(editable_matches, each_serializer: MatchSerializer).to_json
   end
+
+  def competitors_json
+    ActiveModel::ArraySerializer.new(competitors, each_serializer: CompetitorSerializer).to_json
+  end
 end
