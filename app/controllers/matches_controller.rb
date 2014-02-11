@@ -76,6 +76,7 @@ class MatchesController < ApplicationController
 
   # POST /matches/1/finalize
   def finalize
+
     # Validate
     errors = "Match was already finalized" if @match.finalized?
     errors = "Match must contain at least one game to be finalized" if @match.games.count == 0
@@ -88,7 +89,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.finalized?
-
+        debugger
         @match.update_player_stats
 
         format.html {
@@ -102,7 +103,7 @@ class MatchesController < ApplicationController
           flash[:error] = errors
           redirect_to match_path(@match)
         }
-        format.json { render json: { :msg => errors} }
+        format.json { head :not_acceptable }
       end
     end
   end
