@@ -7,13 +7,13 @@
     .cell.competitor
       .detail Competitor 1
       %select(name="match-competitor-1")
-        %option(value="") Select a competitor
+        %option(value="" selected="selected") Select a competitor
         - for competitor in @competitors
           %option(value="#{competitor.id}")= competitor.name
     .cell.competitor
       .detail Competitor 2
       %select(name="match-competitor-2" disabled="disabled")
-        %option(value="") Select a competitor
+        %option(value="" selected="selected") Select a competitor
     .cell.pull-right
       .btn-group
         %input.btn.btn-small.btn-primary(type="submit" value="Save")
