@@ -17,8 +17,6 @@ define (require, exports, module) ->
     initialize: (params) ->
       @competitors = params['competitors']
       @ladder_id   = params['ladder']
-
-      @updateOtherCompetitor()
       this
 
     render: () ->
@@ -28,20 +26,27 @@ define (require, exports, module) ->
     updateOtherCompetitor: (e) ->
       comp_1_select = @$el.find('select[name="match-competitor-1"]')
       comp_2_select = @$el.find('select[name="match-competitor-2"]')
-
       if comp_1_select.val() isnt ""
         # Build opponent array
-        opponent_hash = _.clone(@competitors)
-        delete opponent_hash[comp_1_select.find('option:selected').text()]
+        opponent_hash = @createOpponentHash()
+
+        # Create new competitor select box excluding user-selected competitor
         options = []
-        # Create new competitor select box excluding first selected competitor
         _.each(opponent_hash, (competitor) ->
           options.push '<option value=\"'+competitor.id+'\">'+competitor.name+'</option>'
         )
-        comp_2_select.empty().prop('disabled', false)
-        comp_2_select.append(options)
+        comp_2_select.empty().append(options).prop('disabled', false)
       else
         return false
+
+    createOpponentHash: () ->
+      comp_1_select      = @$el.find('select[name="match-competitor-1"]')
+      selectedCompetitor = parseInt(comp_1_select.find('option:selected').val()) # Convert to number for equality
+      opponent_hash      = _.clone(@competitors)
+      opponent_hash      = _(opponent_hash).reject((competitor) -> # Return all competitors except selected one
+                            return competitor.id is selectedCompetitor
+                            )
+      opponent_hash
 
     createMatch: (e) ->
       e.preventDefault()
