@@ -24,7 +24,7 @@ class MatchesController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: @match, root: false
+        render json: @match, root: false, expanded: true
       }
     end
   end

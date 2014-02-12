@@ -99,6 +99,7 @@ class GamesController < ApplicationController
         format.json {
           render json: @game.errors, status: :unprocessable_entity
         }
+      end
     end
   end
 

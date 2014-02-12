@@ -20,7 +20,7 @@ class CompetitorsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        render json: @competitor, root: false
+        render json: @competitor, root: false, expanded: true
       }
     end
   end
@@ -88,6 +88,7 @@ class CompetitorsController < ApplicationController
         format.json {
           render json: @competitor.errors, status: :unprocessable_entity
         }
+      end
     end
   end
 
