@@ -18,6 +18,17 @@ define (require, exports, module) ->
       'click #record-new-match' : 'showNewMatchForm'
 
     initialize: () ->
+      console.log @collection
+      @addChildrenAndRender()
+      # @listenTo()
+      this
+
+    render: () ->
+      @$el.empty().html(Matches_t(matches: @collection)).find('tbody').append(@children)
+      this
+
+    addChildrenAndRender: () ->
+
       @children = []
 
       _(@collection.models).each((model) =>
@@ -32,18 +43,13 @@ define (require, exports, module) ->
         else
           @children.push(matchView)
       )
-      @render()
-      this
-
-    render: () ->
-      @$el.empty().html(Matches_t(matches: @collection)).find('tbody').append(@children)
       this
 
     showNewMatchForm: (e) ->
       e.preventDefault()
 
       newMatchView = new NewMatchView(
-        competitors : @collection.competitors
         ladder_id   : @collection.ladder_id
       )
       @$el.find('table:first').prepend(newMatchView.render().el)
+      this
