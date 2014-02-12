@@ -57,7 +57,7 @@
           %p
             Finalized matches cannot be edited and thus are not shown.
             = link_to 'View all matches', ladder_matches_path(@ladder)
-        %a.btn.btn-primary.pull-right(id="create-new-match" href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
+        %a.btn.btn-primary.pull-right(id="record-new-match" href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
       %section#edit-matches
         %table.bordered-table
           %tbody
@@ -67,6 +67,5 @@
     matches = #{@matches_json}
     matchCollection = new MatchCollection(matches)
     matchCollection.ladder_id = #{@ladder.id}
-    matchCollection.competitors = #{@competitors_json}
     matchIndexview = new MatchIndexView(collection: matchCollection)
 
