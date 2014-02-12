@@ -1,3 +1,4 @@
 class CompetitorSerializer < ActiveModel::Serializer
-  attributes :id
+  self.root = false
+  attributes :id, :name, :rating, :wins
 end
