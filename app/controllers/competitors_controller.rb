@@ -5,7 +5,12 @@ class CompetitorsController < ApplicationController
   # GET /competitors
   # GET /competitors.json
   def index
-    @competitors = Competitor.all
+    @competitors = @ladder.competitors
+    respond_to do |format|
+      format.json {
+        render json: @competitors, root: false
+      }
+    end
   end
 
   # GET /competitors/1
