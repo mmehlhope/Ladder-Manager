@@ -4,8 +4,9 @@ module CompetitorsHelper
   # ASSOCIATION HELPERS #
   #######################
 
+ # TODO: Make this real
   def games
-    games = matches.collect(&:games)
+    matches.collect(&:games)
   end
 
   ################
