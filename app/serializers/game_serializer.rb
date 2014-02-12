@@ -1,3 +1,4 @@
-class GameSerializer < ActiveModel::Serializer
-  attributes :id, :created_at, :updated_at, :match_id, :winner_id, :competitor_1_score, :competitor_2_score
+class GameSerializer < ApplicationSerializer
+  attributes :id, :date_created, :updated_how_long_ago, :match_id, :winner_id,
+             :competitor_1_score, :competitor_2_score
 end
