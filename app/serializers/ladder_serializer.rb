@@ -9,7 +9,7 @@ class LadderSerializer < ApplicationSerializer
     hash[:name]              = object.name
     hash[:organization_id]   = object.organization_id
 
-    unless options[:minimal]
+    unless options[:expanded]
       hash[:competitors] = ActiveModel::ArraySerializer.new(
                             object.competitors,
                             each_serializer:

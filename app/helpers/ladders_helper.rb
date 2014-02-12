@@ -48,7 +48,6 @@ module LaddersHelper
     ActiveModel::ArraySerializer.new(
       editable_matches,
       each_serializer: MatchSerializer,
-      minimal: true
     ).to_json
   end
 

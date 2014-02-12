@@ -11,7 +11,7 @@ class MatchSerializer < ApplicationSerializer
     hash[:competitor_1] = CompetitorSerializer.new(Competitor.find_by_id(object.competitor_1))
     hash[:competitor_2] = CompetitorSerializer.new(Competitor.find_by_id(object.competitor_2))
 
-    unless options[:minimal]
+    unless options[:expanded]
       hash[:ladder] = {
         ladder_id: object.ladder_id,
         ladder_name: object.ladder.name
