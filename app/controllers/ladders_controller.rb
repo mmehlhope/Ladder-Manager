@@ -7,6 +7,7 @@ class LaddersController < ApplicationController
   # GET /ladders.json
   def index
     @ladders = current_org.ladders
+    @ladders_json = LadderSerializer.new(@ladders).to_json
   end
 
   # GET /ladders/1
@@ -25,8 +26,7 @@ class LaddersController < ApplicationController
 
   # GET /ladders/1/edit
   def edit
-    @matches_json     = @ladder.editable_matches_json
-    @competitors_json = @ladder.competitors.to_json
+    @matches_json = @ladder.editable_matches_json
   end
 
   # POST /ladders
