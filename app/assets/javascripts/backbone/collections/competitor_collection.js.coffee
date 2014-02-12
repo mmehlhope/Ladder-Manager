@@ -6,4 +6,3 @@ define (require, exports, module) ->
 
   class CompetitorCollection extends Backbone.Collection
     model: CompetitorModel
-    url: '/competitors'
