@@ -8,12 +8,24 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = @match.games
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @games, root: false
+      }
+    end
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @game, root: false
+      }
+    end
   end
 
   # GET /games/new
@@ -74,10 +86,19 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
-    @game.destroy
+
     respond_to do |format|
-      format.html { redirect_to match_path(@match) }
-      format.json { head :no_content }
+      if @game.destroy
+        format.html { redirect_to match_path(@match) }
+        format.json { head :no_content }
+      else
+        format.html {
+          flash[:error] = "There was an error deleting the selected game"
+          redirect_to match_path(@match)
+        }
+        format.json {
+          render json: @game.errors, status: :unprocessable_entity
+        }
     end
   end
 

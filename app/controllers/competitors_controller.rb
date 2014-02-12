@@ -7,6 +7,7 @@ class CompetitorsController < ApplicationController
   def index
     @competitors = @ladder.competitors
     respond_to do |format|
+      format.html
       format.json {
         render json: @competitors, root: false
       }
@@ -16,6 +17,12 @@ class CompetitorsController < ApplicationController
   # GET /competitors/1
   # GET /competitors/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @competitor, root: false
+      }
+    end
   end
 
   # GET /competitors/new
@@ -66,12 +73,21 @@ class CompetitorsController < ApplicationController
   # DELETE /competitors/1
   # DELETE /competitors/1.json
   def destroy
-    @competitor.destroy
-
     respond_to do |format|
-      format.html { redirect_to ladder_path(@ladder) }
-      format.json { head :ok }
-      format.js   { head :ok }
+      if @competitor.destroy
+        format.html {
+          flash[:success] = "Competitor has been successfully deleted"
+          redirect_to ladder_path(@ladder)
+        }
+        format.json { head :ok }
+      else
+        format.html {
+          flash[:error] = "There was an error deleting the selected competitor"
+          redirect_to ladder_path(@ladder)
+        }
+        format.json {
+          render json: @competitor.errors, status: :unprocessable_entity
+        }
     end
   end
 

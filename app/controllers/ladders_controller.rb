@@ -7,7 +7,12 @@ class LaddersController < ApplicationController
   # GET /ladders.json
   def index
     @ladders = current_org.ladders
-    @ladders_json = LadderSerializer.new(@ladders).to_json
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @ladders, root: false
+      }
+    end
   end
 
   # GET /ladders/1
@@ -17,6 +22,13 @@ class LaddersController < ApplicationController
     @competitors = @ladder.rating_desc
     # Sort matches newest -> oldest creation date
     @matches = @ladder.matches.order("updated_at desc").limit(5)
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @ladder, expanded: true
+      }
+    end
   end
 
   # GET /ladders/new
@@ -79,7 +91,7 @@ class LaddersController < ApplicationController
     respond_to do |format|
       if @ladder.destroy
         format.html { redirect_to root_path }
-        format.json { head :no_content }
+        format.json { head :ok }
       else
         format.html {
           flash[:error] = 'There was an error deleting this ladder. Please try again later.'
