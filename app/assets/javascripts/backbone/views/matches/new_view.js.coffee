@@ -4,6 +4,7 @@ define (require, exports, module) ->
   _          = require 'underscore'
   Backbone   = require 'backbone'
   NewMatch_t = require 'templates/matches/new_match_t'
+  CompetitorCollection = require 'backbone/collections/competitor_collection'
 
   class NewMatchView extends Backbone.View
 
@@ -15,13 +16,24 @@ define (require, exports, module) ->
       'change [name="match-competitor-1"]' : 'updateOtherCompetitor'
 
     initialize: (params) ->
-      @competitors = params['competitors']
-      @ladder_id   = params['ladder']
+      @ladder_id   = params['ladder_id']
+      @competitors = @getCompetitors()
       this
 
     render: () ->
-      @$el.append(NewMatch_t({competitors: @competitors, ladder: @ladder}))
+      @$el.append(NewMatch_t({competitors: @competitors, ladder_id: @ladder_id}))
       this
+
+    getCompetitors: () ->
+      competitorCollection = new CompetitorCollection
+      competitorCollection.url = "/ladders/#{@ladder_id}/competitors"
+      competitorCollection.fetch(
+        success: (collection, response, options) =>
+          console.log collection
+          @competitors = collection
+        error: (collection, response, options) =>
+          console.log response
+      )
 
     updateOtherCompetitor: (e) ->
       comp_1_select = @$el.find('select[name="match-competitor-1"]')
@@ -50,13 +62,15 @@ define (require, exports, module) ->
 
     createMatch: (e) ->
       e.preventDefault()
+      form = $(e.target)
 
       $.ajax(
-        url: '/matches/' + @model.get('id') + '/finalize'
+        url: form.attr('action')
         type: 'POST'
         dataType: 'json'
+        data: form.serialize()
         success: (jqXHR, textStatus) =>
-          @destroy()
+          @trigger()
         error: (jqXHR, textStatus, errorThrown) ->
           console.log textStatus
       )
