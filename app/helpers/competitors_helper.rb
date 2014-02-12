@@ -34,4 +34,5 @@ module CompetitorsHelper
   def percent_of_highest_competitor
     (rating.to_f / ladder.highest_competitor.rating * 100).round(2)
   end
+
 end

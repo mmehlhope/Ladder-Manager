@@ -29,15 +29,34 @@ module LaddersHelper
   # DATA HELPERS #
   ################
 
+  def all_matches
+    matches.order("updated_at desc")
+  end
+
   def editable_matches
     matches.order("updated_at desc").reject(&:finalized?)
   end
 
+  def all_matches_json
+    ActiveModel::ArraySerializer.new(
+      all_matches,
+      each_serializer: MatchSerializer
+    ).to_json
+  end
+
   def editable_matches_json
-    ActiveModel::ArraySerializer.new(editable_matches, each_serializer: MatchSerializer).to_json
+    ActiveModel::ArraySerializer.new(
+      editable_matches,
+      each_serializer: MatchSerializer,
+      minimal: true
+    ).to_json
   end
 
   def competitors_json
-    ActiveModel::ArraySerializer.new(competitors, each_serializer: CompetitorSerializer).to_json
+    ActiveModel::ArraySerializer.new(
+      competitors,
+      each_serializer:
+      CompetitorSerializer
+    ).to_json
   end
 end
