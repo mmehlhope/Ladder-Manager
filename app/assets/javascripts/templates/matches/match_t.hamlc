@@ -15,7 +15,15 @@
   .detail
     Games
   = @match.get('games').length
+  - if @match.has_games()
+    \-
+    %a.view-games(href="#" title="View games") View
 %td
 
 %td.text-right
-  %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize") Finalize
+  .btn-group
+    - unless @match.isFinalized()
+      %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game") Add game
+      - if @match.has_games()
+        %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize") Finalize
+      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete") Delete
