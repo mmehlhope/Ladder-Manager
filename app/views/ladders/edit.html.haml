@@ -64,8 +64,9 @@
 
 :coffeescript
   require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view'], ($, MatchCollection, MatchIndexView) ->
-    matches = #{@matches_json}
-    matchCollection = new MatchCollection(matches)
+    matches                   = #{@matches_json}
+    matchCollection           = new MatchCollection(matches)
     matchCollection.ladder_id = #{@ladder.id}
-    matchIndexview = new MatchIndexView(collection: matchCollection)
+    matchCollection.url       = "/ladders/#{@ladder.id}/matches"
+    matchIndexview            = new MatchIndexView(collection: matchCollection)
 
