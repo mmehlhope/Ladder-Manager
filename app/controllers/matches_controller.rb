@@ -102,7 +102,6 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.finalized?
-        debugger
         @match.update_player_stats
 
         format.html {
