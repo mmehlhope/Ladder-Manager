@@ -9,20 +9,17 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     events:
-      # 'click'                          : 'toggleGamesView'
+      'click [data-action="delete"]'   : 'deleteMatch'
       'click [data-action="finalize"]' : 'finalize'
+      'click .view-games'              : 'toggleGamesView'
 
     initialize: () ->
       @listenTo(@model, 'change', @render)
+      @listenTo(@model, 'destroy', @destroy)
       this
 
     render: () ->
-      @$el.attr('id', 'match-' + @model.get('id'))
-          .append(Match_t(match: @model))
-
-      if @model.get('games').length
-        @$el.addClass('clickable')
-
+      @$el.attr('id', 'match-' + @model.get('id')).append(Match_t(match: @model))
       this
 
     toggleGamesView: (e) ->
@@ -43,5 +40,10 @@ define (require, exports, module) ->
           console.log textStatus
       )
       this
+
+    deleteMatch: () ->
+      @model.destroy()
+
     destroy: () ->
       @$el.fadeOut()
+      this
