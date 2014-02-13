@@ -18,9 +18,8 @@ define (require, exports, module) ->
       'click #record-new-match' : 'showNewMatchForm'
 
     initialize: () ->
-      console.log @collection
       @addChildrenAndRender()
-      # @listenTo()
+      @listenTo(@collection, 'sync', @addChildrenAndRender)
       this
 
     render: () ->
@@ -43,13 +42,25 @@ define (require, exports, module) ->
         else
           @children.push(matchView)
       )
+      @render()
+      this
+
+    toggleBusy: () ->
+      @$el.find('#record-new-match').toggleClass('busy')
+      this
+
+    updateCollection: () ->
+      @collection.fetch()
       this
 
     showNewMatchForm: (e) ->
       e.preventDefault()
+      @toggleBusy()
 
       newMatchView = new NewMatchView(
         ladder_id   : @collection.ladder_id
       )
+      @listenTo(newMatchView, 'fetchFinished', @toggleBusy)
+      @listenTo(newMatchView, 'newMatchCreated', @updateCollection)
       @$el.find('table:first').prepend(newMatchView.render().el)
       this
