@@ -1,6 +1,8 @@
 class Competitor < ActiveRecord::Base
   belongs_to :ladder
   has_and_belongs_to_many :matches
+  has_and_belongs_to_many :games
+
 
   validates :name, presence: true, format: {
     with: /\A[a-zA-Z0-9  -]+\z/, message: "can only contain letters, numbers, spaces, and hyphens."

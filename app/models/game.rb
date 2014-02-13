@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   belongs_to :match
+  has_and_belongs_to_many :competitors
 
   before_save   :populate_winner
   after_save    :update_match_winner

@@ -1,17 +1,9 @@
 module CompetitorsHelper
 
-  #######################
-  # ASSOCIATION HELPERS #
-  #######################
-
- # TODO: Make this real
-  def games
-    matches.collect(&:games)
-  end
-
   ################
   # STAT HELPERS #
   ################
+
   def last_match_played_date
     last_match_played.created_at
   end

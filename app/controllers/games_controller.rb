@@ -52,6 +52,9 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = @match.games.build(game_params)
+    competitors = Competitor.find([@match.competitor_1, @match.competitor_2])
+    @game.competitors << competitors
+
     respond_to do |format|
       if @game.save
         format.html {
