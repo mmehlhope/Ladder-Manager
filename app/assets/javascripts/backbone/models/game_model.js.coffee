@@ -4,4 +4,9 @@ define (require, exports, module) ->
 
   class GameModel extends Backbone.Model
 
+    defaults:
+      competitor_1_score: 0
+      competitor_2_score: 0
+      winner_id: null
+
     urlRoot: '/games'
