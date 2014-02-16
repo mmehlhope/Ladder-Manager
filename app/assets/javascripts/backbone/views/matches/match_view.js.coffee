@@ -1,14 +1,20 @@
 define (require, exports, module) ->
 
-  $          = require 'jquery'
-  _          = require 'underscore'
-  Backbone   = require 'backbone'
-  Match_t    = require 'templates/matches/match_t'
+  $                  = require 'jquery'
+  _                  = require 'underscore'
+  Backbone           = require 'backbone'
+  Match_t            = require 'templates/matches/match_t'
+  GameModel          = require 'backbone/models/game_model'
+  GameCollection     = require 'backbone/collections/game_collection'
+  GameCollectionView = require 'backbone/views/games/index_view'
+  # NewGameView = require 'backbone/views/games/new_view'
 
   class MatchView extends Backbone.View
+
     tagName: 'tr'
 
     events:
+      'click [data-action="add-game"]' : 'showNewGameRow'
       'click [data-action="delete"]'   : 'deleteMatch'
       'click [data-action="finalize"]' : 'finalize'
       'click .view-games'              : 'toggleGamesView'
@@ -23,9 +29,32 @@ define (require, exports, module) ->
       this
 
     toggleGamesView: (e) ->
-      e.preventDefault()
+      e.preventDefault() if e
       $("#games-for-match-" + @model.get('id') + " .table-wrap").collapse('toggle')
+      this
 
+    showNewGameRow: (e) ->
+      e.preventDefault()
+
+      gameModel = new GameModel(
+        match_id: @model.get('id')
+        competitor_1_score: 0
+        competitor_2_score: 0
+      )
+
+      unless @gameCollection
+        @gameCollection     = new GameCollection(gameModel, silent: true)
+        @gameCollectionView = new GameCollectionView(collection: @gameCollection)
+        $(@gameCollectionView.render().el).insertAfter(@$el)
+
+        gamesTable = $("#games-for-match-" + @model.get('id') + " .table-wrap")
+        if !gamesTable.hasClass('in')
+          console.log 'toggling view'
+          @toggleGamesView()
+
+      else
+        @gameCollection.push(gameModel)
+      this
 
     finalize: (e) ->
       e.preventDefault()
@@ -42,7 +71,8 @@ define (require, exports, module) ->
       this
 
     deleteMatch: () ->
-      @model.destroy()
+      if confirm("Are you sure you want to delete this match?")
+        @model.destroy()
 
     destroy: () ->
       @$el.fadeOut()
