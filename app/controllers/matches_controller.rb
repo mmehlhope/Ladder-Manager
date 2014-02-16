@@ -79,7 +79,7 @@ class MatchesController < ApplicationController
           flash[:success] = 'Match was successfully updated.'
           redirect_to match_path(@match)
         }
-        format.json { head :no_content }
+        format.json { head :ok }
       else
         format.html { render action: 'edit' }
         format.json { render json: @match.errors, status: :unprocessable_entity }
@@ -151,6 +151,6 @@ class MatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params[:match].permit(:competitor_1, :competitor_2)
+      params[:match].permit(:competitor_1, :competitor_2, :finalized)
     end
 end
