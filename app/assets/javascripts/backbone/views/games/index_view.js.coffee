@@ -11,16 +11,23 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     initialize: () ->
+      @addChildrenAndRender()
+      # @listenTo(@collection, 'change', @addChildrenAndRender)
+      @listenTo(@collection, 'add', @addChildrenAndRender)
+      this
+
+    render: () ->
+      console.log 'rendering game collection'
+      @$el.attr('id', 'games-for-match-' + @collection.models[0].get('match_id'))
+          .empty().append(Games_t())
+      @$el.find('tbody').append(@children)
+      this
+
+    addChildrenAndRender: () ->
       @children = []
       _(@collection.models).each((model) =>
         gameView = new GameView(model: model)
         @children.push(gameView.render().el)
       )
       @render()
-      this
-
-    render: () ->
-      @$el.attr('id', 'games-for-match-' + @collection.models[0].get('match_id'))
-          .empty().append(Games_t())
-      @$el.find('tbody').append(@children)
       this
