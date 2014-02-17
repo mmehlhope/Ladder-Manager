@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :set_match
-  before_action :set_ladder
+  before_action :set_match, except: [:destroy]
+  before_action :set_ladder, except: [:destroy]
   # before_action :ensure_user_can_admin_ladder, except: [:index, :show]
 
 
@@ -61,7 +61,7 @@ class GamesController < ApplicationController
           flash[:success] = 'Game was successfully added.'
           redirect_to @match
         }
-        format.json { render action: 'show', status: :created, location: @game }
+        format.json { render json: @game, status: :created }
       else
         format.html { render action: 'new' }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -78,7 +78,7 @@ class GamesController < ApplicationController
           flash[:success] = 'Game was successfully updated.'
           redirect_to edit_ladder_path(@match.ladder)
         }
-        format.json { head :no_content }
+        format.json { render json: @game }
       else
         format.html { render action: 'edit' }
         format.json { render json: @game.errors, status: :unprocessable_entity }
@@ -93,7 +93,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.destroy
         format.html { redirect_to match_path(@match) }
-        format.json { head :no_content }
+        format.json { render json: @game, status: :ok }
       else
         format.html {
           flash[:error] = "There was an error deleting the selected game"
@@ -123,6 +123,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:competitor_1_score, :competitor_2_score, :winner_name, :winner_id)
+      params.require(:game).permit(:competitor_1_score, :competitor_2_score)
     end
 end
