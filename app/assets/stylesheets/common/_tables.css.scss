@@ -26,26 +26,6 @@ table {
       float: left;
       padding: 1em;
     }
-    &.games-table-wrapper {
-      position: relative;
-      padding: 0;
-    }
-    &.games-table-wrapper .collapse.in {
-      &:after {
-        content: " ";
-        border-left: 12px solid transparent;
-        border-right: 12px solid transparent;
-        border-bottom: 12px solid $tableBorder;
-        font-size: 0;
-        height: 0;
-        line-height: 0;
-        position: absolute;
-        top: -11px;
-        bottom: 100%;
-        left: 660px;
-        width: 0;
-      }
-    }
     &.game,
     &.no-padding {
       padding: 0;
@@ -79,6 +59,26 @@ table {
   }
   .numGames {
     width: 120px;
+  }
+  .games-table-wrapper {
+    clear: both;
+    position: relative;
+  }
+  .games-table-wrapper .collapse.in {
+    &:after {
+      content: " ";
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 12px solid $tableBorder;
+      font-size: 0;
+      height: 0;
+      line-height: 0;
+      position: absolute;
+      top: -11px;
+      bottom: 100%;
+      left: 660px;
+      width: 0;
+    }
   }
 
   &.games-table {
