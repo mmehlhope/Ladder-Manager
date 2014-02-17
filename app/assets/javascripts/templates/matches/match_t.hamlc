@@ -1,29 +1,32 @@
-%td.status
-  .detail Last updated
-  = @match.get('last_updated')
-%td.competitor
-  .detail Competitor 1
-  = @match.get('competitor_1').name
-  - if @match.competitor_1_is_winner() && @match.isFinalized()
-    %span.badge.success-bg.success-text Winner!
-%td.competitor
-  .detail Competitor 2
-  = @match.get('competitor_2').name
-  - if @match.competitor_2_is_winner() && @match.isFinalized()
-    %span.badge.success-bg.success-text Winner!
-%td.numGames
-  .detail
-    Games
-  = @match.get('games').length
-  - if @match.has_games()
-    \-
-    %a.view-games(href="#" title="View games") View
-%td
+%td.no-padding
+  .cell.status
+    .detail Last updated
+    = @match.get('last_updated')
 
-%td.text-right
-  .btn-group
-    - unless @match.isFinalized()
-      %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game") Add game
-      - if @match.has_games()
-        %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize") Finalize
-      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete") Delete
+  .cell.competitor
+    .detail Competitor 1
+    = @match.get('competitor_1').name
+    - if @match.competitor_1_is_winner() && @match.isFinalized()
+      %span.badge.success-bg.success-text Winner!
+
+  .cell.competitor
+    .detail Competitor 2
+    = @match.get('competitor_2').name
+    - if @match.competitor_2_is_winner() && @match.isFinalized()
+      %span.badge.success-bg.success-text Winner!
+
+  .cell.numGames
+    .detail
+      Games
+    = @match.get('games').length
+    - if @match.has_games()
+      \-
+      %a.view-games(href="#" title="View games") View
+
+  .cell.pull-right
+    .btn-group
+      - unless @match.isFinalized()
+        %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game") Add game
+        - if @match.has_games()
+          %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize") Finalize
+        %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete-match") x

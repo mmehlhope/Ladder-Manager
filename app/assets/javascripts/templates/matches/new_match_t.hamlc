@@ -17,4 +17,4 @@
     .cell.pull-right
       .btn-group
         %input.btn.btn-small.btn-primary(type="submit" value="Save")
-        %button.btn.btn-small.close-btn Close
+        %button.btn.btn-small.close-btn x
