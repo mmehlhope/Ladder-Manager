@@ -11,9 +11,9 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     events:
-      'submit form'                        : 'createMatch'
+      'submit form'                         : 'createMatch'
       'change [name="match[competitor_1]"]' : 'updateOtherCompetitor'
-      'click .close-btn'                   : 'destroy'
+      'click .close-btn'                    : 'destroy'
 
     initialize: (params) ->
       @ladder_id   = params['ladder_id']
@@ -64,7 +64,6 @@ define (require, exports, module) ->
       opponent_hash
 
     createMatch: (e) ->
-      console.log 'creating'
       e.preventDefault()
       form = $(e.target)
 
