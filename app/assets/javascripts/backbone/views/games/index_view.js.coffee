@@ -4,30 +4,40 @@ define (require, exports, module) ->
   _                = require 'underscore'
   Backbone         = require 'backbone'
   GameView         = require 'backbone/views/games/game_view'
+  NewGameView      = require 'backbone/views/games/new_view'
   Games_t          = require 'templates/games/index_t'
 
   class GameCollectionView extends Backbone.View
 
-    tagName: 'tr'
+    className: 'games-table-wrapper collapse'
 
     initialize: () ->
-      @addChildrenAndRender()
-      # @listenTo(@collection, 'change', @addChildrenAndRender)
-      @listenTo(@collection, 'add', @addChildrenAndRender)
+      @listenTo(@collection, 'add', @showNewGameForm)
+      # @listenTo(@collection, 'sync', @showNewGameForm)
       this
 
     render: () ->
-      console.log 'rendering game collection'
-      @$el.attr('id', 'games-for-match-' + @collection.models[0].get('match_id'))
-          .empty().append(Games_t())
-      @$el.find('tbody').append(@children)
+      @addChildren()
+
+      @$el.attr('id', 'games-for-match-' + @collection.match_id)
+          .empty().html(Games_t())
+      @$('tbody').append(@children)
       this
 
-    addChildrenAndRender: () ->
+    addChildren: () ->
       @children = []
-      _(@collection.models).each((model) =>
-        gameView = new GameView(model: model)
+      _(@collection.models).each((model, index) =>
+        gameView = new GameView(model: model, attributes: {'number': index+1})
         @children.push(gameView.render().el)
       )
-      @render()
+      this
+
+    showNewGameForm: (newGame) ->
+      gameView = new NewGameView(model: newGame)
+      @listenTo(gameView, 'newGameCreated', @updateCollection)
+      @$('tbody').append(gameView.render().el)
+      this
+
+    updateCollection: () ->
+      @collection.fetch()
       this
