@@ -71,12 +71,12 @@
 }
 
 // color
-.success-text { color: $successButtonBg; }
-.success-bg { background-color: $successButtonTint; }
-.danger-text { color: $dangerButtonBg; }
-.danger-bg { background-color: $dangerButtonTint; }
-.info-text { color: $infoButtonBg; }
-.info-bg { background-color: $infoButtonBg; }
+.success-text { color: $successButtonBg !important; }
+.success-bg { background-color: $successButtonTint !important; }
+.danger-text { color: $dangerButtonBg !important; }
+.danger-bg { background-color: $dangerButtonTint !important; }
+.info-text { color: $infoButtonBg !important; }
+.info-bg { background-color: $infoButtonBg !important; }
 
 // Accessibility
 .hide-text {
