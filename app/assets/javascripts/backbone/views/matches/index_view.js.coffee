@@ -31,16 +31,9 @@ define (require, exports, module) ->
       @children = []
 
       _(@collection.models).each((model) =>
-        matchView = new MatchView(model: model)
-        matchView = matchView.render().el
-
-        if model.get('games').length
-          gameCollection = new GameCollection(model.get('games'))
-          gameCollectionView = new GameCollectionView(collection: gameCollection)
-          gamesView = gameCollectionView.render().el
-          @children.push(matchView, gamesView)
-        else
-          @children.push(matchView)
+        matchView     = new MatchView(model: model)
+        matchViewNode = matchView.render().el
+        @children.push(matchViewNode)
       )
       @render()
       this

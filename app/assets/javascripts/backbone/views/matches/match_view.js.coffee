@@ -7,53 +7,68 @@ define (require, exports, module) ->
   GameModel          = require 'backbone/models/game_model'
   GameCollection     = require 'backbone/collections/game_collection'
   GameCollectionView = require 'backbone/views/games/index_view'
-  # NewGameView = require 'backbone/views/games/new_view'
 
   class MatchView extends Backbone.View
 
     tagName: 'tr'
 
     events:
-      'click [data-action="add-game"]' : 'showNewGameRow'
-      'click [data-action="delete"]'   : 'deleteMatch'
-      'click [data-action="finalize"]' : 'finalize'
-      'click .view-games'              : 'toggleGamesView'
+      'click [data-action="add-game"]'       : 'showNewGameRow'
+      'click [data-action="delete-match"]'   : 'deleteMatch'
+      'click [data-action="finalize"]'       : 'finalize'
+      'click .view-games'                    : 'toggleGamesView'
 
     initialize: () ->
+      @gameCollection     = @model.get('games')
+      @gameCollectionView = new GameCollectionView(collection: @gameCollection)
+
+      @listenTo(@gameCollection, 'sync destroy', @render)
       @listenTo(@model, 'change', @render)
       @listenTo(@model, 'destroy', @destroy)
       this
 
     render: () ->
-      @$el.attr('id', 'match-' + @model.get('id')).append(Match_t(match: @model))
+      console.log 'rendering match'
+      node = Match_t(match: @model)
+      node = $(node).append(@gameCollectionView.render().el)
+      @$el.html(node).attr('id', 'match-' + @model.get('id'))
+
+      if @model.isGamesListVisible()
+        @showGamesView()
+      else
+        @hideGamesView()
       this
 
-    toggleGamesView: (e) ->
+    toggleGamesView: (e, action="toggle") ->
       e.preventDefault() if e
-      $("#games-for-match-" + @model.get('id') + " .table-wrap").collapse('toggle')
+      # @model.set('visibleGamesList', bool, silent: true)
+      @$(".games-table-wrapper").collapse(action)
+      this
+
+    showGamesView: () ->
+      @model.set('visibleGamesList', true, silent: true)
+      @toggleGamesView(null, 'show')
+      this
+
+    hideGamesView: () ->
+      @model.set('visibleGamesList', false, silent: true)
+      @toggleGamesView(null, 'hide')
       this
 
     showNewGameRow: (e) ->
       e.preventDefault()
-
       gameModel = new GameModel(
         match_id: @model.get('id')
-        competitor_1_score: 0
-        competitor_2_score: 0
       )
+      @gameCollection.push(gameModel)
+      @model.set('visibleGamesList', true, silent: true)
+      @showGamesView()
+      this
 
-      unless @gameCollection
-        @gameCollection     = new GameCollection(gameModel, silent: true)
-        @gameCollectionView = new GameCollectionView(collection: @gameCollection)
-        $(@gameCollectionView.render().el).insertAfter(@$el)
-
-        gamesTable = $("#games-for-match-" + @model.get('id') + " .table-wrap")
-        if !gamesTable.hasClass('in')
-          console.log 'toggling view'
-          @toggleGamesView()
-
-      else
-        @gameCollection.push(gameModel)
+    assessGamesVisibility: () ->
+      unless @gameCollection.models.length
+        @model.set('visibleGamesList', false, silent: true)
+        @hideGamesView()
       this
 
     finalize: (e) ->
@@ -70,10 +85,11 @@ define (require, exports, module) ->
       )
       this
 
-    deleteMatch: () ->
+    deleteMatch: (e) ->
+      e.preventDefault()
       if confirm("Are you sure you want to delete this match?")
         @model.destroy()
 
     destroy: () ->
-      @$el.fadeOut()
+      @$el.remove()
       this
