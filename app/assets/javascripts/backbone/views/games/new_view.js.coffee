@@ -10,8 +10,8 @@ define (require, exports, module) ->
     tagName: 'tr'
 
     events:
-      'submit form'                  : 'createNewGame'
-      'click [data-action="delete"]' : 'deleteGame'
+      'submit form'                       : 'createNewGame'
+      'click [data-action="delete-game"]' : 'deleteGame'
 
     initialize: () ->
       @listenTo(@model, 'change', @render)

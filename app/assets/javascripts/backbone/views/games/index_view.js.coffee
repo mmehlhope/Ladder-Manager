@@ -13,7 +13,6 @@ define (require, exports, module) ->
 
     initialize: () ->
       @listenTo(@collection, 'add', @showNewGameForm)
-      # @listenTo(@collection, 'sync', @showNewGameForm)
       this
 
     render: () ->
