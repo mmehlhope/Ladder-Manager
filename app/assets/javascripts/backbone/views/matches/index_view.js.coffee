@@ -7,6 +7,7 @@ define (require, exports, module) ->
   MatchCollection      = require 'backbone/collections/match_collection'
   MatchView            = require 'backbone/views/matches/match_view'
   NewMatchView         = require 'backbone/views/matches/new_view'
+  MessagesView         = require 'backbone/views/widgets/messages_view'
   Matches_t            = require 'templates/matches/index_t'
 
   class MatchCollectionView extends Backbone.View
@@ -18,6 +19,8 @@ define (require, exports, module) ->
 
     initialize: () ->
       @addChildrenAndRender()
+      @messageCenter = new MessagesView(el: @$('.messaging'))
+
       @listenTo(@collection, 'sync', @addChildrenAndRender)
       @listenTo(@collection, 'add', @addOne)
       this
@@ -29,6 +32,8 @@ define (require, exports, module) ->
     addOne: (model) ->
       matchView = new MatchView(model: model)
       @$('tbody:first').prepend(matchView.render().el)
+      # Post success message of new match
+      @messageCenter.post("You've added a new match!", 'success')
       this
 
     addChildrenAndRender: () ->
