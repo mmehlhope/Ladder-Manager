@@ -26,15 +26,15 @@ input[type="reset"].btn {
     border-color: $inputFocusBorderColor;
   }
   &:hover {
-    color: $primaryButtonText;
-    background-color: $inputBorderColor;
+    border-color: $defaultButtonText;
   }
-  &:active {
-    color: $primaryButtonText;
-    background-color: $primaryButtonBg;
-    border-color: $primaryButtonBg;
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: .65;
+    filter: alpha(opacity=65);
   }
-
   &.btn-primary {
     color: #fff;
     background: $primaryButtonBg;
@@ -43,45 +43,26 @@ input[type="reset"].btn {
     &:hover {
       background: $primaryButtonHighlight;
     }
-    &:active, &:focus {
-      background: $defaultButtonText;
-    }
   }
   &.btn-success {
-    color: $primaryButtonText;
-    background: $successButtonBg;
-    border-color: $successButtonHighlight;
+    color: $successButtonBg;
 
     &:hover {
-      background: $successButtonHighlight;
-    }
-    &:active, &:focus {
-      background: $defaultButtonText;
+      border-color: $successButtonBg;
     }
   }
   &.btn-danger {
-    color: $primaryButtonText;
-    background: $dangerButtonBg;
-    border-color: $dangerButtonHighlight;
+    color: $dangerButtonBg;
 
     &:hover {
-      background: $dangerButtonHighlight;
-    }
-    &:active, &:focus {
-      background: $defaultButtonText;
-      border-color: $primaryButtonBg;
+      border-color: $dangerButtonBg;
     }
   }
   &.btn-info {
-    color: $primaryButtonText;
-    background: $infoButtonBg;
-    border-color: $infoButtonHighlight;
+    color: $infoButtonBg;
 
     &:hover {
-      background: $infoButtonHighlight;
-    }
-    &:active, &:focus {
-      background: $defaultButtonText;
+      background: $infoButtonBg;
     }
   }
   &.btn-neutral {
