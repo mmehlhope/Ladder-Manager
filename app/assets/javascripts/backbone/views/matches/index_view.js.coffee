@@ -4,11 +4,10 @@ define (require, exports, module) ->
   _                    = require 'underscore'
   Backbone             = require 'backbone'
   MatchModel           = require 'backbone/models/match_model'
+  MatchCollection      = require 'backbone/collections/match_collection'
   MatchView            = require 'backbone/views/matches/match_view'
   NewMatchView         = require 'backbone/views/matches/new_view'
   Matches_t            = require 'templates/matches/index_t'
-  GameCollection       = require 'backbone/collections/game_collection'
-  GameCollectionView   = require 'backbone/views/games/index_view'
 
   class MatchCollectionView extends Backbone.View
 
@@ -20,14 +19,19 @@ define (require, exports, module) ->
     initialize: () ->
       @addChildrenAndRender()
       @listenTo(@collection, 'sync', @addChildrenAndRender)
+      @listenTo(@collection, 'add', @addOne)
       this
 
     render: () ->
       @$el.empty().html(Matches_t(matches: @collection)).find('tbody').append(@children)
       this
 
-    addChildrenAndRender: () ->
+    addOne: (model) ->
+      matchView = new MatchView(model: model)
+      @$('tbody:first').prepend(matchView.render().el)
+      this
 
+    addChildrenAndRender: () ->
       @children = []
 
       _(@collection.models).each((model) =>
@@ -39,7 +43,7 @@ define (require, exports, module) ->
       this
 
     toggleBusy: () ->
-      @$el.find('#record-new-match').toggleClass('busy')
+      @$('#record-new-match').toggleClass('busy')
       this
 
     updateCollection: () ->
@@ -51,9 +55,9 @@ define (require, exports, module) ->
       @toggleBusy()
 
       newMatchView = new NewMatchView(
+        collection  : @collection
         ladder_id   : @collection.ladder_id
       )
       @listenTo(newMatchView, 'fetchFinished', @toggleBusy)
-      @listenTo(newMatchView, 'newMatchCreated', @updateCollection)
-      @$el.find('table:first').prepend(newMatchView.render().el)
+      @$('table:first').prepend(newMatchView.render().el)
       this

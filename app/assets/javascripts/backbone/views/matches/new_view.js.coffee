@@ -1,9 +1,10 @@
 define (require, exports, module) ->
 
-  $          = require 'jquery'
-  _          = require 'underscore'
-  Backbone   = require 'backbone'
-  NewMatch_t = require 'templates/matches/new_match_t'
+  $                    = require 'jquery'
+  _                    = require 'underscore'
+  Backbone             = require 'backbone'
+  NewMatch_t           = require 'templates/matches/new_match_t'
+  MatchModel           = require 'backbone/models/match_model'
   CompetitorCollection = require 'backbone/collections/competitor_collection'
 
   class NewMatchView extends Backbone.View
@@ -13,9 +14,10 @@ define (require, exports, module) ->
     events:
       'submit form'                         : 'createMatch'
       'change [name="match[competitor_1]"]' : 'updateOtherCompetitor'
-      'click .close-btn'                    : 'destroy'
+      'click [data-action="close"]'         : 'destroy'
 
     initialize: (params) ->
+      console.log @collection
       @ladder_id   = params['ladder_id']
       @competitors = @getCompetitors()
       this
@@ -72,14 +74,16 @@ define (require, exports, module) ->
         type: 'POST'
         dataType: 'json'
         data: form.serialize()
-        success: (jqXHR, textStatus) =>
-          @trigger('newMatchCreated')
+        success: (model, textStatus) =>
+          @destroy()
+          matchModel = new MatchModel(model.match)
+          @collection.push(matchModel)
         error: (jqXHR, textStatus, errorThrown) ->
           console.log textStatus
       )
       this
 
     destroy: (e) ->
-      e.preventDefault()
-      this.$el.remove()
+      e.preventDefault() if e
+      @$el.remove()
       this

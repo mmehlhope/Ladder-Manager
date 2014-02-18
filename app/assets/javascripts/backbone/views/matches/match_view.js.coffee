@@ -5,7 +5,6 @@ define (require, exports, module) ->
   Backbone           = require 'backbone'
   Match_t            = require 'templates/matches/match_t'
   GameModel          = require 'backbone/models/game_model'
-  GameCollection     = require 'backbone/collections/game_collection'
   GameCollectionView = require 'backbone/views/games/index_view'
 
   class MatchView extends Backbone.View
@@ -19,7 +18,7 @@ define (require, exports, module) ->
       'click .view-games'                    : 'toggleGamesView'
 
     initialize: () ->
-      @gameCollection     = @model.get('games')
+      @gameCollection     = @model.games
       @gameCollectionView = new GameCollectionView(collection: @gameCollection)
 
       @listenTo(@gameCollection, 'sync destroy', @render)
@@ -28,31 +27,31 @@ define (require, exports, module) ->
       this
 
     render: () ->
-      console.log 'rendering match'
       node = Match_t(match: @model)
       node = $(node).append(@gameCollectionView.render().el)
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
-
-      if @model.isGamesListVisible()
-        @showGamesView()
-      else
-        @hideGamesView()
+      @assessGamesVisibility()
       this
 
     toggleGamesView: (e, action="toggle") ->
       e.preventDefault() if e
-      # @model.set('visibleGamesList', bool, silent: true)
       @$(".games-table-wrapper").collapse(action)
       this
 
-    showGamesView: () ->
+    showGamesView: (now) ->
       @model.set('visibleGamesList', true, silent: true)
-      @toggleGamesView(null, 'show')
+      unless now
+        @toggleGamesView(null, 'show')
+      else
+        @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse in')
       this
 
-    hideGamesView: () ->
+    hideGamesView: (now) ->
       @model.set('visibleGamesList', false, silent: true)
-      @toggleGamesView(null, 'hide')
+      unless now
+        @toggleGamesView(null, 'hide')
+      else
+        @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse')
       this
 
     showNewGameRow: (e) ->
@@ -66,28 +65,29 @@ define (require, exports, module) ->
       this
 
     assessGamesVisibility: () ->
-      unless @gameCollection.models.length
-        @model.set('visibleGamesList', false, silent: true)
-        @hideGamesView()
+      if @model.has_games() && @model.isGamesListVisible()
+        @showGamesView(true)
+      else
+        @hideGamesView(true)
       this
 
     finalize: (e) ->
       e.preventDefault()
-
-      $.ajax(
-        url: '/matches/' + @model.get('id') + '/finalize'
-        type: 'POST'
-        dataType: 'json'
-        success: (jqXHR, textStatus) =>
-          @destroy()
-        error: (jqXHR, textStatus, errorThrown) ->
-          console.log textStatus
-      )
+      if confirm('If you finalize the match, it can no longer be edited.\n\nAdditionally, competitor records and ratings will be permanently adjusted. Are you sure you wish to finalize this match?')
+        $.ajax(
+          url: '/matches/' + @model.get('id') + '/finalize'
+          type: 'POST'
+          dataType: 'json'
+          success: (jqXHR, textStatus) =>
+            @destroy()
+          error: (jqXHR, textStatus, errorThrown) ->
+            console.log textStatus
+        )
       this
 
     deleteMatch: (e) ->
       e.preventDefault()
-      if confirm("Are you sure you want to delete this match?")
+      if confirm('Are you sure you want to delete this match?')
         @model.destroy()
 
     destroy: () ->
