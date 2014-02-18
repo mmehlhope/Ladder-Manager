@@ -6,9 +6,9 @@ define (require, exports, module) ->
   class MatchModel extends Backbone.Model
 
     initialize: () ->
-      @set('games', new GameCollection(@get('games')))
-      @get('games').url      = @urlRoot + '/' + @get('id') + '/games'
-      @get('games').match_id = @get('id')
+      @games          = new GameCollection(@get('games'))
+      @games.url      = @urlRoot + '/' + @get('id') + '/games'
+      @games.match_id = @get('id')
       @set('visibleGamesList', false)
 
     urlRoot: '/matches'
@@ -20,7 +20,7 @@ define (require, exports, module) ->
       @get('finalized')
 
     has_games: () ->
-      @get('games').length > 0
+      @games.length > 0
 
     competitor_1_is_winner: () ->
       @get('competitor_1').id == @get('winner_id')
