@@ -16,5 +16,7 @@
         %option(value="" selected="selected") Select a competitor
     .cell.pull-right
       .btn-group
-        %input.btn.btn-small.btn-primary(type="submit" value="Save")
-        %button.btn.btn-small.close-btn x
+        %button.btn.btn-small.btn-primary(type="submit" value="")
+          %span.glyphicon.glyphicon-ok
+        %button.btn.btn-small.btn-danger(data-action="close")
+          %span.glyphicon.glyphicon-remove

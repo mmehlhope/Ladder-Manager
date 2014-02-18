@@ -18,7 +18,7 @@
   .cell.numGames
     .detail
       Games
-    = @match.get('games').length
+    = @match.games.length
     - if @match.has_games()
       \-
       %a.view-games(href="#" title="View games") View
@@ -26,7 +26,11 @@
   .cell.pull-right
     .btn-group
       - unless @match.isFinalized()
-        %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game") Add game
         - if @match.has_games()
-          %button.btn.btn-neutral.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize") Finalize
-        %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete-match") x
+          %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize")
+            %span.glyphicon.glyphicon-lock
+        %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game")
+          %span.glyphicon.glyphicon-plus
+          Game
+        %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete-match")
+          %span.glyphicon.glyphicon-remove

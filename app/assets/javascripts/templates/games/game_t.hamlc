@@ -8,5 +8,7 @@
       %input.input-small(name="game[competitor_2_score]" type="text" value="#{@game.get('competitor_2_score')}" placeholder="Competitor 2 score")
     .cell.pull-right
       .btn-group
-        %input.btn.btn-small(type="submit" value="Update")
-        %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete-game") x
+        %button.btn.btn-small(type="submit" value="")
+          %span.glyphicon.glyphicon-ok
+        %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete-game")
+          %span.glyphicon.glyphicon-remove

@@ -8,5 +8,7 @@
       %input.input-small(name="game[competitor_2_score]" type="text" value="#{@game.get('competitor_2_score')}" placeholder="Competitor 2 score")
     .cell.pull-right
       .btn-group
-        %input.btn.btn-small(type="submit" value="Save")
-        %button.btn.btn-small.btn-danger(data-action="delete") x
+        %button.btn.btn-small.btn-success(type="submit" value="")
+          %span.glyphicon.glyphicon-ok
+        %button.btn.btn-small.btn-danger(data-action="delete-game")
+          %span.glyphicon.glyphicon-remove
