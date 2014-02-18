@@ -5,6 +5,6 @@ define (require, exports, module) ->
   class Message extends Backbone.Model
 
     defaults:
-      "type": "notification"
+      "type": "info"
       "removable": true
       "content" : null

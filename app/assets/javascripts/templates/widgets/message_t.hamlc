@@ -1,3 +1,3 @@
-.alert.alert-dismissable.alert-success
-  %button.close(type="button" data-dismiss="alert") &times;
+%div(class="alert alert-dismissable alert-#{@message.get('type')}")
+  %button.close(type="button" data-action="close") &times;
   = @message.get('content')
