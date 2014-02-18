@@ -61,7 +61,7 @@ class MatchesController < ApplicationController
             flash[:success] = 'Match was successfully created.'
             redirect_to match_path(@match)
           }
-          format.json { render action: 'show', status: :created, location: @match }
+          format.json { render json: @match, status: :created }
         else
           format.html { render action: 'new' }
           format.json { render json: @match.errors, status: :unprocessable_entity }
