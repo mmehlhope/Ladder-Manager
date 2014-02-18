@@ -17,7 +17,6 @@ define (require, exports, module) ->
       'click [data-action="close"]'         : 'destroy'
 
     initialize: (params) ->
-      console.log @collection
       @ladder_id   = params['ladder_id']
       @competitors = @getCompetitors()
       this
