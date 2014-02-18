@@ -7,22 +7,18 @@ define (require, exports, module) ->
 
   class MessageView extends Backbone.View
 
-    el: '.messaging'
-
-    className: ''
-
     events:
-      'click [data-action="close"]' : 'destroy'
+      'click [data-action="close"]' : 'deleteMessage'
 
     initialize: () ->
       @listenTo(@model, 'destroy', @delete)
       this
 
     render: () ->
-      @$el.html(Message_t(message: @model))
+      @setElement(Message_t(message: @model))
       this
 
-    deleteGame: (e) ->
+    deleteMessage: (e) ->
       e.preventDefault()
       @model.destroy()
       this
