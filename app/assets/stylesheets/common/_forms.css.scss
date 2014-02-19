@@ -22,6 +22,20 @@ form {
       width: 100%;
     }
   }
+  &.inline-edit {
+    input[type="text"],
+    input[type="password"],
+    input[type="search"],
+    textarea {
+      background:transparent;
+      border-color: transparent;
+
+      &:hover {
+        background: inherit;
+        border-color: inherit;
+      }
+    }
+  }
   .input-group {
     position: relative
   }

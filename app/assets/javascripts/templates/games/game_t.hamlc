@@ -1,6 +1,7 @@
 %td.game(colspan="5")
+  .messaging
   - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
-  %form(action="#{action_url}" method="PUT")
+  %form.inline-edit(action="#{action_url}" method="PUT")
     .cell.number= @number
     .cell.competitor
       %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
