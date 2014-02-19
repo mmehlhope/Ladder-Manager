@@ -19,10 +19,11 @@ define (require, exports, module) ->
 
     initialize: () ->
       @addChildrenAndRender()
-      @messageCenter = new MessagesView(el: @$('.messaging'))
+      @messageCenter = new MessagesView(el: @$('.messaging:first'))
 
       @listenTo(@collection, 'sync', @addChildrenAndRender)
       @listenTo(@collection, 'add', @addOne)
+      @listenTo(@collection, 'finalize', @showFinalizeSuccess)
       this
 
     render: () ->
@@ -30,10 +31,14 @@ define (require, exports, module) ->
       this
 
     addOne: (model) ->
-      matchView = new MatchView(model: model)
-      @$('tbody:first').prepend(matchView.render().el)
+      matchView     = new MatchView(model: model)
+      matchViewNode = matchView.render().el
+      @$('tbody:first').prepend(matchViewNode)
       # Post success message of new match
-      @messageCenter.post("You've added a new match!", 'success')
+      @messageCenter.post(
+        "You've added a new match between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
+        'success'
+      )
       this
 
     addChildrenAndRender: () ->
@@ -51,6 +56,12 @@ define (require, exports, module) ->
       @$('#record-new-match').toggleClass('busy')
       this
 
+    showFinalizeSuccess: () ->
+      @messageCenter.post(
+        "The match was successfully finalized",
+        'success'
+      )
+      this
     updateCollection: () ->
       @collection.fetch()
       this
