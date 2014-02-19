@@ -1,7 +1,7 @@
 @import '../common/colors';
 
 .alert {
-  padding: 0.5em 1em;
+  padding: 0.75em 1em;
   margin-bottom: 1em;
   border: 1px solid transparent;
   border-radius: 0.4em;
@@ -30,7 +30,7 @@
 }
 .alert-success {
   background-color: $successButtonTint;
-  border-color: $successButtonBg;
+  border-color: darken($successButtonTint, 10%);
   color: $successButtonBg;
 }
 .alert-info {
@@ -51,7 +51,6 @@
 
 .close {
   float: right;
-  font-size: 1.4em;
   font-weight: bold;
   line-height: 1;
   color: #000000;
