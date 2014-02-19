@@ -79,6 +79,7 @@ define (require, exports, module) ->
           type: 'POST'
           dataType: 'json'
           success: (jqXHR, textStatus) =>
+            @model.trigger('finalize')
             @destroy()
           error: (jqXHR, textStatus, errorThrown) ->
             console.log textStatus
