@@ -102,13 +102,14 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.finalized?
+
         @match.update_player_stats
 
         format.html {
           flash[:success] = 'Match has been finalized. No further changes can be made to this match.'
           redirect_to match_path(@match)
         }
-        format.json { head :ok }
+        format.json { render json: @match, status: :ok }
       else
         errors = "There was an error finalizing the match" if errors.blank?
         format.html {
