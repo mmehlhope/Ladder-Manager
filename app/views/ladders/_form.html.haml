@@ -1,4 +1,4 @@
-= form_for(@ladder) do |f|
+= form_for(@ladder, html: {class: 'full-width'}) do |f|
   .alert.alert-info
     %span.glyphicon.glyphicon-info-sign
     All fields are required.
@@ -6,6 +6,9 @@
   .field
     .form-group
       = f.text_field :name, :class => "form-control", :placeholder => "Ladder name"
+    - if current_user
+      .form-group
+        = f.text_field :organization, :class => "form-control", :value => "#{current_user.organization.name}", :disabled => true
   .field.text-left
     .form-group
       = f.submit :class => "btn btn-primary"

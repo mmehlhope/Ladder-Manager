@@ -2,24 +2,29 @@
 
 %section.main
   %header.clearfix
-    %ul.breadcrumbs
-      %li= link_to @ladder.name, ladder_path(@ladder)
-      %li Manage
     .ladder-props
       %h1= yield(:title)
+      %dl
+        %dt
+          Ladder:
+        %dd
+          %a(href="#{@ladder.name}" ttile="Back to #{@ladder.name}")= @ladder.name
+        %dt
+          Num. of Competitors
+        %dd
+          = @ladder.competitors.size
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %ul.navigation
     %li.active
-      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Edit details
-    %li
       %a.btn.btn-link(href="#matchOpts" data-toggle="tab") Matches
     %li
       %a.btn.btn-link(href="#competitorOpts" data-toggle="tab") Competitors
+    %li
+      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Edit details
   .tab-content
 
-    .tab-pane#ladderOpts.active
-      = render 'edit_form'
+    .tab-pane#matchOpts.active
 
     .tab-pane#competitorOpts
       %h2 Edit Competitors
@@ -50,7 +55,8 @@
             %td.text-right(colspan="5")
               %a.btn.btn-neutral(href="#{new_ladder_competitor_path(@ladder)}" title="New competitor") New competitor
 
-    .tab-pane#matchOpts
+    .tab-pane#ladderOpts
+      = render 'edit_form'
 
 :coffeescript
   require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view'], ($, MatchCollection, MatchIndexView) ->
