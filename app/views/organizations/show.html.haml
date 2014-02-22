@@ -1,7 +1,63 @@
+- content_for(:title, "#{@organization.name}")
 - content_for :head do
   = stylesheet_link_tag('views/users')
 %section.main
   = render 'includes/message' if flash_message?
-  %h1 #{@organization.name}
-  %h2= link_to 'Edit', edit_organization_path(@organization)
-  %h2= link_to 'Create new ladder', new_ladder_path
+  %header.clearfix
+    %h1= yield(:title)
+  %ul.navigation
+    %li.active
+      %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
+    %li
+      %a.btn.btn-link(href="#users" data-toggle="tab") Users
+  .tab-content
+    .tab-pane#ladders.active
+      .section-header
+        .pull-left
+          %h2 Your organization's ladders
+        %a.btn.btn-primary.pull-right(href="#{new_ladder_path}" title="Create a new ladder")
+          %span.glyphicon.glyphicon-plus
+          New Ladder
+      %table
+        %tbody
+          - if current_org.has_ladders?
+            - current_org.ladders.each do |ladder|
+              %tr
+                %td
+                  .detail Name
+                  = link_to ladder.name, ladder_path(ladder)
+                %td
+                  .detail # of Competitors
+                  = ladder.competitors.size
+                %td
+                  .detail Date created
+                  = ladder.created_at.strftime("%B %d, %Y")
+                %td.text-right
+                  %a.btn.btn-small(href="#{edit_ladder_path(ladder)}") Manage
+          - else
+            %tr
+              %td(colspan="4") No ladders have been created
+    .tab-pane#users
+      .section-header
+        .pull-left
+          %h2 Your organization's users
+          %p All of the below users can administrate your organization's ladders.
+        %a.btn.btn-primary.pull-right(href="#{new_user_path}" title="Create a new user")
+          %span.glyphicon.glyphicon-plus
+          New User
+      %table
+        %tbody
+          - current_org.users.each do |user|
+            %tr
+              %td
+                .detail Name
+                #{user.name}
+              %td
+                .detail Email
+                #{user.email}
+              %td
+                .detail Date Created
+                #{user.created_at.strftime("%B %d, %Y")}
+              %td.text-right
+                %a.btn.btn-small(href="#")
+                  Edit
