@@ -12,8 +12,12 @@
       = password_field :user, :password, :class => "form-control", :placeholder => "Password"
     .form-group
       = password_field :user, :password_confirmation, :class => "form-control", :placeholder => "Confirm password"
-    .form-group
-      = text_field :organization, :name, :class => "form-control", :placeholder => "Organization name"
+    - if current_user
+      .form-group
+        = text_field :organization, :name, :class => "form-control", :value => "#{current_user.organization.name}", :disabled => true
+    - else
+      .form-group
+        = text_field :organization, :name, :class => "form-control", :placeholder => "Organization name"
     .form-group
     = submit_tag 'Update', :class => "btn btn-primary"
     = link_to "Cancel", user_path(@user), :class => 'btn'
