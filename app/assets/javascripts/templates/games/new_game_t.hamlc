@@ -1,7 +1,7 @@
 %td.game.success-bg(colspan="5")
   - action_url = @game.createUrl()
   %form(action="#{action_url}" method="POST")
-    .cell.status.success-text New
+    .cell.numGames.success-text New
     .cell.competitor
       %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
     .cell.competitor
@@ -9,6 +9,6 @@
     .cell.pull-right
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="")
-          %span.glyphicon.glyphicon-ok
-        %button.btn.btn-small.btn-danger(data-action="delete-game")
-          %span.glyphicon.glyphicon-remove
+          Save
+        %button.btn.btn-small(data-action="delete-game")
+          Cancel

@@ -1,15 +1,29 @@
-%td.game(colspan="5")
+%td(colspan="5" class="#{if @_view.inEditMode() then 'game success-bg' else 'game'}")
   .messaging
-  - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
-  %form.inline-edit(action="#{action_url}" method="PUT")
-    .cell.number= @number
+  - if @_view.inEditMode()
+    - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
+    %form(action="#{action_url}" method="PUT")
+      .cell.numGames= @number
+      .cell.competitor
+        %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
+      .cell.competitor
+        %input.input-small(name="game[competitor_2_score]" type="text" value="#{@game.get('competitor_2_score')}" placeholder="Competitor 2 score")
+      .cell.pull-right
+        .btn-group
+          %button.btn.btn-small.btn-success(type="submit" value="Update")
+            Update
+          %button.btn.btn-small(data-action="cancel")
+            Cancel
+  - else
+    .cell.numGames= @number
     .cell.competitor
-      %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
+      = @game.get('competitor_1_score')
     .cell.competitor
-      %input.input-small(name="game[competitor_2_score]" type="text" value="#{@game.get('competitor_2_score')}" placeholder="Competitor 2 score")
+      = @game.get('competitor_2_score')
     .cell.pull-right
       .btn-group
-        %button.btn.btn-small(type="submit" value="")
-          %span.glyphicon.glyphicon-ok
+        %button.btn.btn-small(data-action="edit")
+          Edit
         %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete-game")
-          %span.glyphicon.glyphicon-remove
+          / %span.glyphicon.glyphicon-remove
+          Delete

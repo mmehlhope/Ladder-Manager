@@ -1,7 +1,11 @@
 %td.no-padding
-  .cell.status
-    .detail Last updated
-    = @match.get('last_updated')
+  .cell.numGames
+    .detail
+      Games
+    = @match.games.length
+    - if @match.has_games()
+      \-
+      %a.view-games(href="#" title="View games") View
 
   .cell.competitor
     .detail Competitor 1
@@ -15,13 +19,9 @@
     - if @match.competitor_2_is_winner() && @match.isFinalized()
       %span.badge.success-bg.success-text Winner!
 
-  .cell.numGames
-    .detail
-      Games
-    = @match.games.length
-    - if @match.has_games()
-      \-
-      %a.view-games(href="#" title="View games") View
+  .cell.status
+    .detail Last updated
+    = @match.get('last_updated')
 
   .cell.pull-right
     .btn-group
