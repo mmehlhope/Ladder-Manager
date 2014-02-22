@@ -23,13 +23,15 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @organization = Organization.new(org_params)
-    if @organization.save
-      params = user_params
-      params[:organization_id] = @organization.id
-      debugger
-      @user = User.new(params)
+    if current_org
+      @organization = current_org
+    else
+      @organization = Organization.create(org_params)
     end
+    params = user_params
+    params[:organization_id] = @organization.id
+    @user = User.new(params)
+
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id
