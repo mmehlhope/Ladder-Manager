@@ -12,13 +12,9 @@
       %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
   .tab-content
     .tab-pane#notifications.active
-      %h2 Administrative notifications
+      .section-header
+        %h2 Recent Activity
       %table
-        %thead
-          %tr
-            %th
-            %th
-            %th
         %tbody
           - if current_org
             / - current_org.notifications.each do |ladder|
@@ -34,25 +30,24 @@
                   %a.btn.btn-small(href="#")
                     Archive
     .tab-pane#ladders
-      %h2 Your organization's ladders
+      .section-header
+        .pull-left
+          %h2 Your organization's ladders
+        %a.btn.btn-primary.pull-right(href="#{new_ladder_path}" title="Create a new ladder")
+          %span.glyphicon.glyphicon-plus
+          New Ladder
       %table
-        %thead
-          %tr
-            %th
-            %th
-            %th
-            %th
         %tbody
           - if current_org.has_ladders?
             - current_org.ladders.each do |ladder|
               %tr
                 %td= link_to ladder.name, ladder_path(ladder)
                 %td
-                  = ladder.created_at.strftime("%B %d, %Y")
-                  .detail Date created
-                %td
+                  .detail Competitors
                   = ladder.competitors.size
-                  .detail competitors
+                %td
+                  .detail Date created
+                  = ladder.created_at.strftime("%B %d, %Y")
                 %td.text-right
                   %a.btn.btn-small(href="#{edit_ladder_path(ladder)}") Manage
           - else
