@@ -25,7 +25,7 @@ $panelTitleColor    : $headerBg;
 
 // Tables
 $tableBg            : $bodyBg;
-$tableBorder        : lighten($inputBorderColor, 20%);
+$tableBorder        : lighten($inputBorderColor, 15%);
 
 // Breadcrumbs
 $breadcrumbBg       : #343C46;
@@ -48,7 +48,7 @@ $defaultButtonBg: #fff;
 $defaultButtonText: $bodyText;
 // primary
 $primaryButtonText: #fff;
-$primaryButtonBg: $bodyText;
+$primaryButtonBg: $link;
 $primaryButtonHighlight: lighten($primaryButtonBg, 5%);
 // danger
 $dangerButtonBg: #bb0000;
