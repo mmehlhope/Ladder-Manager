@@ -12,14 +12,17 @@ define (require, exports, module) ->
     events:
       'submit form'                       : 'updateGame'
       'click [data-action="delete-game"]' : 'deleteGame'
+      'click [data-action="edit"]'        : 'toggleEditMode'
+      'click [data-action="cancel"]'      : 'toggleEditMode'
 
 
     initialize: () ->
       @listenTo(@model, 'change', @render)
+      @editMode = false
       this
 
     render: () ->
-      @$el.html(Game_t(game: @model, number: @attributes.number))
+      @$el.html(Game_t(game: @model, number: @attributes.number, _view: @))
       this
 
     updateGame: (e) ->
@@ -33,6 +36,7 @@ define (require, exports, module) ->
         data: form.serialize()
         success: (jqXHR, textStatus) =>
           # Update the model, which triggers the row to re-render
+          @editMode = false
           @model.set(jqXHR.game)
         error: (jqXHR, textStatus, errorThrown) ->
           console.log textStatus
@@ -49,6 +53,15 @@ define (require, exports, module) ->
             console.log 'game not deleted'
         )
       this
+
+    toggleEditMode: (e) ->
+      e.preventDefault() if e
+      @editMode = !@editMode
+      @render()
+      this
+
+    inEditMode: () ->
+      @editMode
 
     destroy: () ->
       @$el.remove()
