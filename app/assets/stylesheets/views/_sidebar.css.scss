@@ -2,19 +2,26 @@
 
 aside {
   background: $bodyText;
-  float: left;
-  min-height: 100%;
-  position: fixed;
-  width: $sidebarContainerWidth;
+  height: 4em;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
 
   .logo-container {
-    // border-bottom: 1px solid $primaryButtonHighlight;
-    padding: 1.5em 3em;
-  }
+    width: 5em;
+    padding: 0;
+    text-align: left;
 
-  .logo {
-    height: auto;
-    width: 100%;
+    .logo {
+      width: 100%;
+      height: auto;
+    }
+  }
+  // temporary
+  .sidebar-menu, .search {
+    display: none;
   }
 }
 
@@ -58,20 +65,30 @@ aside {
 
 @include breakpoint(tablet) {
   aside {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 4em;
-    min-height: 0;
+    float: left;
+    min-height: 100%;
+    position: fixed;
+    width: $sidebarContainerWidth;
+
     .sidebar-menu, .search {
-      display: none;
+      display: block;
+    }
+    .search {
+      padding: 0 2em 1em;
+
+      input[type="search"] {
+        border: 0;
+        color: #fff;
+        background: darken($bodyText, 5%);
+        padding-right: 2.5em;
+      }
+    }
+    .search-button {
+      color: #fff;
     }
     .logo-container {
-      width: 5em;
-      padding: 0;
-      text-align: left;
+      width: 100%;
+      padding: 1.5em 3em;
     }
   }
 }

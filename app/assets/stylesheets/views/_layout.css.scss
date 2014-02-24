@@ -1,4 +1,5 @@
 @import '../common/grid';
+@import '../common/helpers';
 
 // Layout
 body {
@@ -11,45 +12,58 @@ body, html {
 }
 
 header {
-  margin-bottom: 2em;
+  margin: 1em 0;
 
   .ladder-props {
     float: left;
+  }
+}
 
-    dl {
-      margin: 0.5em 0 0;
-      dt, dd { display: inline-block; }
-      dt {
-        color: $sidebarLinkColor;
-        border-left: 1px solid $sidebarLinkColor;
-        padding: 0 0 0 0.5em;
-        &:first-child {
-          padding: 0;
-          border: none;
-        }
-      }
-      dd {
-        margin: 0;
-        padding: 0 0.5em 0 0;
-      }
+dl {
+  margin: 0.5em 0 0;
+  dt, dd { display: inline-block; }
+  dt {
+    color: $sidebarLinkColor;
+    border-left: 1px solid $sidebarLinkColor;
+    padding: 0 0 0 0.5em;
+    &:first-child {
+      padding: 0;
+      border: none;
     }
+  }
+  dd {
+    margin: 0;
+    padding: 0 0.5em 0 0;
   }
 }
 
 .content-wrapper {
   height: 100%;
   min-height: 100%;
-  width:100%;
+  width: 100%;
 }
 
 .main {
-  margin-left: $sidebarContainerWidth;
   min-height: 100%;
-  padding: 1.5em 3em;
+  padding: 4em 1em 1em;
+  margin: 0;
 }
+
 .section-header {
   overflow: auto;
   margin-bottom: 1em;
+}
+.section-title {
+  margin: 0 0 1em 0;
+}
+.section-actions {
+  @include clearfix
+}
+.section-actions > .btn {
+  @include clearfix;
+  display: block;
+  text-align: center;
+  width: 100%;
 }
 .panel {
   background: #fff;
@@ -62,22 +76,18 @@ header {
 }
 
 @include breakpoint(tablet) {
-  .main {
-    margin: 4em 0 0;
-    padding: 1em;
-  }
-}
-
-@include breakpoint(phone) {
   header {
-    .ladder-props {
-      float: none;
-    }
-    .btn, a.btn {
-      display: block;
-      float: none !important;
-      margin: 1em 0 0;
-      text-align: center;
-    }
+    margin: 0 0 2em;
+  }
+  .main {
+    margin-left: $sidebarContainerWidth;
+    padding: 1.5em 3em;
+  }
+  .section-title {
+    float: left;
+    margin: 0;
+  }
+  .section-actions {
+    float: right;
   }
 }
