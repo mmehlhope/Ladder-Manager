@@ -70,6 +70,10 @@
   padding: 0.25em 0.75em;
 }
 
+.bordered {
+  border: 1px solid $tableBorder;
+}
+
 // color
 .success-text { color: $successButtonBg !important; }
 .success-bg { background-color: $successButtonTint !important; }
