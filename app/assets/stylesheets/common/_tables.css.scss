@@ -51,14 +51,14 @@ table {
   }
 
   // columns
-  .status, .number {
-    width: 150px;
+  .numGames, .number {
+    width: 10%;
   }
   .competitor {
-    width: 250px;
+    width: 25%;
   }
-  .numGames {
-    width: 120px;
+  .status {
+    width: 25% ;
   }
   .games-table-wrapper {
     clear: both;
@@ -102,8 +102,5 @@ table {
     div.cell {
       padding: 0.5em 1em;
     }
-  }
-  &.bordered-table {
-    border: 1px solid $tableBorder;
   }
 }

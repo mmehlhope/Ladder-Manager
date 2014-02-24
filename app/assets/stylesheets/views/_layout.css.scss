@@ -20,20 +20,16 @@ header {
 }
 
 dl {
-  margin: 0.5em 0 0;
-  dt, dd { display: inline-block; }
+  margin: 0.5em 0;
+  dt, dd { display: block; }
   dt {
+    float: left;
     color: $sidebarLinkColor;
-    border-left: 1px solid $sidebarLinkColor;
-    padding: 0 0 0 0.5em;
-    &:first-child {
-      padding: 0;
-      border: none;
-    }
+    padding: 0.25em 0.5em 0.25em 0;
   }
   dd {
     margin: 0;
-    padding: 0 0.5em 0 0;
+    padding: 0.25em 0 0.25em 0;
   }
 }
 
@@ -89,5 +85,23 @@ dl {
   }
   .section-actions {
     float: right;
+  }
+  dl {
+    dd, dt {
+      display: inline-block;
+      float: none;
+    }
+    dt {
+      border-left: 1px solid $tableBorder;
+      padding: 0 0 0 0.5em;
+
+      &:first-child {
+        padding: 0;
+        border: none;
+      }
+    }
+    dd {
+      padding: 0 0.5em 0 0;
+    }
   }
 }
