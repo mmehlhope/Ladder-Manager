@@ -1,0 +1,32 @@
+@import 'colors';
+
+.list-view {
+  padding: 0;
+
+  > .list-item {
+    border-top: 1px solid $tableBorder;
+    margin: 0;
+    padding: 1em 25% 1em 0;
+    position: relative;
+    &:first-child {
+      border-top: none;
+    }
+  }
+  .name {
+    font-size: 1.2em;
+  }
+  .list-item-actions {
+    position: absolute;
+    top: 1em;
+    right: 0;
+  }
+}
+
+ul.list-view {
+  list-style: none;
+}
+
+ol.list-view {
+  list-style-type: decimal-leading-zero;
+  padding-left: 2em;
+}
