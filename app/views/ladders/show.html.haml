@@ -1,7 +1,7 @@
 - content_for(:title, @ladder.name)
 %section.main
   %header.clearfix
-    .ladder-props
+    .section-title
       %h1= yield(:title)
       %dl
         %dt
@@ -10,7 +10,8 @@
           %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
         %dt Status:
         %dd(class="#{@ladder.active? ? 'success-text' : 'danger-text'}") #{@ladder.active? ? 'Active' : 'Inactive'}
-    %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}") Manage ladder
+    .section-actions
+      %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}") Manage ladder
   %ul.navigation
     %li.active
       %a.btn.btn-link(href="#rankings" data-toggle="tab") Rankings
@@ -19,36 +20,9 @@
 
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
+
   .tab-content
     .tab-pane#rankings.active
-      - competitors_exist = @competitors.size > 0
-      %table
-        %tbody
-          - if @competitors.size > 0
-            - rank = 0
-            - @competitors.each do |competitor|
-              %tr
-                %td(width="1%")
-                  %span.badge= rank += 1
-                %td
-                  .detail Last Match: #{competitor.last_match_played ? competitor.last_match_played_date.strftime("%B %d, %Y") : 'never'}
-                  = link_to competitor.name, competitor_path(competitor)
-                %td
-                  .detail Wins - Losses
-                  #{competitor.wins} - #{competitor.losses}
-                %td
-                  .detail Rating
-                  .rating-bg
-                    .rating-bar(style="width: #{competitor.percent_of_highest_competitor}%")
-                      =competitor.rating
-          - else
-            %tr
-              %td(colspan="5")
-                .alert.alert-info
-                  %span.glyphicon.glyphicon-info-sign
-                  There are currently no competitors added to this ladder.
-                  - if user_can_admin_ladder
-                    %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
-                    to begin.
+      = render partial: 'rankings', locals: {competitors: @competitors}
     .tab-pane#recent-matches
       = render partial: 'matches/matches_table', locals: {matches: @matches}
