@@ -1,32 +1,66 @@
-%table.bordered-table
-  %tbody
-    - if matches
-      - matches.each do |match|
-        %tr
-          %td.status(width="120px")
-            .detail Status
-            #{match.finalized ? 'Final' : 'In progress'}
-          %td.competitor
-            .detail Competitor 1
+%ul.list-view.bordered
+  - if matches
+    - matches.each do |match|
+      %li.list-item
+        .list-item-content
+          .name
             = link_to match.competitor_1_name, competitor_path(match.competitor_1)
             - if match.competitor_1_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
-          %td.competitor
-            .detail Competitor 2
+            vs.
             = link_to match.competitor_2_name, competitor_path(match.competitor_2)
             - if match.competitor_2_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
-          %td.numGames
-            .detail
-              Games
-              - if match.has_games?
-                \-
-                %a(href="#" data-toggle="show-games" tite="Show / Hide games") Show
-            #{match.games.size}
-          %td.text-right
-            .detail Last updated
-            #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
+
+          %dl
+            %dt Status:
+            %dd #{match.finalized ? 'Final' : 'In progress'}
+            %dt Games:
+            %dd #{match.games.size}
+            %dt Started:
+            %dd #{match.created_at.strftime('%B %d, %Y')}
+            %dt Updated:
+            %dd #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
+          .list-item-actions
+            %a(data-toggle="games" title="Show/hide games")
+              %span.glyphicon.glyphicon-chevron-down
         - if match.has_games?
-          %tr.games-table-row
-            %td.games-table-wrapper(colspan="5")
-              = render partial: 'games/games_sub_table', locals: {games: match.games}
+          .games-table-wrapper
+            = render partial: 'games/games_sub_table', locals: {games: match.games}
+  - else
+    %li
+      No matches have been recorded recently.
+
+
+/ %table.bordered-table
+/   %tbody
+/     - if matches
+/       - matches.each do |match|
+/         %tr
+/           %td.status(width="120px")
+/             .detail Status
+/             #{match.finalized ? 'Final' : 'In progress'}
+/           %td.competitor
+/             .detail Competitor 1
+/             = link_to match.competitor_1_name, competitor_path(match.competitor_1)
+/             - if match.competitor_1_is_winner? && match.finalized?
+/               %span.badge.success-bg.success-text Winner!
+/           %td.competitor
+/             .detail Competitor 2
+/             = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+/             - if match.competitor_2_is_winner? && match.finalized?
+/               %span.badge.success-bg.success-text Winner!
+/           %td.numGames
+/             .detail
+/               Games
+/               - if match.has_games?
+/                 \-
+/                 %a(href="#" data-toggle="show-games" tite="Show / Hide games") Show
+/             #{match.games.size}
+/           %td.text-right
+/             .detail Last updated
+/             #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
+/         - if match.has_games?
+/           %tr.games-table-row
+/             %td.games-table-wrapper(colspan="5")
+/               = render partial: 'games/games_sub_table', locals: {games: match.games}

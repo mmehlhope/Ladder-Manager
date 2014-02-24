@@ -27,7 +27,7 @@ define (require, exports, module) ->
       this
 
     render: () ->
-      @$el.empty().html(Matches_t(matches: @collection)).find('tbody').append(@children)
+      @$el.empty().html(Matches_t(matches: @collection)).find('.list-view').append(@children)
       this
 
     addOne: (model) ->

@@ -1,9 +1,10 @@
-%td(colspan="5" class="#{if @_view.inEditMode() then 'game success-bg' else 'game'}")
+%td(colspan="4" class="#{if @_view.inEditMode() then 'game success-bg' else 'game'}")
   .messaging
   - if @_view.inEditMode()
     - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
-    %form(action="#{action_url}" method="PUT")
-      .cell.numGames= @number
+    %form.full-width(action="#{action_url}" method="PUT")
+      .cell.numGames
+        = @number
       .cell.competitor
         %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
       .cell.competitor
@@ -13,9 +14,10 @@
           %button.btn.btn-small.btn-success(type="submit" value="Update")
             Update
           %button.btn.btn-small(data-action="cancel")
-            Cancel
+            %span.glyphicon.glyphicon-remove
   - else
-    .cell.numGames= @number
+    .cell.numGames
+      = @number
     .cell.competitor
       = @game.get('competitor_1_score')
     .cell.competitor
@@ -25,5 +27,4 @@
         %button.btn.btn-small(data-action="edit")
           Edit
         %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete-game")
-          / %span.glyphicon.glyphicon-remove
-          Delete
+          %span.glyphicon.glyphicon-remove

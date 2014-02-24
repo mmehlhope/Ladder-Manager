@@ -3,13 +3,11 @@
     %th.status Game #
     %th.competitor Competitor 1 Score
     %th.competitor Competitor 2 Score
-    %th
   %tbody
     - gameNum = 0
     - games.each do |game|
       - gameNum += 1
       %tr
-        %td.game(colspan="5")
-          .cell.number= gameNum
-          .cell.competitor #{game.competitor_1_score}
-          .cell.competitor #{game.competitor_2_score}
+        %td.number= gameNum
+        %td #{game.competitor_1_score}
+        %td #{game.competitor_2_score}

@@ -9,7 +9,8 @@ define (require, exports, module) ->
 
   class MatchView extends Backbone.View
 
-    tagName: 'tr'
+    tagName: 'li'
+    className: 'list-item'
 
     events:
       'click [data-action="add-game"]'       : 'showNewGameRow'
@@ -28,8 +29,8 @@ define (require, exports, module) ->
 
     render: () ->
       node = Match_t(match: @model)
-      node = $(node).append(@gameCollectionView.render().el)
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
+      @$el.append(@gameCollectionView.render().el)
       @assessGamesVisibility()
       this
 
