@@ -1,0 +1,12 @@
+%ul.list-view
+  - current_org.users.each do |user|
+    %li.list-item
+      .name= user.name
+      %dl
+        %dt Email:
+        %dd= user.email
+
+        %dt Created:
+        %dd= user.created_at.strftime("%B %d, %Y")
+      .list-item-actions
+        %a.btn.btn-small(href="#{edit_user_path(user)}") Edit

@@ -1,0 +1,17 @@
+%ul.list-view
+  - if current_org.has_ladders?
+    - current_org.ladders.each do |ladder|
+      %li.list-item
+        .name
+          = link_to ladder.name, ladder_path(ladder)
+        %dl
+          %dt Competitors:
+          %dd= ladder.competitors.size
+
+          %dt Created
+          %dd= ladder.created_at.strftime("%B %d, %Y")
+        .list-item-actions
+          %a.btn.btn-small(href="#{edit_ladder_path(ladder)}") Manage
+  - else
+    %li
+      No ladders have been created
