@@ -6,15 +6,20 @@
   > .list-item {
     border-top: 1px solid $tableBorder;
     margin: 0;
-    padding: 1em 25% 1em 0;
+    padding: 0;
     position: relative;
     &:first-child {
       border-top: none;
     }
   }
+  .list-item-content {
+    padding: 1em 25% 1em 0em;
+  }
+
   .name {
     font-size: 1.2em;
   }
+
   .list-item-actions {
     position: absolute;
     top: 1em;
@@ -29,4 +34,14 @@ ul.list-view {
 ol.list-view {
   list-style-type: decimal-leading-zero;
   padding-left: 2em;
+}
+
+ol.list-view.bordered,
+ul.list-view.bordered {
+  .list-item-content {
+    padding: 1em 25% 1em 1em;
+  }
+  .list-item-actions {
+    right: 1em;
+  }
 }
