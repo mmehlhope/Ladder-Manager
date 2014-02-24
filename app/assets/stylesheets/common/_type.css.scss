@@ -39,6 +39,10 @@ body {
   font-size: $smallEm;
 }
 
+.bold {
+  @include body-font(700)
+}
+
 section h1,
 section h2,
 section h3,
@@ -50,15 +54,9 @@ section h6 {
   margin: 0;
 }
 section h1 {
-  font-size: $largeEm;
+  font-size: $mediumEm;
   margin: 0;
 
-  @include breakpoint(tablet) {
-    font-size: 2em;
-  }
-  @include breakpoint(phone) {
-    font-size: 1.8em;
-  }
 }
 
 // Links
@@ -77,25 +75,4 @@ a {
     color: darken($link, 10%);
   }
 }
-.titleize {
-  color: #fff;
-  font-size: 48em;
-  font-weight: bold;
-  line-height: 1em;
-  letter-spacing: 1px;
-  text-shadow: 0 2em 3em rgba(0, 0, 0, 0.3);
-  text-transform: uppercase;
-}
 
-.panelHeading {
-  color: $panelTitleColor;
-  font-size: $largeEm;
-  font-weight: 300;
-  margin-top: 0;
-}
-aside .panelHeading {
-  color: $panelTitleColor;
-  font-weight: 300;
-  font-size: $sidebarHeaderEm;
-  margin-top: $largeEm - $sidebarHeaderEm +1;
-}
