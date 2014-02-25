@@ -9,7 +9,8 @@ define (require, exports, module) ->
 
   class NewMatchView extends Backbone.View
 
-    tagName: 'tr'
+    tagName: 'li'
+    className: 'list-item'
 
     events:
       'submit form'                         : 'createMatch'
@@ -75,8 +76,7 @@ define (require, exports, module) ->
         data: form.serialize()
         success: (model, textStatus) =>
           @destroy()
-          matchModel = new MatchModel(model.match)
-          @collection.push(matchModel)
+          @collection.push(model.match)
         error: (jqXHR, textStatus, errorThrown) ->
           console.log textStatus
       )

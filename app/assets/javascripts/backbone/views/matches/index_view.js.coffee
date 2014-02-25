@@ -33,7 +33,7 @@ define (require, exports, module) ->
     addOne: (model) ->
       matchView     = new MatchView(model: model)
       matchViewNode = matchView.render().el
-      @$('tbody:first').prepend(matchViewNode)
+      @$('.list-view').prepend(matchViewNode)
       # Post success message of new match
       @messageCenter.post(
         "You've added a new match between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
@@ -75,5 +75,5 @@ define (require, exports, module) ->
         ladder_id   : @collection.ladder_id
       )
       @listenTo(newMatchView, 'fetchFinished', @toggleBusy)
-      @$('table:first').prepend(newMatchView.render().el)
+      @$('.list-view').prepend(newMatchView.render().el)
       this
