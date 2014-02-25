@@ -8,14 +8,14 @@
         %dt
           Ladder:
         %dd
-          %a(href="#{ladder_path(@ladder)}" ttile="Back to #{@ladder.name}")= @ladder.name
+          %a(href="#{ladder_path(@ladder)}" title="Back to #{@ladder.name}")= @ladder.name
         %dt
-          Num. of Competitors
+          Competitors:
         %dd
           = @ladder.competitors.size
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
-  %ul.navigation
+  %ul.navigation.three-across
     %li.active
       %a.btn.btn-link(href="#matchOpts" data-toggle="tab") Matches
     %li
