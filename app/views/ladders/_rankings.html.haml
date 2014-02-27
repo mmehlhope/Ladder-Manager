@@ -3,6 +3,8 @@
     - competitors.each do |competitor|
       %li.list-item
         .list-item-content
+          .competitor-avatar
+            %span.glyphicon.glyphicon-user
           .name
             = link_to competitor.name, competitor_path(competitor)
           %dl
