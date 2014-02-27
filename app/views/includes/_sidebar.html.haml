@@ -10,14 +10,6 @@
 
   - if current_user
     %ul.sidebar-menu.user-options
-      %li(class="#{request.fullpath =~ /\/dashboard/ ? 'active' : nil}")
-        %a(href="#{dashboard_path}" title="Dashboard")
-          %span.glyphicon.glyphicon-dashboard
-          Dashboard
-      %li
-        %a(href="#{ladders_path}" title="Notifications")
-          %span.glyphicon.glyphicon-envelope
-          View Notifications
       %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
         %a(href="#{organization_path(current_org)}" title="My Organization")
           %span.glyphicon.glyphicon-globe
