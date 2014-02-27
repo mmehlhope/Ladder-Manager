@@ -11,10 +11,9 @@
             = link_to match.competitor_2_name, competitor_path(match.competitor_2)
             - if match.competitor_2_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
-
           %dl
             %dt Status:
-            %dd #{match.finalized ? 'Final' : 'In progress'}
+            %dd(class="#{match.finalized ? 'danger-text' : ''}") #{match.finalized ? 'Final' : 'In progress'}
             %dt Games:
             %dd #{match.games.size}
             %dt Started:
@@ -22,45 +21,11 @@
             %dt Updated:
             %dd #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
           .list-item-actions
-            %a(data-toggle="games" title="Show/hide games")
+            %a(data-toggle="collapse" data-target="#games-for-#{match.id}" title="Show/hide games")
               %span.glyphicon.glyphicon-chevron-down
         - if match.has_games?
-          .games-table-wrapper
-            = render partial: 'games/games_sub_table', locals: {games: match.games}
+          %div(id="games-for-#{match.id}" class="games-table-wrapper collapse")
+            = render partial: 'games/games_sub_table', locals: {games: match.games, competitor_1_name: match.competitor_1_name, competitor_2_name: match.competitor_2_name}
   - else
     %li
       No matches have been recorded recently.
-
-
-/ %table.bordered-table
-/   %tbody
-/     - if matches
-/       - matches.each do |match|
-/         %tr
-/           %td.status(width="120px")
-/             .detail Status
-/             #{match.finalized ? 'Final' : 'In progress'}
-/           %td.competitor
-/             .detail Competitor 1
-/             = link_to match.competitor_1_name, competitor_path(match.competitor_1)
-/             - if match.competitor_1_is_winner? && match.finalized?
-/               %span.badge.success-bg.success-text Winner!
-/           %td.competitor
-/             .detail Competitor 2
-/             = link_to match.competitor_2_name, competitor_path(match.competitor_2)
-/             - if match.competitor_2_is_winner? && match.finalized?
-/               %span.badge.success-bg.success-text Winner!
-/           %td.numGames
-/             .detail
-/               Games
-/               - if match.has_games?
-/                 \-
-/                 %a(href="#" data-toggle="show-games" tite="Show / Hide games") Show
-/             #{match.games.size}
-/           %td.text-right
-/             .detail Last updated
-/             #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
-/         - if match.has_games?
-/           %tr.games-table-row
-/             %td.games-table-wrapper(colspan="5")
-/               = render partial: 'games/games_sub_table', locals: {games: match.games}
