@@ -31,6 +31,7 @@ define (require, exports, module) ->
       node = Match_t(match: @model)
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
       @$el.append(@gameCollectionView.render().el)
+      @newGameInProgress = false
       @assessGamesVisibility()
       this
 
@@ -56,13 +57,17 @@ define (require, exports, module) ->
       this
 
     showNewGameRow: (e) ->
-      e.preventDefault()
-      gameModel = new GameModel(
-        match_id: @model.get('id')
-      )
-      @gameCollection.push(gameModel)
-      @model.set('visibleGamesList', true, silent: true)
-      @showGamesView()
+      unless @newGameInProgress
+        e.preventDefault()
+        @newGameInProgress = true
+        gameModel = new GameModel(
+          match_id: @model.get('id')
+        )
+        @gameCollection.push(gameModel)
+        @model.set('visibleGamesList', true, silent: true)
+        @showGamesView()
+      else
+        alert('A new game is already in progress of being added')
       this
 
     assessGamesVisibility: () ->
