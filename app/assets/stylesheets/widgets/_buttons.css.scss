@@ -31,9 +31,9 @@ input[type="reset"].btn {
   &.disabled,
   &[disabled] {
     cursor: not-allowed;
-    pointer-events: none;
-    opacity: .65;
     filter: alpha(opacity=65);
+    opacity: .65;
+    pointer-events: none;
   }
   &.btn-primary {
     color: #fff;
