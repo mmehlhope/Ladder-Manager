@@ -2,7 +2,6 @@
 - content_for :head do
   = stylesheet_link_tag('views/users')
 %section.main
-  = render 'includes/message' if flash_message?
   %header.clearfix
     %h1= yield(:title)
   %ul.navigation
@@ -10,11 +9,18 @@
       %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
     %li
       %a.btn.btn-link(href="#users" data-toggle="tab") Users
+  = render 'includes/message' if flash_message?
   .tab-content
     .tab-pane#ladders.active
       .section-header
         .section-title
           %h2 Your organization's ladders
+          - if @organization.has_ladders?
+            %p View or manage your organization's ladders
+          - else
+            %p To get started,
+              %a(href="#{new_ladder_path}" title="Create a new ladder") create a new ladder
+              \.
         .section-actions
           %a.btn.btn-primary(href="#{new_ladder_path}" title="Create a new ladder")
             %span.glyphicon.glyphicon-plus
@@ -31,4 +37,5 @@
           %a.btn.btn-primary(href="#{new_user_path}" title="Create a new user")
             %span.glyphicon.glyphicon-plus
             New User
+
       = render 'all_users'
