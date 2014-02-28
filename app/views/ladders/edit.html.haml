@@ -17,17 +17,25 @@
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %ul.navigation.three-across
     %li.active
-      %a.btn.btn-link(href="#matchOpts" data-toggle="tab") Matches
-    %li
       %a.btn.btn-link(href="#competitorOpts" data-toggle="tab") Competitors
     %li
-      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Edit details
+      %a.btn.btn-link(href="#matchOpts" data-toggle="tab" class="#{@ladder.has_competitors? ? nil : 'disabled'}") Matches
+    %li
+      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Details
   .tab-content
 
-    .tab-pane#matchOpts.active
+    .tab-pane#competitorOpts.active
+      .section-title
+        %h2 Edit Competitors
+        - if @ladder.has_competitors?
+          %p Add, edit, and remove competitors for this ladder.
+        - else
+          %p Start by adding some competitors, the you can records matches for those competitors!
+      .section-actions
+        %a.btn.btn-primary(href="#")
+          %span.glyphicon.glyphicon-plus
+          New competitor
 
-    .tab-pane#competitorOpts
-      %h2 Edit Competitors
       %table
         %thead
           %tr
@@ -42,18 +50,8 @@
                 %td= link_to competitor.name, competitor_path(competitor)
                 %td
                 %td
-          - else
-            %tr
-              %td(colspan="5")
-                .alert.alert-info
-                  %span.glyphicon.glyphicon-info-sign
-                  There are currently no competitors added to this ladder.
-                  - if user_can_admin_ladder
-                    %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
-                    to begin.
-          %tr
-            %td.text-right(colspan="5")
-              %a.btn.btn-neutral(href="#{new_ladder_competitor_path(@ladder)}" title="New competitor") New competitor
+
+    .tab-pane#matchOpts
 
     .tab-pane#ladderOpts
       = render 'edit_form'
