@@ -13,11 +13,11 @@
       %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
         %a(href="#{organization_path(current_org)}" title="My Organization")
           %span.glyphicon.glyphicon-globe
-          Manage Organization
+          My Organization
       %li(class="#{request.fullpath =~ /\/users/ ? 'active' : nil}")
         %a(href="#{user_path(current_user)}" title="My Account")
           %span.glyphicon.glyphicon-user
-          Manage Account
+          My Account
       %li
         %a(href="#{session_path(current_user)}" title="Sign out" data-method="delete")
           %span.glyphicon.glyphicon-off
