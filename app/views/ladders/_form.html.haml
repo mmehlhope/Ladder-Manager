@@ -6,10 +6,7 @@
   .field
     .form-group
       = f.text_field :name, :class => "form-control", :placeholder => "Ladder name"
-    - if current_user
-      .form-group
-        = f.text_field :organization, :class => "form-control", :value => "#{current_user.organization.name}", :disabled => true
   .field.text-left
     .form-group
       = f.submit :class => "btn btn-primary"
-      = link_to "Cancel", root_path
+      = link_to "Cancel", organization_path(current_user.organization)
