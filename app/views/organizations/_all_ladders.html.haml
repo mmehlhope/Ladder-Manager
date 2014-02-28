@@ -9,10 +9,16 @@
             %dt Competitors:
             %dd= ladder.competitors.size
 
-            %dt Created
+            %dt Total matches:
+            %dd= ladder.matches.size
+
+            %dt Created:
             %dd= ladder.created_at.strftime("%B %d, %Y")
         .list-item-actions
-          %a.btn.btn-small(href="#{edit_ladder_path(ladder)}") Manage
+          .btn-group
+            %a.btn.btn-small(href="#{edit_ladder_path(ladder)}") Manage
+            %a.btn.btn-small.btn-danger(href="#{ladder_path(ladder)}" data-method="delete")
+              %span.glyphicon.glyphicon-remove
   - else
     %li
       No ladders have been created
