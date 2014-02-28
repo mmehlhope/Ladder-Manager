@@ -4,13 +4,16 @@ class SessionsController < ApplicationController
   def create
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to dashboard_path
+      redirect_to organization_path(@user.organization)
+
     elsif @user && !@user.authenticate(params[:password])
       flash[:error] = "The password you entered was invalid."
       redirect_to login_path
+
     else
       flash[:error] = "A user with that email address was not found."
       redirect_to login_path
+
     end
   end
 

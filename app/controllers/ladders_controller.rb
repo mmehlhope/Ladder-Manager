@@ -56,7 +56,7 @@ class LaddersController < ApplicationController
         end
         format.html {
           flash[:success] = "Ladder was successfully created."
-          redirect_to @ladder
+          redirect_to edit_ladder_path(@ladder)
         }
         format.json { render action: 'show', status: :created, location: @ladder }
       else
@@ -90,7 +90,8 @@ class LaddersController < ApplicationController
   def destroy
     respond_to do |format|
       if @ladder.destroy
-        format.html { redirect_to root_path }
+        flash[:success] = "#{@ladder.name} was successfully deleted."
+        format.html { redirect_to organization_path(current_org) }
         format.json { head :ok }
       else
         format.html {
