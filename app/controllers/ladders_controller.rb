@@ -38,7 +38,8 @@ class LaddersController < ApplicationController
 
   # GET /ladders/1/edit
   def edit
-    @matches_json = @ladder.editable_matches_json
+    @matches_json     = @ladder.editable_matches_json
+    @competitors_json = @ladder.competitors_json
   end
 
   # POST /ladders

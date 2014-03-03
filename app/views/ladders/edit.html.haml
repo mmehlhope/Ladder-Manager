@@ -17,51 +17,30 @@
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %ul.navigation.three-across
     %li.active
-      %a.btn.btn-link(href="#competitorOpts" data-toggle="tab") Competitors
+      %a.btn.btn-link(href="#competitors" data-toggle="tab") Competitors
     %li
-      %a.btn.btn-link(href="#matchOpts" data-toggle="tab" class="#{@ladder.has_competitors? ? nil : 'disabled'}") Matches
+      %a.btn.btn-link(href="#matches" data-toggle="tab" class="#{@ladder.has_competitors? ? nil : 'disabled'}") Matches
     %li
-      %a.btn.btn-link(href="#ladderOpts" data-toggle="tab") Details
+      %a.btn.btn-link(href="#ladders" data-toggle="tab") Details
+
   .tab-content
 
-    .tab-pane#competitorOpts.active
-      .section-title
-        - if @ladder.has_competitors?
-          %h2 Edit Competitors
-          %p Add, edit, and remove competitors for this ladder.
-        - else
-          %h2 Add some competitors!
-          %p Start by adding some competitors, the you can records matches for those competitors.
-      .section-actions
-        %a.btn.btn-primary(href="#")
-          %span.glyphicon.glyphicon-plus
-          New competitor
+    .tab-pane#competitors.active
 
-      %table
-        %thead
-          %tr
-            %th
-            %th
-            %th
-        %tbody
-          - if @ladder.has_competitors?
-            - rank = 0
-            - @ladder.competitors.each do |competitor|
-              %tr
-                %td= link_to competitor.name, competitor_path(competitor)
-                %td
-                %td
+    .tab-pane#matches
 
-    .tab-pane#matchOpts
-
-    .tab-pane#ladderOpts
+    .tab-pane#ladders
       = render 'edit_form'
 
 :coffeescript
-  require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view'], ($, MatchCollection, MatchIndexView) ->
+  require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view', 'backbone/collections/competitor_collection', 'backbone/views/competitors/index_view'], ($, MatchCollection, MatchIndexView, CompetitorCollection, CompetitorIndexView) ->
     matches                   = #{@matches_json}
     matchCollection           = new MatchCollection(matches)
     matchCollection.ladder_id = #{@ladder.id}
     matchCollection.url       = "/ladders/#{@ladder.id}/matches"
     matchIndexView            = new MatchIndexView(collection: matchCollection)
+    competitors               = #{@competitors_json}
+    competitorCollection      = new CompetitorCollection(competitors)
+    CompetitorCollection.url  = "/ladders/#{@ladder.id}/competitors"
+    competitorIndexView       = new CompetitorIndexView(collection: competitorCollection)
 

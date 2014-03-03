@@ -1,0 +1,15 @@
+.section-header
+  .section-title
+    - if @competitors.length
+      %h2 Edit Competitors
+      %p Add, edit, and remove competitors for this ladder.
+    - else
+      %h2 Add some competitors!
+      %p Start by adding some competitors, the you can records matches for those competitors.
+  .section-actions
+    %a.btn.btn-primary(href="#")
+      %span.glyphicon.glyphicon-plus
+      New competitor
+
+%section#edit-competitors
+  %ul.list-view
