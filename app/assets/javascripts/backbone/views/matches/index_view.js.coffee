@@ -12,7 +12,7 @@ define (require, exports, module) ->
 
   class MatchCollectionView extends Backbone.View
 
-    el: '#matchOpts'
+    el: '#matches'
 
     events:
       'click #record-new-match' : 'showNewMatchForm'
