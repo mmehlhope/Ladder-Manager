@@ -1,8 +1,20 @@
-.list-item-content
-  .name
-    %a(href="/competitors/#{@competitor.get('id')}" title="#{@competitor.get('name')}")= @competitor.get('name')
-.list-item-actions
-  .btn-group
-    %a.btn.btn-small(href="#" data-action="edit") Edit
-    %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete-competitor")
-      %span.glyphicon.glyphicon-remove
+- if @_view.editMode
+  - action_url = "#{@competitor.urlRoot}/#{@competitor.get('id')}"
+  %form(action="#{action_url}" method="PUT")
+    .list-item-content
+      %input.input-small(type="text" name="competitor[name]" value="#{@competitor.get('name')}" placeholder="Competitor name")
+    .list-item-actions
+      .btn-group
+        %button.btn.btn-small.btn-success(type="submit" value="Update")
+          Update
+        %button.btn.btn-small(data-action="cancel")
+          %span.glyphicon.glyphicon-remove
+- else
+  .list-item-content
+    .name
+      %a(href="/competitors/#{@competitor.get('id')}" title="#{@competitor.get('name')}")= @competitor.get('name')
+  .list-item-actions
+    .btn-group
+      %a.btn.btn-small(href="#" data-action="edit") Edit
+      %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete-competitor")
+        %span.glyphicon.glyphicon-remove

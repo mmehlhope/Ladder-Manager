@@ -62,7 +62,7 @@ class CompetitorsController < ApplicationController
           flash[:success] = "#{@competitor.name} was successfully updated."
           redirect_to ladder_path(@ladder)
         }
-        format.json { head :no_content }
+        format.json { render json: @competitor }
       else
         format.html { render action: 'edit' }
         format.json { render json: @competitor.errors, status: :unprocessable_entity }
