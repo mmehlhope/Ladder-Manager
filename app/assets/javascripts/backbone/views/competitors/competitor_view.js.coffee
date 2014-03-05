@@ -1,9 +1,12 @@
 define (require, exports, module) ->
 
-  $            = require 'jquery'
-  _            = require 'underscore'
-  Backbone     = require 'backbone'
-  Competitor_t = require 'templates/competitors/competitor_t'
+  $                 = require 'jquery'
+  _                 = require 'underscore'
+  Util              = require 'util'
+  Backbone          = require 'backbone'
+  Competitor_t      = require 'templates/competitors/competitor_t'
+  MessageModel      = require 'backbone/models/message_model'
+  MessagesView      = require 'backbone/views/widgets/messages_view'
 
   class CompetitorView extends Backbone.View
 
@@ -24,6 +27,7 @@ define (require, exports, module) ->
 
     render: () ->
       @$el.html(Competitor_t(competitor: @model, _view: @))
+      @messagesView = new MessagesView(el: @$('.messaging'))
       this
 
     updateCompetitor: (e) ->
@@ -39,19 +43,19 @@ define (require, exports, module) ->
           # Update the model, which triggers the row to re-render
           @editMode = false
           @model.set(jqXHR.competitor)
-        error: (jqXHR, textStatus, errorThrown) ->
-          console.log textStatus
+        error: (jqXHR, textStatus, errorThrown) =>
+          @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger')
       )
       this
 
     deleteCompetitor: (e) ->
       e.preventDefault()
-      if confirm("Are you sure you want to delete this competitor?")
+      if confirm("Are you sure you want to delete #{@model.get('name')}? You cannot undo this action.")
         @model.destroy(
           success: () =>
             @destroy()
-          error: () ->
-            console.log 'competitor not deleted'
+          error: (existingModel, response) =>
+            @messagesView.post(Util.parseTransportErrors(response), 'danger')
         )
       this
 

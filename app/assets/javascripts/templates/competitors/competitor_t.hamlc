@@ -9,12 +9,17 @@
           Update
         %button.btn.btn-small(data-action="cancel")
           %span.glyphicon.glyphicon-remove
+    .messaging
 - else
   .list-item-content
     .name
       %a(href="/competitors/#{@competitor.get('id')}" title="#{@competitor.get('name')}")= @competitor.get('name')
+    %dl
+      %dt Added:
+      %dd #{@competitor.get('date_created')}
   .list-item-actions
     .btn-group
-      %a.btn.btn-small(href="#" data-action="edit") Edit
+      %a.btn.btn-small(href="#" data-action="edit") Rename
       %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete-competitor")
         %span.glyphicon.glyphicon-remove
+  .messaging
