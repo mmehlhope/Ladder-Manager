@@ -65,7 +65,7 @@ class CompetitorsController < ApplicationController
         format.json { render json: @competitor }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @competitor.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @competitor.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -79,14 +79,14 @@ class CompetitorsController < ApplicationController
           flash[:success] = "Competitor has been successfully deleted"
           redirect_to ladder_path(@ladder)
         }
-        format.json { head :ok }
+        format.json { render json: @competitor, status: :ok }
       else
         format.html {
           flash[:error] = "There was an error deleting the selected competitor"
           redirect_to ladder_path(@ladder)
         }
         format.json {
-          render json: @competitor.errors, status: :unprocessable_entity
+          render json: {errors: @competitor.errors.full_messages}, status: :unprocessable_entity
         }
       end
     end

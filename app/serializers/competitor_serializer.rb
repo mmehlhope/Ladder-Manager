@@ -8,6 +8,7 @@ class CompetitorSerializer < ApplicationSerializer
     hash[:name]              = object.name
     hash[:rating]            = object.rating
     hash[:wins]              = object.wins
+    hash[:errors]            = object.errors
 
     if options[:expanded]
       hash[:games]  = ActiveModel::ArraySerializer.new(object.games, each_serializer: GameSerializer)
