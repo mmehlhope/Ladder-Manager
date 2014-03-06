@@ -44,7 +44,9 @@ define (require, exports, module) ->
           @editMode = false
           @model.set(jqXHR.competitor)
         error: (jqXHR, textStatus, errorThrown) =>
-          @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger')
+          form.find('input').focus()
+          @messagesView.clear()
+          @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
       )
       this
 
@@ -55,7 +57,7 @@ define (require, exports, module) ->
           success: () =>
             @destroy()
           error: (existingModel, response) =>
-            @messagesView.post(Util.parseTransportErrors(response), 'danger')
+            @messagesView.post(Util.parseTransportErrors(response), 'danger', false)
         )
       this
 
@@ -69,5 +71,7 @@ define (require, exports, module) ->
       @editMode
 
     destroy: () ->
-      @$el.remove()
+      @$el.slideUp(() =>
+        @$el.remove()
+      )
       this

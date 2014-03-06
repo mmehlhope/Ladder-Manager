@@ -6,7 +6,7 @@ define (require, exports, module) ->
   CompetitorModel           = require 'backbone/models/competitor_model'
   CompetitorCollection      = require 'backbone/collections/competitor_collection'
   CompetitorView            = require 'backbone/views/competitors/competitor_view'
-  # NewCompetitorView         = require 'backbone/views/competitors/new_view'
+  NewCompetitorView         = require 'backbone/views/competitors/new_view'
   MessagesView              = require 'backbone/views/widgets/messages_view'
   Competitors_t             = require 'templates/competitors/index_t'
 
@@ -15,29 +15,24 @@ define (require, exports, module) ->
     el: '#competitors'
 
     events:
-      'click #record-new-competitor' : 'showNewCompetitorForm'
+      'click #create-new-competitor' : 'showNewCompetitorForm'
 
     initialize: () ->
       @addChildrenAndRender()
-      @messageCenter = new MessagesView(el: @$('.messaging:first'))
-
       @listenTo(@collection, 'sync', @addChildrenAndRender)
       @listenTo(@collection, 'add', @addOne)
       this
 
     render: () ->
       @$el.empty().html(Competitors_t(competitors: @collection)).find('.list-view').append(@children)
+      @messageCenter = new MessagesView(el: @$('.messaging:first'))
       this
 
     addOne: (model) ->
-      competitorView     = new CompetitorView(model: model)
-      competitorViewNode = competitorView.render().el
-      @$('.list-view').prepend(competitorViewNode)
+      competitorView = new CompetitorView(model: model)
+      @$('.list-view').prepend(competitorView.render().el)
       # Post success message of new competitor
-      # @messageCenter.post(
-      #   "You've added a new competitor between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
-      #   'success'
-      # )
+      @messageCenter.post("#{model.get('name')} has been added to the ladder.", 'success')
       this
 
     addChildrenAndRender: () ->
@@ -51,8 +46,8 @@ define (require, exports, module) ->
       @render()
       this
 
-    toggleBusy: () ->
-      @$('#record-new-competitor').toggleClass('busy')
+    toggleBusy: (el) ->
+      @$(el).toggleClass('busy')
       this
 
     updateCollection: () ->
@@ -61,12 +56,11 @@ define (require, exports, module) ->
 
     showNewCompetitorForm: (e) ->
       e.preventDefault()
-      @toggleBusy()
 
       newCompetitorView = new NewCompetitorView(
         collection  : @collection
-        ladder_id   : @collection.ladder_id
+        url         : @collection.url
+        _view       : @
       )
-      @listenTo(newCompetitorView, 'fetchFinished', @toggleBusy)
       @$('.list-view').prepend(newCompetitorView.render().el)
       this
