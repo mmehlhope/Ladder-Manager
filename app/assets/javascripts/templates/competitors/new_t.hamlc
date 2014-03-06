@@ -1,0 +1,10 @@
+%form.success-bg(action="#{@url}" method="POST")
+  .list-item-content
+    %input.input-small(type="text" name="competitor[name]" placeholder="New competitor name")
+  .list-item-actions
+    .btn-group
+      %button.btn.btn-small.btn-success(type="submit" value="Create")
+        Create
+      %button.btn.btn-small(data-action="cancel")
+        %span.glyphicon.glyphicon-remove
+  .messaging
