@@ -6,6 +6,7 @@ define (require, exports, module) ->
   Match_t            = require 'templates/matches/match_t'
   GameModel          = require 'backbone/models/game_model'
   GameCollectionView = require 'backbone/views/games/index_view'
+  MessagesView       = require 'backbone/views/widgets/messages_view'
 
   class MatchView extends Backbone.View
 
@@ -32,6 +33,7 @@ define (require, exports, module) ->
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
       @$el.append(@gameCollectionView.render().el)
       @newGameInProgress = false
+      @messageCenter = new MessagesView(el: @$('.messages'))
       @assessGamesVisibility()
       this
 
@@ -95,7 +97,8 @@ define (require, exports, module) ->
     deleteMatch: (e) ->
       e.preventDefault()
       if confirm('Are you sure you want to delete this match?')
-        @model.destroy()
+        @model.destroy(
+        )
 
     destroy: () ->
       @$el.remove()
