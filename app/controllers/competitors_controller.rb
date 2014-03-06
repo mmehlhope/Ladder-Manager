@@ -45,10 +45,10 @@ class CompetitorsController < ApplicationController
           flash[:success] = success_msg
           redirect_to @ladder
         }
-        format.json { render action: 'show', status: :created, location: @ladder }
+        format.json { render json: @competitor, status: :created}
       else
         format.html { render action: 'new' }
-        format.json { render json: @competitor.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @competitor.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
