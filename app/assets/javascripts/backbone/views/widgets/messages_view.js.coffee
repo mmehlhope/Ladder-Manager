@@ -28,9 +28,13 @@ define (require, exports, module) ->
       )
       this
 
-    post: (message, type) ->
-      messageModel = new MessageModel(content: message, type: type)
+    post: (message, type, removeable=true) ->
+      messageModel = new MessageModel(content: message, type: type, removeable: removeable)
       @collection.add(messageModel)
+      this
+
+    clear: () ->
+      @collection.reset()
       this
 
     destroy: () ->
