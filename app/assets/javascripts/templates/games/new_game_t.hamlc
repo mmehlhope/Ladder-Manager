@@ -3,9 +3,9 @@
   %form.full-width(action="#{action_url}" method="POST")
     .cell.numGames.success-text New
     .cell.competitor
-      %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
+      %input.input-small(name="game[competitor_1_score]" type="text" value="" placeholder="Competitor 1 score")
     .cell.competitor
-      %input.input-small(name="game[competitor_2_score]" type="text" value="#{@game.get('competitor_2_score')}" placeholder="Competitor 2 score")
+      %input.input-small(name="game[competitor_2_score]" type="text" value="" placeholder="Competitor 2 score")
     .cell.pull-right
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="")
