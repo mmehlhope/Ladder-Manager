@@ -28,6 +28,9 @@ define (require, exports, module) ->
     render: () ->
       @$el.html(Competitor_t(competitor: @model, _view: @))
       @messagesView = new MessagesView(el: @$('.messaging'))
+      if @inEditMode
+        @$('input').focus()
+
       this
 
     updateCompetitor: (e) ->
@@ -40,11 +43,14 @@ define (require, exports, module) ->
         dataType: 'json'
         data: form.serialize()
         success: (jqXHR, textStatus) =>
-          # Update the model, which triggers the row to re-render
+          # Update the model and trigger the change event whether or not it actually happens.
+          # User may submit non-changing value, but view should still re-render
           @editMode = false
-          @model.set(jqXHR.competitor)
+          @model.set(jqXHR.competitor, {silent: true})
+          @model.trigger('change')
         error: (jqXHR, textStatus, errorThrown) =>
-          form.find('input').focus()
+          @render()
+          @$('input').focus()
           @messagesView.clear()
           @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
       )
