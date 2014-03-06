@@ -41,6 +41,6 @@
     matchIndexView            = new MatchIndexView(collection: matchCollection)
     competitors               = #{@competitors_json}
     competitorCollection      = new CompetitorCollection(competitors)
-    CompetitorCollection.url  = "/ladders/#{@ladder.id}/competitors"
+    competitorCollection.url  = "/ladders/#{@ladder.id}/competitors"
     competitorIndexView       = new CompetitorIndexView(collection: competitorCollection)
 
