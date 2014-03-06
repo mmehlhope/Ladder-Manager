@@ -81,7 +81,7 @@ define (require, exports, module) ->
 
     finalize: (e) ->
       e.preventDefault()
-      if confirm('If you finalize the match, it can no longer be edited.\n\nAdditionally, competitor records and ratings will be permanently adjusted. Are you sure you wish to finalize this match?')
+      if confirm("Locking-in the results of this match will permanently update these competitors' ratings.\n\nThis match will no longer be editable after it has been locked. Do you want to lock this match?")
         $.ajax(
           url: '/matches/' + @model.get('id') + '/finalize'
           type: 'POST'
