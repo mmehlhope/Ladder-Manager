@@ -11,7 +11,7 @@ define (require, exports, module) ->
       'click [data-action="close"]' : 'deleteMessage'
 
     initialize: () ->
-      @listenTo(@model, 'destroy', @delete)
+      @listenTo(@model, 'destroy', @removeEl)
       this
 
     render: () ->
@@ -23,6 +23,6 @@ define (require, exports, module) ->
       @model.destroy()
       this
 
-    destroy: () ->
+    removeEl: () ->
       @$el.remove()
       this
