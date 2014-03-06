@@ -17,6 +17,6 @@
     .list-item-actions
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="")
-          %span.glyphicon.glyphicon-ok
+          Save
         %button.btn.btn-small(data-action="close")
           %span.glyphicon.glyphicon-remove
