@@ -1,6 +1,6 @@
 - if @_view.editMode
   - action_url = "#{@competitor.urlRoot}/#{@competitor.get('id')}"
-  %form(action="#{action_url}" method="PUT")
+  %form.success-bg(action="#{action_url}" method="PUT")
     .list-item-content
       %input.input-small(type="text" name="competitor[name]" value="#{@competitor.get('name')}" placeholder="Competitor name")
     .list-item-actions
@@ -9,7 +9,7 @@
           Update
         %button.btn.btn-small(data-action="cancel")
           %span.glyphicon.glyphicon-remove
-    .messaging
+  .messaging
 - else
   .list-item-content
     .name

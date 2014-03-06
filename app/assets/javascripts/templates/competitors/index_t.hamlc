@@ -7,9 +7,10 @@
       %h2 Add some competitors!
       %p Start by adding some competitors, the you can records matches for those competitors.
   .section-actions
-    %a.btn.btn-primary(href="#")
+    %a#create-new-competitor.btn.btn-primary(href="#")
       %span.glyphicon.glyphicon-plus
       New competitor
 
 %section#edit-competitors
+  .messaging
   %ul.list-view
