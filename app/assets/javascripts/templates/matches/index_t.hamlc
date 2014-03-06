@@ -2,7 +2,7 @@
   .section-title
     %h2 Edit Matches
     %p
-      Finalized matches cannot be edited and thus are not shown.
+      Record matches and add games, then lock-in the results to adjust ladder rankings.
       %a(href="/ladders/#{@matches.ladder_id}/matches" title="View all matches") View all matches
   .section-actions
     %a.btn.btn-primary.pull-right(id="record-new-match" href="/ladders/#{@matches.ladder_id}/matches/new" title="Record a new match") Record a new match
