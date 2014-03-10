@@ -1,10 +1,8 @@
-%ol.list-view
+%ol.list-view.rankings
   - if competitors.size > 0
     - competitors.each do |competitor|
       %li.list-item
         .list-item-content
-          .competitor-avatar
-            %span.glyphicon.glyphicon-user
           .name
             = link_to competitor.name, competitor_path(competitor)
           %dl
@@ -12,6 +10,8 @@
             %dd #{competitor.wins}W - #{competitor.losses}L
             %dt Rating:
             %dd= competitor.rating
+          .competitor-avatar
+            %span.glyphicon.glyphicon-user
   - else
     %li
       No competitors have been added to this ladder yet.

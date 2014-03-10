@@ -1,5 +1,7 @@
 @import 'colors';
 
+// Default list view
+
 .list-view {
   padding: 0;
 
@@ -15,18 +17,6 @@
   .list-item-content {
     padding: 1em 25% 1em 0em;
   }
-  .competitor-avatar {
-    background: $tableBorder;
-    color: #fff;
-    float: left;
-    font-size: 3em;
-    margin: 0 0.5em 0 0;
-    padding: 0.05em;
-
-    .glyphicon {
-      display: block;
-    }
-  }
   .name {
     font-size: 1.2em;
   }
@@ -36,6 +26,26 @@
     position: absolute;
     top: 1em;
     right: 0;
+  }
+}
+
+// Competitor rankings
+.list-view.rankings {
+  .competitor-avatar {
+    background: $tableBorder;
+    color: #fff;
+    float: left;
+    font-size: 3em;
+    width: 1.1em;
+    margin: 0;
+    padding: 0.05em;
+    position: absolute;
+    right: 0;
+    top: 0.3em;
+
+    .glyphicon {
+      display: block;
+    }
   }
 }
 
