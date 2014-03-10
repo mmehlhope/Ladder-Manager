@@ -1,7 +1,7 @@
 %td.game.success-bg(colspan="5")
   - action_url = @game.createUrl()
   %form.full-width(action="#{action_url}" method="POST")
-    .cell.numGames.success-text New
+    .cell.numGames.success-text #{@game.collection.length}
     .cell.competitor
       %input.input-small(name="game[competitor_1_score]" type="text" value="" placeholder="Competitor 1 score")
     .cell.competitor
