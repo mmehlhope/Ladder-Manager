@@ -1,14 +1,14 @@
 %td.game.success-bg(colspan="5")
-  - action_url = @game.createUrl()
-  %form.full-width(action="#{action_url}" method="POST")
-    .cell.numGames.success-text #{@game.collection.length}
+  %form.full-width(action="#{@collection.url}" method="POST")
+    .cell.numGames.success-text #{@collection.length + 1}
     .cell.competitor
-      %input.input-small(name="game[competitor_1_score]" type="text" value="" placeholder="Competitor 1 score")
+      %input.input-small(name="game[competitor_1_score]" type="text" value="" placeholder="#{@comp_1_name}")
     .cell.competitor
-      %input.input-small(name="game[competitor_2_score]" type="text" value="" placeholder="Competitor 2 score")
+      %input.input-small(name="game[competitor_2_score]" type="text" value="" placeholder="#{@comp_2_name}")
     .cell.pull-right
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="")
           Save
-        %button.btn.btn-small(data-action="delete-game")
+        %button.btn.btn-small(data-action="cancel")
           %span.glyphicon.glyphicon-remove
+  .messaging
