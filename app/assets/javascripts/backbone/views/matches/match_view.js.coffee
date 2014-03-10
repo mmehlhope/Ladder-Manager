@@ -4,6 +4,7 @@ define (require, exports, module) ->
   _                  = require 'underscore'
   Backbone           = require 'backbone'
   Match_t            = require 'templates/matches/match_t'
+  NewGameView        = require 'backbone/views/games/new_view'
   GameModel          = require 'backbone/models/game_model'
   GameCollectionView = require 'backbone/views/games/index_view'
   MessagesView       = require 'backbone/views/widgets/messages_view'
@@ -21,7 +22,11 @@ define (require, exports, module) ->
 
     initialize: () ->
       @gameCollection     = @model.games
-      @gameCollectionView = new GameCollectionView(collection: @gameCollection)
+      @gameCollectionView = new GameCollectionView(
+        collection: @gameCollection
+        comp_1_name : @model.getCompetitorName(1)
+        comp_2_name : @model.getCompetitorName(2)
+      )
 
       @listenTo(@gameCollection, 'sync destroy', @render)
       @listenTo(@model, 'change', @render)
@@ -60,9 +65,13 @@ define (require, exports, module) ->
 
     showNewGameRow: (e) ->
       e.preventDefault()
-      newCompetitorView = new NewCompetitorView(
-        url         : @collection.url
+
+      newGameView = new NewGameView(
+        collection  : @gameCollection
+        comp_1_name : @model.getCompetitorName(1)
+        comp_2_name : @model.getCompetitorName(2)
       )
+      @$('tbody').append(newGameView.render().el)
       @model.set('visibleGamesList', true, silent: true)
       @showGamesView()
       this
