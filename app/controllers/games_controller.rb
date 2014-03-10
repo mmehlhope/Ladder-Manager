@@ -37,7 +37,7 @@ class GamesController < ApplicationController
           flash[:error] = error_msg
           redirect_to @match
         }
-        format.json { render json: {msg: error_msg } }
+        format.json { render json: {errors: [error_msg] } }
       end
     else
       @game = Game.new
@@ -64,7 +64,7 @@ class GamesController < ApplicationController
         format.json { render json: @game, status: :created }
       else
         format.html { render action: 'new' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @game.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -81,7 +81,7 @@ class GamesController < ApplicationController
         format.json { render json: @game }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @game.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -100,7 +100,7 @@ class GamesController < ApplicationController
           redirect_to match_path(@match)
         }
         format.json {
-          render json: @game.errors, status: :unprocessable_entity
+          render json: {errors: @game.errors.full_messages}, status: :unprocessable_entity
         }
       end
     end
