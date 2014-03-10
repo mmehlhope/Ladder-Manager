@@ -12,7 +12,7 @@
       .cell.pull-right
         .btn-group
           %button.btn.btn-small.btn-success(type="submit" value="Update")
-            Update
+            Save
           %button.btn.btn-small(data-action="cancel")
             %span.glyphicon.glyphicon-remove
   - else
