@@ -1,3 +1,4 @@
+@import 'grid';
 @import 'colors';
 
 // Default list view
@@ -26,6 +27,10 @@
     position: absolute;
     top: 1em;
     right: 0;
+  }
+  .versus {
+    color: $sidebarLinkColor;
+    display: block;
   }
 }
 
@@ -65,5 +70,11 @@ ul.list-view.bordered {
   }
   .list-item-actions {
     right: 1em;
+  }
+}
+
+@include breakpoint(tablet) {
+  .list-view .versus {
+    display: inline;
   }
 }

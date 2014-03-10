@@ -6,7 +6,7 @@
         %option(value="" selected="selected") Select a competitor
         - for competitor in @competitors
           %option(value="#{competitor.get('id')}")= competitor.get('name')
-      vs.
+      %span.versus vs.
       %select(name="match[competitor_2]" disabled="disabled")
         %option(value="" selected="selected") Select a competitor
     %dl

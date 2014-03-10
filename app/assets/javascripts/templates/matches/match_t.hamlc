@@ -6,7 +6,7 @@
         %span.badge.success-bg.success-text Winner!
     - else
       (N/A)
-    vs.
+    %span.versus vs.
     - if @match.get('competitor_2')
       %a(href="/competitors/#{@match.get('competitor_2').id}")= @match.get('competitor_2').name
       - if @match.competitor_2_is_winner() && @match.isFinalized()
@@ -25,7 +25,7 @@
   .btn-group
     - unless @match.isFinalized()
       - if @match.has_games()
-        %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize")
+        %button.btn.btn-small.btn-success(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize")
           %span.glyphicon.glyphicon-lock
       %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game")
         %span.glyphicon.glyphicon-plus
