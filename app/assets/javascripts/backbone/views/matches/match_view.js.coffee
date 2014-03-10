@@ -25,7 +25,7 @@ define (require, exports, module) ->
 
       @listenTo(@gameCollection, 'sync destroy', @render)
       @listenTo(@model, 'change', @render)
-      @listenTo(@model, 'destroy', @destroy)
+      @listenTo(@model, 'destroy', @removeEl)
       this
 
     render: () ->
@@ -59,17 +59,12 @@ define (require, exports, module) ->
       this
 
     showNewGameRow: (e) ->
-      unless @newGameInProgress
-        e.preventDefault()
-        @newGameInProgress = true
-        gameModel = new GameModel(
-          match_id: @model.get('id')
-        )
-        @gameCollection.push(gameModel)
-        @model.set('visibleGamesList', true, silent: true)
-        @showGamesView()
-      else
-        alert('A new game is already in progress of being added')
+      e.preventDefault()
+      newCompetitorView = new NewCompetitorView(
+        url         : @collection.url
+      )
+      @model.set('visibleGamesList', true, silent: true)
+      @showGamesView()
       this
 
     assessGamesVisibility: () ->
@@ -88,7 +83,7 @@ define (require, exports, module) ->
           dataType: 'json'
           success: (jqXHR, textStatus) =>
             @model.trigger('finalize')
-            @destroy()
+            @removeEl()
           error: (jqXHR, textStatus, errorThrown) ->
             console.log textStatus
         )
@@ -97,9 +92,10 @@ define (require, exports, module) ->
     deleteMatch: (e) ->
       e.preventDefault()
       if confirm('Are you sure you want to delete this match?')
-        @model.destroy(
-        )
+        @model.destroy()
 
-    destroy: () ->
-      @$el.remove()
+    removeEl: () ->
+      @$el.slideUp(() =>
+        @$el.remove()
+      )
       this

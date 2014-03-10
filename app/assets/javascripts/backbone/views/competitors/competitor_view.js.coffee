@@ -61,7 +61,7 @@ define (require, exports, module) ->
       if confirm("Are you sure you want to delete #{@model.get('name')}? You cannot undo this action.")
         @model.destroy(
           success: () =>
-            @destroy()
+            @removeEl()
           error: (existingModel, response) =>
             @messagesView.post(Util.parseTransportErrors(response), 'danger', false)
         )
@@ -76,7 +76,7 @@ define (require, exports, module) ->
     inEditMode: () ->
       @editMode
 
-    destroy: () ->
+    removeEl: () ->
       @$el.slideUp(() =>
         @$el.remove()
       )

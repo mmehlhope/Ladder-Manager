@@ -15,7 +15,7 @@ define (require, exports, module) ->
     events:
       'submit form'                         : 'createMatch'
       'change [name="match[competitor_1]"]' : 'updateOtherCompetitor'
-      'click [data-action="close"]'         : 'destroy'
+      'click [data-action="close"]'         : 'removeEl'
 
     initialize: (params) ->
       @ladder_id   = params['ladder_id']
@@ -75,14 +75,16 @@ define (require, exports, module) ->
         dataType: 'json'
         data: form.serialize()
         success: (model, textStatus) =>
-          @destroy()
+          @removeEl()
           @collection.push(model.match)
         error: (jqXHR, textStatus, errorThrown) ->
           console.log textStatus
       )
       this
 
-    destroy: (e) ->
+    removeEl: (e) ->
       e.preventDefault() if e
-      @$el.remove()
+      @$el.slideUp(() =>
+        @$el.remove()
+      )
       this
