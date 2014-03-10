@@ -11,15 +11,17 @@ define (require, exports, module) ->
 
     className: 'games-table-wrapper collapse'
 
-    initialize: () ->
-      @listenTo(@collection, 'add', @showNewGameForm)
+    initialize: (options) ->
+      @options = options
+      @listenTo(@collection, 'add', @addOne)
+      @listenTo(@collection, 'showNewGameForm', @showNewGameFrom)
       this
 
     render: () ->
       @addChildren()
 
       @$el.attr('id', 'games-for-match-' + @collection.match_id)
-          .empty().html(Games_t())
+          .empty().html(Games_t(comp_1_name: @options.comp_1_name, comp_2_name: @options.comp_2_name))
       @$('tbody').append(@children)
       this
 
@@ -31,8 +33,19 @@ define (require, exports, module) ->
       )
       this
 
-    showNewGameForm: (newGame) ->
-      gameView = new NewGameView(model: newGame)
+    addOne: (model) ->
+      gameView     = new GameView(model: model)
+      @$('tbody').append(gameView.render().el)
+      # Post success message of new match
+      # @messageCenter.post(
+      #   "You've added a new match between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
+      #   'success'
+      # )
+      this
+
+
+    showNewGameForm: () ->
+      gameView = new NewGameView()
       @listenTo(gameView, 'newGameCreated', @updateCollection)
       @$('tbody').append(gameView.render().el)
       this
