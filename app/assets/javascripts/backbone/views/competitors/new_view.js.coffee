@@ -46,7 +46,7 @@ define (require, exports, module) ->
           @collection.add(competitor)
         error: (jqXHR, textStatus, errorThrown) =>
           @toggleBusy()
-          form.find('input').focus()
+          @$('input').focus()
           @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
           this
       )
