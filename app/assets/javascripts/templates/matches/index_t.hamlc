@@ -9,4 +9,4 @@
       New match
 %section#edit-matches
   .messaging
-  %ul.list-view.bordered
+  %ul.list-view.bordered.clickable

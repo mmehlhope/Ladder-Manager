@@ -19,6 +19,7 @@ define (require, exports, module) ->
       'click [data-action="delete-match"]'   : 'deleteMatch'
       'click [data-action="finalize"]'       : 'finalize'
       'click .view-games'                    : 'toggleGamesView'
+      'click'                                : 'toggleGamesView'
 
     initialize: () ->
       @gameCollection     = @model.games
@@ -43,7 +44,13 @@ define (require, exports, module) ->
       this
 
     toggleGamesView: (e, action="toggle") ->
-      e.preventDefault() if e
+      if e
+        tag = e.target.tagName.toLowerCase()
+        if (tag is 'a' || tag is 'input' || tag is 'button')
+          return
+        else
+          e.preventDefault()
+
       @$(".games-table-wrapper").collapse(action)
       this
 
@@ -64,7 +71,9 @@ define (require, exports, module) ->
       this
 
     showNewGameRow: (e) ->
-      e.preventDefault()
+      if e
+        e.preventDefault()
+        e.stopPropagation()
 
       newGameView = new NewGameView(
         collection  : @gameCollection
@@ -84,7 +93,9 @@ define (require, exports, module) ->
       this
 
     finalize: (e) ->
-      e.preventDefault()
+      if e
+        e.preventDefault()
+
       if confirm("Locking-in the results of this match will permanently update these competitors' ratings.\n\nThis match will no longer be editable after it has been locked. Do you want to lock this match?")
         $.ajax(
           url: '/matches/' + @model.get('id') + '/finalize'
@@ -99,7 +110,9 @@ define (require, exports, module) ->
       this
 
     deleteMatch: (e) ->
-      e.preventDefault()
+      if e
+        e.preventDefault()
+
       if confirm('Are you sure you want to delete this match?')
         @model.destroy()
 

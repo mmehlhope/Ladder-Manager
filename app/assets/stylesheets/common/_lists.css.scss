@@ -54,6 +54,11 @@
   }
 }
 
+.list-view.clickable li:hover {
+  cursor: pointer;
+  background: $infoButtonTint;
+}
+
 ul.list-view {
   list-style: none;
 }
