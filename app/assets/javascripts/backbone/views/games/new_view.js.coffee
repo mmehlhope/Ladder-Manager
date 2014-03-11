@@ -42,6 +42,7 @@ define (require, exports, module) ->
         data: form.serialize()
         success: (jqXHR, textStatus) =>
           game = new GameModel(jqXHR.game)
+          game.set('number', @collection.length+1)
           @removeEl(null, false)
           @collection.add(game)
         error: (jqXHR, textStatus, errorThrown) =>

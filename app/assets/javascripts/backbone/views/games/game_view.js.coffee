@@ -22,7 +22,7 @@ define (require, exports, module) ->
       this
 
     render: () ->
-      @$el.html(Game_t(game: @model, number: @attributes.number, _view: @))
+      @$el.html(Game_t(game: @model, _view: @))
       this
 
     updateGame: (e) ->

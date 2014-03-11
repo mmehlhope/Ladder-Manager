@@ -4,7 +4,7 @@
     - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
     %form.full-width(action="#{action_url}" method="PUT")
       .cell.numGames
-        = @number
+        = @game.get('number')
       .cell.competitor
         %input.input-small(name="game[competitor_1_score]" type="text" value="#{@game.get('competitor_1_score')}" placeholder="Competitor 1 score")
       .cell.competitor
@@ -17,7 +17,7 @@
             %span.glyphicon.glyphicon-remove
   - else
     .cell.numGames
-      = @number
+      = @game.get('number')
     .cell.competitor
       = @game.get('competitor_1_score')
     .cell.competitor

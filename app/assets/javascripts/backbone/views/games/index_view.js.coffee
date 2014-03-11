@@ -28,7 +28,8 @@ define (require, exports, module) ->
     addChildren: () ->
       @children = []
       _(@collection.models).each((model, index) =>
-        gameView = new GameView(model: model, attributes: {'number': index+1})
+        model.set('number', index+1)
+        gameView = new GameView(model: model)
         @children.push(gameView.render().el)
       )
       this
