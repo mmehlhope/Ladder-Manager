@@ -2,8 +2,10 @@ define (require, exports, module) ->
 
   $          = require 'jquery'
   _          = require 'underscore'
+  Util       = require 'util'
   Backbone   = require 'backbone'
   Game_t     = require 'templates/games/game_t'
+  MessagesView = require 'backbone/views/widgets/messages_view'
 
   class GameView extends Backbone.View
 
@@ -23,6 +25,7 @@ define (require, exports, module) ->
 
     render: () ->
       @$el.html(Game_t(game: @model, _view: @))
+      @messageCenter = new MessagesView(el: @$('.messaging'))
       this
 
     updateGame: (e) ->
@@ -39,7 +42,11 @@ define (require, exports, module) ->
           @editMode = false
           @model.set(jqXHR.game)
         error: (jqXHR, textStatus, errorThrown) ->
-          console.log textStatus
+          @render()
+          @$('input:first').focus()
+          @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+          this
+
       )
       this
 
@@ -49,8 +56,9 @@ define (require, exports, module) ->
         @model.destroy(
           success: () =>
             @removeEl()
-          error: () ->
-            console.log 'game not deleted'
+          error: () =>
+            @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+            this
         )
       this
 

@@ -37,17 +37,11 @@ define (require, exports, module) ->
     addOne: (model) ->
       gameView     = new GameView(model: model)
       @$('tbody').append(gameView.render().el)
-      # Post success message of new match
-      # @messageCenter.post(
-      #   "You've added a new match between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
-      #   'success'
-      # )
       this
 
 
     showNewGameForm: () ->
       gameView = new NewGameView()
-      @listenTo(gameView, 'newGameCreated', @updateCollection)
       @$('tbody').append(gameView.render().el)
       this
 
