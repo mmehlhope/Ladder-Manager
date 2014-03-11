@@ -19,7 +19,7 @@ define (require, exports, module) ->
       'click [data-action="delete-match"]'   : 'deleteMatch'
       'click [data-action="finalize"]'       : 'finalize'
       'click .view-games'                    : 'toggleGamesView'
-      'click'                                : 'toggleGamesView'
+      'click .list-item-content'             : 'toggleGamesView'
 
     initialize: () ->
       @gameCollection     = @model.games
@@ -118,6 +118,6 @@ define (require, exports, module) ->
 
     removeEl: () ->
       @$el.slideUp(() =>
-        @$el.remove()
+        @remove()
       )
       this
