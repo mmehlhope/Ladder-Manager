@@ -78,6 +78,6 @@ define (require, exports, module) ->
 
     removeEl: () ->
       @$el.slideUp(() =>
-        @$el.remove()
+        @remove()
       )
       this

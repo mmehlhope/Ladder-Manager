@@ -37,6 +37,6 @@ define (require, exports, module) ->
       @collection.reset()
       this
 
-    destroy: () ->
-      @$el.remove()
+    removeEl: () ->
+      @remove()
       this

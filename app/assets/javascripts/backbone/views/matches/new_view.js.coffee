@@ -85,6 +85,6 @@ define (require, exports, module) ->
     removeEl: (e) ->
       e.preventDefault() if e
       @$el.slideUp(() =>
-        @$el.remove()
+        @remove()
       )
       this

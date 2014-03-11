@@ -48,7 +48,7 @@ define (require, exports, module) ->
       if confirm("Are you sure you want to delete this game?")
         @model.destroy(
           success: () =>
-            @destroy()
+            @removeEl()
           error: () ->
             console.log 'game not deleted'
         )
@@ -63,6 +63,6 @@ define (require, exports, module) ->
     inEditMode: () ->
       @editMode
 
-    destroy: () ->
-      @$el.remove()
+    removeEl: () ->
+      @remove()
       this

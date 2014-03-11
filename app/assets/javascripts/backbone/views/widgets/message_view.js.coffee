@@ -24,5 +24,4 @@ define (require, exports, module) ->
       this
 
     removeEl: () ->
-      @$el.remove()
-      this
+      @remove()

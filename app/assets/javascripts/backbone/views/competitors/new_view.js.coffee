@@ -56,7 +56,7 @@ define (require, exports, module) ->
       e.preventDefault() if e
       if animate
         @$el.slideUp(200, () =>
-          @$el.remove()
+          @remove()
         )
       else
-        @$el.remove()
+        @remove()
