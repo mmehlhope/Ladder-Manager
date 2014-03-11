@@ -58,7 +58,7 @@ define (require, exports, module) ->
       e.preventDefault()
 
       newCompetitorView = new NewCompetitorView(
-        url         : @collection.url
+        collection: @collection
       )
       @$('.list-view').prepend(newCompetitorView.render().el)
       this
