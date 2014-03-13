@@ -1,30 +1,34 @@
 %aside
-  .logo-container.text-center
+  .logo-container
     = image_tag('ladder-manager-logo-white.svg', :class => 'logo')
-  .search
-    = form_tag(ladders_search_path, method: :post, class: 'full-width') do
-      .input-group
-        %input.form-control(type="search" name="search" placeholder="Search for a ladder")
-        %button.search-button(type="submit")
-          %span.glyphicon.glyphicon-search
+    %span.logo-text Ladder Manager
+  %a.nav-toggle(href="#" title="Toggle menu")
+    %span.glyphicon.glyphicon-align-justify
+  .global-navigation
+    .search
+      = form_tag(ladders_search_path, method: :post, class: 'full-width') do
+        .input-group
+          %input.form-control(type="search" name="search" placeholder="Search for a ladder")
+          %button.search-button(type="submit")
+            %span.glyphicon.glyphicon-search
 
-  - if current_user
-    %ul.sidebar-menu.user-options
-      %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
-        %a(href="#{organization_path(current_org)}" title="My Organization")
-          %span.glyphicon.glyphicon-globe
-          My Organization
-      %li(class="#{request.fullpath =~ /\/users/ ? 'active' : nil}")
-        %a(href="#{user_path(current_user)}" title="My Account")
-          %span.glyphicon.glyphicon-user
-          My Account
-      %li
-        %a(href="#{session_path(current_user)}" title="Sign out" data-method="delete")
-          %span.glyphicon.glyphicon-off
-          Sign out
-  - else
-    %ul.sidebar-menu.user-options
-      %li
-        %a(href="#{login_path}" title="My challanges")
-          %span.glyphicon.glyphicon-off
-          Sign in
+    - if current_user
+      %ul.sidebar-menu.user-options
+        %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
+          %a(href="#{organization_path(current_org)}" title="My Organization")
+            %span.glyphicon.glyphicon-globe
+            My Organization
+        %li(class="#{request.fullpath =~ /\/users/ ? 'active' : nil}")
+          %a(href="#{user_path(current_user)}" title="My Account")
+            %span.glyphicon.glyphicon-user
+            My Account
+        %li
+          %a(href="#{session_path(current_user)}" title="Sign out" data-method="delete")
+            %span.glyphicon.glyphicon-off
+            Sign out
+    - else
+      %ul.sidebar-menu.user-options
+        %li
+          %a(href="#{login_path}" title="My challanges")
+            %span.glyphicon.glyphicon-off
+            Sign in

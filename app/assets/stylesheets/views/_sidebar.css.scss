@@ -2,31 +2,46 @@
 
 aside {
   background: $bodyText;
-  height: 4em;
+  color: $bodyBg;
+  height: 3em;
   left: 0;
+  line-height: 3em;
+  padding: 0 1em;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
 
   .logo-container {
-    width: 5em;
+    color: $bodyBg;
+    float: left;
     padding: 0;
-    text-align: left;
 
     .logo {
-      width: 100%;
+      display: none;
       height: auto;
+      width: 100%;
     }
   }
-  // temporary
-  .sidebar-menu, .search {
+  a.nav-toggle {
+    display: inline-block;
+    border: none;
+    background: none;
+    color: $bodyBg;
+    float: right;
+  }
+  .global-navigation {
+    background: $bodyText;
+    border-top: 1px solid darken($bodyText, 5%);
+    clear: left;
     display: none;
+    line-height: 1;
+    margin: 0 -1em;
   }
 }
 
 .search {
-  padding: 0 2em 1em;
+  padding: 1em 2em;
 
   input[type="search"] {
     border: 0;
@@ -40,8 +55,9 @@ aside {
 }
 
 .sidebar-menu {
-  padding: 0;
+  padding: 0 0 1em 0;
   margin: 0;
+  list-style: none;
 
   li:first-child a {
     border-top: 0;
@@ -66,29 +82,32 @@ aside {
 @include breakpoint(tablet) {
   aside {
     float: left;
+    line-height: 1em;
     min-height: 100%;
+    padding: 0;
     position: fixed;
     width: $sidebarContainerWidth;
 
-    .sidebar-menu, .search {
+    .global-navigation {
+      border: none;
       display: block;
+      margin: 0;
     }
+    a.nav-toggle {
+      display: none;
+    }
+
     .search {
       padding: 0 2em 1em;
+    }
 
-      input[type="search"] {
-        border: 0;
-        color: #fff;
-        background: darken($bodyText, 5%);
-        padding-right: 2.5em;
-      }
-    }
-    .search-button {
-      color: #fff;
-    }
     .logo-container {
-      width: 100%;
+      display: block;
       padding: 1.5em 3em;
+      width: 100%;
+
+      .logo {display: block;}
+      .logo-text {display: none;}
     }
   }
 }
