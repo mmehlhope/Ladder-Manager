@@ -29,4 +29,7 @@ define (require, exports, module) ->
       @get('competitor_2').id == @get('winner_id')
 
     getCompetitorName: (competitor_number=1) ->
-      @get('competitor_' + competitor_number).name || '(N/A)'
+      if @get('competitor_' + competitor_number)
+        @get('competitor_' + competitor_number).name
+      else
+        "(N/A)"
