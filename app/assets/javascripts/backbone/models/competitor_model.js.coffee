@@ -4,3 +4,9 @@ define (require, exports, module) ->
 
   class CompetitorModel extends Backbone.Model
     urlRoot: '/competitors'
+
+    has_unfinished_matches: () ->
+      @get('has_unfinished_matches')
+
+    can_be_deleted: () ->
+      !@has_unfinished_matches()

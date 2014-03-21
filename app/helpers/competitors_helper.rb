@@ -28,4 +28,8 @@ module CompetitorsHelper
     (rating.to_f / ladder.highest_competitor.rating * 100).round(2)
   end
 
+  def has_unfinished_matches?
+    matches.reject(&:finalized?).length > 0
+  end
+
 end
