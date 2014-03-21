@@ -44,7 +44,7 @@ define (require, exports, module) ->
         error: (jqXHR, textStatus, errorThrown) =>
           @render()
           @$('input:first').focus()
-          @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+          @messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger', false)
           this
 
       )
@@ -57,7 +57,7 @@ define (require, exports, module) ->
           success: () =>
             @removeEl()
           error: () =>
-            @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+            @messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger', false)
             this
         )
       this

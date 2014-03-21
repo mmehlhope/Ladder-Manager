@@ -1,5 +1,4 @@
 %td(colspan="4" class="#{if @_view.inEditMode() then 'game success-bg' else 'game'}")
-  .messaging
   - if @_view.inEditMode()
     - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
     %form.full-width(action="#{action_url}" method="PUT")
@@ -28,3 +27,4 @@
           Edit
         %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete-game")
           %span.glyphicon.glyphicon-remove
+  .messaging
