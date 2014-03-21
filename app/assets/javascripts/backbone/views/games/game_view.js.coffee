@@ -41,7 +41,7 @@ define (require, exports, module) ->
           # Update the model, which triggers the row to re-render
           @editMode = false
           @model.set(jqXHR.game)
-        error: (jqXHR, textStatus, errorThrown) ->
+        error: (jqXHR, textStatus, errorThrown) =>
           @render()
           @$('input:first').focus()
           @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
