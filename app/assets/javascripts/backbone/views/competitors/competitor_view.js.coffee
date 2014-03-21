@@ -69,7 +69,7 @@ define (require, exports, module) ->
                 @messageCenter.post(Util.parseTransportErrors(response), 'danger', false)
             )
         else
-          alert('This competitor is in one or more incomplete matches. Please finalize these matches or delete them to allow deletion of this competitor.')
+          alert('This competitor is in one or more unfinished matches. Please finalize these matches or delete them to allow deletion of this competitor.')
 
       @model.fetch(
         success: verifyDeletion
