@@ -27,7 +27,7 @@ define (require, exports, module) ->
 
     render: () ->
       @$el.html(Competitor_t(competitor: @model, _view: @))
-      @messagesView = new MessagesView(el: @$('.messaging'))
+      @messageCenter = new MessagesView(el: @$('.messaging'))
       if @inEditMode
         @$('input').focus()
 
@@ -51,20 +51,32 @@ define (require, exports, module) ->
         error: (jqXHR, textStatus, errorThrown) =>
           @render()
           @$('input').focus()
-          @messagesView.clear()
-          @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+          @messageCenter.clear()
+          @messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger', false)
       )
       this
 
     deleteCompetitor: (e) ->
-      e.preventDefault()
-      if confirm("Are you sure you want to delete #{@model.get('name')}? You cannot undo this action.")
-        @model.destroy(
-          success: () =>
-            @removeEl()
-          error: (existingModel, response) =>
-            @messagesView.post(Util.parseTransportErrors(response), 'danger', false)
-        )
+      e.preventDefault() if e
+
+      verifyDeletion = () =>
+        if @model.can_be_deleted()
+          if confirm("Are you sure you want to delete #{@model.get('name')}? You cannot undo this action.")
+            @model.destroy(
+              success: () =>
+                @removeEl()
+              error: (existingModel, response) =>
+                @messageCenter.post(Util.parseTransportErrors(response), 'danger', false)
+            )
+        else
+          alert('This competitor is in one or more incomplete matches. Please finalize these matches or delete them to allow deletion of this competitor.')
+
+      @model.fetch(
+        success: verifyDeletion
+        error: (existingModel, response) ->
+          @messageCenter.post(Util.parseTransportErrors(response), 'danger', false)
+      )
+
       this
 
     toggleEditMode: (e) ->
