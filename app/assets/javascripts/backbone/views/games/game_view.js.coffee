@@ -40,7 +40,9 @@ define (require, exports, module) ->
         success: (jqXHR, textStatus) =>
           # Update the model, which triggers the row to re-render
           @editMode = false
-          @model.set(jqXHR.game)
+          # force update
+          @model.set(jqXHR.game, {silent: true})
+          @model.trigger('change')
         error: (jqXHR, textStatus, errorThrown) =>
           @render()
           @$('input:first').focus()
