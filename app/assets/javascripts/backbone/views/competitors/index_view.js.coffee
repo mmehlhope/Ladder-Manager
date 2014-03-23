@@ -32,7 +32,7 @@ define (require, exports, module) ->
       competitorView = new CompetitorView(model: model)
       @$('.list-view').prepend(competitorView.render().el)
       # Post success message of new competitor
-      @messageCenter.post("#{model.get('name')} has been added to the ladder.", 'success')
+      @messageCenter.clear().post("#{model.get('name')} has been added to the ladder.", 'success')
       this
 
     addChildrenAndRender: () ->
