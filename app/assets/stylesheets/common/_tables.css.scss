@@ -60,27 +60,6 @@ table {
   .status {
     width: 25% ;
   }
-  .games-table-wrapper {
-    clear: both;
-    position: relative;
-  }
-  .games-table-wrapper .collapse.in {
-    &:after {
-      content: " ";
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-bottom: 12px solid $tableBorder;
-      font-size: 0;
-      height: 0;
-      line-height: 0;
-      position: absolute;
-      top: -11px;
-      bottom: 100%;
-      left: 660px;
-      width: 0;
-    }
-  }
-
   &.games-table {
     color: $sidebarLinkColor;
     margin: 0;
@@ -93,7 +72,7 @@ table {
       border-bottom: 1px solid $bodyBg;
       color: $sidebarLinkColor;
       // font-size: 0.8em;
-      font-weight: normal;
+      font-weight: 700;
       // padding: 0.5em 1.3em;
     }
     td {
@@ -102,5 +81,26 @@ table {
     div.cell {
       padding: 0.5em 1em;
     }
+  }
+}
+
+.games-table-wrapper {
+  clear: both;
+  position: relative;
+}
+.games-table-wrapper.collapse.in {
+  &:after {
+    content: " ";
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid $tableBorder;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    position: absolute;
+    top: -11px;
+    bottom: 100%;
+    left: 660px;
+    width: 0;
   }
 }
