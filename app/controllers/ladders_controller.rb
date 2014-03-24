@@ -81,7 +81,7 @@ class LaddersController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @ladder.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @ladder.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -99,7 +99,7 @@ class LaddersController < ApplicationController
           flash[:error] = 'There was an error deleting this ladder. Please try again later.'
           redirect_to @ladder
         }
-        format.json { render json: @ladder.errors,  status: :unprocessable_entity}
+        format.json { render json: {errors: @ladder.errors.full_messages},  status: :unprocessable_entity}
       end
     end
   end
