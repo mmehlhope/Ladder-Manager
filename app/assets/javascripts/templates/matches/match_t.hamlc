@@ -1,19 +1,8 @@
 .list-item-content
   .name
-    - if @match.get('competitor_1')
-      %a(href="/competitors/#{@match.get('competitor_1').id}")= @match.get('competitor_1').name
-      - if @match.competitor_1_is_winner() && @match.isFinalized()
-        %span.badge.success-bg.success-text Winner!
-    - else
-      (N/A)
+    = @match.getCompetitorName(1)
     %span.versus vs.
-    - if @match.get('competitor_2')
-      %a(href="/competitors/#{@match.get('competitor_2').id}")= @match.get('competitor_2').name
-      - if @match.competitor_2_is_winner() && @match.isFinalized()
-        %span.badge.success-bg.success-text Winner!
-    - else
-      (N/A)
-
+    = @match.getCompetitorName(2)
   %dl
     %dt Status:
     %dd #{if @match.isFinalized() then 'Final' else 'In progress'}

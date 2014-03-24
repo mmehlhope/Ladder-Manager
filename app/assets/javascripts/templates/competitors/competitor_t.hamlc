@@ -13,7 +13,7 @@
 - else
   .list-item-content
     .name
-      %a(href="/competitors/#{@competitor.get('id')}" title="#{@competitor.get('name')}")= @competitor.get('name')
+      = @competitor.get('name')
     %dl
       %dt Added:
       %dd #{@competitor.get('date_created')}

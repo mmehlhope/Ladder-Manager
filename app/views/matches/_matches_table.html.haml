@@ -4,11 +4,11 @@
       %li.list-item
         .list-item-content
           .name
-            = link_to match.competitor_1_name, competitor_path(match.competitor_1)
+            = match.competitor_1_name
             - if match.competitor_1_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
             %span.versus vs.
-            = link_to match.competitor_2_name, competitor_path(match.competitor_2)
+            = match.competitor_2_name
             - if match.competitor_2_is_winner? && match.finalized?
               %span.badge.success-bg.success-text Winner!
           %dl
