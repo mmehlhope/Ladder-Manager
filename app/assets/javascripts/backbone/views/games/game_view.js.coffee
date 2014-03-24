@@ -26,6 +26,8 @@ define (require, exports, module) ->
     render: () ->
       @$el.html(Game_t(game: @model, _view: @))
       @messageCenter = new MessagesView(el: @$('.messaging'))
+      if @inEditMode()
+        @$('input:first').focus()
       this
 
     updateGame: (e) ->
