@@ -18,7 +18,6 @@ define (require, exports, module) ->
       'click [data-action="add-game"]'       : 'showNewGameRow'
       'click [data-action="delete-match"]'   : 'deleteMatch'
       'click [data-action="finalize"]'       : 'finalize'
-      'click .view-games'                    : 'toggleGamesView'
       'click .list-item-content'             : 'toggleGamesView'
 
     initialize: () ->
@@ -29,18 +28,18 @@ define (require, exports, module) ->
         comp_2_name : @model.getCompetitorName(2)
       )
 
-      @listenTo(@gameCollection, 'sync destroy', @render)
+      @listenTo(@gameCollection, 'add sync destroy', @render)
       @listenTo(@model, 'change', @render)
       @listenTo(@model, 'destroy', @removeEl)
+
+      @gamesListVisible = false
       this
 
     render: () ->
-      node = Match_t(match: @model)
+      node = Match_t(match: @model, _view: @)
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
-      @$el.append(@gameCollectionView.render().el)
-      @newGameInProgress = false
+      @$('.games-table-wrapper').append(@gameCollectionView.render().el)
       @messageCenter = new MessagesView(el: @$('.messages'))
-      @assessGamesVisibility()
       this
 
     toggleGamesView: (e, action="toggle") ->
@@ -50,24 +49,18 @@ define (require, exports, module) ->
           return
         else
           e.preventDefault()
-
+      @gamesListVisible = !@gamesListVisible
       @$(".games-table-wrapper").collapse(action)
       this
 
-    showGamesView: (now) ->
-      @model.set('visibleGamesList', true, silent: true)
-      unless now
-        @toggleGamesView(null, 'show')
-      else
-        @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse in')
+    showGamesView: () ->
+      @gamesListVisible = true
+      @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse in')
       this
 
-    hideGamesView: (now) ->
-      @model.set('visibleGamesList', false, silent: true)
-      unless now
-        @toggleGamesView(null, 'hide')
-      else
-        @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse')
+    hideGamesView: () ->
+      @gamesListVisible = false
+      @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse')
       this
 
     showNewGameRow: (e) ->
@@ -81,16 +74,9 @@ define (require, exports, module) ->
         comp_2_name : @model.getCompetitorName(2)
       )
       @$('tbody').append(newGameView.render().el)
-      @model.set('visibleGamesList', true, silent: true)
       @showGamesView()
       this
 
-    assessGamesVisibility: () ->
-      if @model.has_games() && @model.isGamesListVisible()
-        @showGamesView(true)
-      else
-        @hideGamesView(true)
-      this
 
     finalize: (e) ->
       if e

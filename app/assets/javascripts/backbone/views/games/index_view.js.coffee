@@ -9,8 +9,6 @@ define (require, exports, module) ->
 
   class GameCollectionView extends Backbone.View
 
-    className: 'games-table-wrapper collapse'
-
     initialize: (options) ->
       @options = options
       @listenTo(@collection, 'add', @addOne)

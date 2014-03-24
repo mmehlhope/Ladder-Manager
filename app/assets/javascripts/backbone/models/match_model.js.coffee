@@ -13,9 +13,6 @@ define (require, exports, module) ->
 
     urlRoot: '/matches'
 
-    isGamesListVisible: () ->
-      @get('visibleGamesList')
-
     isFinalized: () ->
       @get('finalized')
 
