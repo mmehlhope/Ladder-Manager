@@ -49,18 +49,22 @@ define (require, exports, module) ->
           return
         else
           e.preventDefault()
-      @gamesListVisible = !@gamesListVisible
+
+      if action is 'show'
+        @gamesListVisible = true
+      else if action is 'hide'
+        @gamesListVisible = false
+      else
+        @gamesListVisible = !@gamesListVisible
       @$(".games-table-wrapper").collapse(action)
       this
 
     showGamesView: () ->
-      @gamesListVisible = true
-      @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse in')
+      @toggleGamesView(null, 'show')
       this
 
-    hideGamesView: () ->
-      @gamesListVisible = false
-      @$(".games-table-wrapper").attr('class', 'games-table-wrapper collapse')
+    hideGamesView: (e) ->
+      @toggleGamesView(null, 'hide')
       this
 
     showNewGameRow: (e) ->
@@ -74,7 +78,10 @@ define (require, exports, module) ->
         comp_2_name : @model.getCompetitorName(2)
       )
       @$('tbody').append(newGameView.render().el)
-      @showGamesView()
+
+      unless @gamesListVisible
+        @showGamesView(e)
+
       this
 
 
