@@ -40,6 +40,7 @@ class LaddersController < ApplicationController
   def edit
     @matches_json     = @ladder.editable_matches_json
     @competitors_json = @ladder.competitors_json
+    @ladder_json      = @ladder.to_json
   end
 
   # POST /ladders
@@ -78,7 +79,7 @@ class LaddersController < ApplicationController
           flash[:success] = successMsg
           redirect_to edit_ladder_path(@ladder)
         }
-        format.json { head :no_content }
+        format.json { render json: @ladder}
       else
         format.html { render action: 'edit' }
         format.json { render json: {errors: @ladder.errors.full_messages}, status: :unprocessable_entity }
