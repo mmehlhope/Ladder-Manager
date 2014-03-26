@@ -33,10 +33,10 @@
     .tab-pane#matches
 
     .tab-pane#ladders
-      = render 'edit_form'
+
 
 :coffeescript
-  require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view', 'backbone/collections/competitor_collection', 'backbone/views/competitors/index_view'], ($, MatchCollection, MatchIndexView, CompetitorCollection, CompetitorIndexView) ->
+  require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view', 'backbone/collections/competitor_collection', 'backbone/views/competitors/index_view', 'backbone/models/ladder_model', 'backbone/views/ladders/details_view'], ($, MatchCollection, MatchIndexView, CompetitorCollection, CompetitorIndexView, LadderModel, LadderDetailsView) ->
     matches                   = #{@matches_json}
     matchCollection           = new MatchCollection(matches)
     matchCollection.ladder_id = #{@ladder.id}
@@ -46,4 +46,8 @@
     competitorCollection      = new CompetitorCollection(competitors)
     competitorCollection.url  = "/ladders/#{@ladder.id}/competitors"
     competitorIndexView       = new CompetitorIndexView(collection: competitorCollection)
+    ladder                    = #{@ladder_json}
+    ladderModel               = new LadderModel(ladder)
+    LadderDetailsView         = new LadderDetailsView(model: ladderModel).render()
+
 

@@ -1,0 +1,4 @@
+.messaging
+%form(action="#{@ladder.urlRoot}/#{@ladder.get('id')}" method="POST")
+  %input(type="text" name="ladder[name]" value="#{@ladder.get('name')}")
+  %button.btn.btn-primary(type="submit") Rename
