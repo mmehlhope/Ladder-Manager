@@ -18,36 +18,29 @@
         Delete Ladder
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
-  %ul.navigation.three-across
-    %li.active
-      %a.btn.btn-link(href="#competitors" data-toggle="tab") Competitors
-    %li
-      %a.btn.btn-link(href="#matches" data-toggle="tab" class="#{@ladder.has_competitors? ? nil : 'disabled'}") Matches
-    %li
-      %a.btn.btn-link(href="#ladders" data-toggle="tab") Details
+  %section.management-panel
+    %ul.navigation.three-across
+      %li.active
+        %a.btn.btn-link(href="#competitors" data-toggle="tab") Competitors
+      %li
+        %a.btn.btn-link(href="#matches" data-toggle="tab") Matches
+      %li
+        %a.btn.btn-link(href="#ladders" data-toggle="tab") Details
 
-  .tab-content
+    .tab-content
 
-    .tab-pane#competitors.active
+      .tab-pane#competitors.active
 
-    .tab-pane#matches
+      .tab-pane#matches
 
-    .tab-pane#ladders
+      .tab-pane#ladders
 
 
 :coffeescript
-  require ['jquery', 'backbone/collections/match_collection', 'backbone/views/matches/index_view', 'backbone/collections/competitor_collection', 'backbone/views/competitors/index_view', 'backbone/models/ladder_model', 'backbone/views/ladders/details_view'], ($, MatchCollection, MatchIndexView, CompetitorCollection, CompetitorIndexView, LadderModel, LadderDetailsView) ->
-    matches                   = #{@matches_json}
-    matchCollection           = new MatchCollection(matches)
-    matchCollection.ladder_id = #{@ladder.id}
-    matchCollection.url       = "/ladders/#{@ladder.id}/matches"
-    matchIndexView            = new MatchIndexView(collection: matchCollection)
-    competitors               = #{@competitors_json}
-    competitorCollection      = new CompetitorCollection(competitors)
-    competitorCollection.url  = "/ladders/#{@ladder.id}/competitors"
-    competitorIndexView       = new CompetitorIndexView(collection: competitorCollection)
-    ladder                    = #{@ladder_json}
-    ladderModel               = new LadderModel(ladder)
-    LadderDetailsView         = new LadderDetailsView(model: ladderModel).render()
-
+  require ['backbone/pages/ladder_edit'], (LadderEditPage) ->
+    ladderEdit = new LadderEditPage(
+      ladder      : #{@ladder_json}
+      matches     : #{@matches_json}
+      competitors : #{@competitors_json}
+    )
 
