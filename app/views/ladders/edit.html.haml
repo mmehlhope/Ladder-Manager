@@ -37,8 +37,8 @@
 
 
 :coffeescript
-  require ['backbone/pages/ladder_edit'], (LadderEditPage) ->
-    ladderEdit = new LadderEditPage(
+  require ['backbone/pages/manage_ladder'], (ManageLadderPage) ->
+    ladderEdit = new ManageLadderPage(
       ladder      : #{@ladder_json}
       matches     : #{@matches_json}
       competitors : #{@competitors_json}

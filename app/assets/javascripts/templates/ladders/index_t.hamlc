@@ -1,0 +1,24 @@
+.section-header
+  .section-title
+    %h2 Your organization's ladders
+    - if @organization.has_ladders()
+      %p View or manage your organization's ladders
+    - else
+      %p To get started,
+        %a(href="/ladders/new" title="Create a new ladder") create a new ladder
+        \.
+  .section-actions
+    %a.btn.btn-primary(href="/ladders/new" title="Create a new ladder")
+      %span.glyphicon.glyphicon-plus
+      New Ladder
+
+  %section#edit-ladders
+    .messaging
+    %ul.list-view
+
+:coffeescript
+  require ['backbone/pages/manage_organization'], (ManageOrganizationPage) ->
+    ladderEdit = new ManageOrganizationPage(
+      organization : #{@organization_json}
+      ladders      : #{@ladders_json}
+    )

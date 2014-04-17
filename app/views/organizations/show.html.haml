@@ -3,39 +3,38 @@
   = stylesheet_link_tag('views/users')
 %section.main
   %header.clearfix
-    %h1= yield(:title)
-  %ul.navigation
-    %li.active
-      %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
-    %li
-      %a.btn.btn-link(href="#users" data-toggle="tab") Users
-  = render 'includes/message' if flash_message?
-  .tab-content
-    .tab-pane#ladders.active
-      .section-header
-        .section-title
-          %h2 Your organization's ladders
-          - if @organization.has_ladders?
-            %p View or manage your organization's ladders
-          - else
-            %p To get started,
-              %a(href="#{new_ladder_path}" title="Create a new ladder") create a new ladder
-              \.
-        .section-actions
-          %a.btn.btn-primary(href="#{new_ladder_path}" title="Create a new ladder")
-            %span.glyphicon.glyphicon-plus
-            New Ladder
+    .section-title
+      %h1= yield(:title)
+      %dl
+        %dt
+          Users:
+        %dd
+          = @organization.users.size
 
-      = render 'all_ladders'
+  = render 'includes/message' if flash_message? && user_can_admin_ladder
+  = render partial: 'includes/validation_errors', locals: {error_messages: @organization.errors.full_messages} if @organization.errors.any?
 
-    .tab-pane#users
-      .section-header
-        .section-title
-          %h2 Your organization's users
-          %p All of the below users can administrate your organization's ladders.
-        .section-actions
-          %a.btn.btn-primary(href="#{new_user_path}" title="Create a new user")
-            %span.glyphicon.glyphicon-plus
-            New User
+  %section.management-panel
+    %ul.navigation.three-across
+      %li.active
+        %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
+      %li
+        %a.btn.btn-link(href="#users" data-toggle="tab") Users
 
-      = render 'all_users'
+    .tab-content
+
+      .tab-pane#ladders.active
+
+      .tab-pane#users
+
+  /   .tab-pane#users
+  /     .section-header
+  /       .section-title
+  /         %h2 Your organization's users
+  /         %p All of the below users can administrate your organization's ladders.
+  /       .section-actions
+  /         %a.btn.btn-primary(href="#{new_user_path}" title="Create a new user")
+  /           %span.glyphicon.glyphicon-plus
+  /           New User
+
+
