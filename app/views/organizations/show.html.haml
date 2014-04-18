@@ -14,7 +14,7 @@
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @organization.errors.full_messages} if @organization.errors.any?
 
-  %section.management-panel
+  %section.organization-panel
     %ul.navigation.three-across
       %li.active
         %a.btn.btn-link(href="#ladders" data-toggle="tab") Ladders
@@ -36,5 +36,11 @@
   /         %a.btn.btn-primary(href="#{new_user_path}" title="Create a new user")
   /           %span.glyphicon.glyphicon-plus
   /           New User
+
+:coffeescript
+  require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
+    ladderEdit = new ManageOrgPage(
+      ladders      : #{@ladders_json}
+    )
 
 
