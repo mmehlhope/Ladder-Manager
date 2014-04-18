@@ -60,10 +60,10 @@ class LaddersController < ApplicationController
           flash[:success] = "Ladder was successfully created."
           redirect_to edit_ladder_path(@ladder)
         }
-        format.json { render action: 'show', status: :created, location: @ladder }
+        format.json { render json: @ladder }
       else
         format.html { render action: 'new' }
-        format.json { render json: @ladder.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @ladder.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
