@@ -12,7 +12,7 @@ define (require, exports, module) ->
 
   class LadderCollectionView extends Backbone.View
 
-    el: '#edit-ladders'
+    el: '#ladders'
 
     events:
       'click #create-new-ladder' : 'showNewLadderForm'
@@ -24,7 +24,7 @@ define (require, exports, module) ->
       this
 
     render: () ->
-      @$el.empty().html(ladders_t(ladders: @collection)).find('.list-view').append(@children)
+      @$el.empty().html(Ladders_t(ladders: @collection)).find('.list-view').append(@children)
       @messageCenter = new MessagesView(el: @$('.messaging:first'))
       this
 
@@ -39,7 +39,7 @@ define (require, exports, module) ->
       @children = []
 
       _(@collection.models).each((model) =>
-        ladderView     = new ladderView(model: model)
+        ladderView     = new LadderView(model: model)
         ladderViewNode = ladderView.render().el
         @children.push(ladderViewNode)
       )
@@ -57,7 +57,7 @@ define (require, exports, module) ->
     showNewLadderForm: (e) ->
       e.preventDefault()
 
-      newladderView = new NewladderView(
+      newladderView = new NewLadderView(
         collection: @collection
       )
       @$('.list-view').prepend(newladderView.render().el)
