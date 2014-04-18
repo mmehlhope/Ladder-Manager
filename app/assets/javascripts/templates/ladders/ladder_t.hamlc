@@ -1,18 +1,18 @@
-%li.list-item
-  .list-item-content
-    .name
-      = @ladder.get('name')
-    %dl
-      %dt Competitors:
-      %dd test
+.list-item-content
+  .name
+    = @ladder.get('name')
+  %dl
+    %dt Competitors:
+    %dd test
 
-      %dt Total matches:
-      %dd test
+    %dt Total matches:
+    %dd test
 
-      %dt Created:
-      %dd test
-  .list-item-actions
-    .btn-group
-      %a.btn.btn-small(href="/ladders/#{@ladder.get('id')}/edit}") Manage
-      %a.btn.btn-small.btn-danger(href="#{ladder_path(ladder)}" data-method="delete")
-        %span.glyphicon.glyphicon-remove
+    %dt Created:
+    %dd test
+.list-item-actions
+  .btn-group
+    %a.btn.btn-small(href="/ladders/#{@ladder.get('id')}/edit" title="Manage ladder") Manage
+    %button.btn.btn-danger.btn-small(href="/ladders/#{@ladder.get('id')}" data-method="DELETE" data-action="delete-ladder")
+      %span.glyphicon.glyphicon-remove
+.messaging
