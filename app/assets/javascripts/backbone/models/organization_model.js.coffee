@@ -5,3 +5,6 @@ define (require, exports, module) ->
   class OrganizationModel extends Backbone.Model
 
     urlRoot: '/organizations'
+
+    has_ladders: () ->
+      @get('ladders').length > 0
