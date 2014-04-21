@@ -13,6 +13,6 @@
 .list-item-actions
   .btn-group
     %a.btn.btn-small(href="/ladders/#{@ladder.get('id')}/edit" title="Manage ladder") Manage
-    %button.btn.btn-danger.btn-small(href="/ladders/#{@ladder.get('id')}" data-method="DELETE" data-action="delete-ladder")
+    %a.btn.btn-danger.btn-small(href="/ladders/#{@ladder.get('id')}" data-method="DELETE" data-action="delete")
       %span.glyphicon.glyphicon-remove
 .messaging

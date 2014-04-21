@@ -1,6 +1,6 @@
 - if @_view.editMode
   - action_url = "#{@competitor.urlRoot}/#{@competitor.get('id')}"
-  %form.success-bg(action="#{action_url}" method="PUT")
+  %form.success-bg.update(action="#{action_url}" method="PUT")
     .list-item-content
       %input.input-small(type="text" name="competitor[name]" value="#{@competitor.get('name')}" placeholder="Competitor name")
     .list-item-actions
@@ -20,6 +20,6 @@
   .list-item-actions
     .btn-group
       %a.btn.btn-small(href="#" data-action="edit") Rename
-      %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete-competitor")
+      %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete")
         %span.glyphicon.glyphicon-remove
   .messaging

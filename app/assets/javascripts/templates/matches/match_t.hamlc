@@ -19,7 +19,7 @@
       %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game")
         %span.glyphicon.glyphicon-plus
         Game
-      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete-match")
+      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete")
         %span.glyphicon.glyphicon-remove
 
 .games-table-wrapper(class="collapse #{if @_view.gamesListVisible && @match.has_games() then 'in' else ''}")

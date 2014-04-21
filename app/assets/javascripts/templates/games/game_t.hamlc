@@ -1,7 +1,7 @@
 %td(colspan="4" class="#{if @_view.inEditMode() then 'game success-bg' else 'game'}")
   - if @_view.inEditMode()
     - action_url = "#{@game.urlRoot}/#{@game.get('id')}"
-    %form.full-width(action="#{action_url}" method="PUT")
+    %form.full-width.update(action="#{action_url}" method="PUT")
       .cell.numGames
         = @game.get('number')
       .cell.competitor
@@ -25,6 +25,6 @@
       .btn-group
         %button.btn.btn-small(data-action="edit")
           Edit
-        %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete-game")
+        %button.btn.btn-danger.btn-small(href="#{@game.rootUrl}/#{@game.get('id')}" data-method="DELETE" data-action="delete")
           %span.glyphicon.glyphicon-remove
   .messaging
