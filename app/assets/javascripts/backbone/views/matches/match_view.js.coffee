@@ -9,16 +9,17 @@ define (require, exports, module) ->
   GameCollectionView = require 'backbone/views/games/index_view'
   MessagesView       = require 'backbone/views/widgets/messages_view'
 
+
   class MatchView extends Backbone.View
 
     tagName: 'li'
     className: 'list-item'
 
     events:
-      'click [data-action="add-game"]'       : 'showNewGameRow'
-      'click [data-action="delete-match"]'   : 'deleteMatch'
-      'click [data-action="finalize"]'       : 'finalize'
-      'click .list-item-content'             : 'toggleGamesView'
+      'click [data-action="delete"]'   : 'deleteItem'
+      'click [data-action="add-game"]' : 'showNewGameRow'
+      'click [data-action="finalize"]' : 'finalize'
+      'click .list-item-content'       : 'toggleGamesView'
 
     initialize: () ->
       @gameCollection     = @model.games
@@ -79,15 +80,12 @@ define (require, exports, module) ->
       )
       @$('tbody').append(newGameView.render().el)
 
-      unless @gamesListVisible
-        @showGamesView(e)
+      @showGamesView(e) unless @gamesListVisible
 
       this
 
-
     finalize: (e) ->
-      if e
-        e.preventDefault()
+      e.preventDefault() if e
 
       if confirm("Locking-in the results of this match will permanently update these competitors' ratings.\n\nThis match will no longer be editable after it has been locked. Do you want to lock this match?")
         $.ajax(
@@ -102,9 +100,8 @@ define (require, exports, module) ->
         )
       this
 
-    deleteMatch: (e) ->
-      if e
-        e.preventDefault()
+    deleteItem: (e) ->
+      e.preventDefault() if e
 
       if confirm('Are you sure you want to delete this match?')
         @model.destroy()

@@ -94,7 +94,7 @@ class LaddersController < ApplicationController
       if @ladder.destroy
         flash[:success] = "#{@ladder.name} was successfully deleted."
         format.html { redirect_to organization_path(current_org) }
-        format.json { head :ok }
+        format.json { render json: @ladder, status: :ok }
       else
         format.html {
           flash[:error] = 'There was an error deleting this ladder. Please try again later.'
