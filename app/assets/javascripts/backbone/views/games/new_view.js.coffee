@@ -41,7 +41,7 @@ define (require, exports, module) ->
         dataType: 'json'
         data: form.serialize()
         success: (jqXHR, textStatus) =>
-          game = new GameModel(jqXHR.game)
+          game = new GameModel(jqXHR)
           game.set('number', @collection.length+1)
           @removeEl(null, false)
           @collection.add(game)

@@ -41,7 +41,7 @@ define (require, exports, module) ->
         dataType: 'json'
         data: form.serialize()
         success: (jqXHR, textStatus) =>
-          ladder = new LadderModel(jqXHR.ladder)
+          ladder = new LadderModel(jqXHR)
           @removeEl(null, false)
           @collection.add(ladder)
         error: (jqXHR, textStatus, errorThrown) =>

@@ -41,7 +41,7 @@ define (require, exports, module) ->
         dataType: 'json'
         data: form.serialize()
         success: (jqXHR, textStatus) =>
-          competitor = new CompetitorModel(jqXHR.competitor)
+          competitor = new CompetitorModel(jqXHR)
           @removeEl(null, false)
           @collection.add(competitor)
         error: (jqXHR, textStatus, errorThrown) =>

@@ -26,6 +26,7 @@ define (require, exports, module) ->
     addChildren: () ->
       @children = []
       _(@collection.models).each((model, index) =>
+        # Increment number for the number of game, temporarily.
         model.set('number', index+1)
         gameView = new GameView(model: model)
         @children.push(gameView.render().el)
@@ -36,7 +37,6 @@ define (require, exports, module) ->
       gameView     = new GameView(model: model)
       @$('tbody').append(gameView.render().el)
       this
-
 
     showNewGameForm: () ->
       gameView = new NewGameView()

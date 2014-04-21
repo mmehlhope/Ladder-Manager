@@ -74,9 +74,9 @@ define (require, exports, module) ->
         type: 'POST'
         dataType: 'json'
         data: form.serialize()
-        success: (model, textStatus) =>
+        success: (jqXHR, textStatus) =>
           @removeEl()
-          @collection.push(model.match)
+          @collection.push(jqXHR)
         error: (jqXHR, textStatus, errorThrown) ->
           console.log textStatus
       )
