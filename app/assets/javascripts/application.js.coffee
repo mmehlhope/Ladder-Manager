@@ -1,1 +1,1 @@
-require ['jquery', 'jquery_ujs', 'bootstrap'], ($, ujs, bootstrap) ->
+require ['jquery', 'bootstrap'], ($, bootstrap) ->
