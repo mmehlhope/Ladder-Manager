@@ -6,7 +6,7 @@ define (require, exports, module) ->
   Backbone          = require 'backbone'
   MessagesView      = require 'backbone/views/widgets/messages_view'
 
-  class BaseListView extends Backbone.View
+  class BaseListItemView extends Backbone.View
 
     tagName: 'li'
     className: 'list-item'
