@@ -1,7 +1,6 @@
 // Typography
 @import 'colors';
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:600);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
 
 @function emCalc($pixelBasedNum) {
   @return $pixelBasedNum / $emBaseInPx * 1em;
@@ -17,8 +16,8 @@
   font-family: 'Open Sans', sans-serif;
   font-weight: $weight;
 }
-@mixin header-font($weight: 600) {
-  font-family: 'Source Sans Pro', sans-serif;
+@mixin header-font($weight: 300) {
+  font-family: 'Open Sans', sans-serif;
   font-weight: $weight;
 }
 
@@ -40,7 +39,7 @@ body {
 }
 
 .bold {
-  @include body-font(700)
+  @include body-font(600)
 }
 
 section h1,
@@ -54,7 +53,7 @@ section h6 {
   margin: 0;
 }
 section h1 {
-  font-size: $mediumEm;
+  font-size: $largeEm;
   margin: 0;
 
 }

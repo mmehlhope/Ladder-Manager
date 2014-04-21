@@ -1,5 +1,6 @@
 @import 'grid';
 @import 'colors';
+@import 'type';
 
 // Default list view
 
@@ -19,6 +20,7 @@
     padding: 1em 25% 1em 0em;
   }
   .name {
+    @include body-font(300);
     font-size: 1.2em;
   }
 

@@ -1,7 +1,7 @@
 @import '../common/grid';
 
 aside {
-  background: $bodyText;
+  background: $asideBg;
   color: $bodyBg;
   height: 3em;
   left: 0;
@@ -31,8 +31,8 @@ aside {
     float: right;
   }
   .global-navigation {
-    background: $bodyText;
-    border-top: 1px solid darken($bodyText, 5%);
+    background: $asideBg;
+    border-top: 1px solid darken($asideBg, 5%);
     clear: left;
     display: none;
     line-height: 1;
@@ -46,7 +46,7 @@ aside {
   input[type="search"] {
     border: 0;
     color: #fff;
-    background: darken($bodyText, 5%);
+    background: darken($asideBg, 5%);
     padding-right: 2.5em;
   }
   .search-button {
