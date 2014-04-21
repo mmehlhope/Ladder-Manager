@@ -1,15 +1,15 @@
 .list-item-content
   .name
-    = @ladder.get('name')
+    %a(href="/ladders/#{@ladder.get('id')}" title="#{@ladder.get('name')}")= @ladder.get('name')
   %dl
     %dt Competitors:
-    %dd test
+    %dd= @ladder.get('competitor_count')
 
     %dt Total matches:
-    %dd test
+    %dd= @ladder.get('matches_count')
 
     %dt Created:
-    %dd test
+    %dd= @ladder.get('date_created')
 .list-item-actions
   .btn-group
     %a.btn.btn-small(href="/ladders/#{@ladder.get('id')}/edit" title="Manage ladder") Manage
