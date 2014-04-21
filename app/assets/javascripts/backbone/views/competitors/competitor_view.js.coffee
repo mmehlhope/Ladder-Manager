@@ -4,9 +4,9 @@ define (require, exports, module) ->
   _                 = require 'underscore'
   Util              = require 'util'
   Competitor_t      = require 'templates/competitors/competitor_t'
-  BaseListView      = require 'backbone/views/common/base_list_view'
+  BaseListItemView      = require 'backbone/views/common/base_list_item_view'
 
-  class CompetitorView extends BaseListView
+  class CompetitorView extends BaseListItemView
 
     render: () ->
       @$el.html(Competitor_t(competitor: @model, _view: @))

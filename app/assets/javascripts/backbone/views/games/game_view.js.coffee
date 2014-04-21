@@ -1,15 +1,15 @@
 define (require, exports, module) ->
 
-  $            = require 'jquery'
-  _            = require 'underscore'
-  Util         = require 'util'
-  Backbone     = require 'backbone'
-  Game_t       = require 'templates/games/game_t'
-  BaseListView = require 'backbone/views/common/base_list_view'
+  $                 = require 'jquery'
+  _                 = require 'underscore'
+  Util              = require 'util'
+  Backbone          = require 'backbone'
+  Game_t            = require 'templates/games/game_t'
+  BaseListItemView  = require 'backbone/views/common/base_list_item_view'
   MessagesView      = require 'backbone/views/widgets/messages_view'
 
 
-  class GameView extends BaseListView
+  class GameView extends BaseListItemView
 
     tagName: 'tr'
     className: ''
