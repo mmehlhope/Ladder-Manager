@@ -4,7 +4,7 @@ define (require, exports, module) ->
   _                 = require 'underscore'
   Util              = require 'util'
   Competitor_t      = require 'templates/competitors/competitor_t'
-  BaseListItemView      = require 'backbone/views/common/base_list_item_view'
+  BaseListItemView  = require 'backbone/views/common/base_list_item_view'
 
   class CompetitorView extends BaseListItemView
 
