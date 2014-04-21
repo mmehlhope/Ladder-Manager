@@ -11,5 +11,3 @@ define (require, exports, module) ->
       match_id: null
 
     urlRoot: '/games'
-    createUrl: () ->
-      '/matches/' + @get('match_id') + @urlRoot
