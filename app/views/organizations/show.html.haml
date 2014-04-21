@@ -5,11 +5,6 @@
   %header.clearfix
     .section-title
       %h1= yield(:title)
-      %dl
-        %dt
-          Users:
-        %dd
-          = @organization.users.size
 
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @organization.errors.full_messages} if @organization.errors.any?
