@@ -14,4 +14,4 @@ define (require, exports, module) ->
       {@organization, @ladders, @users} = options
 
       ladderCollection  = new LadderCollection(@ladders)
-      ladderIndexView   = new LadderIndexView(collection: ladderCollection).render()
+      ladderIndexView   = new LadderIndexView(collection: ladderCollection)
