@@ -1,4 +1,5 @@
 class LadderSerializer < ApplicationSerializer
+  self.root = false
 
   def attributes
     hash = super
