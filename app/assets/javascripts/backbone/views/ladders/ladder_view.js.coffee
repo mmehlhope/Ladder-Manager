@@ -18,21 +18,17 @@ define (require, exports, module) ->
 
     initialize: () ->
       @listenTo(@model, 'change', @render)
-      @editMode = false
       this
 
     render: () ->
       @$el.html(Ladder_t(ladder: @model, _view: @))
       @messageCenter = new MessagesView(el: @$('.messaging'))
-      if @inEditMode
-        @$('input').focus()
-
       this
 
     deleteLadder: (e) ->
       e.preventDefault() if e
 
-      if confirm("Are you sure you want to delete #{@model.get('name')}? You cannot undo this action.")
+      if confirm("Are you sure you want to delete #{@model.get('name')}? This will permanently delete all matches and competitors that belong to this ladder.")
         @model.destroy(
           success: () =>
             @removeEl()
@@ -42,22 +38,7 @@ define (require, exports, module) ->
       else
         false
 
-      # @model.fetch(
-      #   success: verifyDeletion
-      #   error: (existingModel, response) ->
-      #     @messageCenter.post(Util.parseTransportErrors(response), 'danger', false)
-      # )
-
       this
-
-    toggleEditMode: (e) ->
-      e.preventDefault() if e
-      @editMode = !@editMode
-      @render()
-      this
-
-    inEditMode: () ->
-      @editMode
 
     removeEl: () ->
       @$el.slideUp(() =>
