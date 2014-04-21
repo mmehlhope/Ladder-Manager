@@ -26,6 +26,7 @@ input[type="reset"].btn {
     border-color: $inputFocusBorderColor;
   }
   &:hover {
+    color: $defaultButtonText;
     border-color: $defaultButtonText;
   }
   &.disabled,
