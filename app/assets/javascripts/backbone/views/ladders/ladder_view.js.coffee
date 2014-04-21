@@ -5,27 +5,15 @@ define (require, exports, module) ->
   Util              = require 'util'
   Backbone          = require 'backbone'
   Ladder_t          = require 'templates/ladders/ladder_t'
-  MessageModel      = require 'backbone/models/message_model'
-  MessagesView      = require 'backbone/views/widgets/messages_view'
+  BaseListItemView  = require 'backbone/views/common/base_list_item_view'
 
-  class LadderView extends Backbone.View
-
-    tagName: 'li'
-    className: 'list-item'
-
-    events:
-      'click [data-action="delete-ladder"]'     : 'deleteLadder'
-
-    initialize: () ->
-      @listenTo(@model, 'change', @render)
-      this
+  class LadderView extends BaseListItemView
 
     render: () ->
       @$el.html(Ladder_t(ladder: @model, _view: @))
-      @messageCenter = new MessagesView(el: @$('.messaging'))
-      this
+      super
 
-    deleteLadder: (e) ->
+    deleteItem: (e) ->
       e.preventDefault() if e
 
       if confirm("Are you sure you want to delete #{@model.get('name')}? This will permanently delete all matches and competitors that belong to this ladder.")
@@ -37,11 +25,3 @@ define (require, exports, module) ->
         )
       else
         false
-
-      this
-
-    removeEl: () ->
-      @$el.slideUp(() =>
-        @remove()
-      )
-      this
