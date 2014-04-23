@@ -16,4 +16,12 @@ module OrganizationHelper
     ).to_json
   end
 
+  def users_json
+    ActiveModel::ArraySerializer.new(
+      users,
+      each_serializer:
+      UserSerializer
+    ).to_json
+  end
+
 end

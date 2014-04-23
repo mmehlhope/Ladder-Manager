@@ -5,6 +5,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1.json
   def show
     @ladders_json = @organization.ladders_json
+    @users_json   = @organization.users_json
   end
 
   # GET /organizations/new
