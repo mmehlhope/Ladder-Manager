@@ -7,11 +7,12 @@
       %p To get started,
         %a(href="/ladders/new" title="Create a new ladder") create a new ladder
         \.
+
   .section-actions
     %a#create-new-ladder.btn.btn-primary(href="/ladders/new" title="Create a new ladder")
       %span.glyphicon.glyphicon-plus
       New Ladder
 
-  %section#edit-ladders
-    .messaging
-    %ul.list-view
+%section#edit-ladders
+  .messaging
+  %ul.list-view

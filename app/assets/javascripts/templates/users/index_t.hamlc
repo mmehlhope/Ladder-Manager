@@ -1,0 +1,13 @@
+.section-header
+  .section-title
+    %h2 Your organization's users
+    %p All of the below users can administrate your organization's ladders.
+
+  .section-actions
+    %a.btn.btn-primary(href="/users/new" title="Create a new user")
+      %span.glyphicon.glyphicon-plus
+      New User
+
+%section#edit-users
+  .messaging
+  %ul.list-item

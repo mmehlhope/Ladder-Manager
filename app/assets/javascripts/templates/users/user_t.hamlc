@@ -1,0 +1,18 @@
+.list-item-content
+  .name= @user.get('name')
+  %dl
+    %dt Created:
+    %dd= @user.get('date_created')
+
+    %dt Activated:
+    %dd Yes
+
+    %dt Last login:
+    %dd 3 days ago
+
+.list-item-actions
+  .btn-group
+    %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user") Edit
+    %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-method="DELETE" data-action="delete")
+      %span.glyphicon.glyphicon-remove
+.messaging
