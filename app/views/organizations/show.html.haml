@@ -22,20 +22,11 @@
 
       .tab-pane#users
 
-  /   .tab-pane#users
-  /     .section-header
-  /       .section-title
-  /         %h2 Your organization's users
-  /         %p All of the below users can administrate your organization's ladders.
-  /       .section-actions
-  /         %a.btn.btn-primary(href="#{new_user_path}" title="Create a new user")
-  /           %span.glyphicon.glyphicon-plus
-  /           New User
-
 :coffeescript
   require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
-    ladderEdit = new ManageOrgPage(
-      ladders      : #{@ladders_json}
-    )
+    ladderEdit = new ManageOrgPage({
+      ladders: #{@ladders_json},
+      users: #{@users_json}
+    })
 
 
