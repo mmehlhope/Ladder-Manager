@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def current_org
-    @current_organization ||= current_user.organization
+    @current_organization ? @current_organization : (current_user ? current_user.organization : false)
   end
 
   def ensure_user_can_admin_ladder
