@@ -10,4 +10,4 @@
 
 %section#edit-users
   .messaging
-  %ul.list-item
+  %ul.list-view
