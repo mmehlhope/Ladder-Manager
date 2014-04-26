@@ -74,7 +74,7 @@ input[type="reset"].btn {
       background: $neutralButtonHighlight;
     }
     &:active, &:focus {
-      color: $bodyBg;
+      color: $defaultBodyBg;
       background: $defaultButtonText;
     }
   }

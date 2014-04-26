@@ -1,8 +1,8 @@
 @import '../common/grid';
 
 aside {
-  background: $asideBg;
-  color: $bodyBg;
+  background: $asideBg url('tactile_noise.png');
+  color: $defaultBodyBg;
   height: 3em;
   left: 0;
   line-height: 3em;
@@ -13,7 +13,7 @@ aside {
   width: 100%;
 
   .logo-container {
-    color: $bodyBg;
+    color: $defaultBodyBg;
     float: left;
     padding: 0;
 
@@ -27,11 +27,10 @@ aside {
     display: inline-block;
     border: none;
     background: none;
-    color: $bodyBg;
+    color: $defaultBodyBg;
     float: right;
   }
   .global-navigation {
-    background: $asideBg;
     border-top: 1px solid darken($asideBg, 5%);
     clear: left;
     display: none;
@@ -74,7 +73,7 @@ aside {
     border-left: 5px solid transparent;
 
     &:active, &:focus {
-      color: $bodyBg;
+      color: $defaultBodyBg;
     }
   }
 }

@@ -3,8 +3,9 @@
 ////////////
 
 // General
-$bodyBg: #fff;
+$defaultBodyBg: #fff;
 $bodyText: #575757;
+$bodyBg: $bodyText;
 $asideBg: #242424;
 $link: #D3643B;
 $sidebarLinkColor: #646464;
@@ -24,7 +25,7 @@ $panelHeaderBg      : #2C333A;
 $panelTitleColor    : $asideBg;
 
 // Tables
-$tableBg            : $bodyBg;
+$tableBg            : $defaultBodyBg;
 $tableBorder        : lighten($inputBorderColor, 15%);
 
 // Breadcrumbs
