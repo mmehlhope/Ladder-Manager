@@ -4,7 +4,7 @@ module ApplicationHelper
   # User helpers #
   ################
   def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
+    @current_user ||= User.find_by_id(session[:id])
   end
 
   def current_org

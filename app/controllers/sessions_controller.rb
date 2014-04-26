@@ -3,7 +3,8 @@ class SessionsController < ApplicationController
 
   def create
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+      debugger
+      session[:id] = @user.id
       redirect_to organization_path(@user.organization)
 
     elsif @user && !@user.authenticate(params[:password])
@@ -18,7 +19,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    sessions
+    session[:id] = nil
     flash[:success] = "You have been successfully logged out."
     redirect_to root_path
   end
