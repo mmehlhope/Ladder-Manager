@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -61,10 +61,20 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
+      if @user.can_be_deleted?
+        if @user.destroy
+          debugger
+          format.html { redirect_to users_url }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to current_org, notice: 'There was an error deleting this user'}
+          format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
+        end
+      else
+        format.html { redirect_to current_org, notice: 'There was an error deleting this user'}
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
+      end
     end
   end
 
