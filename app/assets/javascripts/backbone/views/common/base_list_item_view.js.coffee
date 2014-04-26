@@ -12,7 +12,7 @@ define (require, exports, module) ->
     className: 'list-item'
 
     events:
-      'submit .update'           : 'updateItem'
+      'submit .update'               : 'updateItem'
       'click [data-action="edit"]'   : 'toggleEditMode'
       'click [data-action="cancel"]' : 'toggleEditMode'
       'click [data-action="delete"]' : 'deleteItem'
