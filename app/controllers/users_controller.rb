@@ -64,7 +64,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.can_be_deleted?
         if @user.destroy
-          debugger
           format.html { redirect_to users_url }
           format.json { head :no_content }
         else

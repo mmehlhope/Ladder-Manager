@@ -24,7 +24,6 @@ class OrganizationsController < ApplicationController
     if @organization.save
       params = organization_params
       params[:organization_id] = @organization.id
-      debugger
       @organization = Organization.new(params)
     end
     respond_to do |format|
