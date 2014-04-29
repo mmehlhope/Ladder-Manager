@@ -11,8 +11,4 @@ define (require, exports, module) ->
   class NewUserView extends BaseNewView
 
     list_item_model: UserModel
-
-    render: () ->
-      @$el.html(NewUser_t(url: @collection.url))
-      super
-      this
+    template       : NewUser_t
