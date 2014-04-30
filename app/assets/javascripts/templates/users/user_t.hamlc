@@ -12,8 +12,7 @@
 
 .list-item-actions
   .btn-group
-    %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user") Edit
-    - unless @user.collection.length is 1
-      %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
-        %span.glyphicon.glyphicon-remove
+    %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user" data-action="edit") Edit
+    %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
+      %span.glyphicon.glyphicon-remove
 .messaging
