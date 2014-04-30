@@ -23,5 +23,3 @@ define (require, exports, module) ->
           error: (existingModel, response) =>
             @messageCenter.post(Util.parseTransportErrors(response), 'danger', false)
         )
-      else
-        false
