@@ -5,3 +5,4 @@ define (require, exports, module) ->
 
   class UserCollection extends Backbone.Collection
     model: UserModel
+    url: "/users"
