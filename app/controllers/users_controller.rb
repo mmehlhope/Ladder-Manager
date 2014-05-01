@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    # Assign or create organization
     if current_org
       @organization = current_org
     else
@@ -40,10 +41,14 @@ class UsersController < ApplicationController
       password = create_random_password
       params[:password] = params[:password_confirmation] = password
     end
+
     @user = User.new(params)
 
     respond_to do |format|
       if @user.save
+
+        LadderMailer.welcome_email(@user).deliver
+
         session[:id] = @user.id unless current_user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user }
