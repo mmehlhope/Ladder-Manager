@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   }
 
   def can_delete_user?(user_id)
-    if self.id == user_id.to_i
-      self.errors.add_to_base("You cannot delete yourself")
+    if id == user_id.to_i
+      errors.add(:base, "You cannot delete yourself")
       return false
     else
       return true

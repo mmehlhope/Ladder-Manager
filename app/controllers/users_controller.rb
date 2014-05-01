@@ -71,7 +71,6 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    debugger
     respond_to do |format|
       if current_user && current_user.can_delete_user?(params[:id])
         if @user.destroy
@@ -83,7 +82,7 @@ class UsersController < ApplicationController
         end
       else
         format.html { redirect_to current_org, notice: 'There was an error deleting this user'}
-        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
+        format.json { render json: {errors: current_user.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -110,7 +109,7 @@ class UsersController < ApplicationController
     def user_not_authorized
       respond_to do |format|
         format.html { redirect_to :back, status: 401 }
-        format.json { render json: {errors: "You do not have permission to make this request"}, status: 401 }
+        format.json { render json: {errors: ["You do not have permission to make this request"]}, status: 401 }
       end
     end
 
