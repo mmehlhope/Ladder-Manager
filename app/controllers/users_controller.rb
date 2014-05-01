@@ -46,9 +46,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-
-        LadderMailer.welcome_email(@user).deliver
-
+        if @organization.has_lone_admin?
+          LadderMailer.welcome_email(@user).deliver
+        end
         session[:id] = @user.id unless current_user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user }
