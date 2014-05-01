@@ -1,8 +1,8 @@
 .list-item-content
   .name= @user.get('name')
   %dl
-    %dt Created:
-    %dd= @user.get('date_created')
+    %dt Email:
+    %dd= @user.get('email')
 
     %dt Activated:
     %dd Yes
