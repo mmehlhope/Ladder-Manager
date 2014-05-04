@@ -52,10 +52,12 @@ ActiveRecord::Schema.define(version: 20140213012008) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
     t.integer  "organization_id"
   end
 
   add_index "ladders", ["organization_id"], name: "index_ladders_on_organization_id", using: :btree
+  add_index "ladders", ["user_id"], name: "index_ladders_on_user_id", using: :btree
 
   create_table "matches", force: true do |t|
     t.datetime "created_at"
