@@ -23,16 +23,13 @@ gem 'haml_coffee_assets'
 gem 'execjs'
 
 # Requirejs
-gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
+gem 'requirejs-rails', git: 'git://github.com/jwhitley/requirejs-rails.git'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # HAML
 gem 'haml'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -63,4 +60,4 @@ gem 'unicorn'
 # gem 'capistrano-rvm',
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+# gem 'debugger', group: [:development, :test]
