@@ -11,9 +11,9 @@
 
   %body
     %section.content-wrapper
-      - exclude_sidebar = @exclude_sidebar || false
-      - unless exclude_sidebar
-        = render :partial => 'includes/sidebar'
+      - exclude_navigation = @exclude_navigation || false
+      - unless exclude_navigation
+        = render :partial => 'includes/navigation'
         = yield :sidebar
       = yield
     = render :partial => 'includes/footer'
