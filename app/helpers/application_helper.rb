@@ -30,6 +30,10 @@ module ApplicationHelper
   # Redirect Helpers #
   ####################
 
+  def after_sign_in_path_for(user)
+    organization_path(user.organization)
+  end
+
   def redirect_with_error(error, path)
     error ||= "You do not have permission to view that page"
     path  ||= root_path
