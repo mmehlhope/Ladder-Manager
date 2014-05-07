@@ -76,12 +76,12 @@ textarea {
 }
 
 input[type="text"][disabled],
-input[type="password"],
-input[type="search"],
-input[type="email"],
+input[type="password"][disabled],
+input[type="search"][disabled],
+input[type="email"][disabled],
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],
-textarea,
+textarea[disabled],
 fieldset[disabled] > * {
   cursor: not-allowed;
 }
