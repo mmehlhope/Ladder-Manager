@@ -16,6 +16,7 @@ form {
     input[type="password"],
     input[type="search"],
     input[type="date"],
+    input[type="email"],
     fieldset,
     textarea,
     select {
@@ -26,6 +27,7 @@ form {
     input[type="text"],
     input[type="password"],
     input[type="search"],
+    input[type="email"],
     textarea {
       background:transparent;
       border-color: transparent;
@@ -55,6 +57,7 @@ form {
 input[type="text"],
 input[type="password"],
 input[type="search"],
+input[type="email"],
 textarea {
   // box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.2);
   border-radius: 0.3em;
@@ -73,8 +76,12 @@ textarea {
 }
 
 input[type="text"][disabled],
+input[type="password"],
+input[type="search"],
+input[type="email"],
 input[type="radio"][disabled],
 input[type="checkbox"][disabled],
+textarea,
 fieldset[disabled] > * {
   cursor: not-allowed;
 }
