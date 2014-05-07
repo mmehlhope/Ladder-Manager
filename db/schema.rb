@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213012008) do
+ActiveRecord::Schema.define(version: 20140507003324) do
 
   create_table "competitors", force: true do |t|
     t.string   "name"
@@ -52,10 +52,12 @@ ActiveRecord::Schema.define(version: 20140213012008) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
     t.integer  "organization_id"
   end
 
   add_index "ladders", ["organization_id"], name: "index_ladders_on_organization_id", using: :btree
+  add_index "ladders", ["user_id"], name: "index_ladders_on_user_id", using: :btree
 
   create_table "matches", force: true do |t|
     t.datetime "created_at"
@@ -77,26 +79,26 @@ ActiveRecord::Schema.define(version: 20140213012008) do
     t.string   "name"
   end
 
-  create_table "sessions", force: true do |t|
-    t.string   "session_id", null: false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
-
   create_table "users", force: true do |t|
     t.string   "name"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "password_digest"
-    t.string   "email"
     t.integer  "organization_id"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

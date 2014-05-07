@@ -1,5 +1,6 @@
 LadderManager::Application.routes.draw do
 
+  devise_for :users
   resources :sessions, only: [:create, :destroy]
   resources :organizations
   resources :users
