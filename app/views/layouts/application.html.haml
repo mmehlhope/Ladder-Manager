@@ -15,5 +15,6 @@
       - unless exclude_navigation
         = render :partial => 'includes/navigation'
         = yield :sidebar
-      = yield
+      %section.main
+        = yield
     = render :partial => 'includes/footer'
