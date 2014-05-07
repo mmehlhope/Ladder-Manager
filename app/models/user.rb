@@ -1,20 +1,21 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :lockable
 
   belongs_to :organization
 
-  before_validation :downcase_email
-  has_secure_password
+  # before_validation :downcase_email
+  # has_secure_password
 
-  validates :name, presence: true, format: {
-    with: /\A[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9' ]*\z/, message: "can only contain letters, numbers, and spaces."
-  }
-  validates :email, presence: true, uniqueness: true, format: {
-    with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: "must be a valid email address."
-  }
+  # validates :name, presence: true, format: {
+  #   with: /\A[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9' ]*\z/, message: "can only contain letters, numbers, and spaces."
+  # }
+  # validates :email, presence: true, uniqueness: true, format: {
+  #   with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, message: "must be a valid email address."
+  # }
 
   def can_delete_user?(user_id)
     if id == user_id.to_i

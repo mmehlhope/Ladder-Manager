@@ -23,12 +23,12 @@
             %span.glyphicon.glyphicon-user
             My Account
         %li
-          %a(href="#{session_path(current_user)}" title="Sign out" data-method="delete")
+          %a(href="#}" title="Sign out" data-method="delete")
             %span.glyphicon.glyphicon-off
             Sign out
     - else
       %ul.sidebar-menu.user-options
         %li
-          %a(href="#{login_path}" title="My challanges")
+          %a(href="#{new_user_session_path}" title="My challanges")
             %span.glyphicon.glyphicon-off
             Sign in

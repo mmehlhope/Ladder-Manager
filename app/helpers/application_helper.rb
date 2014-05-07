@@ -3,10 +3,6 @@ module ApplicationHelper
   ################
   # User helpers #
   ################
-  def current_user
-    @current_user ||= User.find_by_id(session[:id])
-  end
-
   def current_org
     @current_organization ? @current_organization : (current_user ? current_user.organization : false)
   end

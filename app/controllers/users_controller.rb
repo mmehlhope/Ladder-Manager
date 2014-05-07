@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   rescue_from Exceptions::NotAuthorized, with: :user_not_authorized
 
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_authorization, except: [:login, :new, :create, :show]
+  before_action :authenticate_user!
 
   # GET /login
   def login
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
         if @organization.has_lone_admin?
           LadderMailer.welcome_email(@user).deliver
         end
-        session[:id] = @user.id unless current_user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user }
       else

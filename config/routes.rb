@@ -1,9 +1,8 @@
 LadderManager::Application.routes.draw do
 
   devise_for :users
-  resources :sessions, only: [:create, :destroy]
   resources :organizations
-  resources :users
+  # resources :users
 
   # Ladder, competitors, matches, games
   resources :ladders, shallow: true do
@@ -21,7 +20,6 @@ LadderManager::Application.routes.draw do
   post '/ladders/search', to: "ladders#search"
   get  '/release_notes', to: "release_notes#index"
   get  '/dashboard', to: "dashboard#index"
-  get  '/login', to: "users#login"
 
   # Home page
   root 'home#index'
