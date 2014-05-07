@@ -4,8 +4,8 @@ modules:
 paths:
   text: 'requirejs-text'
   views: 'backbone/views'
-shims:
-  requirejs:
-    deps:
-      - hamlcoffee
-      - text
+  jquery: 'jquery-1.11.1.min'
+
+shim:
+  requirejs: [hamlcoffee, text]
+  bootstrap: [jquery]
