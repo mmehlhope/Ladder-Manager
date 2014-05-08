@@ -2,7 +2,7 @@ LadderManager::Application.routes.draw do
 
   devise_for :users, controllers: {registrations: "users/registrations"}
   resources :organizations
-  # resources :users
+  resources :users, only: [:index, :show]
 
   # Ladder, competitors, matches, games
   resources :ladders, shallow: true do
@@ -16,10 +16,8 @@ LadderManager::Application.routes.draw do
   #################
   # Custom routes #
   #################
-  get  '/ladders/:id/admin_preferences', to: "ladders#admin_preferences", as: :admin_preferences
   post '/ladders/search', to: "ladders#search"
   get  '/release_notes', to: "release_notes#index"
-  get  '/dashboard', to: "dashboard#index"
 
   # Home page
   root 'home#index'
