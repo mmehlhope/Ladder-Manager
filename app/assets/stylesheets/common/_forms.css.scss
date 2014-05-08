@@ -1,6 +1,10 @@
 @import 'colors';
 
 form {
+  label {
+    display: block;
+    padding: 0 0 0.5em 0;
+  }
   &.paneled {
     padding: 1em;
     border-radius: 0.4em;
@@ -24,6 +28,10 @@ form {
     }
   }
   &.inline-edit {
+    label {
+      display: inline;
+      padding: 0 0.5em 0;
+    }
     input[type="text"],
     input[type="password"],
     input[type="search"],
