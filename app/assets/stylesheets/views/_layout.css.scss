@@ -63,8 +63,9 @@ dl {
   text-align: center;
   width: 100%;
 }
+
 .panel {
-  background: #fff;
+  background: $defaultBodyBg;
   padding: 1em;
 }
 
@@ -74,6 +75,7 @@ dl {
 }
 
 @include breakpoint(tablet) {
+
   header {
     margin: 0 0 2em;
   }
@@ -107,5 +109,10 @@ dl {
     dd {
       padding: 0 0.5em 0 0;
     }
+  }
+
+  .user-auth-wrapper {
+    width: $smallContainerWidth;
+    margin: 0 auto;
   }
 }
