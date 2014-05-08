@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :null_session
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :remove_default_navigation, if: :devise_controller?
 
   include ApplicationHelper
   require "exceptions"
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :organization_name
+  end
+
+  def remove_default_navigation
+    @exclude_navigation = true
   end
 
 end
