@@ -10,7 +10,13 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/new
   def new
-    @organization = Organization.new
+    # User is already in an organization, no need to create another
+    if current_org
+      redirect_to current_org
+    else
+      @organization = Organization.new
+      render layout: 'devise'
+    end
   end
 
   # GET /organizations/1/edit
@@ -21,18 +27,15 @@ class OrganizationsController < ApplicationController
   # POST /organizations.json
   def create
     @organization = Organization.new(org_params)
-    if @organization.save
-      params = organization_params
-      params[:organization_id] = @organization.id
-      @organization = Organization.new(params)
-    end
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to @organization, notice: 'Or was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @organization }
+        # Assign org to user
+        current_user[:organization_id] = @organization.id
+        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
+        format.json { render json: @organization }
       else
         format.html { render action: 'new' }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @organization.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -46,7 +49,7 @@ class OrganizationsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @organization.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -56,12 +59,16 @@ class OrganizationsController < ApplicationController
   def destroy
     @organization.destroy
     respond_to do |format|
-      format.html { redirect_to organizations_url }
-      format.json { head :no_content }
+      format.html { redirect_to current_user }
+      format.json { render json: @organization }
     end
   end
 
   private
+
+    def org_params
+      params.require(:organization).permit(:name)
+    end
 
     def set_org
       @organization = current_org || Organization.find_by_id(params[:id])
