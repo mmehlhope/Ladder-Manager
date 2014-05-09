@@ -1,0 +1,11 @@
+- content_for(:title, "Organization creation")
+- content_for(:description, "Name the organization that will be hosting your ladders")
+
+= form_tag new_organization_path, :class => "full-width" do
+  = render "includes/message"
+
+  %div.form-group
+    %label(for="email") Organization Name
+    %input(type="text" name="organization[name]" autofocus="true" placeholder="YMCA, Company name, etc." required="required")
+
+  %button.btn.btn-primary(type="submit") Continue
