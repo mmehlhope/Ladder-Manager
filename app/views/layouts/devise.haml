@@ -15,4 +15,5 @@
         / %img(src="logo.png")
         %div.panel
           = yield
+        = render "devise/shared/links" if devise_controller?
     = render :partial => 'includes/footer'

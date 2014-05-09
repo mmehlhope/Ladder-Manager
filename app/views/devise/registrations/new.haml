@@ -16,11 +16,5 @@
     %label(for="user[password_confirmation]") Confirm Password
     %input(type="password" name="user[password_confirmation]" placeholder="Confirm password" required="required")
 
-  %div.form-group
-    %label(for="organization_name") Organization name
-    %input(type="text" name="organization_name" placeholder="Organization name" required="required")
-
   %button.btn.btn-primary(type="submit") Sign up
   %a.btn(href="#{root_path}" title="Cancel") Cancel
-
-= render "devise/shared/links"

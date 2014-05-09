@@ -2,23 +2,16 @@
 - content_for(:description, "Sign in to your Ladder Manager account")
 
 = form_tag session_path(resource_name), :class => "full-width" do
-
+  = render "includes/message"
   = devise_error_messages!
 
   %div.form-group
     %label(for="email") Email
-    %input(type="email" name="user[email]" autofocus="true" placeholder="you@address.com" required="required")
+    %input(type="email" name="user[email]" autofocus="true" placeholder="Email address" required="required")
 
   %div.form-group
     %label(for="user[password]") Password
     %input(type="password" name="user[password]" placeholder="Password" required="required")
 
-  %div.form-group
-    %label(for="user[password_confirmation]") Confirm Password
-    %input(type="password" name="user[password_confirmation]" placeholder="Confirm password" required="required")
-
   %button.btn.btn-primary(type="submit") Sign in
   %a.btn(href="#{root_path}" title="Cancel") Cancel
-
-  %div
-    = render "devise/shared/links"
