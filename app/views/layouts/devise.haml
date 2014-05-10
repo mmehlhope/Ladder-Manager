@@ -13,7 +13,9 @@
     %section.content-wrapper
       %section.user-auth-wrapper
         / %img(src="logo.png")
-        %div.panel
+        %div.panel.user-auth-panel
+          %div.panel-header.text-center
+            = image_tag('ladder-manager-logo-white-h.svg', :class => 'logo')
           = yield
         = render "devise/shared/links" if devise_controller?
     = render :partial => 'includes/footer'
