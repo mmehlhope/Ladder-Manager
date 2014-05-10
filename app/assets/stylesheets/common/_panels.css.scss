@@ -4,12 +4,38 @@
 .panel {
   background: $defaultBodyBg;
   margin-bottom:1em;
-  padding: 1em;
+  padding: 2em;
+
+  h2 {
+    margin: 0 0 1em 0;
+  }
+}
+
+.panel-header {
+  background: #000;
+  margin: -2em -2em 1em;
+  padding: 2em 1em;
+
+  .logo {
+    width: 75%;
+  }
 }
 
 @include breakpoint(tablet) {
   .panel {
     border-radius: 0.4em;
     box-shadow: 0 0 0.75em rgba(0,0,0,0.5);
+
+    &.user-auth-panel {
+      margin: 6em 0 0.5em 0;
+    }
+  }
+  .panel-header {
+    -webkit-border-top-left-radius: 0.35em;
+    -webkit-border-top-right-radius: 0.35em;
+    -moz-border-radius-topleft: 0.35em;
+    -moz-border-radius-topright: 0.35em;
+    border-top-left-radius: 0.35em;
+    border-top-right-radius: 0.35em;
   }
 }

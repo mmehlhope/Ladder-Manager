@@ -64,11 +64,6 @@ dl {
   width: 100%;
 }
 
-.panel {
-  background: $defaultBodyBg;
-  padding: 1em;
-}
-
 .messaging {
   clear: both;
   width: 100%;
@@ -112,7 +107,7 @@ dl {
   }
 
   .user-auth-wrapper {
-    width: $xSmallContainerWidth;
+    width: $smallContainerWidth;
     margin: 0 auto;
   }
 }

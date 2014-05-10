@@ -73,5 +73,19 @@ a {
   &:active, &:focus {
     color: darken($link, 10%);
   }
+
+  &.subdued {
+    color: $subduedLink;
+
+    &:visited {
+      color: $subduedLink;
+    }
+    &:hover {
+      color: lighten($subduedLink, 10%);
+    }
+    &:active, &:focus {
+      color: darken($subduedLink, 10%);
+    }
+  }
 }
 
