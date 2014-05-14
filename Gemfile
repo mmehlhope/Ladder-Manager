@@ -62,4 +62,4 @@ gem 'devise'
 # gem 'capistrano-rvm',
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
