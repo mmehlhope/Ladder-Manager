@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_org, except: [:create, :new]
+  before_action :authenticate_user!
 
   # GET /organizations/1
   # GET /organizations/1.json
