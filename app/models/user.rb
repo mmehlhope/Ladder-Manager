@@ -1,14 +1,11 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  # :confirmable, :lockable, :timeoutable and :omniauthable :confirmable
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable
 
   belongs_to :organization
-
-  # before_validation :downcase_email
-  # has_secure_password
 
   # validates :name, presence: true, format: {
   #   with: /\A[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9' ]*\z/, message: "can only contain letters, numbers, and spaces."
@@ -25,11 +22,5 @@ class User < ActiveRecord::Base
       return true
     end
   end
-
-  private
-
-    def downcase_email
-      self.email = self.email.downcase if self.email.present?
-    end
 
 end
