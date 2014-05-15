@@ -31,7 +31,8 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         # Assign org to user
-        current_user[:organization_id] = @organization.id
+        current_user.update_attributes(organization_id: @organization.id)
+
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render json: @organization }
       else
