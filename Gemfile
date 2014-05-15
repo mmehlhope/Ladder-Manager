@@ -43,7 +43,7 @@ group :doc do
 end
 
 # Active Record session store
-gem 'activerecord-session_store'
+# gem 'activerecord-session_store'
 
 # serializer
 gem "active_model_serializers"
