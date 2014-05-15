@@ -31,7 +31,11 @@ module ApplicationHelper
   ####################
 
   def after_sign_in_path_for(user)
-    organization_path(user.organization)
+    if current_org
+      organization_path(user.organization)
+    else
+      new_organization_path
+    end
   end
 
   def redirect_with_error(error, path)
