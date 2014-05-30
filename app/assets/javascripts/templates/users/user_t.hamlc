@@ -1,14 +1,14 @@
 .list-item-content
-  .name= @user.get('name')
+  .name= @user.getFullName()
   %dl
     %dt Email:
     %dd= @user.get('email')
 
     %dt Activated:
-    %dd Yes
+    %dd= @user.get('isActivatedFriendly')
 
     %dt Last login:
-    %dd 3 days ago
+    %dd= @user.get('last_sign_in')
 
 .list-item-actions
   .btn-group
