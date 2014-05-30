@@ -7,12 +7,9 @@
   = devise_error_messages!
 
   %div.form-group
-    / %label(for="email") Email
     %input(type="email" name="user[email]" autofocus="true" placeholder="Email address" required="required")
 
   %div.form-group
-    / %label(for="user[password]") Password
     %input(type="password" name="user[password]" placeholder="Password" required="required")
 
   %button.btn.btn-primary.btn-block(type="submit") Sign in
-  / %a.btn(href="#{root_path}" title="Cancel") Cancel

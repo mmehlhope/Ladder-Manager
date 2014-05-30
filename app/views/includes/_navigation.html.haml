@@ -23,9 +23,10 @@
             %span.glyphicon.glyphicon-user
             My Account
         %li
-          %a(href="#}" title="Sign out" data-method="delete")
-            %span.glyphicon.glyphicon-off
-            Sign out
+          %form(action="#{destroy_user_session_path}")
+            %button.btn.btn-link(type="submit" value="submit")
+              / %span.glyphicon.glyphicon-off
+              / Sign out
     - else
       %ul.sidebar-menu.user-options
         %li
