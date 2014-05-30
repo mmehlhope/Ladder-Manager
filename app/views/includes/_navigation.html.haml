@@ -22,9 +22,10 @@
           %a(href="#{user_path(current_user)}" title="My Account")
             %span.glyphicon.glyphicon-user
             My Account
-        %form(action="#{destroy_user_session_path}" method="POST")
-          %input(type="hidden" name="_method" value="delete")
-          %button.btn.btn-link(type="submit") Sign out
+        %li
+          %a.sign-out(href="#{destroy_user_session_path}" title="Sign out")
+            %span.glyphicon.glyphicon-off
+            Sign out
     - else
       %ul.sidebar-menu.user-options
         %li
