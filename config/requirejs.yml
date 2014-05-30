@@ -5,6 +5,7 @@ paths:
   text: 'requirejs-text'
   views: 'backbone/views'
   jquery: 'jquery-1.11.1.min'
+  globals: 'globals'
 
 shim:
   requirejs: [hamlcoffee, text]
