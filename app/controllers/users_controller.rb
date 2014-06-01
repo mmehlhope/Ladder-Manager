@@ -25,6 +25,16 @@ class UsersController < ApplicationController
   end
 
   def update
+    # TODO: Security email validation.
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        format.json {
+          render json: @user
+        }
+      else
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
