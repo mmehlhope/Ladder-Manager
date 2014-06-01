@@ -2,7 +2,10 @@ LadderManager::Application.routes.draw do
 
   devise_for :users, controllers: {registrations: "users/registrations"}
   resources :organizations
-  resources :users, only: [:index, :show]
+
+  scope "/admin" do
+    resources :users, only: [:index, :show, :update]
+  end
 
   # Ladder, competitors, matches, games
   resources :ladders, shallow: true do

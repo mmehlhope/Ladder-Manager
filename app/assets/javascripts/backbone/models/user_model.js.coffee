@@ -4,7 +4,7 @@ define (require, exports, module) ->
 
   class UserModel extends Backbone.Model
 
-    urlRoot: '/users'
+    urlRoot: '/admin/users'
 
     getFullName: () ->
       @get('name') || @get('email')
