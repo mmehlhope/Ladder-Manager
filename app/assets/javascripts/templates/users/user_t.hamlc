@@ -1,18 +1,31 @@
-.list-item-content
-  .name= @user.getFullName()
-  %dl
-    %dt Email:
-    %dd= @user.get('email')
+- if @_view.inEditMode()
+  - action_url = "#{@user.urlRoot}/#{@user.get('id')}"
+  %form.success-bg.update(action="#{action_url}" method="PUT")
+    .list-item-content
+      %input.input-small(type="text" name="user[name]" value="#{@user.get('name')}" placeholder="Full name")
+      %input.input-small(type="text" name="user[email]" value="#{@user.get('email')}" placeholder="Email")
+    .list-item-actions
+      .btn-group
+        %button.btn.btn-small.btn-success(type="submit" value="Update")
+          Update
+        %button.btn.btn-small(data-action="cancel")
+          %span.glyphicon.glyphicon-remove
+- else
+  .list-item-content
+    .name= @user.getFullName()
+    %dl
+      %dt Email:
+      %dd= @user.get('email')
 
-    %dt Activated:
-    %dd= @user.get('isActivatedFriendly')
+      %dt Activated:
+      %dd= @user.isActivatedFriendly()
 
-    %dt Last login:
-    %dd= @user.get('last_sign_in')
+      %dt Last login:
+      %dd= @user.get('last_sign_in')
 
-.list-item-actions
-  .btn-group
-    %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user" data-action="edit") Edit
-    %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
-      %span.glyphicon.glyphicon-remove
+  .list-item-actions
+    .btn-group
+      %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user" data-action="edit") Edit
+      %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
+        %span.glyphicon.glyphicon-remove
 .messaging
