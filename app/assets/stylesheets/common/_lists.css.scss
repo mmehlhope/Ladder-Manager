@@ -17,7 +17,7 @@
     }
   }
   .list-item-content {
-    padding: 1em 25% 1em 0em;
+    padding: 1em 25% 1em 1em;
   }
   .name {
     @include body-font(300);
@@ -27,7 +27,7 @@
   .list-item-actions {
     position: absolute;
     top: 1em;
-    right: 0;
+    right: 1em;
   }
   .versus {
     color: $sidebarLinkColor;
