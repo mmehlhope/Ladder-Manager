@@ -8,3 +8,6 @@ define (require, exports, module) ->
 
     getFullName: () ->
       @get('name') || @get('email')
+
+    canDelete: (id) ->
+      !(@get('id') is id)
