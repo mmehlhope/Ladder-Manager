@@ -1,8 +1,13 @@
 module UsersHelper
   include ActionView::Helpers::DateHelper
 
+
   def signed_in_how_long_ago
-    "#{distance_of_time_in_words(Time.now, last_sign_in_at).capitalize} ago"
+    if last_sign_in_at
+      "#{distance_of_time_in_words(Time.now, last_sign_in_at).capitalize} ago"
+    else
+      "never"
+    end
   end
 
   def is_activated?

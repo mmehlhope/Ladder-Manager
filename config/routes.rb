@@ -4,7 +4,7 @@ LadderManager::Application.routes.draw do
   resources :organizations
 
   scope "/admin" do
-    resources :users, only: [:index, :show, :update]
+    resources :users
   end
 
   # Ladder, competitors, matches, games
