@@ -17,8 +17,10 @@ module OrganizationHelper
   end
 
   def users_json
+    sorted_users = users.sort! { |x,y| x.full_name <=> y.full_name }
+
     ActiveModel::ArraySerializer.new(
-      users,
+      sorted_users,
       each_serializer:
       UserSerializer
     ).to_json
