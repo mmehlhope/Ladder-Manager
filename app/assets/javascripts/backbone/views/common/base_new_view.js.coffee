@@ -25,7 +25,7 @@ define (require, exports, module) ->
       this
 
     render: () ->
-      @$el.html(@template(url: @collection.url))
+      @$el.html(@template(url: @collection.url, collection: @collection))
       @messagesView = new MessagesView(el: @$('.messaging'))
       this
 

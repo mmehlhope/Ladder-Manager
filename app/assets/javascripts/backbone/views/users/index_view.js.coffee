@@ -56,9 +56,8 @@ define (require, exports, module) ->
 
     showNewUserForm: (e) ->
       e.preventDefault()
-
-      newuserView = new NewUserView(
-        collection: @collection
+      newUserView = new NewUserView(
+        collection      : @collection
       )
-      @$('.list-view').prepend(newuserView.render().el)
+      @$('.list-view').prepend(newUserView.render().el)
       this
