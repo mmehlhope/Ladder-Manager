@@ -10,7 +10,7 @@ define (require, exports, module) ->
   class UserView extends BaseListItemView
 
     render: () ->
-      @$el.html(User_t(user: @model, _view: @))
+      @$el.html(User_t(user: @model, _view: @, currentUser: @currentUserModel))
       super
 
     deleteItem: (e) ->

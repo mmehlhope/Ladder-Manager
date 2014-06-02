@@ -3,6 +3,10 @@ module ApplicationHelper
   ################
   # User helpers #
   ################
+  def current_user_json
+    @current_user_json = UserSerializer.new(current_user).to_json if current_user
+  end
+
   def current_org
     @current_organization ? @current_organization : (current_user ? current_user.organization : false)
   end

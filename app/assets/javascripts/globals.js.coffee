@@ -4,10 +4,17 @@ define (require, exports, module) ->
 
   Globals =
 
-    initialize: () ->
-      $(document).on('click', '.sign-out', @signOutUser)
+    initialize: (options) ->
+      @bindEvents()
+      @setupAjax()
+      @setGlobalVars()
 
-      # Add security tokens to all AJAX requests on site
+    # Global event handling in lieu of Rails's UJS
+    bindEvents: () ->
+       $(document).on('click', '.sign-out', @_signOutUser)
+
+    # Add security tokens to all AJAX requests on site
+    setupAjax: () ->
       $.ajaxSetup
         beforeSend: (xhr, settings) ->
           return if settings.crossDomain
@@ -16,7 +23,14 @@ define (require, exports, module) ->
           token = $('meta[name="csrf-token"]').attr('content')
           xhr.setRequestHeader('X-CSRF-Token', token) if token
 
-    signOutUser: (e) ->
+    setGlobalVars: () ->
+      window.LadderManager ||= {}
+      window.LadderManager.currentUser = new UserModel(window.LadderManager.currentUser) if window.LadderManager.currentUser
+
+    ###
+    # Pseudo private
+    ###
+    _signOutUser: (e) ->
       e.preventDefault() if e
 
       request =

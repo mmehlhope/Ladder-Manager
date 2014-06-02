@@ -4,6 +4,7 @@ define (require, exports, module) ->
   _                 = require 'underscore'
   Util              = require 'util'
   Backbone          = require 'backbone'
+  CurrentUserModel  = require 'backbone/models/current_user_model'
   MessagesView      = require 'backbone/views/widgets/messages_view'
 
   class BaseListItemView extends Backbone.View
@@ -19,7 +20,8 @@ define (require, exports, module) ->
 
     initialize: () ->
       @listenTo(@model, 'change', @render)
-      @editMode = false
+      @currentUserModel = new CurrentUserModel(window.LadderManager.currentUser) if window.LadderManager.currentUser
+      @editMode        = false
       this
 
     render: () ->
