@@ -20,8 +20,8 @@ define (require, exports, module) ->
 
     initialize: () ->
       @listenTo(@model, 'change', @render)
-      @currentUserModel = new CurrentUserModel(window.LadderManager.currentUser) if window.LadderManager.currentUser
-      @editMode        = false
+      @currentUser = new CurrentUserModel(window.LadderManager.currentUser) if window.LadderManager.currentUser
+      @editMode    = false
       this
 
     render: () ->

@@ -10,7 +10,7 @@ define (require, exports, module) ->
   class UserView extends BaseListItemView
 
     render: () ->
-      @$el.html(User_t(user: @model, _view: @, currentUser: @currentUserModel))
+      @$el.html(User_t(user: @model, _view: @, currentUser: @currentUser))
       super
 
     deleteItem: (e) ->
@@ -23,3 +23,6 @@ define (require, exports, module) ->
           error: (existingModel, response) =>
             @messageCenter.post(Util.parseTransportErrors(response), 'danger', false)
         )
+
+    currentUserHighlight: () ->
+      if @currentUser.get('id') is @model.get('id') then 'info-bg' else ''

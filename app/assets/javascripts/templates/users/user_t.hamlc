@@ -11,7 +11,7 @@
         %button.btn.btn-small(data-action="cancel")
           %span.glyphicon.glyphicon-remove
 - else
-  .list-item-content
+  %div(class="list-item-content #{@_view.currentUserHighlight()}")
     .name= @user.getFullName()
     %dl
       %dt Email:
@@ -26,6 +26,7 @@
   .list-item-actions
     .btn-group
       %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user" data-action="edit") Edit
-      %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
-        %span.glyphicon.glyphicon-remove
+      - if @currentUser.canDelete(@user.get('id'))
+        %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
+          %span.glyphicon.glyphicon-remove
 .messaging
