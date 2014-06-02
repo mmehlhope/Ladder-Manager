@@ -1,6 +1,9 @@
 module UsersHelper
   include ActionView::Helpers::DateHelper
 
+  def full_name
+    name || email
+  end
 
   def signed_in_how_long_ago
     if last_sign_in_at
@@ -12,12 +15,5 @@ module UsersHelper
 
   def is_activated?
     !confirmation_token.nil?
-  end
-
-  def all_users
-    ActiveModel::ArraySerializer.new(
-      User.all,
-      each_serializer: UserSerializer,
-    ).to_json
   end
 end
