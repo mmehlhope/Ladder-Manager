@@ -2,7 +2,7 @@
 @import '../common/type';
 
 .alert {
-  font-size: newEmCalc(1, 1.2);
+  @include font-size(1);
   padding: 0.5em 0.75em;
   margin-bottom: 1em;
   border: 1px solid transparent;
@@ -66,4 +66,21 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+}
+
+.global-message-center {
+  left: 50%;
+  margin-left: -45%;
+  position: fixed;
+  text-align: center;
+  top: 10%;
+  width: 90%;
+  z-index: 9999;
+
+  .alert {
+    background: $successButtonTint;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+    @include font-size;
+    margin-bottom: 0;
+  }
 }

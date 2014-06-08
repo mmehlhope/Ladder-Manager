@@ -11,7 +11,7 @@ input[type="reset"].btn {
   border-radius: 0.3em;
   border: 1px solid transparent;
   border-color: $inputBorderColor;
-  font-size: emCalc($emBaseInPx);
+  @include font-size(1.4);
   display: inline-block;
   padding: 0.75em 1.5em;
   text-decoration: none;
@@ -84,11 +84,11 @@ input[type="reset"].btn {
     border-color: transparent;
   }
   &.btn-small {
-    font-size: newEmCalc(1, 1.2);
+    @include font-size(1.2);
     padding: 0.5em 0.75em;
   }
   &.icon-only {
-    font-size: newEmCalc(1, 1.2);
+    @include font-size(1.2);
     padding: 0.3em 0.5em 0.25em;
 
     .glyphicon {

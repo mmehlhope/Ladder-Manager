@@ -1,14 +1,12 @@
 // Typography
 @import 'colors';
+@import 'grid';
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
 
-@function emCalc($pixelBasedNum) {
-  @return $pixelBasedNum / $emBaseInPx * 1em;
+@mixin font-size($sizeValue: 1.4) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
 }
-@function newEmCalc($existingEmVal, $newEmVal) {
-  @return ($existingEmVal / $newEmVal) * 1em;
-}
-
 @mixin text-shadow {
   text-shadow: 0 2px 3px rgba(0,0,0,0.3)
 }
@@ -21,13 +19,13 @@
   font-weight: $weight;
 }
 
-$emBaseInPx      : 10px; //default
-$baseEm          : emCalc(12px);
-$smallEm         : emCalc(14px);
-$headerEm        : emCalc(16px);
-$mediumEm        : emCalc(18px);
-$largeEm         : emCalc(30px);
-$sidebarHeaderEm : $largeEm;
+$emBase        : 1; //default
+$base          : 1.2;
+$default       : 1.4;
+$header        : 1.6;
+$medium        : 2.4;
+$large         : 3.0;
+$sidebarHeader : $large;
 
 html {
   font-size: 62.5%;
@@ -35,7 +33,7 @@ html {
 body {
   @include body-font;
   color: $defaultButtonText;
-  font-size: $smallEm;
+  @include font-size;
 }
 
 .bold {
@@ -53,9 +51,8 @@ section h6 {
   margin: 0;
 }
 section h1 {
-  font-size: $largeEm;
+  @include font-size($medium);
   margin: 0;
-
 }
 
 // Links
@@ -89,3 +86,8 @@ a {
   }
 }
 
+@include breakpoint(tablet) {
+  section h1 {
+    @include font-size($large);
+  }
+}
