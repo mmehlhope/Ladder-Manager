@@ -4,6 +4,7 @@ define (require, exports, module) ->
   _                 = require 'underscore'
   Util              = require 'util'
   Backbone          = require 'backbone'
+  Globals           = require 'globals'
   CurrentUserModel  = require 'backbone/models/current_user_model'
   MessagesView      = require 'backbone/views/widgets/messages_view'
 
@@ -47,8 +48,7 @@ define (require, exports, module) ->
         error: (jqXHR, textStatus, errorThrown) =>
           @render()
           @$('input:first').focus()
-          @messageCenter.clear()
-          @messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+          Globals.postGlobalError(Util.parseTransportErrors(jqXHR))
       )
       this
 

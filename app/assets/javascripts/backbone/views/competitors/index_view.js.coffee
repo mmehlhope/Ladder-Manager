@@ -2,6 +2,7 @@ define (require, exports, module) ->
 
   $                         = require 'jquery'
   _                         = require 'underscore'
+  Globals                   = require 'globals'
   Backbone                  = require 'backbone'
   CompetitorModel           = require 'backbone/models/competitor_model'
   CompetitorCollection      = require 'backbone/collections/competitor_collection'
@@ -25,14 +26,14 @@ define (require, exports, module) ->
 
     render: () ->
       @$el.empty().html(Competitors_t(competitors: @collection)).find('.list-view').append(@children)
-      @messageCenter = new MessagesView(el: @$('.messaging:first'))
+      @messageCenter       = new MessagesView(el: @$('.messaging:first'))
       this
 
     addOne: (model) ->
       competitorView = new CompetitorView(model: model)
       @$('.list-view').prepend(competitorView.render().el)
       # Post success message of new competitor
-      @messageCenter.clear().post("#{model.get('name')} has been added to the ladder.", 'success')
+      Globals.postGlobalSuccess("#{model.get('name')} has been added to the ladder.", 'success')
       this
 
     addChildrenAndRender: () ->
@@ -61,4 +62,5 @@ define (require, exports, module) ->
         collection: @collection
       )
       @$('.list-view').prepend(newCompetitorView.render().el)
+      @$('.list-view .list-item:first input:first').focus()
       this

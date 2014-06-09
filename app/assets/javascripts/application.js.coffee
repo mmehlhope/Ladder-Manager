@@ -1,2 +1,2 @@
-require ['jquery', 'bootstrap', 'globals', 'backbone/models/user_model'], ($, bootstrap, Globals, UserModel) ->
+require ['jquery', 'underscore', 'bootstrap', 'globals'], ($, _, bootstrap, Globals) ->
   Globals.initialize()

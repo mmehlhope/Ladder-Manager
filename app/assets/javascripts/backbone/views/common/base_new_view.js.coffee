@@ -4,6 +4,7 @@ define (require, exports, module) ->
   _              = require 'underscore'
   Util           = require 'util'
   Backbone       = require 'backbone'
+  Globals        = require 'globals'
   MessagesView   = require 'backbone/views/widgets/messages_view'
 
   class BaseNewView extends Backbone.View
@@ -62,8 +63,9 @@ define (require, exports, module) ->
       item = new @list_item_model(jqXHR)
       @removeEl(null, false)
       @collection.add(item)
+
     _errorCallback: (jqXHR, textStatus, errorThrown) =>
       @toggleBusy()
       @$('input:first').focus()
-      @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+      Globals.postGlobalError(Util.parseTransportErrors(jqXHR))
       this

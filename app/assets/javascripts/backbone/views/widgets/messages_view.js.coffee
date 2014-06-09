@@ -11,7 +11,7 @@ define (require, exports, module) ->
 
     initialize: () ->
       @collection = new MessageCollection
-      @listenTo(@collection, 'destroy', @render)
+      @listenTo(@collection, 'reset', @render)
       @listenTo(@collection, 'add', @render)
       this
 
@@ -39,4 +39,15 @@ define (require, exports, module) ->
 
     removeEl: () ->
       @remove()
+      this
+
+    # TODO: refactor
+    startFadeTimer: () ->
+      window.clearTimeout(@timer) if @timer
+      @timer = setTimeout(() =>
+        @$el.fadeOut(350, () =>
+          @clear()
+          @$el.removeAttr('style')
+        )
+      , 3000)
       this

@@ -33,7 +33,6 @@ define (require, exports, module) ->
 
     _errorCallback: (jqXHR, textStatus, errorThrown) =>
       @render()
-      @messagesView.clear()
-      @messagesView.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+      @messagesView.clear().post(Util.parseTransportErrors(jqXHR), 'danger', false)
       @$('input:first').focus()
       this

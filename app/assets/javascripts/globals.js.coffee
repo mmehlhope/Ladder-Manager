@@ -1,20 +1,44 @@
 define (require, exports, module) ->
 
-  $ = require 'jquery'
+  $             = require 'jquery'
+  _             = require 'underscore'
+  MessageCenter = require 'backbone/views/widgets/messages_view'
+  UserModel     = require 'backbone/models/user_model'
 
   Globals =
 
     initialize: (options) ->
-      @bindEvents()
-      @setupAjax()
-      @setGlobalVars()
+      @_bindEvents()
+      @_setupAjax()
+      @_setGlobalVars()
+
+    ###
+    # Public
+    ###
+
+    postGlobalSuccess: (message) ->
+      @globalMessageCenter || @_getMessageCenter()
+      @globalMessageCenter.clear().post(message, 'success', false).$el.hide().fadeIn(350)
+      @globalMessageCenter.startFadeTimer()
+
+    postGlobalError: (message) ->
+      @globalMessageCenter || @_getMessageCenter()
+      @globalMessageCenter.clear().post(message, 'error', false).$el.hide().fadeIn(350)
+      @globalMessageCenter.startFadeTimer()
+
+    ###
+    # Pseudo private
+    ###
+    _getMessageCenter: () ->
+      @globalMessageCenter = new MessageCenter(el: $('.global-message-center'))
+      console.log @globalMessageCenter.el
 
     # Global event handling in lieu of Rails's UJS
-    bindEvents: () ->
+    _bindEvents: () ->
        $(document).on('click', '.sign-out', @_signOutUser)
 
     # Add security tokens to all AJAX requests on site
-    setupAjax: () ->
+    _setupAjax: () ->
       $.ajaxSetup
         beforeSend: (xhr, settings) ->
           return if settings.crossDomain
@@ -23,13 +47,11 @@ define (require, exports, module) ->
           token = $('meta[name="csrf-token"]').attr('content')
           xhr.setRequestHeader('X-CSRF-Token', token) if token
 
-    setGlobalVars: () ->
+    # Establish global namespace and current user if available
+    _setGlobalVars: () ->
       window.LadderManager ||= {}
       window.LadderManager.currentUser = new UserModel(window.LadderManager.currentUser) if window.LadderManager.currentUser
 
-    ###
-    # Pseudo private
-    ###
     _signOutUser: (e) ->
       e.preventDefault() if e
 

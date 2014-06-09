@@ -3,6 +3,7 @@ define (require, exports, module) ->
   $                    = require 'jquery'
   _                    = require 'underscore'
   Backbone             = require 'backbone'
+  Globals              = require 'globals'
   MatchModel           = require 'backbone/models/match_model'
   MatchCollection      = require 'backbone/collections/match_collection'
   MatchView            = require 'backbone/views/matches/match_view'
@@ -35,7 +36,7 @@ define (require, exports, module) ->
       matchViewNode = matchView.render().el
       @$('.list-view').prepend(matchViewNode)
       # Post success message of new match
-      @messageCenter.clear().post(
+      Globals.postGlobalSuccess(
         "You've added a new match between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
         'success'
       )
@@ -57,11 +58,9 @@ define (require, exports, module) ->
       this
 
     showFinalizeSuccess: () ->
-      @messageCenter.post(
-        "The match was successfully finalized",
-        'success'
-      )
+      Globals.postGlobalSuccess("The match was successfully finalized! Competitor rankings and ratings have been updated.")
       this
+
     updateCollection: () ->
       @collection.fetch()
       this

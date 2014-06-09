@@ -16,6 +16,7 @@
 
   %body
     %section.content-wrapper
+      .global-message-center
       - exclude_navigation = @exclude_navigation || false
       - unless exclude_navigation
         = render :partial => 'includes/navigation'

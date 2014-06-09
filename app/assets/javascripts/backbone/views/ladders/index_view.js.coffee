@@ -3,6 +3,7 @@ define (require, exports, module) ->
   $                    = require 'jquery'
   _                    = require 'underscore'
   Backbone             = require 'backbone'
+  Globals              = require 'globals'
   LadderModel          = require 'backbone/models/ladder_model'
   LadderCollection     = require 'backbone/collections/ladder_collection'
   LadderView           = require 'backbone/views/ladders/ladder_view'
@@ -32,7 +33,7 @@ define (require, exports, module) ->
       ladderView = new LadderView(model: model)
       @$('.list-view').prepend(ladderView.render().el)
       # Post success message of new ladder
-      @messageCenter.clear().post("#{model.get('name')} has been created.", 'success')
+      Globals.postGlobalSuccess("#{model.get('name')} has been created.", 'success')
       this
 
     addChildrenAndRender: () ->
@@ -61,4 +62,5 @@ define (require, exports, module) ->
         collection: @collection
       )
       @$('.list-view').prepend(newladderView.render().el)
+      @$('.list-view .list-item:first input:first').focus()
       this

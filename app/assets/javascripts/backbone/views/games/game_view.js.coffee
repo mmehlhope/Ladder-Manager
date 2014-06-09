@@ -4,6 +4,7 @@ define (require, exports, module) ->
   _                 = require 'underscore'
   Util              = require 'util'
   Backbone          = require 'backbone'
+  Globals           = require 'globals'
   Game_t            = require 'templates/games/game_t'
   BaseListItemView  = require 'backbone/views/common/base_list_item_view'
   MessagesView      = require 'backbone/views/widgets/messages_view'
@@ -27,7 +28,7 @@ define (require, exports, module) ->
           success: () =>
             @removeEl()
           error: () =>
-            @messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger', false)
+            Globals.postGlobalError(Util.parseTransportErrors(jqXHR))
             this
         )
       this
