@@ -6,7 +6,7 @@ aside {
   height: 3em;
   left: 0;
   line-height: 3em;
-  padding: 0 1em;
+  padding: 0 0 0 1em;
   position: absolute;
   right: 0;
   top: 0;
@@ -24,18 +24,24 @@ aside {
     }
   }
   a.nav-toggle {
-    display: inline-block;
-    border: none;
     background: none;
+    border: none;
     color: $defaultBodyBg;
+    display: inline-block;
     float: right;
+    padding: 0 1em;
   }
   .global-navigation {
+    background: $asideBg;
     border-top: 1px solid darken($asideBg, 5%);
     clear: left;
     display: none;
     line-height: 1;
     margin: 0 -1em;
+
+    &.visible {
+      display: block;
+    }
   }
 }
 

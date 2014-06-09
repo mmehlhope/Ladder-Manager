@@ -36,6 +36,14 @@ define (require, exports, module) ->
     # Global event handling in lieu of Rails's UJS
     _bindEvents: () ->
        $(document).on('click', '.sign-out', @_signOutUser)
+       $(document).on('click', '.nav-toggle', @_toggleNavMenu)
+
+    _toggleNavMenu: (e) ->
+      e.preventDefault() if e
+      $nav = $('.global-navigation')
+      $nav.slideToggle(200, () =>
+        $nav.toggleClass('visible').removeAttr('style')
+      )
 
     # Add security tokens to all AJAX requests on site
     _setupAjax: () ->
