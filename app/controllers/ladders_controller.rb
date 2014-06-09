@@ -50,12 +50,6 @@ class LaddersController < ApplicationController
 
     respond_to do |format|
       if @ladder.save
-        # send welcome email
-        begin
-          LadderMailer.welcome_email(@ladder).deliver
-        rescue
-          flash[:alert] = "Your welcome email failed to send. Please bookmark this page for future reference."
-        end
         format.html {
           flash[:success] = "Ladder was successfully created."
           redirect_to edit_ladder_path(@ladder)
@@ -92,7 +86,6 @@ class LaddersController < ApplicationController
   def destroy
     respond_to do |format|
       if @ladder.destroy
-        flash[:success] = "#{@ladder.name} was successfully deleted."
         format.html { redirect_to organization_path(current_org) }
         format.json { render json: @ladder, status: :ok }
       else
