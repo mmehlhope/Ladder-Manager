@@ -72,6 +72,9 @@
 
 .bordered {
   border: 1px solid $tableBorder;
+  &:empty {
+    border: none;
+  }
 }
 
 // color
