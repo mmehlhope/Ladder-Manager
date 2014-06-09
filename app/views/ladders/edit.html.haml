@@ -4,19 +4,8 @@
   %header.clearfix
     .section-title
       %h1= yield(:title)
-      %dl
-        %dt
-          Ladder:
-        %dd
-          %a(href="#{ladder_path(@ladder)}" title="Back to #{@ladder.name}")= @ladder.name
-        %dt
-          Competitors:
-        %dd
-          = @ladder.competitors.size
-        %dt
-          Organization:
-        %dd
-          = link_to @ladder.organization.name, @ladder.organization
+    .section-actions
+      %a.btn.pull-right(href="#{ladder_path(@ladder)}") View ladder
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %section.management-panel
