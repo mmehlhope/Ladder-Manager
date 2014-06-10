@@ -9,5 +9,6 @@
   - when :error
     - style = "alert-danger"
   .alert.alert-dismissable.text-left(class="#{style ? style : ''}")
-    %button.close(type="button" data-dismiss="alert") &times;
+    %button.close(type="button" data-dismiss="alert")
+      %span.glyphicon.glyphicon-remove
     = msg

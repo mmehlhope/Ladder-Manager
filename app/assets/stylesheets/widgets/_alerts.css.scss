@@ -66,8 +66,8 @@ button.close {
   color: inherit;
   cursor: pointer;
   left: 0;
-  line-height: 1;
-  @include font-size(2);
+  line-height: 1.4;
+  @include font-size(1.5);
   padding: 0;
   -webkit-appearance: none;
 }

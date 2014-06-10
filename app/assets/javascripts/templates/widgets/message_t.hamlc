@@ -1,7 +1,5 @@
-%div(class="alert #{@message.get('removeable') ? alert-dismissable : nil} alert-#{@message.get('type')}")
+%div(class="alert #{if @message.get('removeable') then 'alert-dismissable' else ''} alert-#{@message.get('type')}")
   - if @message.get('removeable')
     %button.close(data-action="close")
       %span.glyphicon.glyphicon-remove
-  - if @message.get('type') is 'danger'
-    %span.glyphicon.glyphicon-warning-sign
   = @message.get('content')
