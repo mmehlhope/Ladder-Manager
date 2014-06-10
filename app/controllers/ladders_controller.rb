@@ -1,7 +1,7 @@
 class LaddersController < ApplicationController
   before_action :verify_user, only: [:new, :create, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
-  # before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
+  before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
 
   # GET /ladders
   # GET /ladders.json
@@ -118,7 +118,11 @@ class LaddersController < ApplicationController
   private
 
     def set_ladder
-      @ladder = Ladder.find_by_id(params[:id])
+      begin
+        @ladder = Ladder.find(params[:id])
+      rescue
+        redirect_with_error('That ladder no longer exists', (current_user_and_org? ? organization_path(current_org) : root_path))
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -128,7 +132,7 @@ class LaddersController < ApplicationController
 
     def verify_user
       if current_user.nil?
-        redirect_with_error("You must login before you can create a ladder", login_path)
+        redirect_with_error("You must be logged in to modify a ladder", new_user_session_path)
       end
     end
 

@@ -11,10 +11,14 @@ module ApplicationHelper
     @current_organization ? @current_organization : (current_user ? current_user.organization : false)
   end
 
+  def current_user_and_org?
+    current_user && current_org
+  end
+
   def ensure_user_can_admin_ladder
     unless user_can_admin_ladder
       flash[:error] = "Please login to edit the ladder."
-      redirect_to login_path
+      redirect_to new_user_session_path
     end
   end
 
