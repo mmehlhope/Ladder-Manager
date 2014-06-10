@@ -64,7 +64,7 @@ class MatchesController < ApplicationController
           format.json { render json: @match, status: :created }
         else
           format.html { render action: 'new' }
-          format.json { render json: @match.errors, status: :unprocessable_entity }
+          format.json { render json: {errors: @match.errors.full_messages}, status: :unprocessable_entity }
         end
       end
     end
@@ -82,7 +82,7 @@ class MatchesController < ApplicationController
         format.json { head :ok }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @match.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @match.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -93,7 +93,7 @@ class MatchesController < ApplicationController
     # Validate
     errors = "Match was already finalized" if @match.finalized?
     errors = "Match must contain at least one game to be finalized" if @match.games.count == 0
-    errors = "Match cannot result in a tie. Please record additional games or adjust the current games.
+    errors = "Match cannot result in a tie. Please record additional games or adjust the current games
     to where there is a decisive victor." if @match.determine_match_winner.nil?
 
     if errors.blank?
@@ -116,7 +116,7 @@ class MatchesController < ApplicationController
           flash[:error] = errors
           redirect_to match_path(@match)
         }
-        format.json { head :not_acceptable }
+        format.json { render json: {errors: errors }, status: :unprocessable_entity }
       end
     end
   end

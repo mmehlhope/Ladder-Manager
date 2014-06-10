@@ -32,7 +32,10 @@ define (require, exports, module) ->
       this
 
     addOne: (model) ->
-      matchView     = new MatchView(model: model)
+      matchView     = new MatchView
+        model       : model
+        contextView : @
+
       matchViewNode = matchView.render().el
       @$('.list-view').prepend(matchViewNode)
       # Post success message of new match
@@ -46,7 +49,10 @@ define (require, exports, module) ->
       @children = []
 
       _(@collection.models).each((model) =>
-        matchView     = new MatchView(model: model)
+        matchView     = new MatchView
+          model       : model
+          contextView : @
+
         matchViewNode = matchView.render().el
         @children.push(matchViewNode)
       )
@@ -72,6 +78,7 @@ define (require, exports, module) ->
       newMatchView = new NewMatchView(
         collection  : @collection
         ladder_id   : @collection.ladder_id
+        contextView : @
       )
       @listenTo(newMatchView, 'fetchFinished', @toggleBusy)
       @$('.list-view').prepend(newMatchView.render().el)

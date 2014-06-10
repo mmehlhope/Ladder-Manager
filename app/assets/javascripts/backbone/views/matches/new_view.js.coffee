@@ -2,6 +2,7 @@ define (require, exports, module) ->
 
   $                    = require 'jquery'
   _                    = require 'underscore'
+  Util                 = require 'util'
   Backbone             = require 'backbone'
   NewMatch_t           = require 'templates/matches/new_match_t'
   MatchModel           = require 'backbone/models/match_model'
@@ -17,8 +18,9 @@ define (require, exports, module) ->
       'change [name="match[competitor_1]"]' : 'updateOtherCompetitor'
       'click [data-action="close"]'         : 'removeEl'
 
-    initialize: (params) ->
-      @ladder_id   = params['ladder_id']
+    initialize: (options={}) ->
+      @ladder_id   = options.ladder_id
+      @contextView = options.contextView
       @competitors = @getCompetitors()
       this
 
@@ -37,7 +39,7 @@ define (require, exports, module) ->
           @trigger('fetchFinished')
           @competitors = collection.models
         error: (collection, response, options) =>
-          console.log response
+          @contextView.messageCenter.post(Util.parseTransportErrors(response), 'danger')
       )
 
     updateOtherCompetitor: (e) ->

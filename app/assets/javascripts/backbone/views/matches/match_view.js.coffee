@@ -3,6 +3,7 @@ define (require, exports, module) ->
   $                  = require 'jquery'
   _                  = require 'underscore'
   Backbone           = require 'backbone'
+  Util               = require 'util'
   Match_t            = require 'templates/matches/match_t'
   NewGameView        = require 'backbone/views/games/new_view'
   GameModel          = require 'backbone/models/game_model'
@@ -21,13 +22,14 @@ define (require, exports, module) ->
       'click [data-action="finalize"]' : 'finalize'
       'click .list-item-content'       : 'toggleGamesView'
 
-    initialize: () ->
+    initialize: (options={}) ->
       @gameCollection     = @model.games
       @gameCollectionView = new GameCollectionView(
         collection: @gameCollection
         comp_1_name : @model.getCompetitorName(1)
         comp_2_name : @model.getCompetitorName(2)
       )
+      @contextView = options.contextView
 
       @listenTo(@gameCollection, 'add sync destroy', @render)
       @listenTo(@model, 'change', @render)
@@ -95,8 +97,8 @@ define (require, exports, module) ->
           success: (jqXHR, textStatus) =>
             @model.trigger('finalize')
             @removeEl()
-          error: (jqXHR, textStatus, errorThrown) ->
-            console.log textStatus
+          error: (jqXHR, textStatus, errorThrown) =>
+            @contextView.messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger')
         )
       this
 
