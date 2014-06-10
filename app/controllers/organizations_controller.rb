@@ -73,6 +73,10 @@ class OrganizationsController < ApplicationController
     end
 
     def set_org
-      @organization = current_org || Organization.find_by_id(params[:id])
+      begin
+        @organization = Organization.find(params[:id])
+      rescue
+        redirect_with_error('That organization does not exist or you do not have access to it.', (current_user_and_org? ? organization_path(current_org) : root_path))
+      end
     end
 end
