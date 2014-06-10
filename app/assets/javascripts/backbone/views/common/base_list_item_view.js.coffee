@@ -48,7 +48,7 @@ define (require, exports, module) ->
         error: (jqXHR, textStatus, errorThrown) =>
           @render()
           @$('input:first').focus()
-          Globals.postGlobalError(Util.parseTransportErrors(jqXHR))
+          @messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger', false)
       )
       this
 
