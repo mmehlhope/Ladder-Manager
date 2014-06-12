@@ -1,22 +1,35 @@
 %section.main
-  %h1 Ladder results
+  %header.clearfix
+    .section-title
+      %h1 Ladder search results
+      %dl
+        %dt Results:
+        %dd= @ladders.length
+    .section-actions
+      %form.full-width(action="#{ladders_path}" method="GET")
+        .input-group.form-group
+          %input.form-control(type="search" name="query" placeholder="Search for a ladder")
+          %button.search-button(type="submit")
+            %span.glyphicon.glyphicon-search
+
   = render 'includes/message' if flash_message?
   - unless @ladders.blank?
-    %table
-      %thead
-        %tr
-          %th Name
-          %th Created
-          %th # Competitors
-          %th
-      %tbody
-        - @ladders.each do |ladder|
-          %tr
-            %td= link_to ladder.name, ladder_path(ladder)
-            %td= ladder.created_at.strftime("%B %d, %Y")
-            %td= ladder.competitors.size
-            %td.text-right
-              %a.btn.icon-only(href="#{edit_ladder_path(ladder)}" title="Manage Ladder")
-                %span.glyphicon.glyphicon-cog
+    %ul.list-view.search-results
+      - @ladders.each do |ladder|
+        %li.list-item
+          .list-item-content
+            .name
+              = link_to ladder.name, ladder_path(ladder)
+            %dl
+              %dt Created:
+              %dd= ladder.created_at.strftime("%B %d, %Y")
+              %dt Organization:
+              %dd= ladder.organization.name
+              %dt Competitors:
+              %dd= ladder.competitors.length
+              %dt Matches
+              %dd= ladder.matches.length
   - else
-    %p No ladders were found with your search terms.
+    %p
+      No ladders were found with your search term of
+      %strong= @query

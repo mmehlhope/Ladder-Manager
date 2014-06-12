@@ -55,6 +55,13 @@
   }
 }
 
+// Search results
+.list-view.search-results {
+  .list-item-content {
+    padding: 1em;
+  }
+}
+
 .list-view.clickable li:hover {
   cursor: pointer;
   background: $infoButtonTint;

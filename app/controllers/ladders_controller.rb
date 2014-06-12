@@ -102,12 +102,15 @@ class LaddersController < ApplicationController
   private
 
     def search
-      query = params[:query].strip! || params[:query]
-
-      if query =~ /\A[0-9]+\z/
-        @ladders = Ladder.where("id = :query", query: query)
-      elsif query =~ /\A[\w ]+\z/
-        @ladders = Ladder.where("name LIKE :query", query: "%#{query}%")
+      if params[:query]
+        @query = params[:query].strip! || params[:query]
+        if @query =~ /\A[0-9]+\z/
+          @ladders = Ladder.where("id = :query", query: @query)
+        elsif @query =~ /\A[\w ]+\z/
+          @ladders = Ladder.where("name LIKE :query", query: "%#{@query}%")
+        else
+          @ladders = []
+        end
       else
         @ladders = []
       end
