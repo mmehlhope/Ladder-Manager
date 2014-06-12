@@ -1,14 +1,14 @@
 class LaddersController < ApplicationController
   before_action :verify_user, only: [:new, :create, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
+  before_action :search, only: [:index]
   before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
 
   # GET /ladders
   # GET /ladders.json
   def index
-    @ladders = current_org.ladders
     respond_to do |format|
-      format.html
+      format.html {}
       format.json {
         render json: @ladders, root: false
       }
@@ -98,24 +98,20 @@ class LaddersController < ApplicationController
     end
   end
 
-  # GET /ladders/search
-  def search
-    if params[:id] =~ /\A[0-9]+\z/
-      ladder = Ladder.find_by_id(params[:id])
-    else
-      error = "Ladder IDs can only be numbers, please try again."
-    end
-
-    unless ladder.nil? or error
-      redirect_to ladder
-    else
-      error ||= "That Ladder ID was not found, please try again."
-      flash[:error] = error
-      redirect_to root_path
-    end
-  end
 
   private
+
+    def search
+      query = params[:query].strip! || params[:query]
+
+      if query =~ /\A[0-9]+\z/
+        @ladders = Ladder.where("id = :query", query: query)
+      elsif query =~ /\A[\w ]+\z/
+        @ladders = Ladder.where("name LIKE :query", query: "%#{query}%")
+      else
+        @ladders = []
+      end
+    end
 
     def set_ladder
       begin

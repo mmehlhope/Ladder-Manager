@@ -1,13 +1,7 @@
-= content_for :head do
-  :coffeescript
-    require(['views/ladders/page'], (LadderPageView) ->
-      LadderPageView.init()
-    )
-
 %section.main
-  %h1 My ladders
+  %h1 Ladder results
   = render 'includes/message' if flash_message?
-  - if @ladders.size > 0
+  - unless @ladders.blank?
     %table
       %thead
         %tr
@@ -25,5 +19,4 @@
               %a.btn.icon-only(href="#{edit_ladder_path(ladder)}" title="Manage Ladder")
                 %span.glyphicon.glyphicon-cog
   - else
-    %p You have no ladders currently, would you like to
-    %a= link_to 'create one', new_ladder_path
+    %p No ladders were found with your search terms.

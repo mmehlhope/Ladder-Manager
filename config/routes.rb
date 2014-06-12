@@ -19,7 +19,6 @@ LadderManager::Application.routes.draw do
   #################
   # Custom routes #
   #################
-  post '/ladders/search', to: "ladders#search"
   get  '/release_notes', to: "release_notes#index"
 
   # Home page
