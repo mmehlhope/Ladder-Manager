@@ -67,5 +67,5 @@ define (require, exports, module) ->
     _errorCallback: (jqXHR, textStatus, errorThrown) =>
       @toggleBusy()
       @$('input:first').focus()
-      Globals.postGlobalError(Util.parseTransportErrors(jqXHR))
+      @messagesView.clear().post(Util.parseTransportErrors(jqXHR), 'danger', false)
       this

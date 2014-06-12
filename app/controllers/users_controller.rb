@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    debugger
     generated_password = Devise.friendly_token.first(8)
 
     full_params = user_params
@@ -22,16 +23,13 @@ class UsersController < ApplicationController
 
     @user = User.new(full_params)
 
-    if @user.save
-      send_invitation_email(@user, generated_password)
-
-      respond_to do |format|
-        format.json {
-          render json: @user
-        }
+    respond_to do |format|
+      if @user.save
+        send_invitation_email(@user, generated_password)
+        format.json { render json: @user }
+      else
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
       end
-    else
-      format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
     end
   end
 
