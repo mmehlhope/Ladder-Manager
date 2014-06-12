@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    debugger
     generated_password = Devise.friendly_token.first(8)
 
     full_params = user_params
