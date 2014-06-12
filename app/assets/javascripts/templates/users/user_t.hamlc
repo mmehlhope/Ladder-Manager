@@ -3,7 +3,6 @@
   %form.success-bg.update(action="#{action_url}" method="PUT")
     .list-item-content
       %input.input-small(type="text" name="user[name]" value="#{@user.get('name')}" placeholder="Full name")
-      %input.input-small(type="text" name="user[email]" value="#{@user.get('email')}" placeholder="Email")
     .list-item-actions
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="Update")
