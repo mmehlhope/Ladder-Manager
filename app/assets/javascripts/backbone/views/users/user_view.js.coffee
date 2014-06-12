@@ -16,7 +16,7 @@ define (require, exports, module) ->
     deleteItem: (e) ->
       e.preventDefault() if e
 
-      if confirm("Are you sure you want to delete #{@model.get('name')}? This will permanently delete all matches and competitors that belong to this user.")
+      if confirm("Are you sure you want to delete #{@model.get('name')}?")
         @model.destroy(
           success: () =>
             @removeEl()
