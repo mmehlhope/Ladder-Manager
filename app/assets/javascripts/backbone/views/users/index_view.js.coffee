@@ -3,6 +3,7 @@ define (require, exports, module) ->
   $               = require 'jquery'
   _               = require 'underscore'
   Backbone        = require 'backbone'
+  Globals         = require 'globals'
   UserModel       = require 'backbone/models/user_model'
   UserCollection  = require 'backbone/collections/user_collection'
   UserView        = require 'backbone/views/users/user_view'
@@ -32,7 +33,7 @@ define (require, exports, module) ->
       userView = new UserView(model: model)
       @$('.list-view').prepend(userView.render().el)
       # Post success message of new user
-      @messageCenter.clear().post("#{model.get('name')} has been created.", 'success')
+      Globals.postGlobalSuccess("An invitation email has been sent to #{model.get('name')}!")
       this
 
     addChildrenAndRender: () ->
