@@ -21,7 +21,7 @@ module CompetitorsHelper
   end
 
   def losses
-    matches_played - wins
+    matches_played - wins - draws
   end
 
   def percent_of_highest_competitor

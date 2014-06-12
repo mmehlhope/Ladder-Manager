@@ -15,6 +15,10 @@ class Competitor < ActiveRecord::Base
     update(:wins => wins + 1)
   end
 
+  def increment_draw_count
+    update(:draws => draws + 1)
+  end
+
   def reduce_win_count
     update(:wins => wins - 1)
   end

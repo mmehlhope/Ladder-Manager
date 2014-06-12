@@ -93,8 +93,6 @@ class MatchesController < ApplicationController
     # Validate
     errors = "Match was already finalized" if @match.finalized?
     errors = "Match must contain at least one game to be finalized" if @match.games.count == 0
-    errors = "Match cannot result in a tie. Please record additional games or adjust the current games
-    to where there is a decisive victor." if @match.determine_match_winner.nil?
 
     if errors.blank?
       @match.finalize
