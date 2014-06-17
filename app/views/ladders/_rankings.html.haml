@@ -1,5 +1,5 @@
 %ol.list-view.rankings
-  - if competitors.size > 0
+  - if competitors.present?
     - competitors.each do |competitor|
       %li.list-item
         .list-item-content
