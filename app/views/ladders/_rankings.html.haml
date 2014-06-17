@@ -1,5 +1,5 @@
-%ol.list-view.rankings
-  - if competitors.present?
+- if competitors.present?
+  %ol.list-view.rankings
     - competitors.each do |competitor|
       %li.list-item
         .list-item-content
@@ -12,6 +12,6 @@
             %dd= competitor.rating
           .competitor-avatar
             %span.glyphicon.glyphicon-user
-  - else
-    %li
-      No competitors have been added to this ladder yet.
+- else
+  %p
+    No competitors have been added to this ladder yet.

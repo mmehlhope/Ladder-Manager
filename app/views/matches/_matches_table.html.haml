@@ -1,5 +1,5 @@
-%ul.list-view.bordered
-  - if matches.present?
+- if matches.present?
+  %ul.list-view.bordered
     - matches.each do |match|
       %li.list-item
         .list-item-content
@@ -26,6 +26,6 @@
         - if match.has_games?
           %div(id="games-for-#{match.id}" class="games-table-wrapper collapse")
             = render partial: 'games/games_sub_table', locals: {games: match.games, competitor_1_name: match.competitor_1_name, competitor_2_name: match.competitor_2_name}
-  - else
-    %li
-      No matches have been recorded recently.
+- else
+  %p
+    No matches have been recorded for this ladder yet.
