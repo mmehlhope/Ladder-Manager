@@ -40,7 +40,7 @@ class LaddersController < ApplicationController
   def edit
     @matches_json     = @ladder.editable_matches_json
     @competitors_json = @ladder.competitors_json
-    @ladder_json      = @ladder.to_json
+    @ladder_json      = LadderSerializer.new(@ladder).to_json
   end
 
   # POST /ladders
