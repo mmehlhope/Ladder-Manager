@@ -58,7 +58,13 @@
 // Search results
 .list-view.search-results {
   .list-item-content {
-    padding: 1em;
+    padding-right: 1em;
+  }
+}
+
+.list-view.rankings {
+  .list-item-content {
+    padding-right: 4em;
   }
 }
 
