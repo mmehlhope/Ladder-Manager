@@ -12,8 +12,8 @@
           %button.search-button(type="submit")
             %span.glyphicon.glyphicon-search
 
-    - if current_user
-      %ul.sidebar-menu.user-options
+    %ul.sidebar-menu.user-options
+      - if current_user
         %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
           %a(href="#{organization_path(current_org)}" title="My Organization")
             %span.glyphicon.glyphicon-globe
@@ -23,12 +23,27 @@
             %span.glyphicon.glyphicon-user
             My Account
         %li
+          %a(href="#{release_notes_path}" title="Release notes")
+            %span.glyphicon.glyphicon-briefcase
+            Release notes
+        %li
+          %a(href="#" title="About Ladder Manager")
+            %span.glyphicon.glyphicon-question-sign
+            About
+        %li
           %a.sign-out(href="#{destroy_user_session_path}" title="Sign out")
             %span.glyphicon.glyphicon-off
             Sign out
-    - else
-      %ul.sidebar-menu.user-options
+      - else
         %li
           %a(href="#{new_user_session_path}" title="My challanges")
             %span.glyphicon.glyphicon-off
             Sign in
+        %li
+          %a(href="#" title="About Ladder Manager")
+            %span.glyphicon.glyphicon-question-sign
+            About
+        %li
+          %a(href="#{release_notes_path}" title="Release notes")
+            %span.glyphicon.glyphicon-briefcase
+            Release notes
