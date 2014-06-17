@@ -1,0 +1,15 @@
+- content_for(:title, "Release notes")
+%section.main
+  %header.clearfix
+    .section-title
+      %h1 Release notes
+    .section-actions
+      %form.full-width(action="#{ladders_path}" method="GET")
+        .input-group.form-group
+          %input.form-control(type="search" name="query" placeholder="Search for a ladder")
+          %button.search-button(type="submit")
+            %span.glyphicon.glyphicon-search
+
+  = render 'includes/message' if flash_message?
+  = render partial: 'release_notes/v0.1.1'
+  = render partial: 'release_notes/v0.1.0'
