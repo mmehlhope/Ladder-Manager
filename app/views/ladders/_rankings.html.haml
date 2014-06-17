@@ -8,10 +8,9 @@
           %dl
             %dt Record:
             %dd #{competitor.wins}W - #{competitor.draws}D - #{competitor.losses}L
-            %dt Rating:
-            %dd= competitor.rating
-          .competitor-avatar
-            %span.glyphicon.glyphicon-user
+          .rating-container
+            .span.rating-label Rating
+            .span.rating= competitor.rating
 - else
   %p
     No competitors have been added to this ladder yet.
