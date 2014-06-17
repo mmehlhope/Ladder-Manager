@@ -1,5 +1,5 @@
 - if @_view.inEditMode()
-  %form(action="#{@ladder.urlRoot}/#{@ladder.get('id')}" method="POST")
+  %form.update(action="#{@ladder.urlRoot}/#{@ladder.get('id')}" method="PUT")
     .list-item-content
       %input.input-small(type="text" name="ladder[name]" value="#{@ladder.get('name')}" placeholder="Ladder name")
     .list-item-actions
