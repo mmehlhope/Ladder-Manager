@@ -7,7 +7,7 @@ define (require, exports, module) ->
   CompetitorCollection = require 'backbone/collections/competitor_collection'
   CompetitorIndexView  = require 'backbone/views/competitors/index_view'
   LadderModel          = require 'backbone/models/ladder_model'
-  LadderDetailsView    = require 'backbone/views/ladders/details_view'
+  LadderDetailsView    = require 'backbone/views/ladders/details_index_view'
 
   class LadderEditPage extends Backbone.View
 
@@ -23,5 +23,4 @@ define (require, exports, module) ->
       competitorCollection      = new CompetitorCollection(@competitors)
       competitorCollection.url  = "/ladders/#{@ladder.id}/competitors"
       competitorIndexView       = new CompetitorIndexView(collection: competitorCollection)
-      ladderModel               = new LadderModel(@ladder)
-      LadderDetailsView         = new LadderDetailsView(model: ladderModel).render()
+      LadderDetailsView         = new LadderDetailsView(model: new LadderModel(@ladder))

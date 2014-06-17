@@ -26,7 +26,7 @@ define (require, exports, module) ->
 
     render: () ->
       @$el.empty().html(Competitors_t(competitors: @collection)).find('.list-view').append(@children)
-      @messageCenter       = new MessagesView(el: @$('.messaging:first'))
+      @messageCenter = new MessagesView(el: @$('.messaging:first'))
       this
 
     addOne: (model) ->

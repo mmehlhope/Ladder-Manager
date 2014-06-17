@@ -1,0 +1,8 @@
+.section-header
+  .section-title
+    %h2 Edit Settings
+    %p Manage this ladders settings and preferences
+
+%section#edit-details
+  .messaging
+  %ul.list-view
