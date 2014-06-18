@@ -15,6 +15,7 @@ class OrganizationsController < ApplicationController
     if current_org
       redirect_to current_org
     else
+      flash.discard[:notice]
       @organization = Organization.new
       render layout: 'devise'
     end
@@ -33,10 +34,11 @@ class OrganizationsController < ApplicationController
         # Assign org to user
         current_user.update_attributes(organization_id: @organization.id)
 
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
+        format.html { redirect_to @organization }
         format.json { render json: @organization }
       else
-        format.html { render action: 'new' }
+        debugger
+        format.html { redirect_to new_organization_path, alert: @organization.errors.full_messages.first }
         format.json { render json: {errors: @organization.errors.full_messages}, status: :unprocessable_entity }
       end
     end
@@ -47,7 +49,7 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(org_params)
-        format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
+        format.html { redirect_to @organization }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
