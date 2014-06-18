@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  require 'securerandom'
 
   before_action :authenticate_user!
   before_action :set_user, :except => [:index, :create]
