@@ -4,6 +4,7 @@ class Match < ActiveRecord::Base
   has_and_belongs_to_many :competitors
 
   validate :validate_competitors
+  validate :finalization, on: :finalize
 
   include MatchesHelper
 
@@ -74,6 +75,14 @@ class Match < ActiveRecord::Base
       errors[:base] << "A competitor cannot compete against him or herself. Please select a different opponent."
     elsif competitor_1.blank? || competitor_2.blank?
       errors[:base] << "Two unique competitors must be selected for the match."
+    end
+  end
+
+  def validate_finalization
+    if @match.finalized?
+      errors[:base] << "Match was already finalized"
+    elsif @match.games.count == 0
+      errors[:base] << "Match must contain at least one game to be finalized"
     end
   end
 end

@@ -81,16 +81,8 @@ class MatchesController < ApplicationController
   # POST /matches/1/finalize
   def finalize
 
-    # Validate
-    errors = "Match was already finalized" if @match.finalized?
-    errors = "Match must contain at least one game to be finalized" if @match.games.count == 0
-
-    if errors.blank?
-      @match.finalize
-    end
-
     respond_to do |format|
-      if @match.finalized?
+      if @match.finalize
 
         @match.update_player_stats
 
@@ -100,12 +92,11 @@ class MatchesController < ApplicationController
         }
         format.json { render json: @match, status: :ok }
       else
-        errors = "There was an error finalizing the match" if errors.blank?
         format.html {
-          flash[:error] = errors
+          flash[:error] = @match.errors.full_messages
           redirect_to match_path(@match)
         }
-        format.json { render json: {errors: errors}, status: :unprocessable_entity }
+        format.json { render json: {errors: @match.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
