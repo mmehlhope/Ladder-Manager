@@ -42,30 +42,21 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
-    if match_params[:competitor_1].blank? || match_params[:competitor_2].blank?
-      flash[:error] = "Two competitors must be selected to create a match."
-      redirect_to new_ladder_match_path(@ladder)
-    elsif match_params[:competitor_1] == match_params[:competitor_2]
-      flash[:error] = "A competitor cannot compete against him or herself. Please select another opponent."
-      redirect_to new_ladder_match_path(@ladder)
-    else
-      @match = @ladder.matches.build(match_params)
+    @match = @ladder.matches.build(match_params)
 
-      # Find competitors and add them to the match association
-      competitors = Competitor.find([match_params[:competitor_1], match_params[:competitor_2]])
-      @match.competitors << competitors
-
-      respond_to do |format|
-        if @match.save
-          format.html {
-            flash[:success] = 'Match was successfully created.'
-            redirect_to match_path(@match)
-          }
-          format.json { render json: @match, status: :created }
-        else
-          format.html { render action: 'new' }
-          format.json { render json: {errors: @match.errors.full_messages}, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @match.save
+        # Find competitors and add them to the match association
+        competitors = Competitor.find([match_params[:competitor_1], match_params[:competitor_2]])
+        @match.competitors << competitors
+        format.html {
+          flash[:success] = 'Match was successfully created.'
+          redirect_to match_path(@match)
+        }
+        format.json { render json: @match, status: :created }
+      else
+        format.html { redirect_to edit_ladder_path(@match.ladder) }
+        format.json { render json: {errors: @match.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -81,7 +72,7 @@ class MatchesController < ApplicationController
         }
         format.json { head :ok }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to edit_ladder_path(@match.ladder) }
         format.json { render json: {errors: @match.errors.full_messages}, status: :unprocessable_entity }
       end
     end
@@ -114,7 +105,7 @@ class MatchesController < ApplicationController
           flash[:error] = errors
           redirect_to match_path(@match)
         }
-        format.json { render json: {errors: errors }, status: :unprocessable_entity }
+        format.json { render json: {errors: errors}, status: :unprocessable_entity }
       end
     end
   end

@@ -3,6 +3,8 @@ class Match < ActiveRecord::Base
   has_many                :games, dependent: :destroy
   has_and_belongs_to_many :competitors
 
+  validate :validate_competitors
+
   include MatchesHelper
 
   # Parses a match's series of games, pulling the winner IDs from each
@@ -64,6 +66,14 @@ class Match < ActiveRecord::Base
       losing_competitor.update_rating(losing_elo)
     end
   end
+
+  protected
+
+  def validate_competitors
+    if competitor_1 == competitor_2
+      errors[:base] << "A competitor cannot compete against him or herself. Please select a different opponent."
+    elsif competitor_1.blank? || competitor_2.blank?
+      errors[:base] << "Two unique competitors must be selected for the match."
+    end
+  end
 end
-
-
