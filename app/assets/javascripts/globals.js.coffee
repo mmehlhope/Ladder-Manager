@@ -31,7 +31,6 @@ define (require, exports, module) ->
     ###
     _getMessageCenter: () ->
       @globalMessageCenter = new MessageCenter(el: $('.global-message-center'))
-      console.log @globalMessageCenter.el
 
     # Global event handling in lieu of Rails's UJS
     _bindEvents: () ->
