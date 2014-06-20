@@ -4,8 +4,9 @@
   %header.clearfix
     .section-title
       %h1= yield(:title)
-    .section-actions
-      %a.btn.pull-right(href="#{ladder_path(@ladder)}") View ladder
+      %dl
+        %dt Ladder:
+        %dd= link_to @ladder.name, @ladder
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %section.management-panel
@@ -24,7 +25,6 @@
       .tab-pane#matches
 
       .tab-pane#ladder-settings
-
 
 :coffeescript
   require ['backbone/pages/manage_ladder'], (ManageLadderPage) ->
