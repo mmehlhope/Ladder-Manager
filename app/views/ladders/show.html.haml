@@ -8,8 +8,6 @@
           Organized by:
         %dd
           %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
-        %dt Status:
-        %dd(class="#{@ladder.active? ? 'success-text' : 'danger-text'}") #{@ladder.active? ? 'Active' : 'Inactive'}
     .section-actions
       %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}") Manage ladder
   %ul.navigation
