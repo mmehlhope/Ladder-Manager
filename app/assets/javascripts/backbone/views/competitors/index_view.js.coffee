@@ -2,7 +2,6 @@ define (require, exports, module) ->
 
   $                         = require 'jquery'
   _                         = require 'underscore'
-  Globals                   = require 'globals'
   Backbone                  = require 'backbone'
   CompetitorModel           = require 'backbone/models/competitor_model'
   CompetitorCollection      = require 'backbone/collections/competitor_collection'
@@ -32,8 +31,6 @@ define (require, exports, module) ->
     addOne: (model) ->
       competitorView = new CompetitorView(model: model)
       @$('.list-view').prepend(competitorView.render().el)
-      # Post success message of new competitor
-      Globals.postGlobalSuccess("#{model.get('name')} has been added to the ladder.", 'success')
       this
 
     addChildrenAndRender: () ->
