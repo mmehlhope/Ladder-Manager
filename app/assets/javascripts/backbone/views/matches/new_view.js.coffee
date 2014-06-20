@@ -79,8 +79,8 @@ define (require, exports, module) ->
         success: (jqXHR, textStatus) =>
           @removeEl()
           @collection.push(jqXHR)
-        error: (jqXHR, textStatus, errorThrown) ->
-          console.log textStatus
+        error: (jqXHR, textStatus, errorThrown) =>
+          @contextView.messageCenter.post(Util.parseTransportErrors(jqXHR), 'danger')
       )
       this
 
