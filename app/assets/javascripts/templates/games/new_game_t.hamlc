@@ -2,9 +2,9 @@
   %form.full-width(action="#{@collection.url}" method="POST")
     .cell.numGames.success-text #{@collection.length + 1}
     .cell.competitor
-      %input.input-small(name="game[competitor_1_score]" type="text" value="" placeholder="#{@comp_1_name}")
+      %input.input-small(name="game[competitor_1_score]" type="text" value="" placeholder="Score")
     .cell.competitor
-      %input.input-small(name="game[competitor_2_score]" type="text" value="" placeholder="#{@comp_2_name}")
+      %input.input-small(name="game[competitor_2_score]" type="text" value="" placeholder="Score")
     .cell.pull-right
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="")
