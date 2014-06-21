@@ -9,15 +9,14 @@
         %dd
           %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
     .section-actions
-      %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}") Manage ladder
+      %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder") Manage ladder
   %ul.navigation
     %li.active
-      %a.btn.btn-link(href="#rankings" data-toggle="tab") Rankings
+      %a.btn.btn-link(href="#rankings" data-toggle="tab" title="Rankings") Rankings
     %li
-      %a.btn.btn-link(href="#recent-matches" data-toggle="tab") Recent matches
+      %a.btn.btn-link(href="#recent-matches" data-toggle="tab" title="Recent matches") Recent matches
 
   = render 'includes/message' if flash_message? && user_can_admin_ladder
-  = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
 
   .tab-content
     .tab-pane#rankings.active
