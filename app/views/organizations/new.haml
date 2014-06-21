@@ -1,6 +1,6 @@
 - content_for(:title, "Organization creation")
 - content_for(:description, "Name the organization that will be hosting your ladders")
-
+%h3 Hi, #{current_user.name}!
 %h2 What is your organization's name?
 = form_tag organizations_path, :class => "full-width" do
   = render "includes/message"
