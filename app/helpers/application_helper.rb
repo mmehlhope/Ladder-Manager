@@ -59,4 +59,24 @@ module ApplicationHelper
   def flash_message?
     true if flash[:notice] || flash[:alert] || flash[:error] || flash[:success]
   end
+
+  def resource_error_messages
+    return "" if resource.errors.empty?
+
+    messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
+    sentence = I18n.t("errors.messages.not_saved",
+                      count: resource.errors.count,
+                      resource: resource.class.model_name.human.downcase)
+
+    html = <<-HTML
+    <div class="alert alert-dismissable text-left alert-danger">
+      <button class="close" type="button" data-dismiss="alert">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+      <ul>#{messages}</ul>
+    </div>
+    HTML
+
+    html.html_safe
+  end
 end

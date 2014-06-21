@@ -17,12 +17,16 @@
 .alert .alert-link {
   font-weight: bold;
 }
-.alert > p,
-.alert > ul {
+.alert > p {
   margin-bottom: 0;
 }
 .alert > p + p {
   margin-top: 5px;
+}
+.alert > ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 .alert-dismissable {
   padding-right: 1em;

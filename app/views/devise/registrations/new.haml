@@ -2,8 +2,9 @@
 - content_for(:description, "Create a Ladder Manager account")
 
 = form_tag registration_path(resource_name), :class => "full-width" do
-  = devise_error_messages!
+  = resource_error_messages
   = render "includes/message"
+
   %h2 Create your account
   %div.form-group
     %input(type="text" name="user[name]" autofocus="true" placeholder="Full name" required="required")
