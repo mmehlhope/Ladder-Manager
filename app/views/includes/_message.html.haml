@@ -1,4 +1,4 @@
-- flash.each do |key, msg|
+- flash.each do |key, messageArr|
   - case key
   - when :notice
     - style = "alert-info"
@@ -11,4 +11,9 @@
   .alert.alert-dismissable.text-left(class="#{style ? style : ''}")
     %button.close(type="button" data-dismiss="alert")
       %span.glyphicon.glyphicon-remove
-    = msg
+    - if messageArr.length == 1
+      = messageArr[0]
+    - else
+      %ul
+        - messageArr.each do |message|
+          %li= message

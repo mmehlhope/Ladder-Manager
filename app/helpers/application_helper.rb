@@ -60,6 +60,14 @@ module ApplicationHelper
     true if flash[:notice] || flash[:alert] || flash[:error] || flash[:success]
   end
 
+  def resource
+    if params[:controller] == 'devise'
+      resource
+    else
+      resource = instance_variable_get('@' + params[:controller].singularize)
+    end
+  end
+
   def resource_error_messages
     return "" if resource.errors.empty?
 
