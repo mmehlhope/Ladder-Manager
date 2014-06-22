@@ -3,6 +3,7 @@
 %h3 Hi, #{current_user.name}!
 %h2 What is your organization's name?
 = form_tag organizations_path, :class => "full-width" do
+
   = render "includes/message"
 
   %div.form-group

@@ -16,7 +16,7 @@
     %li
       %a.btn.btn-link(href="#recent-matches" data-toggle="tab" title="Recent matches") Recent matches
 
-  = render 'includes/message' if flash_message? && user_can_admin_ladder
+  = resource_error_messages
 
   .tab-content
     .tab-pane#rankings.active

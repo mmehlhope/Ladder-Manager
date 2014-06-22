@@ -37,8 +37,8 @@ class OrganizationsController < ApplicationController
         format.html { redirect_to @organization }
         format.json { render json: @organization }
       else
-        debugger
-        format.html { redirect_to new_organization_path, alert: @organization.errors.full_messages.first }
+        flash[:error] = @organization.errors.full_messages
+        format.html { redirect_to new_organization_path }
         format.json { render json: {errors: @organization.errors.full_messages}, status: :unprocessable_entity }
       end
     end
