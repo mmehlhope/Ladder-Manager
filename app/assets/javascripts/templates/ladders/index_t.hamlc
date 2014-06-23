@@ -1,12 +1,13 @@
 .section-header
   .section-title
     %h2 Your organization's ladders
-    - if @ladders
+    - if @ladders.present?
       %p View or manage your organization's ladders
     - else
-      %p To get started,
-        %a(href="/ladders/new" title="Create a new ladder") create a new ladder
-        \.
+      %p 
+        To get started, create your first ladder using the 
+        %strong "New Ladder" 
+        button.
 
   .section-actions
     %a#create-new-ladder.btn.btn-primary(href="/ladders/new" title="Create a new ladder")

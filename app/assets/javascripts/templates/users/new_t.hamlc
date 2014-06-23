@@ -5,8 +5,8 @@
     %input.input-small(type="text" name="user[email]" placeholder="New user email")
   .list-item-actions
     .btn-group
-      %button.btn.btn-small.btn-success(type="submit" value="Create")
+      %button.btn.btn-small.btn-success(type="submit" value="Create" title="Create new user")
         Create
-      %button.btn.btn-small(data-action="cancel")
+      %button.btn.btn-small(data-action="cancel" title="Cancel")
         %span.glyphicon.glyphicon-remove
   .messaging
