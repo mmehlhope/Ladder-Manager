@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612003057) do
+ActiveRecord::Schema.define(version: 20140624150043) do
 
   create_table "competitors", force: true do |t|
     t.string   "name"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20140612003057) do
     t.integer  "winner_id"
     t.integer  "competitor_1_score"
     t.integer  "competitor_2_score"
+    t.integer  "ladder_id"
   end
 
   add_index "games", ["match_id"], name: "index_games_on_match_id", using: :btree

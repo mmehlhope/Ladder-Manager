@@ -2,8 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :set_match, except: [:destroy]
   before_action :set_ladder, except: [:destroy]
-  # before_action :ensure_user_can_admin_ladder, except: [:index, :show]
-
+  before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
 
   # GET /games
   # GET /games.json
@@ -51,7 +50,9 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = @match.games.build(game_params)
+    gparams = game_params
+    gparams[:ladder_id] = @match.ladder.id
+    @game = @match.games.build(gparams)
     competitors = Competitor.find([@match.competitor_1, @match.competitor_2])
     @game.competitors << competitors
 
