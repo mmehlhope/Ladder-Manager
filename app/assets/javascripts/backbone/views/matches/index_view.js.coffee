@@ -38,11 +38,6 @@ define (require, exports, module) ->
 
       matchViewNode = matchView.render().el
       @$('.list-view').prepend(matchViewNode)
-      # Post success message of new match
-      Globals.postGlobalSuccess(
-        "You've added a new match between #{model.get('competitor_1').name} and #{model.get('competitor_2').name}!",
-        'success'
-      )
       this
 
     addChildrenAndRender: () ->
