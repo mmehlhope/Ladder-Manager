@@ -1,6 +1,9 @@
 class OrganizationsController < ApplicationController
   before_action :set_org, except: [:create, :new]
   before_action :authenticate_user!
+  before_action :ensure_user_can_view_organization, only: [:show]
+  # before_action :ensure_user_can_create_resource, only: [:create]
+  # before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
 
   # GET /organizations/1
   # GET /organizations/1.json

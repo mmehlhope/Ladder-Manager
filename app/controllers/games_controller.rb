@@ -2,7 +2,8 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_action :set_match, except: [:destroy]
   before_action :set_ladder, except: [:destroy]
-  before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
 
   # GET /games
   # GET /games.json

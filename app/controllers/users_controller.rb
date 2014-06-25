@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_user, :except => [:index, :create]
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
 
   # GET /admin/users
   # GET /admin/users.json
@@ -18,6 +20,7 @@ class UsersController < ApplicationController
 
     full_params = user_params
     full_params[:password] = generated_password
+    full_params[:organization_id] = current_org.id
 
     @user = User.new(full_params)
 
@@ -75,6 +78,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :organization_id)
+      params.require(:user).permit(:name, :email)
     end
 end

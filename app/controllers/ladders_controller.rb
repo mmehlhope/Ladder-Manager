@@ -2,7 +2,8 @@ class LaddersController < ApplicationController
   before_action :verify_user, only: [:new, :create, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
   before_action :search, only: [:index]
-  before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
 
   # GET /ladders
   # GET /ladders.json

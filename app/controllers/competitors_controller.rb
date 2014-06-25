@@ -1,8 +1,8 @@
 class CompetitorsController < ApplicationController
   before_action :set_competitor, only: [:show, :edit, :update, :destroy]
   before_action :set_ladder
-  before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
-
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
   # GET /competitors
   # GET /competitors.json
   def index

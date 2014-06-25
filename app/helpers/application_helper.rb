@@ -4,7 +4,11 @@ module ApplicationHelper
   # User helpers #
   ################
   def current_user_json
-    @current_user_json = UserSerializer.new(current_user).to_json if current_user
+    if current_user
+      @current_user_json = UserSerializer.new(current_user).to_json
+    else
+      nil
+    end
   end
 
   def current_org
@@ -15,48 +19,78 @@ module ApplicationHelper
     current_user && current_org
   end
 
-  def ensure_user_can_create_resource
-    resource = params[:controller].singularize
-    unless user_can_create_resource
-      respond_to do |format|
-        message = "You do not have permission to create that #{resource}"
-        format.html {
-          flash[:error] = message
-          redirect_to request.referer
-        }
-        format.json {
-          render json: {errors: message}, status: :unauthorized
-        }
-      end
-    end
-  end
-  def ensure_user_can_edit_resource
-    resource = params[:controller].singularize
-    unless user_can_edit_resource
-      respond_to do |format|
-        message = "You do not have permission to edit that #{resource}"
-        format.html {
-          flash[:error] = message
-          redirect_to request.referer
-        }
-        format.json {
-          render json: {errors: message}, status: :unauthorized
-        }
-      end
-    end
-  end
+  #################
+  # Authorization #
+  #################
   
-  def user_can_create_resource
-    resource = params[:controller] 
-    resource_singular = resource.singularize
-    if current_user.nil? || current_org.nil?
-      false
-    else
-      ladder_id = instance_variable_get("@"+resource_singular).try(:ladder_id)
-      current_org.ladders.find_by_id(ladder_id).present? ? true : false
+  def ensure_user_can_create_resource
+    unless user_can_create_resource
+      redirect_with_error("You do not have permission to edit that #{_resource_singular}")
     end
   end
 
+  def ensure_user_can_edit_resource
+    unless user_can_edit_resource
+      redirect_with_error("You do not have permission to edit that #{_resource_singular}")
+    end
+  end
+  
+  def ensure_user_can_view_organization
+    unless user_can_view_organization
+      redirect_with_error("You do not have permission to view that #{_resource_singular}")
+    end
+  end
+
+  def user_can_edit_resource
+    return false unless current_org.present?
+
+    if _resource == "ladders"
+      current_org.send(_resource).find_by_id(id).present?
+    else
+      ladder_id = _resource_instance.try(:ladder_id)
+      current_org.ladders.find_by_id(ladder_id).present?
+    end
+  end
+
+  def user_can_create_resource
+    whitelisted_resources = %w(organization users ladders matches competitors games)
+    ladder_resources = %w(matches competitors)
+
+    # If there is no current org, cannot create anything
+   return false unless current_org.present? && whitelisted_resources.include?(_resource) 
+
+    # If it is a ladder resource, see if that ladder exists within the current org
+    if ladder_resources.include?(_resource)
+      ladder_id = params[:ladder_id]
+      current_org.ladders.find_by_id(ladder_id).present?
+    # if it's a game, ensure the game's match is within the current org's ladder
+    elsif _resource == "games"
+      ladder_id = instance_variable_get("@match").try(:ladder_id)
+      current_org.ladders.find_by_id(ladder_id).present?
+    end
+  end
+
+  def user_can_view_organization
+    current_org.present? && current_org.id == params[:id].to_i
+  end
+  #########################
+  # Authorization Helpers #
+  #########################
+  
+  
+  def _resource
+    params[:controller]
+  end
+
+  def _resource_singular
+    _resource.singularize
+  end
+
+  def _resource_instance
+    instance_variable_get("@" + _resource_singular)
+  end
+
+  
   ####################
   # Redirect Helpers #
   ####################
@@ -69,11 +103,22 @@ module ApplicationHelper
     end
   end
 
-  def redirect_with_error(error, path)
-    error ||= "You do not have permission to view that page"
-    path  ||= root_path
-    flash[:error] = error
-    redirect_to path
+  def redirect_with_error(error, path=new_user_session_path)
+    error ||= "You do not have permission to complete that action."
+    
+    respond_to do |format|
+      format.html {
+        flash[:error] = error
+        if current_org.present?
+          redirect_to organization_path(current_org)
+        else
+          redirect_to path
+        end
+      }
+      format.json {
+        render json: {errors: error}, status: :unauthorized
+      }
+    end
   end
 
   ##################
