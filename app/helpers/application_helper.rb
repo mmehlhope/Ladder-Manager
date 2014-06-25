@@ -23,6 +23,9 @@ module ApplicationHelper
   # Authorization #
   #################
   
+  #
+  # TODO: MAKE THIS BULLETPROOF BY PASSING IN ASSOCIATIVE IDS 
+  #
   def ensure_user_can_create_resource
     unless user_can_create_resource
       redirect_with_error("You do not have permission to edit that #{_resource_singular}")
@@ -43,9 +46,10 @@ module ApplicationHelper
 
   def user_can_edit_resource
     return false unless current_org.present?
-
+    
     if _resource == "ladders"
-      current_org.send(_resource).find_by_id(id).present?
+      ladder_id = params[:id]
+      current_org.send(_resource).find_by_id(ladder_id).present?
     else
       ladder_id = _resource_instance.try(:ladder_id)
       current_org.ladders.find_by_id(ladder_id).present?
@@ -53,6 +57,7 @@ module ApplicationHelper
   end
 
   def user_can_create_resource
+    debugger
     whitelisted_resources = %w(organization users ladders matches competitors games)
     ladder_resources = %w(matches competitors)
 
@@ -67,6 +72,8 @@ module ApplicationHelper
     elsif _resource == "games"
       ladder_id = instance_variable_get("@match").try(:ladder_id)
       current_org.ladders.find_by_id(ladder_id).present?
+    elsif _resource == "ladders"
+      true
     end
   end
 

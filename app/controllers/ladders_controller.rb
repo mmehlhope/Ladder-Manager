@@ -1,5 +1,5 @@
 class LaddersController < ApplicationController
-  before_action :verify_user, only: [:new, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
   before_action :search, only: [:index]
   before_action :ensure_user_can_create_resource, only: [:create]
@@ -113,7 +113,7 @@ class LaddersController < ApplicationController
           @ladders = []
         end
       else
-        @ladders = []
+        @ladders = current_org ? current_org.ladders : []
       end
     end
 
@@ -129,11 +129,4 @@ class LaddersController < ApplicationController
     def ladder_params
       params.require(:ladder).permit(:name)
     end
-
-    def verify_user
-      if current_user.nil?
-        redirect_with_error("You must be logged in to modify a ladder", new_user_session_path)
-      end
-    end
-
 end
