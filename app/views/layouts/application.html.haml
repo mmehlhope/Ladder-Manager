@@ -3,10 +3,9 @@
   %head
     %title Ladder Manager - #{yield :title}
     :coffeescript
-      current_user_exists = #{!@current_user_json.empty?}
-      if current_user_exists
-        window.LadderManager =
-          currentUser: #{@current_user_json}
+      current_user_json = #{@current_user_json}
+      window.LadderManager =
+        currentUser: current_user_json
     #{stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true}
     #{requirejs_include_tag "application"}
     #{csrf_meta_tags}
