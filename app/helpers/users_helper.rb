@@ -14,7 +14,7 @@ module UsersHelper
   end
 
   def is_activated?
-    !confirmation_token.nil?
+    confirmation_token.present?
   end
 
   ###############################
