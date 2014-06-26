@@ -7,23 +7,13 @@ class CompetitorsController < ApplicationController
   # GET /competitors.json
   def index
     @competitors = @ladder.competitors
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @competitors, root: false
-      }
-    end
+    render json: @competitors, root: false
   end
 
   # GET /competitors/1
   # GET /competitors/1.json
   def show
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @competitor, root: false, expanded: true
-      }
-    end
+    render json: @competitor, root: false, expanded: true
   end
 
   # GET /competitors/new

@@ -9,24 +9,13 @@ class MatchesController < ApplicationController
   # GET /matches.json
   def index
     @matches = @ladder.matches.order("updated_at desc")
-
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @matches, root: false
-      }
-    end
+    render json: @matches, root: false
   end
 
   # GET /matches/1
   # GET /matches/1.json
   def show
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @match, root: false, expanded: true
-      }
-    end
+    render json: @match, root: false, expanded: true
   end
 
   # GET /matches/new
