@@ -1,6 +1,7 @@
 class LaddersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
+  before_action :set_organization, only: [:create]
   before_action :search, only: [:index]
   before_action :ensure_user_can_create_resource, only: [:create]
   before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
@@ -47,7 +48,7 @@ class LaddersController < ApplicationController
   # POST /ladders
   # POST /ladders.json
   def create
-    @ladder = current_org.ladders.build(ladder_params)
+    @ladder = @organization.ladders.build(ladder_params)
 
     respond_to do |format|
       if @ladder.save
@@ -125,8 +126,12 @@ class LaddersController < ApplicationController
       end
     end
 
+    def set_organization
+      @organization = Organization.find_by_id(params[:organization_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def ladder_params
-      params.require(:ladder).permit(:name)
+      params.require(:ladder).permit(:name, :organization_id)
     end
 end

@@ -8,8 +8,16 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
-    @ladders_json = @organization.ladders_json
-    @users_json   = @organization.users_json
+    respond_to do |format|
+      format.html {
+        @organization_json = @organization.to_json
+        @ladders_json = @organization.ladders_json
+        @users_json   = @organization.users_json
+      }
+      format.json {
+        render json: @organization
+      }
+    end
   end
 
   # GET /organizations/new

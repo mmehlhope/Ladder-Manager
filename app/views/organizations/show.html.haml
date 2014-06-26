@@ -24,6 +24,7 @@
 :coffeescript
   require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
     ladderEdit = new ManageOrgPage({
+      organization: #{@organization_json}
       ladders: #{@ladders_json},
       users: #{@users_json}
     })

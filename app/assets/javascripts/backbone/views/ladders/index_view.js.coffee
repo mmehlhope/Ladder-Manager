@@ -17,8 +17,9 @@ define (require, exports, module) ->
     events:
       'click #create-new-ladder' : 'showNewLadderForm'
 
-    initialize: () ->
+    initialize: (options={}) ->
       @addChildrenAndRender()
+      @organization = options.organization
       @listenTo(@collection, 'sync', @addChildrenAndRender)
       @listenTo(@collection, 'add', @addOne)
       this
@@ -57,6 +58,7 @@ define (require, exports, module) ->
 
       newladderView = new NewLadderView(
         collection: @collection
+        organization: @organization
       )
       @$('.list-view').prepend(newladderView.render().el)
       @$('.list-view .list-item:first input:first').focus()

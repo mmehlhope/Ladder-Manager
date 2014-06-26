@@ -22,11 +22,15 @@ define (require, exports, module) ->
       'submit form'                  : 'createNewItem'
       'click [data-action="cancel"]' : 'removeEl'
 
-    initialize: () ->
+    initialize: (options={}) ->
+      @renderOptions = _.extend({}, options, {
+        url: @collection.url
+        collection: @collection
+      })
       this
 
     render: () ->
-      @$el.html(@template(url: @collection.url, collection: @collection))
+      @$el.html(@template(@renderOptions))
       @messagesView = new MessagesView(el: @$('.messaging'))
       this
 

@@ -14,8 +14,8 @@ define (require, exports, module) ->
 
     initialize: (options={}) ->
       {@organization, @ladders, @users} = options
-
+      orgModel         = new OrganizationModel(@organization)
       ladderCollection = new LadderCollection(@ladders)
-      ladderIndexView  = new LadderIndexView(collection: ladderCollection)
+      ladderIndexView  = new LadderIndexView(collection: ladderCollection, organization: orgModel)
       userCollection   = new UserCollection(@users)
       userIndexView    = new UserIndexView(collection: userCollection)
