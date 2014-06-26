@@ -19,28 +19,6 @@ module ApplicationHelper
     current_user && current_org
   end
 
-  #################
-  # Authorization #
-  #################
-  
-  def ensure_user_can_create_resource
-    unless current_user.send(user_resource_create_method, _resource_id)
-      redirect_with_error("You do not have permission to create that #{_resource_singular}")
-    end
-  end
-
-  def ensure_user_can_edit_resource
-    unless current_user.send(user_resource_edit_method, _resource_instance)
-      redirect_with_error("You do not have permission to edit that #{_resource_singular}")
-    end
-  end
-  
-  def ensure_user_can_view_organization
-    unless current_user.can_view_organization?(_resource_instance)
-      redirect_with_error("You do not have permission to view that #{_resource_singular}")
-    end
-  end
-
   #########################
   # Authorization Helpers #
   #########################
