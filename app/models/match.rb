@@ -81,7 +81,7 @@ class Match < ActiveRecord::Base
   def validate_finalization
     if @match.finalized?
       errors[:base] << "Match was already finalized"
-    elsif @match.games.count == 0
+    elsif @match.games.size == 0
       errors[:base] << "Match must contain at least one game to be finalized"
     end
   end

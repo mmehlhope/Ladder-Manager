@@ -17,7 +17,7 @@ module CompetitorsHelper
   end
 
   def games_played
-    games.count
+    games.size
   end
 
   def losses

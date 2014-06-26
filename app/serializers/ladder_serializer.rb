@@ -8,8 +8,8 @@ class LadderSerializer < ApplicationSerializer
     hash[:last_updated]      = updated_how_long_ago
     hash[:name]              = object.name
     hash[:organization_id]   = object.organization_id
-    hash[:competitor_count]  = object.competitors.count
-    hash[:matches_count]     = object.matches.count
+    hash[:competitor_count]  = object.competitors.size
+    hash[:matches_count]     = object.matches.size
 
     if options[:expanded]
       hash[:competitors] = ActiveModel::ArraySerializer.new(
