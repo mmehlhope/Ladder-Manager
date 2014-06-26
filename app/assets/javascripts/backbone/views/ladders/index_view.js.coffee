@@ -61,5 +61,5 @@ define (require, exports, module) ->
         organization: @organization
       )
       @$('.list-view').prepend(newladderView.render().el)
-      @$('.list-view .list-item:first input:first').focus()
+      @$('.list-view .list-item:first input[name="ladder[name]"]').focus()
       this

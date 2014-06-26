@@ -1,7 +1,7 @@
 .section-header
   .section-title
     %h2 Your organization's ladders
-    - if @ladders.present?
+    - if @ladders.length
       %p View or manage your organization's ladders
     - else
       %p 
