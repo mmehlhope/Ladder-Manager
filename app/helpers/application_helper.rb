@@ -23,62 +23,24 @@ module ApplicationHelper
   # Authorization #
   #################
   
-  #
-  # TODO: MAKE THIS BULLETPROOF BY PASSING IN ASSOCIATIVE IDS 
-  #
   def ensure_user_can_create_resource
-    unless user_can_create_resource
-      redirect_with_error("You do not have permission to edit that #{_resource_singular}")
+    unless current_user.send(user_resource_create_method, _resource_id)
+      redirect_with_error("You do not have permission to create that #{_resource_singular}")
     end
   end
 
   def ensure_user_can_edit_resource
-    unless user_can_edit_resource
+    unless current_user.send(user_resource_edit_method, _resource_instance)
       redirect_with_error("You do not have permission to edit that #{_resource_singular}")
     end
   end
   
   def ensure_user_can_view_organization
-    unless user_can_view_organization
+    unless current_user.can_view_organization?(_resource_instance)
       redirect_with_error("You do not have permission to view that #{_resource_singular}")
     end
   end
 
-  def user_can_edit_resource
-    return false unless current_org.present?
-    
-    if _resource == "ladders"
-      ladder_id = params[:id]
-      current_org.send(_resource).find_by_id(ladder_id).present?
-    else
-      ladder_id = _resource_instance.try(:ladder_id)
-      current_org.ladders.find_by_id(ladder_id).present?
-    end
-  end
-
-  def user_can_create_resource
-    whitelisted_resources = %w(organization users ladders matches competitors games)
-    ladder_resources = %w(matches competitors)
-
-    # If there is no current org, cannot create anything
-   return false unless current_org.present? && whitelisted_resources.include?(_resource) 
-
-    # If it is a ladder resource, see if that ladder exists within the current org
-    if ladder_resources.include?(_resource)
-      ladder_id = params[:ladder_id]
-      current_org.ladders.find_by_id(ladder_id).present?
-    # if it's a game, ensure the game's match is within the current org's ladder
-    elsif _resource == "games"
-      ladder_id = instance_variable_get("@match").try(:ladder_id)
-      current_org.ladders.find_by_id(ladder_id).present?
-    elsif _resource == "ladders"
-      true
-    end
-  end
-
-  def user_can_view_organization
-    current_org.present? && current_org.id == params[:id].to_i
-  end
   #########################
   # Authorization Helpers #
   #########################
@@ -96,7 +58,37 @@ module ApplicationHelper
     instance_variable_get("@" + _resource_singular)
   end
 
-  
+  def resource_association_map
+    resource_association_map = {
+      users: "organization",
+      ladders: "organization",
+      matches: "ladder",
+      competitors: "ladder",
+      games: "match",
+    } 
+    resource_association_map
+  end
+
+  def _resource_association
+    resource_association_map[_resource.to_sym]
+  end
+
+  def user_resource_create_method
+    "can_create_#{_resource_singular}_in_#{_resource_association}?"
+  end
+
+  def user_resource_edit_method
+    "can_edit_#{_resource_singular}?"
+  end
+
+  def _resource_instance
+    instance_variable_get("@#{_resource_singular}") 
+  end
+
+  def _resource_id
+    params["#{_resource_association}_id".to_sym].to_i
+  end
+
   ####################
   # Redirect Helpers #
   ####################

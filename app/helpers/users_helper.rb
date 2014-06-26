@@ -21,11 +21,11 @@ module UsersHelper
   # User Access and Permissions #
   ###############################
  
-  def can_create_user_in_org?(organization_id)
+  def can_create_user_in_organization?(organization_id)
     organization.id == organization_id
   end
 
-  def can_create_ladder_in_org?(organization_id)
+  def can_create_ladder_in_organization?(organization_id)
     organization.id == organization_id
   end
 
@@ -67,7 +67,7 @@ module UsersHelper
   end
   
   def ladder_exists_in_org?(ladder)
-    ladder_id = ladder.is_a? Object ? ladder.id : ladder
+    ladder_id = ladder.is_a?(Integer) ? ladder : ladder.try(:id)
     organization.ladders.find_by_id(ladder_id).present?
   end
 end
