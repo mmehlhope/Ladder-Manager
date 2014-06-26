@@ -9,23 +9,13 @@ class GamesController < ApplicationController
   # GET /games.json
   def index
     @games = @match.games
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @games, root: false
-      }
-    end
+    render json: @games, root: false
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @game, root: false
-      }
-    end
+    render json: @game, root: false
   end
 
   # GET /games/new

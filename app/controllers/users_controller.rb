@@ -8,11 +8,7 @@ class UsersController < ApplicationController
   # GET /admin/users
   # GET /admin/users.json
   def index
-    respond_to do |format|
-      format.json {
-        render json: current_org.users
-      }
-    end
+    render json: current_org.users
   end
 
   def create
