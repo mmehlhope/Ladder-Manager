@@ -57,7 +57,6 @@ module ApplicationHelper
   end
 
   def user_can_create_resource
-    debugger
     whitelisted_resources = %w(organization users ladders matches competitors games)
     ladder_resources = %w(matches competitors)
 
