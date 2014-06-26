@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
     full_params = user_params
     full_params[:password] = generated_password
-    full_params[:organization_id] = current_org.id
+    full_params[:organization_id] = params[:organization_id]
 
     @user = User.new(full_params)
 
