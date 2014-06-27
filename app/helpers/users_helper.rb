@@ -42,8 +42,16 @@ module UsersHelper
     organization.ladders.find_by_id(ladder_id).present?
   end
  
+  def can_edit_organization?(org)
+    organization.id == org.id
+  end
+
   def can_edit_user?(user)
     organization.id == user.organization.id
+  end
+
+  def can_delete_user?(user)
+    id != user.id
   end
 
   def can_edit_ladder?(ladder)
