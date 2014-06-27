@@ -1,13 +1,13 @@
 class OrganizationsController < ApplicationController
-  before_action :set_org, except: [:create, :new]
   before_action :authenticate_user!
+  before_action :set_org, except: [:create, :new]
   before_action :ensure_user_can_view_organization, only: [:show]
-  # before_action :ensure_user_can_create_resource, only: [:create]
-  # before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
+  before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
 
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    debugger
     respond_to do |format|
       format.html {
         @organization_json = @organization.to_json
@@ -89,7 +89,13 @@ class OrganizationsController < ApplicationController
       begin
         @organization = Organization.find(params[:id])
       rescue
-        redirect_with_error('That organization does not exist or you do not have access to it.', (current_user_and_org? ? organization_path(current_org) : root_path))
+        redirect_with_error("That organization does not exist or you do not have access to it.") 
+      end
+    end
+
+    def ensure_user_can_edit_organization
+      unless current_user && current_user.can_edit_organization?(@organization)
+        redirect_with_error("You do not have permission to edit that organization")
       end
     end
 end
