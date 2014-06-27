@@ -16,7 +16,7 @@ class CompetitorSerializer < ApplicationSerializer
       hash[:games]  = ActiveModel::ArraySerializer.new(object.games, each_serializer: GameSerializer)
       hash[:ladder] = LadderSerializer.new(object.ladder, root: false)
     end
-
+    hash[:can_edit] = scope.can_edit_competitor?(object) if scope
     hash
   end
 end

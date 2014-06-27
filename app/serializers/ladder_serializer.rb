@@ -22,7 +22,7 @@ class LadderSerializer < ApplicationSerializer
                             MatchSerializer,
                             minimal: true)
     end
-
+    hash[:can_edit] = scope.can_edit_ladder?(object)
     hash
   end
 end

@@ -18,6 +18,7 @@ class MatchSerializer < ApplicationSerializer
         ladder_name: object.ladder.name
       }
     end
+    hash[:can_edit] = scope.can_edit_match?(object) if scope
     hash
   end
 end

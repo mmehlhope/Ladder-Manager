@@ -11,6 +11,7 @@ class UserSerializer < ApplicationSerializer
     hash[:name]              = object.name
     hash[:email]             = object.email
     hash[:organization_id]   = object.organization_id
+    hash[:can_edit] = scope.can_edit_user?(object) if scope 
     hash
   end
 end
