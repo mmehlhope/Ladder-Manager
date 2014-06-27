@@ -9,10 +9,11 @@ module OrganizationHelper
   ################
 
   def ladders_json
+    debugger
     ActiveModel::ArraySerializer.new(
       ladders,
-      each_serializer:
-      LadderSerializer
+      each_serializer: LadderSerializer,
+      serialization_scope: current_user
     ).to_json
   end
 
@@ -21,8 +22,8 @@ module OrganizationHelper
 
     ActiveModel::ArraySerializer.new(
       sorted_users,
-      each_serializer:
-      UserSerializer
+      each_serializer: UserSerializer,
+      serialization_scope: current_user
     ).to_json
   end
 

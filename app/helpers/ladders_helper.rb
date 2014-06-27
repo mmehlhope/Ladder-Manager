@@ -40,7 +40,8 @@ module LaddersHelper
   def all_matches_json
     ActiveModel::ArraySerializer.new(
       all_matches,
-      each_serializer: MatchSerializer
+      each_serializer: MatchSerializer,
+      serialization_scope: current_user
     ).to_json
   end
 
@@ -48,14 +49,15 @@ module LaddersHelper
     ActiveModel::ArraySerializer.new(
       editable_matches,
       each_serializer: MatchSerializer,
+      serialization_scope: current_user
     ).to_json
   end
 
   def competitors_json
     ActiveModel::ArraySerializer.new(
       competitors,
-      each_serializer:
-      CompetitorSerializer
+      each_serializer: CompetitorSerializer,
+      serialization_scope: current_user
     ).to_json
   end
 end
