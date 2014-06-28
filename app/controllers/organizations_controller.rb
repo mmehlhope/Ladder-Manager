@@ -7,12 +7,11 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
-    debugger
     respond_to do |format|
       format.html {
         @organization_json = @organization.to_json
-        @ladders_json = @organization.ladders_json
-        @users_json   = @organization.users_json
+        @ladders_json = ladders_json
+        @users_json   = users_json
       }
       format.json {
         render json: @organization
@@ -97,5 +96,22 @@ class OrganizationsController < ApplicationController
       unless current_user && current_user.can_edit_organization?(@organization)
         redirect_with_error("You do not have permission to edit that organization")
       end
+    end
+
+    def ladders_json
+      ActiveModel::ArraySerializer.new(
+        @organization.ladders,
+        each_serializer: LadderSerializer,
+        scope: serialization_scope
+      ).to_json
+    end
+
+    def users_json
+      sorted_users = @organization.users.sort! { |x,y| x.full_name <=> y.full_name }
+      ActiveModel::ArraySerializer.new(
+        sorted_users,
+        each_serializer: UserSerializer,
+        scope: serialization_scope
+      ).to_json
     end
 end

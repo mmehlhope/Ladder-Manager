@@ -40,8 +40,8 @@ class LaddersController < ApplicationController
 
   # GET /ladders/1/edit
   def edit
-    @matches_json     = @ladder.editable_matches_json
-    @competitors_json = @ladder.competitors_json
+    @matches_json     = editable_matches_json
+    @competitors_json = competitors_json
     @ladder_json      = LadderSerializer.new(@ladder).to_json
   end
 
@@ -133,5 +133,29 @@ class LaddersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ladder_params
       params.require(:ladder).permit(:name, :organization_id)
+    end
+
+    def all_matches_json
+      ActiveModel::ArraySerializer.new(
+        @ladder.all_matches,
+        each_serializer: MatchSerializer,
+        scope: serialization_scope
+      ).to_json
+    end
+
+    def editable_matches_json
+      ActiveModel::ArraySerializer.new(
+        @ladder.editable_matches,
+        each_serializer: MatchSerializer,
+        scope: serialization_scope
+      ).to_json
+    end
+
+    def competitors_json
+      ActiveModel::ArraySerializer.new(
+        @ladder.competitors,
+        each_serializer: CompetitorSerializer,
+        scope: serialization_scope
+      ).to_json
     end
 end

@@ -2,14 +2,14 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
-  serialization_scope :current_user
   before_action :current_user_json
 
   include ApplicationHelper
+  
   #################
   # Authorization #
   #################
-  
+
   def ensure_user_can_create_resource
     unless current_user && current_user.send(user_resource_create_method, _resource_id)
       redirect_with_error("You do not have permission to create that #{_resource_singular}")

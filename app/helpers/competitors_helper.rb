@@ -31,5 +31,4 @@ module CompetitorsHelper
   def has_unfinished_matches?
     matches.reject(&:finalized?).length > 0
   end
-
 end

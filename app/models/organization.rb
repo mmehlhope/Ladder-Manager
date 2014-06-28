@@ -11,4 +11,5 @@ class Organization < ActiveRecord::Base
   def has_lone_admin?
     users.size == 1
   end
+
 end

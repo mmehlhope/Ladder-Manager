@@ -36,28 +36,4 @@ module LaddersHelper
   def editable_matches
     matches.order("updated_at desc").reject(&:finalized?)
   end
-
-  def all_matches_json
-    ActiveModel::ArraySerializer.new(
-      all_matches,
-      each_serializer: MatchSerializer,
-      serialization_scope: current_user
-    ).to_json
-  end
-
-  def editable_matches_json
-    ActiveModel::ArraySerializer.new(
-      editable_matches,
-      each_serializer: MatchSerializer,
-      serialization_scope: current_user
-    ).to_json
-  end
-
-  def competitors_json
-    ActiveModel::ArraySerializer.new(
-      competitors,
-      each_serializer: CompetitorSerializer,
-      serialization_scope: current_user
-    ).to_json
-  end
 end
