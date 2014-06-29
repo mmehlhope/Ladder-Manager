@@ -10,6 +10,16 @@ class ApplicationController < ActionController::Base
   # Authorization #
   #################
 
+  alias_method :devise_current_user, :current_user
+  def current_user
+    @current_user if @current_user
+    if devise_current_user
+      @current_user = devise_current_user
+    else
+      @current_user = User.new()
+    end
+  end
+
   def ensure_user_can_create_resource
     unless current_user && current_user.send(user_resource_create_method, _resource_id)
       redirect_with_error("You do not have permission to create that #{_resource_singular}")

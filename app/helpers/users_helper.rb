@@ -75,6 +75,7 @@ module UsersHelper
   end
   
   def ladder_exists_in_org?(ladder)
+    return false unless organization && organization.ladders
     ladder_id = ladder.is_a?(Integer) ? ladder : ladder.try(:id)
     organization.ladders.find_by_id(ladder_id).present?
   end

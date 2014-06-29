@@ -4,16 +4,12 @@ module ApplicationHelper
   # User helpers #
   ################
   def current_user_json
-    if current_user
+    if devise_current_user
       @current_user_json ||= UserSerializer.new(current_user).to_json
     else
       nil
     end
   end
-
-  # def current_user
-  #   current_user || User.new()
-  # end
 
   def current_org
     @current_organization ? @current_organization : (current_user ? current_user.organization : false)

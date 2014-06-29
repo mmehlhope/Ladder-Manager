@@ -8,8 +8,9 @@
           Organized by:
         %dd
           %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
-    .section-actions
-      %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder") Manage ladder
+    - if current_user.can_edit_ladder?(@ladder)
+      .section-actions
+        %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder") Manage ladder
   %ul.navigation
     %li.active
       %a.btn.btn-link(href="#rankings" data-toggle="tab" title="Rankings") Rankings
