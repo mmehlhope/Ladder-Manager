@@ -15,12 +15,12 @@ class LadderSerializer < ApplicationSerializer
     if options[:expanded]
       hash[:competitors] = ActiveModel::ArraySerializer.new(
                             object.competitors,
-                            each_serializer:
-                            CompetitorSerializer)
+                            each_serializer: CompetitorSerializer,
+                            scope: scope)
       hash[:matches]     = ActiveModel::ArraySerializer.new(
                             object.matches,
-                            each_serializer:
-                            MatchSerializer,
+                            each_serializer: MatchSerializer,
+                            scope: scope,
                             minimal: true)
     end
     hash
