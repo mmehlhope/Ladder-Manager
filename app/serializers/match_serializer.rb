@@ -11,6 +11,7 @@ class MatchSerializer < ApplicationSerializer
     hash[:last_updated] = updated_how_long_ago
     hash[:winner_id]    = object.winner_id
     hash[:games]        = ActiveModel::ArraySerializer.new(object.games, each_serializer: GameSerializer)
+    hash[:can_edit]     = scope ? scope.can_edit_match?(object) : false
 
     if options[:expanded]
       hash[:ladder] = {
@@ -18,7 +19,6 @@ class MatchSerializer < ApplicationSerializer
         ladder_name: object.ladder.name
       }
     end
-    hash[:can_edit] = scope.can_edit_match?(object) if scope
     hash
   end
 end

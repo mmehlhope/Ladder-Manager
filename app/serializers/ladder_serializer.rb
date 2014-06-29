@@ -10,6 +10,7 @@ class LadderSerializer < ApplicationSerializer
     hash[:organization_id]   = object.organization_id
     hash[:competitor_count]  = object.competitors.size
     hash[:matches_count]     = object.matches.size
+    hash[:can_edit] = scope ? scope.can_edit_ladder?(object) : false
 
     if options[:expanded]
       hash[:competitors] = ActiveModel::ArraySerializer.new(
@@ -22,7 +23,6 @@ class LadderSerializer < ApplicationSerializer
                             MatchSerializer,
                             minimal: true)
     end
-    hash[:can_edit] = scope.can_edit_ladder?(object) if scope
     hash
   end
 end

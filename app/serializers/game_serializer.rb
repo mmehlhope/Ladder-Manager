@@ -10,7 +10,7 @@ class GameSerializer < ApplicationSerializer
     hash[:winner_id] = object.winner_id
     hash[:competitor_1_score] = object.competitor_1_score
     hash[:competitor_2_score] = object.competitor_2_score
-    hash[:can_edit] = scope.can_edit_game?(object) if scope
+    hash[:can_edit] = scope ? scope.can_edit_game?(object) : false
     hash
   end
 end
