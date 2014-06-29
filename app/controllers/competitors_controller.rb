@@ -13,7 +13,7 @@ class CompetitorsController < ApplicationController
   # GET /competitors/1
   # GET /competitors/1.json
   def show
-    render json: @competitor, root: false, expanded: true
+    render json: @competitor, root: false
   end
 
   # GET /competitors/new
