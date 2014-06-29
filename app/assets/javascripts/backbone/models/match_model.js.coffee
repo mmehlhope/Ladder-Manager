@@ -30,3 +30,6 @@ define (require, exports, module) ->
         @get('competitor_' + competitor_number).name
       else
         "(N/A)"
+
+    can_edit: () ->
+      @get('can_edit')

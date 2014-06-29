@@ -10,3 +10,6 @@ define (require, exports, module) ->
 
     can_be_deleted: () ->
       !@has_unfinished_matches()
+
+    can_edit: () ->
+      @get('can_edit')

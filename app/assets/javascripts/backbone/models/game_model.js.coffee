@@ -11,3 +11,6 @@ define (require, exports, module) ->
       match_id: null
 
     urlRoot: '/games'
+
+    can_edit: () ->
+      @get('can_edit')
