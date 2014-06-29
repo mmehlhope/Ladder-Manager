@@ -22,10 +22,12 @@ module UsersHelper
   ###############################
  
   def can_create_user_in_organization?(organization_id)
+    return false unless organization
     organization.id == organization_id
   end
 
   def can_create_ladder_in_organization?(organization_id)
+    return false unless organization
     organization.id == organization_id
   end
 
@@ -38,19 +40,23 @@ module UsersHelper
   end
 
   def can_create_game_in_match?(match_id)
+    return false unless organization
     ladder_id = Match.find_by_id(match_id).try(:ladder_id)
     organization.ladders.find_by_id(ladder_id).present?
   end
  
   def can_edit_organization?(org)
+    return false unless organization
     organization.id == org.id
   end
 
   def can_edit_user?(user)
+    return false unless organization
     organization.id == user.organization.id
   end
 
   def can_delete_user?(user)
+    return false unless id
     id != user.id
   end
 
@@ -71,6 +77,7 @@ module UsersHelper
   end
 
   def can_view_organization?(org)
+    return false unless organization
     organization.id == org.id
   end
   
