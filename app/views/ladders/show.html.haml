@@ -7,7 +7,10 @@
         %dt
           Organized by:
         %dd
-          %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
+          - if current_user.can_edit_ladder?(@ladder)
+            %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
+          - else
+            = @ladder.organization.name
     - if current_user.can_edit_ladder?(@ladder)
       .section-actions
         %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder") Manage ladder
