@@ -78,9 +78,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email)
     end
 
-    def ensure_user_can_delete_user(user)
-      unless current_user.can_delete_user?(user)
-        redirect_with_error("You cannot delete yourself")
+    def ensure_user_can_delete_user
+      unless current_user.can_delete_user?(@user)
+        redirect_with_error("You do not have permission to delete this user")
       end
     end
 end
