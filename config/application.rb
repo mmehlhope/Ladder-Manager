@@ -13,7 +13,7 @@ module LadderManager
     # include web fonts
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.secret_key_base = "0b319ed943a2a98ef65d405ca0a3a26a6f5503e8d41f275a6743ee060e87ea56acbada91e98ff3c74f54eed5a35ae6f898e4fc1d8f9cb03a23807d859d6de362"
-    # config.active_support.escape_html_entities_in_json = true
+    config.active_support.escape_html_entities_in_json = true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
