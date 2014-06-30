@@ -9,7 +9,7 @@
     %a.btn.btn-primary.btn-lg.btn-block(href="#{new_ladder_path}" title="Create new ladder") Create a New Ladder
     %p.spacer-text
       or
-    = form_tag(ladders_search_path, method: :post) do
+    = form_tag(ladders_path, method: :get) do
       .field
         .input-group
           %input.input-lg.form-control(name="id" type="text" placeholder="Enter existing ladder id")
