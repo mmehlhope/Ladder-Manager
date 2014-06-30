@@ -17,6 +17,10 @@ module UsersHelper
     confirmation_token.present?
   end
 
+  def is_real?
+    id.present?
+  end 
+
   ###############################
   # User Access and Permissions #
   ###############################
@@ -56,8 +60,8 @@ module UsersHelper
   end
 
   def can_delete_user?(user)
-    return false unless id
-    id != user.id
+    return false unless id && organization
+    id != user.id && organization.id == user.organization.id
   end
 
   def can_edit_ladder?(ladder)
