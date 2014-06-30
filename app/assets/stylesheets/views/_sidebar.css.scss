@@ -1,7 +1,7 @@
 @import '../common/grid';
 
 aside {
-  background: $asideBg url('tactile_noise.png');
+  background: $asideBg image-url('tactile_noise.png');
   color: $defaultBodyBg;
   height: 3em;
   left: 0;
