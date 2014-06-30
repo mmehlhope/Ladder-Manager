@@ -3,6 +3,7 @@ module ApplicationHelper
   ################
   # User helpers #
   ################
+
   def current_user_json
     if devise_current_user
       @current_user_json ||= UserSerializer.new(current_user).to_json
@@ -85,7 +86,7 @@ module ApplicationHelper
     respond_to do |format|
       format.html {
         flash[:error] = error
-        if current_org.present?
+        if current_user_and_org?
           redirect_to organization_path(current_org)
         else
           redirect_to path
