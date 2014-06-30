@@ -13,7 +13,7 @@
             %span.glyphicon.glyphicon-search
 
     %ul.sidebar-menu.user-options
-      - if current_user
+      - if current_user.id
         %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
           %a(href="#{organization_path(current_org)}" title="My Organization")
             %span.glyphicon.glyphicon-globe
