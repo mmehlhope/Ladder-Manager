@@ -13,7 +13,7 @@
             %span.glyphicon.glyphicon-search
 
   = render 'includes/message' if flash_message?
-  - unless @ladders.blank?
+  - if @ladders.present?
     %ul.list-view.search-results
       - @ladders.each do |ladder|
         %li.list-item
@@ -31,5 +31,8 @@
               %dd= ladder.matches.length
   - else
     %p
-      No ladders were found with your search term of
-      %strong= @query
+      - if @query
+        No ladders were found with your search term of
+        %strong= @query
+      - else
+        Your organization does not currently have any ladders and you have not entered a search term.
