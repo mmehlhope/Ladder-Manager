@@ -26,11 +26,12 @@
 
       .tab-pane#ladder-settings
 
-:coffeescript
-  require ['backbone/pages/manage_ladder'], (ManageLadderPage) ->
-    ladderEdit = new ManageLadderPage(
-      ladder      : #{@ladder_json}
-      matches     : #{@matches_json}
-      competitors : #{@competitors_json}
-    )
+- content_for :footer do
+  :coffeescript
+    require ['backbone/pages/manage_ladder'], (ManageLadderPage) ->
+      new ManageLadderPage(
+        ladder      : #{@ladder_json}
+        matches     : #{@matches_json}
+        competitors : #{@competitors_json}
+      )
 

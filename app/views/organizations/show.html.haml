@@ -19,11 +19,12 @@
 
       .tab-pane#users
 
-:javascript
-  require(['backbone/pages/manage_organization'], function(ManageOrgPage) {
-    new ManageOrgPage({
-      organization: #{@organization_json},
-      ladders: #{@ladders_json},
-      users: #{@users_json}
-    });
-  });
+- content_for :footer do
+  :coffeescript
+    require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
+      new ManageOrgPage(
+        organization: #{@organization_json},
+        ladders: #{@ladders_json},
+        users: #{@users_json}
+      )
+
