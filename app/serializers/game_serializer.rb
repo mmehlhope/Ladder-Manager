@@ -4,7 +4,7 @@ class GameSerializer < ApplicationSerializer
   def attributes
     hash = super
     hash[:id]           = object.id
-    hash[:date_created] = object.date_created
+    hash[:date_created] = date_created
     hash[:last_updated] = updated_how_long_ago
     hash[:match_id] = object.match_id
     hash[:winner_id] = object.winner_id
