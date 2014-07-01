@@ -19,12 +19,11 @@
 
       .tab-pane#users
 
-:coffeescript
-  require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
-    ladderEdit = new ManageOrgPage({
-      organization: #{@organization_json}
+:javascript
+  require(['backbone/pages/manage_organization'], function(ManageOrgPage) {
+    new ManageOrgPage({
+      organization: #{@organization_json},
       ladders: #{@ladders_json},
       users: #{@users_json}
-    })
-
-
+    });
+  });
