@@ -23,4 +23,7 @@ LadderManager::Application.routes.draw do
 
   # Home page
   root 'home#index'
+  
+  # 404 Matching
+  match '*url', to: "errors#routing", via: :all
 end
