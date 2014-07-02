@@ -48,6 +48,7 @@ dl {
 }
 
 .section-header {
+  position: relative;
   overflow: auto;
   margin-bottom: 1em;
 }
@@ -73,6 +74,7 @@ dl {
 
   header {
     margin: 0 0 2em;
+    position: relative;
   }
   .main {
     margin-left: $sidebarContainerWidth;
@@ -81,11 +83,13 @@ dl {
 
   }
   .section-title {
-    float: left;
     margin: 0;
+    padding: 0 15em 0 0;
   }
   .section-actions {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
   dl {
     dd, dt {

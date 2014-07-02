@@ -2,9 +2,9 @@
   .section-title
     %h2 Your organization's ladders
     - if @ladders.length
-      %p View and manage your organization's ladders
+      %p.subdued-text View and manage your organization's ladders
     - else
-      %p 
+      %p.subdued-text 
         To get started, create your first ladder using the 
         %strong "New Ladder" 
         button. 

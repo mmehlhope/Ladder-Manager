@@ -1,7 +1,7 @@
 .section-header
   .section-title
     %h2 Edit Matches
-    %p
+    %p.subdued-text 
       Record matches and add games, then lock-in the results to adjust ladder rankings.
   .section-actions
     %a.btn.btn-primary.pull-right(id="record-new-match" href="/ladders/#{@matches.ladder_id}/matches/new" title="Record a new match")

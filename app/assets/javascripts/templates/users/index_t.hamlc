@@ -1,7 +1,7 @@
 .section-header
   .section-title
     %h2 Your organization's administrators
-    %p All of the below users can administrate your organization's ladders.
+    %p.subdued-text All of the below users can administrate your organization's ladders.
 
   .section-actions
     %a.btn.btn-primary#create-new-user(href="/users/new" title="Create a new administrator")
