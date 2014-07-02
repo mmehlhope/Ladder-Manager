@@ -6,7 +6,17 @@ development:
   :password: bDZQ34pPtJY65S9AvEIIvA
   :enable_starttls_auto: true
   :domain: laddermanager.com
+
 production:
+  :address: smtp.mandrillapp.com
+  :port: 587
+  :authentication: login
+  :user_name: mmehlhope@gmail.com
+  :password: bDZQ34pPtJY65S9AvEIIvA
+  :enable_starttls_auto: true
+  :domain: laddermanager.com
+
+mock_production:
   :address: smtp.mandrillapp.com
   :port: 587
   :authentication: login

@@ -10,12 +10,12 @@ class LadderMailer < Devise::Mailer
     mail(to: @user.email, subject: "You are now an admin for #{@user.organization.name}!")
   end
 
-  # def welcome_email(user)
-  #   @user = user
-  #   @organization = @user.organization
-  #   @url  = "http://laddermanager.com/organizations/#{@organization.id}"
-  #   mail(to: @user.email, subject: "Welcome to LadderManager, #{@user.name}")
-  # end
+  def welcome_email(user)
+    @user = user
+    @organization = @user.organization
+    @url  = "http://laddermanager.com/organizations/#{@organization.id}"
+    mail(to: @user.email, subject: "Welcome to LadderManager, #{@user.name}")
+  end
 
 
   # def new_ladder_email(user, ladder)
