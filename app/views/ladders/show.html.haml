@@ -13,7 +13,10 @@
             = @ladder.organization.name
     - if current_user.can_edit_ladder?(@ladder)
       .section-actions
-        %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder") Manage ladder
+        %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder")
+          %span.glyphicon.glyphicon-cog
+          Manage ladder
+
   %ul.navigation
     %li.active
       %a.btn.btn-link(href="#rankings" data-toggle="tab" title="Rankings") Rankings
@@ -24,6 +27,6 @@
 
   .tab-content
     .tab-pane#rankings.active
-      = render partial: 'rankings', locals: {competitors: @competitors}
+      = render partial: 'rankings', locals: {ladder: @ladder, competitors: @competitors}
     .tab-pane#recent-matches
-      = render partial: 'matches/matches_table', locals: {matches: @matches}
+      = render partial: 'matches/matches_table', locals: {ladder: @ladder, matches: @matches}

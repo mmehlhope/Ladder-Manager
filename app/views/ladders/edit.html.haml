@@ -8,7 +8,10 @@
         %dt Ladder:
         %dd= link_to @ladder.name, @ladder
     .section-actions
-      %a.btn(href="#{ladder_path(@ladder)}" title="#{@ladder.name}") View ladder
+      %a.btn(href="#{ladder_path(@ladder)}" title="#{@ladder.name}")
+        %span.glyphicon.glyphicon-eye-open
+        View ladder
+
   = render 'includes/message' if flash_message? && user_can_admin_ladder
   = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
   %section.management-panel
