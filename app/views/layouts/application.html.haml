@@ -20,6 +20,9 @@
         = render :partial => 'includes/navigation'
         = yield :sidebar
       = yield
-    #{javascript_include_tag "application"}
+    - if Rails.env != "development"
+      #{javascript_include_tag "application"}
+    - else
+      #{requirejs_include_tag "application-dev"}
     = yield :footer
     = render :partial => 'includes/footer'
