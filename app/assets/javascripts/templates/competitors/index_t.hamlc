@@ -5,9 +5,9 @@
       %p.subdued-text Add, edit, and remove competitors for this ladder.
     - else
       %h2 Add some competitors!
-      %p.subdued-text Start by adding some competitors, then you can record matches between them.
+      %p.subdued-text Start by adding at least 2 competitors, then you can record matches between them.
   .section-actions
-    %a#create-new-competitor.btn.btn-primary(href="#")
+    %a#create-new-competitor.btn.btn-primary(href="#" title="Create a new competitor")
       %span.glyphicon.glyphicon-plus
       New competitor
 

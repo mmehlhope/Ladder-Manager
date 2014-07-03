@@ -16,7 +16,7 @@
       %dd 0
     .list-item-actions
       .btn-group
-        %button.btn.btn-small.btn-success(type="submit" value="")
+        %button.btn.btn-small.btn-success(type="submit" title="Save")
           Save
-        %button.btn.btn-small(data-action="close")
+        %button.btn.btn-small(data-action="close" title="Cancel")
           %span.glyphicon.glyphicon-remove

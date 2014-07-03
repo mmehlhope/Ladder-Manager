@@ -14,12 +14,12 @@
   .btn-group
     - unless @match.isFinalized()
       - if @match.has_games()
-        %button.btn.btn-small.btn-success(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize")
+        %button.btn.btn-small.btn-success(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize" title="Complete")
           Complete
-      %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game")
+      %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game" title="Add")
         %span.glyphicon.glyphicon-plus
         Game
-      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete")
+      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete" title="Delete")
         %span.glyphicon.glyphicon-remove
 
 .games-table-wrapper(class="collapse #{if @_view.gamesListVisible && @match.has_games() then 'in' else ''}")

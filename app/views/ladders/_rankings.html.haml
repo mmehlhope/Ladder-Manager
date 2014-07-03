@@ -15,6 +15,6 @@
   %p
     - if current_user.can_edit_ladder?(@ladder)
       %a(href="#{edit_ladder_path(@ladder)}" title="manage this ladder") Manage this ladder
-      to add competitors and matches.
+      to add competitors and the matches between them.
     - else
       No competitors have been added to this ladder yet.

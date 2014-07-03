@@ -3,8 +3,8 @@
     %input.input-small(type="text" name="competitor[name]" placeholder="New competitor name")
   .list-item-actions
     .btn-group
-      %button.btn.btn-small.btn-success(type="submit" value="Create")
+      %button.btn.btn-small.btn-success(type="submit" value="Create" title="Create new competitor")
         Create
-      %button.btn.btn-small(data-action="cancel")
+      %button.btn.btn-small(data-action="cancel" title="Cancel")
         %span.glyphicon.glyphicon-remove
   .messaging

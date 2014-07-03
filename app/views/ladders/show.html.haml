@@ -8,7 +8,7 @@
           Organized by:
         %dd
           - if current_user.can_edit_ladder?(@ladder)
-            %a(href="#{url_for(@ladder.organization)}" title="@ladder.organization.name")= @ladder.organization.name
+            %a(href="#{url_for(@ladder.organization)}" title="#{@ladder.organization.name}")= @ladder.organization.name
           - else
             = @ladder.organization.name
     - if current_user.can_edit_ladder?(@ladder)
@@ -21,7 +21,7 @@
     %li.active
       %a.btn.btn-link(href="#rankings" data-toggle="tab" title="Rankings") Rankings
     %li
-      %a.btn.btn-link(href="#recent-matches" data-toggle="tab" title="Recent matches") Recent matches
+      %a.btn.btn-link(href="#recent-matches" data-toggle="tab" title="Recent matches" class="#{@matches.empty? ? 'disabled' : nil}") Recent matches
 
   = resource_error_messages
 

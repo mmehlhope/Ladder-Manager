@@ -7,8 +7,8 @@
       %input.input-small(name="game[competitor_2_score]" type="text" value="" placeholder="Score")
     .cell.pull-right
       .btn-group
-        %button.btn.btn-small.btn-success(type="submit" value="")
+        %button.btn.btn-small.btn-success(type="submit" value="" title="Save")
           Save
-        %button.btn.btn-small(data-action="cancel")
+        %button.btn.btn-small(data-action="cancel" title="Cancel")
           %span.glyphicon.glyphicon-remove
   .messaging

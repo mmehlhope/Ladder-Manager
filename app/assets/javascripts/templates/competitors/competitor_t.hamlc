@@ -5,9 +5,9 @@
       %input.input-small(type="text" name="competitor[name]" value="#{@competitor.get('name')}" placeholder="Competitor name")
     .list-item-actions
       .btn-group
-        %button.btn.btn-small.btn-success(type="submit" value="Update")
+        %button.btn.btn-small.btn-success(type="submit" value="Update" title="Update")
           Update
-        %button.btn.btn-small(data-action="cancel")
+        %button.btn.btn-small(data-action="cancel" title="Cancel")
           %span.glyphicon.glyphicon-remove
   .messaging
 - else
@@ -20,6 +20,6 @@
   .list-item-actions
     .btn-group
       %a.btn.btn-small(href="#" data-action="edit") Rename
-      %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete")
+      %button.btn.btn-danger.btn-small(href="/competitors/#{@competitor.get('id')}" data-method="DELETE" data-action="delete" title="Delete")
         %span.glyphicon.glyphicon-remove
   .messaging
