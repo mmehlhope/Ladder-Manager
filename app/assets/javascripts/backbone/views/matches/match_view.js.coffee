@@ -81,9 +81,8 @@ define (require, exports, module) ->
         comp_2_name : @model.getCompetitorName(2)
       )
       @$('tbody').append(newGameView.render().el)
-
       @showGamesView(e) unless @gamesListVisible
-
+      @$('.games-table-wrapper:first input:first').focus()
       this
 
     finalize: (e) ->
