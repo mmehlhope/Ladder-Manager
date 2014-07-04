@@ -19,7 +19,7 @@
             %span.glyphicon.glyphicon-globe
             My Organization
         %li(class="#{request.fullpath =~ /\/users/ ? 'active' : nil}")
-          %a(href="#{user_path(current_user)}" title="My Account")
+          %a(href="#{edit_user_registration_path}" title="My Account")
             %span.glyphicon.glyphicon-user
             My Account
         %li
