@@ -3,7 +3,6 @@
   %head
     %title Ladder Manager - #{yield :title}
     #{stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true}
-    #{requirejs_include_tag "application"}
     #{csrf_meta_tags}
     %meta(name="description" content="#{yield :description}")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -12,10 +11,13 @@
   %body
     %section.content-wrapper
       %section.user-auth-wrapper
-        / %img(src="logo.png")
         %div.panel.user-auth-panel
           %div.panel-header.text-center
             = image_tag('ladder-manager-logo-white-h.svg', :class => 'logo')
           = yield
         = render "devise/shared/links" if devise_controller?
+    - if Rails.env != "development"
+      #{javascript_include_tag "application"}
+    - else
+      #{requirejs_include_tag "application-dev"}
     = render :partial => 'includes/footer'
