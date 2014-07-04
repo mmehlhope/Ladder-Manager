@@ -106,7 +106,7 @@ module ApplicationHelper
   end
 
   def resource
-    if params[:controller] == 'devise'
+    if devise_controller? 
       resource
     else
       resource = instance_variable_get('@' + params[:controller].singularize)
