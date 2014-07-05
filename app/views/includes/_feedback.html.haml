@@ -16,7 +16,7 @@
 
   // Identify the user and pass traits
   // To enable, replace sample data with actual user traits and uncomment the line
-  var user = window.LadderManager.currentUser;
+  var user = window.LadderManager ? window.LadderManager.currentUser : false;
   var userData = {};
 
   if (user) {
