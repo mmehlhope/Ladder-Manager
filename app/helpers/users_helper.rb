@@ -61,7 +61,7 @@ module UsersHelper
 
   def can_delete_user?(user)
     return false unless id && organization
-    id != user.id && organization.id == user.organization.id
+    id != user.id && organization.id == user.organization.id && user.id != organization.users.first.id
   end
 
   def can_edit_ladder?(ladder)

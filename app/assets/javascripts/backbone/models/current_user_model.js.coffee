@@ -9,5 +9,5 @@ define (require, exports, module) ->
     getFullName: () ->
       @get('name') || @get('email')
 
-    canDelete: (id) ->
-      !(@get('id') is id)
+    canDeleteUser: (user) ->
+      user.get('can_delete') is true
