@@ -33,7 +33,6 @@ define (require, exports, module) ->
       @listenTo(@gameCollection, 'add sync destroy', @render)
       @listenTo(@model, 'change', @render)
       @listenTo(@model, 'destroy', @removeEl)
-
       @gamesListVisible = true
       this
 
@@ -41,9 +40,13 @@ define (require, exports, module) ->
       node = Match_t(match: @model, _view: @)
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
       @$('.games-table-wrapper').append(@gameCollectionView.render().el)
+      @determineIfSampleGameIsNeeded()
       @messageCenter = new MessagesView(el: @$('.messages'))
       this
 
+    determineIfSampleGameIsNeeded: () ->
+      @showNewGameRow() if @gameCollection.length is 0
+    
     showNewGameRow: (e) ->
       if e
         e.preventDefault()
@@ -55,9 +58,11 @@ define (require, exports, module) ->
         comp_2_name : @model.getCompetitorName(2)
       )
       @$('tbody').append(newGameView.render().el)
-      # @showGamesView(e) unless @gamesListVisible
-      @$('.games-table-wrapper:first input:first').focus()
+      @focusGameInput()
       this
+
+    focusGameInput: () ->
+      @$('.games-table-wrapper:first input:first').focus()
 
     finalize: (e) ->
       e.preventDefault() if e

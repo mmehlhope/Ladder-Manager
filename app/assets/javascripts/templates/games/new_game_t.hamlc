@@ -8,7 +8,7 @@
     .cell.pull-right
       .btn-group
         %button.btn.btn-small.btn-success(type="submit" value="" title="Save")
-          Save
+          Save game
         %button.btn.btn-small(data-action="cancel" title="Cancel")
           %span.glyphicon.glyphicon-remove
   .messaging

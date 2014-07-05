@@ -38,6 +38,7 @@ define (require, exports, module) ->
 
       matchViewNode = matchView.render().el
       @$('.list-view').prepend(matchViewNode)
+      matchView.focusGameInput()
       this
 
     addChildrenAndRender: () ->
