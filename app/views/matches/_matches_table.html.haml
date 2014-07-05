@@ -1,7 +1,7 @@
 - if matches.present?
-  %ul.list-view.bordered
+  %ul.list-view.match-list
     - matches.each do |match|
-      %li.list-item
+      %li.list-item.bordered
         .list-item-content
           .name
             = match.competitor_1_name
@@ -20,11 +20,8 @@
             %dd #{match.created_at.strftime('%B %d, %Y')}
             %dt Updated:
             %dd #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
-          .list-item-actions
-            %a(data-toggle="collapse" data-target="#games-for-#{match.id}" title="Show/hide games")
-              %span.glyphicon.glyphicon-chevron-down
         - if match.has_games?
-          %div(id="games-for-#{match.id}" class="games-table-wrapper collapse")
+          %div(id="games-for-#{match.id}" class="games-table-wrapper")
             = render partial: 'games/games_sub_table', locals: {games: match.games, competitor_1_name: match.competitor_1_name, competitor_2_name: match.competitor_2_name}
 - else
   %p

@@ -5,6 +5,7 @@
 // Default list view
 
 .list-view {
+  list-style: none;
   padding: 0;
 
   > .list-item {
@@ -90,13 +91,14 @@
   }
 }
 
-.list-view.clickable li:hover {
-  cursor: pointer;
-  background: $infoButtonTint;
-}
+.list-view.match-list {
+  > .list-item {
+    margin-bottom: 2em;
 
-ul.list-view {
-  list-style: none;
+    &:first-child {
+      border-top: 1px solid $tableBorder;
+    }
+  }
 }
 
 ol.list-view {

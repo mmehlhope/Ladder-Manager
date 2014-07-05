@@ -11,7 +11,7 @@ define (require, exports, module) ->
   class NewMatchView extends Backbone.View
 
     tagName: 'li'
-    className: 'list-item'
+    className: 'list-item bordered'
 
     events:
       'submit form'                         : 'createMatch'
@@ -86,7 +86,5 @@ define (require, exports, module) ->
 
     removeEl: (e) ->
       e.preventDefault() if e
-      @$el.slideUp(() =>
-        @remove()
-      )
+      @remove()
       this

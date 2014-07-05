@@ -22,4 +22,4 @@
       %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete" title="Delete")
         %span.glyphicon.glyphicon-remove
 
-.games-table-wrapper(class="collapse #{if @_view.gamesListVisible && @match.has_games() then 'in' else ''}")
+.games-table-wrapper

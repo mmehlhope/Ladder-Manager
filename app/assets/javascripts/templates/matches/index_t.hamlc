@@ -2,11 +2,13 @@
   .section-title
     %h2 Edit Matches
     %p.subdued-text 
-      Record matches and add games, then lock-in the results to adjust ladder rankings.
+      Record matches and add games, then press
+      %strong "Complete"
+      to lock-in the results and permanently adjust ladder rankings.
   .section-actions
     %a.btn.btn-primary.pull-right(id="record-new-match" href="/ladders/#{@matches.ladder_id}/matches/new" title="Record a new match")
       %span.glyphicon.glyphicon-plus
       New match
 %section#edit-matches
   .messaging
-  %ul.list-view.bordered.clickable
+  %ul.list-view.match-list

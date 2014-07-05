@@ -14,13 +14,12 @@ define (require, exports, module) ->
   class MatchView extends Backbone.View
 
     tagName: 'li'
-    className: 'list-item'
+    className: 'list-item bordered'
 
     events:
       'click [data-action="delete"]'   : 'deleteItem'
       'click [data-action="add-game"]' : 'showNewGameRow'
       'click [data-action="finalize"]' : 'finalize'
-      'click .list-item-content'       : 'toggleGamesView'
 
     initialize: (options={}) ->
       @gameCollection     = @model.games
@@ -35,7 +34,7 @@ define (require, exports, module) ->
       @listenTo(@model, 'change', @render)
       @listenTo(@model, 'destroy', @removeEl)
 
-      @gamesListVisible = false
+      @gamesListVisible = true
       this
 
     render: () ->
@@ -43,31 +42,6 @@ define (require, exports, module) ->
       @$el.html(node).attr('id', 'match-' + @model.get('id'))
       @$('.games-table-wrapper').append(@gameCollectionView.render().el)
       @messageCenter = new MessagesView(el: @$('.messages'))
-      this
-
-    toggleGamesView: (e, action="toggle") ->
-      if e
-        tag = e.target.tagName.toLowerCase()
-        if (tag is 'a' || tag is 'input' || tag is 'button')
-          return
-        else
-          e.preventDefault()
-
-      if action is 'show'
-        @gamesListVisible = true
-      else if action is 'hide'
-        @gamesListVisible = false
-      else
-        @gamesListVisible = !@gamesListVisible
-      @$(".games-table-wrapper").collapse(action)
-      this
-
-    showGamesView: () ->
-      @toggleGamesView(null, 'show')
-      this
-
-    hideGamesView: (e) ->
-      @toggleGamesView(null, 'hide')
       this
 
     showNewGameRow: (e) ->
@@ -81,7 +55,7 @@ define (require, exports, module) ->
         comp_2_name : @model.getCompetitorName(2)
       )
       @$('tbody').append(newGameView.render().el)
-      @showGamesView(e) unless @gamesListVisible
+      # @showGamesView(e) unless @gamesListVisible
       @$('.games-table-wrapper:first input:first').focus()
       this
 

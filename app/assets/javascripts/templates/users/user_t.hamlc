@@ -16,15 +16,13 @@
       %dt Email:
       %dd= @user.get('email')
 
-      %dt Activated:
-      %dd= @user.isActivatedFriendly()
-
       %dt Last login:
       %dd= @user.get('last_sign_in')
 
   .list-item-actions
     .btn-group
-      %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user" data-action="edit") Edit
+      - unless @currentUser.get('id') is @user.get('id')
+        %a.btn.btn-small(href="/users/#{@user.get('id')}/edit" title="Edit user" data-action="edit") Rename
       - if @currentUser.canDelete(@user.get('id'))
         %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
           %span.glyphicon.glyphicon-remove
