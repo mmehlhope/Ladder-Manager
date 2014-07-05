@@ -1,12 +1,16 @@
 class Match < ActiveRecord::Base
+  include MatchesHelper
+
   belongs_to              :ladder
   has_many                :games, dependent: :destroy
   has_and_belongs_to_many :competitors
 
   validate :validate_competitors
   validate :finalization, on: :finalize
+  validate :within_game_limits
+  validates_associated :ladder, message: "has reached the maximum number of allowed matches. Email contact@laddermanager.com to request a higher limit"
 
-  include MatchesHelper
+  GAME_LIMIT = 1000
 
   # Parses a match's series of games, pulling the winner IDs from each
   # game. If there is more than one winner and and they have not won the
@@ -84,5 +88,10 @@ class Match < ActiveRecord::Base
     elsif @match.games.size == 0
       errors[:base] << "Match must contain at least one game to be finalized"
     end
+  end
+
+  def within_game_limits
+    return if games.blank?
+    errors.add(:base, "You've reached the maxmimum number of allowed games") if games.size >= GAME_LIMIT
   end
 end

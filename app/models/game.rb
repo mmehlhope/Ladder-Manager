@@ -9,6 +9,8 @@ class Game < ActiveRecord::Base
   validates :competitor_1_score, numericality: { only_integer: true }
   validates :competitor_2_score, numericality: { only_integer: true }
 
+  validates_associated :match, message: "has reached the maximum number of allowed games. Email contact@laddermanager.com to request a higher limit"
+
   private
     # Based on the scores of the game, a winner is decided
     # and their competitor id is set as the winner_id. This

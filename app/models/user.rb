@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
          :lockable
 
   belongs_to :organization
+  validates_associated :organization, message: "has reached the maximum number of allowed users. Email contact@laddermanager.com to request a higher limit."
 end
