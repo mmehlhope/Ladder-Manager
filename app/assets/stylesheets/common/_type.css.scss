@@ -54,6 +54,9 @@ section h1 {
   @include font-size($medium);
   margin: 0;
 }
+section h2 {
+  @include header-font(600);
+}
 
 // Links
 
