@@ -15,6 +15,7 @@
           %div.panel-header.text-center
             = image_tag('ladder-manager-logo-white-h.svg', :class => 'logo')
           = yield
+        = yield :footer
         = render "devise/shared/links" if devise_controller?
     - if Rails.env != "development"
       #{javascript_include_tag "application"}
