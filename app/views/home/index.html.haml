@@ -1,12 +1,12 @@
-- content_for(:title, "Request an invite to Ladder Manager")
+- content_for(:title, "Head-to-head competition made simple")
 - content_for(:description, "Request an invite to Ladder Manager")
 
-= form_tag(request_invite_path, method: :post, class: "full-width") do
-  %h2 Request an invite to Ladder Manager's Alpha
+= form_tag(request_invite_path, method: :post, class: "full-width text-center") do
+  %h2 Request an invite to Ladder Manager
   = render "includes/message"
 
   %div.form-group
-    %input(type="email" name="signup[email]" autofocus="true" placeholder="Email address" required="required")
+    %input.text-center(type="email" name="signup[email]" autofocus="true" placeholder="Email address" required="required")
 
   %button.btn.btn-primary.btn-block(type="submit") Request an invite
 - content_for :footer do
