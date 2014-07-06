@@ -1,0 +1,21 @@
+- content_for(:title, "ELO ladders made beautifully simple")
+%section.landing-header
+  .landing-header-content
+    = image_tag('ladder-manager-logo-white-h.svg', :class => 'logo', :alt => "Ladder Manager")
+
+    %h2.tagline
+      Compete. Record. Compare.
+      %br
+      Head-to-Head competition made simple.
+
+    .request-an-invite
+      = render 'includes/message' if flash_message?
+      = form_tag(ladders_path, method: :get) do
+        .form-group
+          %input.request-an-invite(name="id" type="text" placeholder="Email address")
+        = submit_tag("Request an invite", :class => 'btn btn-primary btn-lg btn-block')
+%section.highlights
+  %ul.highlight-list
+    %li
+      %h3 Why Ladder Manager?
+      %p This is the most amazing feature ever. Whenever you do things with this feature, it will totally blow your mind like omg.
