@@ -1,6 +1,41 @@
-- content_for(:title, "Rename Ladder")
-%section.col-small.centeredContainer.container-large-offset
-  %h1.panelHeading= yield(:title)
-  .panel.panel-padded
-    = render 'includes/message' if flash_message?
-    = render 'edit_form'
+- content_for(:title, "Ladder Management")
+
+%section.main
+  %header.clearfix
+    .section-title
+      %h1= yield(:title)
+      %dl
+        %dt Ladder:
+        %dd= link_to @ladder.name, @ladder
+    .section-actions
+      %a.btn(href="#{ladder_path(@ladder)}" title="View ladder")
+        %span.glyphicon.glyphicon-eye-open
+        View ladder
+
+  = render 'includes/message' if flash_message? && user_can_admin_ladder
+  = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
+  %section.management-panel
+    %ul.navigation.three-across
+      %li.active
+        %a.btn.btn-link(href="#competitors" data-toggle="tab" title="Edit Competitors") Competitors
+      %li
+        %a.btn.btn-link(href="#matches" data-toggle="tab" title="Edit Matches") Matches
+      %li
+        %a.btn.btn-link(href="#ladder-settings" data-toggle="tab" title="Change settings") Settings
+
+    .tab-content
+
+      .tab-pane#competitors.active
+
+      .tab-pane#matches
+
+      .tab-pane#ladder-settings
+
+- content_for :footer do
+  :coffeescript
+    require ['backbone/pages/manage_ladder'], (ManageLadderPage) ->
+      new ManageLadderPage(
+        ladder      : #{@ladder_json}
+        matches     : #{@matches_json}
+        competitors : #{@competitors_json}
+      )

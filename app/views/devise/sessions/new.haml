@@ -1,0 +1,15 @@
+- content_for(:title, "Sign in to Ladder Manager")
+- content_for(:description, "Sign in to your Ladder Manager account")
+
+= form_tag session_path(resource_name), :class => "full-width" do
+  %h2 Sign in to your account
+  = resource_error_messages
+  = render "includes/message"
+
+  %div.form-group
+    %input(type="email" name="user[email]" autofocus="true" placeholder="Email address" required="required")
+
+  %div.form-group
+    %input(type="password" name="user[password]" placeholder="Password" required="required")
+
+  %button.btn.btn-primary.btn-block(type="submit") Sign in

@@ -1,0 +1,11 @@
+%form.success-bg(action="/ladders" method="POST")
+  %input(type="hidden" name="organization_id" value="#{@organization.get('id')}")
+  .list-item-content
+    %input.input-small(type="text" name="ladder[name]" placeholder="New ladder name")
+  .list-item-actions
+    .btn-group
+      %button.btn.btn-small.btn-success(type="submit" value="Create" title="Create ladder")
+        Create
+      %button.btn.btn-small(data-action="cancel" title="Cancel")
+        %span.glyphicon.glyphicon-remove
+  .messaging

@@ -1,0 +1,22 @@
+- if @_view.inEditMode()
+  %form.update(action="#{@ladder.urlRoot}/#{@ladder.get('id')}" method="PUT")
+    .list-item-content
+      %input.input-small(type="text" name="ladder[name]" value="#{@ladder.get('name')}" placeholder="Ladder name")
+    .list-item-actions
+      .btn-group
+        %button.btn.btn-small.btn-success(type="submit" value="Update")
+          Update
+        %button.btn.btn-small(data-action="cancel")
+          %span.glyphicon.glyphicon-remove
+  .messaging
+- else
+  .list-item-content
+    .name
+      = @ladder.get('name')
+    %dl
+      %dt Added:
+      %dd #{@ladder.get('date_created')}
+  .list-item-actions
+    .btn-group
+      %a.btn.btn-small(href="#" data-action="edit") Rename
+  .messaging

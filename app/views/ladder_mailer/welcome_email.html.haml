@@ -3,18 +3,23 @@
   %head
     %meta(content="text/html" charset="UTF-8" http-equiv='Content-Type')
   %body
-    %h1 Congrats on your new ladder!
-    %h2
-      Your new ladder, "#{@ladder.name}", can be found here:
-      %a(href="#{@url}" title="#{@ladder.name}") #{@url}
+    %h1 Welcome to Ladder Manager!
+    %h2 Manage your Organization
     %p
-      If you're searching for it from the home page, you can use the following ladder id:
-      %strong #{@ladder.id}
+      Now that you've created an account, you can
+      %a(href="#{@url}" title="#{@organization.name}") manage your organization
+      by adding ladders and other users.
+    %h2 Manage a Ladder
+    %p
+      Once you've created your first ladder, you can then manage that ladder and add competitors,
+      matches, and games!
+    %p
+      Click the 'complete' button on a match once you've recorded a few games for it. Completing a match will
+      permanently finalize the scores, updating competitor rankings and ratings.
+    %h2 Submit Feedback
     %p
       Ladder Manager is still in its infancy, so if you have any feedback or suggestions,
       please press the "submit feedback" button on the site, I'd love to hear from you!
-    %p
-      Enjoy your new ladder!
       %br
       %br
       Matt - Developer of

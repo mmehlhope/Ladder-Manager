@@ -1,12 +1,17 @@
-RailsCompetitionPlatform::Application.routes.draw do
-  resources :sessions, only: [:create, :destroy]
-  resources :users
+LadderManager::Application.routes.draw do
+
+  devise_for :users, controllers: {registrations: "users/registrations"}
+  resources :organizations
+
+  scope "/admin" do
+    resources :users
+  end
 
   # Ladder, competitors, matches, games
   resources :ladders, shallow: true do
     resources :competitors
     resources :matches do
-      get 'finalize', on: :member
+      post 'finalize', on: :member
       resources :games
     end
   end
@@ -14,10 +19,12 @@ RailsCompetitionPlatform::Application.routes.draw do
   #################
   # Custom routes #
   #################
-  get '/ladders/:id/admin_preferences', to: "ladders#admin_preferences", as: :admin_preferences
-  get '/release_notes', to: "release_notes#index"
-  post '/ladders/search', to: "ladders#search"
+  get  '/release_notes', to: "release_notes#index"
+  post '/request_invite', to: "signups#create"
 
   # Home page
   root 'home#index'
+  
+  # 404 Matching
+  match '*url', to: "errors#routing", via: :all
 end

@@ -1,0 +1,123 @@
+@import 'grid';
+@import 'colors';
+@import 'type';
+
+// Default list view
+
+.list-view {
+  list-style: none;
+  padding: 0;
+
+  > .list-item {
+    border-top: 1px solid $tableBorder;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    &:first-child {
+      border-top: none;
+    }
+  }
+  .list-item-content {
+    padding: 1em 25% 1em 1em;
+  }
+  .name {
+    @include body-font(300);
+    @include font-size(1.7);
+  }
+
+  .list-item-actions {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+  .versus {
+    color: $sidebarLinkColor;
+    display: block;
+  }
+}
+
+// Competitor rankings
+.list-view.rankings {
+
+  .competitor-avatar {
+    background: $tableBorder;
+    color: #fff;
+    float: left;
+    font-size: 3em;
+    width: 1.1em;
+    margin: 0;
+    padding: 0.05em;
+    position: absolute;
+    right: 0;
+    top: 0.3em;
+
+    .glyphicon {
+      display: block;
+    }
+  }
+
+  .rating-container {
+    position: absolute;
+    right: 0;
+    top: 1.1em;
+    text-align: right;
+  }
+  .rating-label {
+    color: $badgeText;
+    @include body-font(300);
+    @include font-size(1.2);
+    position: relative;
+    right: 2px;
+    top: 0;
+  }
+  .rating {
+    @include body-font(300);
+    @include font-size(2.4);
+    position: relative;
+    right: 0;
+  }
+}
+
+// Search results
+.list-view.search-results {
+  .list-item-content {
+    padding-right: 1em;
+  }
+}
+
+.list-view.rankings {
+  .list-item-content {
+    padding-right: 4em;
+  }
+}
+
+.list-view.match-list {
+  > .list-item {
+    margin-bottom: 2em;
+
+    &:first-child {
+      border-top: 1px solid $tableBorder;
+    }
+  }
+}
+
+ol.list-view {
+  list-style-type: decimal-leading-zero;
+  padding-left: 2em;
+}
+
+ol.list-view.bordered,
+ul.list-view.bordered {
+  .list-item-content {
+    padding: 1em 25% 1em 1em;
+  }
+  .list-item-actions {
+    right: 1em;
+  }
+}
+
+@include breakpoint(tablet) {
+  .list-view .versus {
+    display: inline;
+  }
+}

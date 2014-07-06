@@ -2,7 +2,8 @@ class HomeController < ApplicationController
 
   # GET /
   def index
-    @exclude_header = true
+    @exclude_navigation = true
+    render layout: "devise"
   end
 
 end

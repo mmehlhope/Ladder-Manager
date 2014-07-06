@@ -1,0 +1,30 @@
+- content_for(:title, "#{@organization.name}")
+%section.main
+  %header.clearfix
+    .section-title
+      %h1= yield(:title)
+
+  = render 'includes/message'
+
+  %section.organization-panel
+    %ul.navigation.three-across
+      %li.active
+        %a.btn.btn-link(href="#ladders" data-toggle="tab" title="Edit Ladders") Ladders
+      %li
+        %a.btn.btn-link(href="#users" data-toggle="tab" title="Edit Users") Administrators
+
+    .tab-content
+
+      .tab-pane#ladders.active
+
+      .tab-pane#users
+
+- content_for :footer do
+  :coffeescript
+    require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
+      new ManageOrgPage(
+        organization: #{@organization_json},
+        ladders: #{@ladders_json},
+        users: #{@users_json}
+      )
+

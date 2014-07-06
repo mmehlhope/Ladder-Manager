@@ -1,0 +1,7 @@
+%table.games-table
+  %thead
+    %th.numGames #
+    %th.competitor #{@comp_1_name}
+    %th.competitor #{@comp_2_name}
+    %th
+  %tbody

@@ -1,16 +1,19 @@
 class CompetitorsController < ApplicationController
   before_action :set_competitor, only: [:show, :edit, :update, :destroy]
   before_action :set_ladder
-
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
   # GET /competitors
   # GET /competitors.json
   def index
-    @competitors = Competitor.all
+    @competitors = @ladder.competitors
+    render json: @competitors, root: false
   end
 
   # GET /competitors/1
   # GET /competitors/1.json
   def show
+    render json: @competitor, root: false
   end
 
   # GET /competitors/new
@@ -33,10 +36,10 @@ class CompetitorsController < ApplicationController
           flash[:success] = success_msg
           redirect_to @ladder
         }
-        format.json { render action: 'show', status: :created, location: @ladder }
+        format.json { render json: @competitor, status: :created}
       else
         format.html { render action: 'new' }
-        format.json { render json: @competitor.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @competitor.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -50,10 +53,10 @@ class CompetitorsController < ApplicationController
           flash[:success] = "#{@competitor.name} was successfully updated."
           redirect_to ladder_path(@ladder)
         }
-        format.json { head :no_content }
+        format.json { render json: @competitor }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @competitor.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @competitor.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -61,12 +64,22 @@ class CompetitorsController < ApplicationController
   # DELETE /competitors/1
   # DELETE /competitors/1.json
   def destroy
-    @competitor.destroy
-
     respond_to do |format|
-      format.html { redirect_to ladder_path(@ladder) }
-      format.json { head :ok }
-      format.js   { head :ok }
+      if @competitor.destroy
+        format.html {
+          flash[:success] = "Competitor has been successfully deleted"
+          redirect_to ladder_path(@ladder)
+        }
+        format.json { render json: @competitor, status: :ok }
+      else
+        format.html {
+          flash[:error] = "There was an error deleting the selected competitor"
+          redirect_to ladder_path(@ladder)
+        }
+        format.json {
+          render json: {errors: @competitor.errors.full_messages}, status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -83,6 +96,6 @@ class CompetitorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def competitor_params
-      params.require(:competitor).permit(:name, :rating)
+      params.require(:competitor).permit(:name)
     end
 end

@@ -1,95 +1,32 @@
 - content_for(:title, @ladder.name)
-%section.content-wrapper.container-small-offset
-  .col-medium.first
-    %h1.panelHeading= yield(:title)
-    = render 'includes/message' if flash_message? && user_can_admin_ladder
-    = render partial: 'includes/validation_errors', locals: {error_messages: @ladder.errors.full_messages} if @ladder.errors.any?
-    - competitors_exist = @competitors.size > 0
-    .panel
-      %table.table.table-striped
-        - if user_can_admin_ladder
-          %thead
-            %tr.breadcrumb-bar
-              %th.text-right(colspan="5")
-                %a.btn.btn-info.btn-xs(href="#{edit_ladder_path(@ladder)}" title="Edit Ladder") Rename
-                %a.btn.btn-success.btn-xs(href="#{new_ladder_competitor_path(@ladder)}" title="Add Competitor") Add Competitor
-        %thead
-          %tr
-            %th(style="width:1%;") Rank
-            %th Name
-            %th.text-center Record (W - L)
-            %th.text-center Rating
-            - if user_can_admin_ladder
-              %th.text-right Actions
-        %tbody
-          - if @competitors.size > 0
-            - rank = 0
-            - @competitors.each do |competitor|
-              %tr
-                %td
-                  %span.badge= rank += 1
-                %td= competitor.name
-                %td.text-center #{competitor.wins} - #{competitor.losses}
-                %td.text-center= competitor.rating
-                - if user_can_admin_ladder
-                  %td.text-right
-                    %a.btn.btn-info.btn-xs(href="#{edit_competitor_path(competitor)}" title="Rename competitor") Rename
-                    %a.btn.btn-danger.btn-xs(href="#{competitor_path(competitor)}" title="Remove competitor" data-method="delete" data-confirm="Are you sure you want to remove this competitor? This action will remove the competitor permanently") Remove
+%section.main
+  %header.clearfix
+    .section-title
+      %h1= yield(:title)
+      %dl
+        %dt
+          Organized by:
+        %dd
+          - if current_user.can_edit_ladder?(@ladder)
+            %a(href="#{url_for(@ladder.organization)}" title="#{@ladder.organization.name}")= @ladder.organization.name
           - else
-            %tr
-              %td(colspan="#{user_can_admin_ladder ? 5 : 4}")
-                .alert.alert-info
-                  %span.glyphicon.glyphicon-info-sign
-                  There are currently no competitors added to this ladder.
-                  - if user_can_admin_ladder
-                    %a(href="#{new_ladder_competitor_path(@ladder)}" title="Add a competitor") Add a competitor
-                    to begin.
+            = @ladder.organization.name
+    - if current_user.can_edit_ladder?(@ladder)
+      .section-actions
+        %a.btn.btn-primary.pull-right(href="#{edit_ladder_path(@ladder)}" title="Manage Ladder")
+          %span.glyphicon.glyphicon-cog
+          Manage ladder
 
-  %aside.pull-right.last
-    %h2.panelHeading Recent matches
-    - matches_exist = @matches.size > 0
-    .panel
-      - if matches_exist
-        %table.table.table-striped
-          - if user_can_admin_ladder
-            %thead
-              %tr.breadcrumb-bar
-                %th.text-right(colspan="3")
-                  %a.btn.btn-success.btn-xs(href="#{new_ladder_match_path(@ladder)}" title="Record a new match") Record a new match
-          %thead
-            %tr
-              %th Competitors
-              %th.text-right When?
-            %tbody
-              - @matches.each do |match|
-                %tr
-                  %td
-                    = match.competitor_1_name
-                    vs.
-                    = match.competitor_2_name
-                  %td.text-right= link_to time_ago_in_words(match.created_at).capitalize + " ago", match
-              %tr
-                %td.text-right(colspan="3")= link_to "View all matches", ladder_matches_path(@ladder)
-      - else
-        .alert.alert-info
-          %span.glyphicon.glyphicon-info-sign
-          There are no recent matches.
-          - if user_can_admin_ladder
-            Once you've added 2 or more competitors, you can
-            %a(href="#{new_ladder_match_path(@ladder)}" title="Record a match") Record a match
+  %ul.navigation
+    %li.active
+      %a.btn.btn-link(href="#rankings" data-toggle="tab" title="Rankings") Rankings
+    %li
+      %a.btn.btn-link(href="#recent-matches" data-toggle="tab" title="Recent matches" class="#{@matches.empty? ? 'disabled' : nil}") Recent matches
 
-    %h2.panelHeading #{user_can_admin_ladder ? 'Admin Options' : 'Admin login'}
-    %div(class="#{user_can_admin_ladder ? 'panel' : 'panel panel-full-padding'}")
-      - if user_can_admin_ladder
-        %a.panel-block-link.text-danger(href="#{ladder_path}" title="Delete ladder" data-method="delete" data-confirm="This will delete the entire ladder, its history, and all competitors. Are you sure?") Delete ladder
-        %a.panel-block-link(href="#{admin_preferences_path(@ladder)}" title="Edit ladder administrator preferences") Edit preferences
-        %a.panel-block-link(href="#{session_path}" data-method="delete" title="Sign out") Sign out
-      - else
-        = render 'includes/message' if flash_message?
-        = form_tag(sessions_path, method: :post) do
-          .field
-            .input-group
-              %input(name="ladder_id" type="hidden" value="#{@ladder.id}")
-              %input.form-control(name="password" type="password" placeholder="Administrator password")
-              %span.input-group-btn
-                = submit_tag("Submit", :class => 'btn btn-primary')
+  = resource_error_messages
+
+  .tab-content
+    .tab-pane#rankings.active
+      = render partial: 'rankings', locals: {ladder: @ladder, competitors: @competitors}
+    .tab-pane#recent-matches
+      = render partial: 'matches/matches_table', locals: {ladder: @ladder, matches: @matches}

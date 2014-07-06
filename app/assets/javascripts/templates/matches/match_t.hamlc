@@ -1,0 +1,25 @@
+.list-item-content
+  .name
+    = @match.getCompetitorName(1)
+    %span.versus vs.
+    = @match.getCompetitorName(2)
+  %dl
+    %dt Status:
+    %dd #{if @match.isFinalized() then 'Final' else 'In progress'}
+    %dt Games:
+    %dd #{@match.games.length}
+    %dt Updated:
+    %dd #{@match.get('last_updated')}
+.list-item-actions
+  .btn-group
+    - unless @match.isFinalized()
+      - if @match.has_games()
+        %button.btn.btn-small.btn-success(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="finalize" title="Complete")
+          Complete
+      %button.btn.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="POST" data-action="add-game" title="Add")
+        %span.glyphicon.glyphicon-plus
+        Game
+      %button.btn.btn-danger.btn-small(href="#{@match.rootUrl}/#{@match.get('id')}" data-method="DELETE" data-action="delete" title="Delete")
+        %span.glyphicon.glyphicon-remove
+
+.games-table-wrapper

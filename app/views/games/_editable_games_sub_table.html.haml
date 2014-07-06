@@ -1,0 +1,20 @@
+%table.games-table
+  %thead
+    %th.status Game #
+    %th.competitor Competitor 1 Score
+    %th.competitor Competitor 2 Score
+    %th
+  %tbody
+    - gameNum = 0
+    - games.each do |game|
+      - gameNum += 1
+      %tr
+        %td.game(colspan="5")
+          = form_for(game, html: {class: 'full-width'}) do
+            .cell.number= gameNum
+            .cell.competitor
+              %input.input-small(name="game[competitor_1_score]" type="text" value="#{game.competitor_1_score}" placeholder="Competitor 1 score")
+            .cell.competitor
+              %input.input-small(name="game[competitor_2_score]" type="text" value="#{game.competitor_2_score}" placeholder="Competitor 2 score")
+            .cell.pull-right
+              %input.btn.btn-small(type="submit" value="Update game")

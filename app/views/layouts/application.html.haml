@@ -2,14 +2,27 @@
 %html
   %head
     %title Ladder Manager - #{yield :title}
+    :coffeescript
+      current_user_json = #{@current_user_json}
+      window.LadderManager =
+        currentUser: current_user_json
     #{stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true}
-    #{requirejs_include_tag "application"}
     #{csrf_meta_tags}
+    %meta(name="description" content="#{yield :description}")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = yield :head
 
   %body
-    - exclude_header = @exclude_header || false
-    - unless exclude_header
-      = render :partial => 'includes/header'
-    = yield
+    %section.content-wrapper
+      .global-message-center
+      - exclude_navigation = @exclude_navigation || false
+      - unless exclude_navigation
+        = render :partial => 'includes/navigation'
+        = yield :sidebar
+      = yield
+    - if Rails.env != "development"
+      #{javascript_include_tag "application"}
+    - else
+      #{requirejs_include_tag "application-dev"}
+    = yield :footer
     = render :partial => 'includes/footer'

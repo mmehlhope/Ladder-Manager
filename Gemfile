@@ -18,20 +18,18 @@ gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
 
-# Requirejs
-gem 'requirejs-rails', git: 'git@github.com:scalient/requirejs-rails.git'
+# Use haml coffee templates
+gem 'haml_coffee_assets'
+gem 'execjs'
 
-# Backbone
-gem 'backbonejs-rails'
+# Requirejs
+gem 'requirejs-rails', git: 'git://github.com/jwhitley/requirejs-rails.git'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # HAML
 gem 'haml'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -45,7 +43,10 @@ group :doc do
 end
 
 # Active Record session store
-gem 'activerecord-session_store'
+# gem 'activerecord-session_store'
+
+# serializer
+gem "active_model_serializers"
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
@@ -53,10 +54,12 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano', group: [:development]
 # gem 'capistrano-rails', group: [:development]
 # gem 'capistrano-rvm',
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test, :mock_production]

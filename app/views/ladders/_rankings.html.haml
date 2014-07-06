@@ -1,0 +1,20 @@
+- if competitors.present?
+  %ol.list-view.rankings
+    - competitors.each do |competitor|
+      %li.list-item
+        .list-item-content
+          .name
+            = competitor.name
+          %dl
+            %dt Record:
+            %dd #{competitor.wins} Wins - #{competitor.draws} Ties - #{competitor.losses} Losses
+          .rating-container
+            .span.rating-label Rating
+            .span.rating= competitor.rating
+- else
+  %p
+    - if current_user.can_edit_ladder?(@ladder)
+      %a(href="#{edit_ladder_path(@ladder)}" title="manage this ladder") Manage this ladder
+      to add competitors and the matches between them.
+    - else
+      No competitors have been added to this ladder yet.

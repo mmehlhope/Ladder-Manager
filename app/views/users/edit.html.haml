@@ -1,0 +1,5 @@
+- content_for(:title, "User profile")
+- content_for(:description, "Edit your ladder manager user profile")
+%section.main
+  = render 'includes/message' if flash_message?
+  = render 'form'

@@ -1,0 +1,13 @@
+%table.games-table
+  %thead
+    %th.status Game #
+    %th.competitor #{competitor_1_name}'s Score
+    %th.competitor #{competitor_2_name}'s Score
+  %tbody
+    - gameNum = 0
+    - games.each do |game|
+      - gameNum += 1
+      %tr
+        %td.number= gameNum
+        %td #{game.competitor_1_score}
+        %td #{game.competitor_2_score}

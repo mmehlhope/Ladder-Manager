@@ -1,0 +1,22 @@
+.list-item-content.success-bg
+  - action_url = "/ladders/" + @ladder_id + "/matches"
+  %form(action="#{action_url}" method="POST")
+    .name
+      %select(name="match[competitor_1]")
+        %option(value="" selected="selected") Select a competitor
+        - for competitor in @competitors
+          %option(value="#{competitor.get('id')}")= competitor.get('name')
+      %span.versus vs.
+      %select(name="match[competitor_2]" disabled="disabled")
+        %option(value="" selected="selected") Select a competitor
+    %dl
+      %dt Status:
+      %dd.success-text New
+      %dt Games:
+      %dd 0
+    .list-item-actions
+      .btn-group
+        %button.btn.btn-small.btn-success(type="submit" title="Save")
+          Save
+        %button.btn.btn-small(data-action="close" title="Cancel")
+          %span.glyphicon.glyphicon-remove

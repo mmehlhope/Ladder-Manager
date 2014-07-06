@@ -1,0 +1,5 @@
+%div(class="alert #{if @message.get('removeable') then 'alert-dismissable' else ''} alert-#{@message.get('type')}")
+  - if @message.get('removeable')
+    %button.close(data-action="close")
+      %span.glyphicon.glyphicon-remove
+  = @message.get('content')

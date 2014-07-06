@@ -1,6 +1,6 @@
 - content_for(:title, "Ladder admin preferences")
 %section.col-small.centeredContainer.container-large-offset
-  %h1.panelHeading= yield(:title)
+  %h1= yield(:title)
   .panel.panel-padded
     = render 'includes/message' if flash_message?
     = render 'edit_preferences_form'

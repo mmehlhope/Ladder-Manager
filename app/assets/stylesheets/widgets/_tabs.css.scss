@@ -1,0 +1,76 @@
+@import '../common/colors';
+@import '../common/helpers';
+
+.navigation {
+  background: $tableBorder;
+  border-top: 3px solid $tableBorder;
+  clear: both;
+  list-style: none;
+  margin: 0em -1em 0em -1em;
+  padding: 0;
+  @include clearfix;
+
+  li {
+    display: block;
+    float: left;
+
+    a,
+    a:visited {
+        background-color: $defaultButtonBg;
+        display: inline-block;
+        padding: 1em 1.5em;
+        text-decoration: none;
+    }
+    &.active {
+      background: $defaultBodyBg;
+    }
+  }
+  li.active a,
+  li.active a:visited,
+  li.active a:hover,
+  li.active a:active {
+    color: $bodyText;
+  }
+}
+// TODO: Fix this to be automated
+.two-across li > a,
+.three-across li > a {
+  display: block;
+  padding: 1em 0;
+  text-align: center;
+}
+.two-across li {
+  width: 50%;
+}
+.three-across li {
+  width: 33.33%;
+}
+
+.tab-content {
+  padding: 1.5em 0;
+
+  .tab-pane {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+  }
+}
+
+@include breakpoint(tablet) {
+  .navigation {
+    margin: 1em -3em 1em -3em;
+    padding: 0 3em;
+  }
+
+  .two-across li,
+  .three-across li {
+    width: auto;
+    a {
+      padding: 1em 1.5em;
+    }
+  }
+
+}

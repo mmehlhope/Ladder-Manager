@@ -1,0 +1,32 @@
+- if matches.present?
+  %ul.list-view.match-list
+    - matches.each do |match|
+      %li.list-item.bordered
+        .list-item-content
+          .name
+            = match.competitor_1_name
+            - if match.competitor_1_is_winner? && match.finalized?
+              %span.badge.success-bg.success-text Winner!
+            %span.versus vs.
+            = match.competitor_2_name
+            - if match.competitor_2_is_winner? && match.finalized?
+              %span.badge.success-bg.success-text Winner!
+          %dl
+            %dt Status:
+            %dd #{match.finalized ? 'Final' : 'In progress'}
+            %dt Games:
+            %dd #{match.games.size}
+            %dt Started:
+            %dd #{match.created_at.strftime('%B %d, %Y')}
+            %dt Updated:
+            %dd #{distance_of_time_in_words(Time.now, match.updated_at).capitalize} ago
+        - if match.has_games?
+          %div(id="games-for-#{match.id}" class="games-table-wrapper")
+            = render partial: 'games/games_sub_table', locals: {games: match.games, competitor_1_name: match.competitor_1_name, competitor_2_name: match.competitor_2_name}
+- else
+  %p
+    - if current_user.can_edit_ladder?(@ladder)
+      %a(href="#{edit_ladder_path(@ladder)}" title="manage this ladder") Manage this ladder
+      to add competitors and the matches between them.
+    - else
+      No matches have been recorded for this ladder yet.

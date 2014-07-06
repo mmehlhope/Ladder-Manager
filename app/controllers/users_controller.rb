@@ -1,67 +1,73 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
+  before_action :authenticate_user!
+  before_action :set_user, :except => [:index, :create]
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
+  before_action :ensure_user_can_delete_user, only: [:destroy]
+  
+  # GET /admin/users
+  # GET /admin/users.json
   def index
-    @users = User.all
+    render json: current_org.users
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-  end
-
-  # POST /users
-  # POST /users.json
   def create
-    @user = User.new(user_params)
+    generated_password = Devise.friendly_token.first(8)
+
+    full_params = user_params
+    full_params[:password] = generated_password
+    full_params[:organization_id] = params[:organization_id]
+
+    @user = User.new(full_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user }
+        send_invitation_email(@user, generated_password)
+        format.json { render json: @user }
       else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
-  def update
+  # GET /admin/users/1
+  # GET /admin/users/1.json
+  def show
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+      format.json {
+        render json: @user
+      }
+    end
+  end
+
+  def update
+    # TODO: Security email validation.
+    respond_to do |format|
+      if @user.update_attributes(user_params)
+        format.json {
+          render json: @user
+        }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @user.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /admin/users/1
+  # DELETE /admin/users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
+      format.html { redirect_to current_org }
+      format.json { render json: @organization }
     end
   end
 
   private
+    def send_invitation_email(user, password)
+      LadderMailer.invitation_email(user, password).deliver
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -69,6 +75,12 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password)
+      params.require(:user).permit(:name, :email)
+    end
+
+    def ensure_user_can_delete_user
+      unless current_user.can_delete_user?(@user)
+        redirect_with_error("You do not have permission to delete this user")
+      end
     end
 end

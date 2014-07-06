@@ -1,0 +1,7 @@
+- content_for(:title, "Create an account")
+- content_for(:description, "Create a Ladder Manager account")
+%section.main
+  %section.col-xsmall.centeredContainer.container-large-offset
+    = render 'includes/message' if flash_message?
+    = render 'form'
+    %a(href="#{root_path}" title="Back to Ladder Manager home page") Back to home

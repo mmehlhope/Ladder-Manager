@@ -7,4 +7,4 @@ end
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsCompetitionPlatform::Application.load_tasks
+LadderManager::Application.load_tasks

@@ -1,0 +1,106 @@
+@import 'colors';
+
+table {
+  background: $tableBg;
+  font-size: 1em;
+  margin-bottom: 2em;
+  width: 100%;
+
+  th, td {
+    text-align: left;
+    padding: 1em;
+  }
+  th {
+    background: $defaultBodyBg;
+    border-bottom: 2px solid $tableBorder;
+    color: $bodyText;
+    font-weight: 700;
+
+  }
+  td {
+    border-top: 1px solid $tableBorder;
+    font-size: 1.2em;
+    vertical-align: top;
+
+    div.cell {
+      float: left;
+      padding: 1em;
+    }
+    &.game,
+    &.no-padding {
+      padding: 0;
+    }
+  }
+
+  tr.clickable:hover {
+    cursor: pointer;
+    td {
+      background-color: $infoButtonTint;
+    }
+  }
+
+  tr:first-child td {
+    border: none;
+  }
+
+  .detail {
+    display: block;
+    padding: 0 0 0.25em;
+    color: $sidebarLinkColor;
+    font-size: 0.8em;
+  }
+
+  // columns
+  .numGames, .number {
+    width: 10%;
+  }
+  .competitor {
+    width: 25%;
+  }
+  .status {
+    width: 25% ;
+  }
+  &.games-table {
+    color: $sidebarLinkColor;
+    margin: 0;
+
+    th, td {
+      background: $tableBorder;
+      font-size: 1em;
+    }
+    th {
+      border-bottom: 1px solid $defaultBodyBg;
+      color: $sidebarLinkColor;
+      // font-size: 0.8em;
+      font-weight: 700;
+      // padding: 0.5em 1.3em;
+    }
+    td {
+      border-top: 1px solid $defaultBodyBg;
+    }
+    div.cell {
+      padding: 0.5em 1em;
+    }
+  }
+}
+
+.games-table-wrapper {
+  clear: both;
+  position: relative;
+}
+.games-table-wrapper.collapse.in {
+  &:after {
+    content: " ";
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid $tableBorder;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    position: absolute;
+    top: -11px;
+    bottom: 100%;
+    left: 660px;
+    width: 0;
+  }
+}

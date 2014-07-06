@@ -1,16 +1,22 @@
 class Competitor < ActiveRecord::Base
+  include CompetitorsHelper
+  include Elo
+
   belongs_to :ladder
   has_and_belongs_to_many :matches
+  has_and_belongs_to_many :games
 
   validates :name, presence: true, format: {
     with: /\A[a-zA-Z0-9  -]+\z/, message: "can only contain letters, numbers, spaces, and hyphens."
   }
-
-  include CompetitorsHelper
-  include Elo
+  validates_associated :ladder, message: "has reached the maximum number of allowed competitors. Email contact@laddermanager.com to request a higher limit."
 
   def increment_win_count
     update(:wins => wins + 1)
+  end
+
+  def increment_draw_count
+    update(:draws => draws + 1)
   end
 
   def reduce_win_count

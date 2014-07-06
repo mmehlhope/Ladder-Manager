@@ -1,0 +1,100 @@
+@import '../common/colors';
+@import '../common/type';
+@import '../common/grid';
+
+.alert {
+  @include font-size(1.4);
+  padding: 0.5em 0.75em;
+  margin-bottom: 1em;
+  border: 1px solid transparent;
+  border-radius: 0.4em;
+  background: $defaultBodyBg;
+}
+.alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+.alert .alert-link {
+  font-weight: bold;
+}
+.alert > p {
+  margin-bottom: 0;
+}
+.alert > p + p {
+  margin-top: 5px;
+}
+.alert > ul {
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
+.alert-dismissable {
+  padding-right: 1em;
+}
+.alert-dismissable .close {
+  position: relative;
+  right: -0.5em;
+  color: inherit;
+}
+.alert-success {
+  border-color: $successButtonBg;
+  color: $successButtonBg;
+}
+.alert-info {
+  border-color: $infoButtonBg;
+  color: $infoButtonBg;
+}
+.alert-warning {
+  border-color: $dangerButtonBg;
+  color: $dangerButtonBg;
+}
+.alert-danger {
+  border-color: $dangerButtonBg;
+  color: $dangerButtonBg;
+}
+
+.close {
+  float: right;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.70;
+  filter: alpha(opacity=70);
+}
+.close:hover,
+.close:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+button.close {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  left: 0;
+  line-height: 1.4;
+  @include font-size(1.5);
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+.global-message-center {
+  left: 0;
+  max-width: 98em;
+  padding: 0 1em;
+  position: fixed;
+  text-align: center;
+  top: 10%;
+  width: 100%;
+  z-index: 9999;
+
+  .alert {
+    background: $successButtonTint;
+    box-shadow: 0 0 20px rgba(0,0,0,0.75);
+    @include font-size;
+    margin-bottom: 0;
+  }
+}
+
+@include breakpoint(tablet) {
+  .global-message-center {
+    padding: 0 3em 0 21em;
+  }
+}

@@ -1,0 +1,7 @@
+%h1 Doh! Nothing here...
+%p You may have mistyped the address or the page may have moved.
+%p
+  - if current_user_and_org? 
+    = link_to "Go back to #{current_org.name}'s dashboard", organization_path(current_org)
+  - else
+    = link_to "Sign in to your account", new_user_session_path

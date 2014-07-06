@@ -1,0 +1,12 @@
+%form.success-bg(action="#{@url}" method="POST")
+  .list-item-content
+    %input(type="hidden" name="organization_id" value="#{@collection.models[0].get('organization_id')}")
+    %input.input-small(type="text" name="user[name]" placeholder="New user name")
+    %input.input-small(type="text" name="user[email]" placeholder="New user email")
+  .list-item-actions
+    .btn-group
+      %button.btn.btn-small.btn-success(type="submit" value="Create" title="Create new user")
+        Create
+      %button.btn.btn-small(data-action="cancel" title="Cancel")
+        %span.glyphicon.glyphicon-remove
+  .messaging

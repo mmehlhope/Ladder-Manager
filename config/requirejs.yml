@@ -1,12 +1,8 @@
-modules:
-  - name: application
-  - name: views/matches/new
+optimize: none
 paths:
-  bootstrap: bootstrap.min
+  views: 'backbone/views'
+  jquery: 'jquery-1.11.1.min'
 shim:
-  jquery:
-    exports: '$'
-  jquery_ujs:
-    - jquery
-  bootstrap:
-    - jquery
+  requirejs: [hamlcoffee]
+  bootstrap: [jquery]
+  backbone: [underscore]

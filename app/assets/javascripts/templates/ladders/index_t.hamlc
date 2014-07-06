@@ -1,0 +1,19 @@
+.section-header
+  .section-title
+    %h2 Your organization's ladders
+    - if @ladders.length
+      %p.subdued-text View and manage your organization's ladders
+    - else
+      %p.subdued-text 
+        To get started, create your first ladder using the 
+        %strong "New Ladder" 
+        button. 
+
+  .section-actions
+    %a#create-new-ladder.btn.btn-primary(href="/ladders/new" title="Create a new ladder")
+      %span.glyphicon.glyphicon-plus
+      New Ladder
+
+%section#edit-ladders
+  .messaging
+  %ul.list-view

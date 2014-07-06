@@ -1,19 +1,21 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :set_match
-  before_action :set_ladder
-  before_action :ensure_user_can_admin_ladder, except: [:index, :show]
-
+  before_action :set_match, except: [:destroy]
+  before_action :set_ladder, except: [:destroy]
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
 
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = @match.games
+    render json: @games, root: false
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+    render json: @game, root: false
   end
 
   # GET /games/new
@@ -25,7 +27,7 @@ class GamesController < ApplicationController
           flash[:error] = error_msg
           redirect_to @match
         }
-        format.json { render json: {msg: error_msg } }
+        format.json { render json: {errors: [error_msg] } }
       end
     else
       @game = Game.new
@@ -39,17 +41,22 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = @match.games.build(game_params)
+    gparams = game_params
+    gparams[:ladder_id] = @match.ladder.id
+    @game = @match.games.build(gparams)
+    competitors = Competitor.find([@match.competitor_1, @match.competitor_2])
+    @game.competitors << competitors
+
     respond_to do |format|
       if @game.save
         format.html {
           flash[:success] = 'Game was successfully added.'
           redirect_to @match
         }
-        format.json { render action: 'show', status: :created, location: @game }
+        format.json { render json: @game, status: :created }
       else
         format.html { render action: 'new' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @game.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -61,12 +68,12 @@ class GamesController < ApplicationController
       if @game.update(game_params)
         format.html {
           flash[:success] = 'Game was successfully updated.'
-          redirect_to @match
+          redirect_to edit_ladder_path(@match.ladder)
         }
-        format.json { head :no_content }
+        format.json { render json: @game }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @game.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -74,10 +81,20 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
-    @game.destroy
+
     respond_to do |format|
-      format.html { redirect_to match_path(@match) }
-      format.json { head :no_content }
+      if @game.destroy
+        format.html { redirect_to match_path(@match) }
+        format.json { render json: @game, status: :ok }
+      else
+        format.html {
+          flash[:error] = "There was an error deleting the selected game"
+          redirect_to match_path(@match)
+        }
+        format.json {
+          render json: {errors: @game.errors.full_messages}, status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -98,6 +115,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:competitor_1_score, :competitor_2_score, :winner_name, :winner_id)
+      params.require(:game).permit(:competitor_1_score, :competitor_2_score)
     end
 end

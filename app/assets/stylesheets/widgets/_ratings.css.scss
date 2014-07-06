@@ -1,0 +1,16 @@
+@import '../common/colors';
+
+.rating-bg {
+  background-color: $tableBorder;
+
+  .rating-bar {
+    background-color: $ratingBar;
+    color: $defaultBodyBg;
+    height:1.25em;
+    line-height: 1.25em;
+    min-width: 4em;
+    padding: 0 0.5em;
+    position:relative;
+    text-align: right;
+  }
+}

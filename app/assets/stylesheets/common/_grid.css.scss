@@ -1,0 +1,61 @@
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: 120em) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: 50em) { @content; }
+  }
+  @else if $point == phone {
+    @media (max-width: 36em) { @content; }
+  }
+}
+
+$sidebarContainerWidth: 18em;
+$xSmallContainerWidth : 24em;
+$smallContainerWidth  : 36em;
+$mediumContainerWidth : 48em;
+$largeContainerWidth  : 60em;
+$maxContainerWidth    : 70em;
+
+.col-xsmall,
+.col-small,
+.col-medium,
+.col-large,
+.col-xlarge {
+
+  float: left;
+  overflow: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+
+  &.first {
+    padding: 0 1em 0 0;
+  }
+  &.last {
+    padding: 0;
+  }
+}
+
+.col-xsmall {
+  width: $xSmallContainerWidth;
+}
+.col-small {
+  width: $smallContainerWidth;
+}
+.col-medium {
+  width: $mediumContainerWidth;
+}
+.col-large {
+  width: $largeContainerWidth;
+}
+.col-xlarge {
+  width: $maxContainerWidth;
+}
+
+.container-small-offset {
+  padding-top:3.33em
+}
+
+.container-large-offset {
+  padding-top: 10em;
+}

@@ -1,55 +1,65 @@
 class LaddersController < ApplicationController
-  before_action :set_ladder, only: [:show, :edit, :admin_preferences, :update, :destroy]
-  before_action :ensure_user_can_admin_ladder, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :set_ladder, only: [:show, :edit, :update, :destroy]
+  before_action :set_organization, only: [:create]
+  before_action :search, only: [:index]
+  before_action :ensure_user_can_create_resource, only: [:create]
+  before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
 
   # GET /ladders
   # GET /ladders.json
   def index
-    @ladders = Ladder.all
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: @ladders, root: false
+      }
+    end
   end
 
   # GET /ladders/1
   # GET /ladders/1.json
   def show
     # Sort competitors highest -> lowest rating
-    @competitors = @ladder.competitors.order("rating desc")
+    @competitors = @ladder.rating_desc
     # Sort matches newest -> oldest creation date
-    @matches = @ladder.matches.order("created_at desc").limit(5)
+    @matches = @ladder.matches.order("updated_at desc").limit(5)
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: @ladder, expanded: true
+      }
+    end
   end
 
   # GET /ladders/new
   def new
-    @ladder = Ladder.new
+    @ladder = current_org.ladders.build
   end
 
   # GET /ladders/1/edit
   def edit
+    @matches_json     = editable_matches_json
+    @competitors_json = competitors_json
+    @ladder_json      = LadderSerializer.new(@ladder).to_json
   end
 
   # POST /ladders
   # POST /ladders.json
   def create
-    @ladder = Ladder.new(ladder_params)
+    @ladder = @organization.ladders.build(ladder_params)
 
     respond_to do |format|
       if @ladder.save
-
-        # set session admin
-        session[:user_can_admin] = [@ladder.id]
-        # send welcome email
-        begin
-          LadderMailer.welcome_email(@ladder).deliver
-        rescue
-          flash[:alert] = "Your welcome email failed to send. Please bookmark this page for future reference."
-        end
         format.html {
           flash[:success] = "Ladder was successfully created."
-          redirect_to @ladder
+          redirect_to edit_ladder_path(@ladder)
         }
-        format.json { render action: 'show', status: :created, location: @ladder }
+        format.json { render json: @ladder }
       else
         format.html { render action: 'new' }
-        format.json { render json: @ladder.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @ladder.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -59,24 +69,16 @@ class LaddersController < ApplicationController
   def update
     respond_to do |format|
       if @ladder.update(ladder_params)
-
-        if user_is_submitting_preferences?
-          successMsg = 'Admin preferences have been successfully updated.'
-          # Send password changed notice
-          LadderMailer.password_changed(@ladder).deliver
-        else
-          successMsg = 'Ladder was successfully updated.'
-        end
+        successMsg = 'Ladder was successfully updated.'
 
         format.html {
           flash[:success] = successMsg
-          redirect_to @ladder
+          redirect_to edit_ladder_path(@ladder)
         }
-        format.json { head :no_content }
+        format.json { render json: @ladder}
       else
-        action = user_is_submitting_preferences? ? 'admin_preferences' : 'edit'
-        format.html { render action: action }
-        format.json { render json: @ladder.errors, status: :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.json { render json: {errors: @ladder.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end
@@ -86,52 +88,74 @@ class LaddersController < ApplicationController
   def destroy
     respond_to do |format|
       if @ladder.destroy
-        format.html { redirect_to root_path }
-        format.json { head :no_content }
+        format.html { redirect_to organization_path(current_org) }
+        format.json { render json: @ladder, status: :ok }
       else
         format.html {
           flash[:error] = 'There was an error deleting this ladder. Please try again later.'
           redirect_to @ladder
         }
-        format.json { render json: @ladder.errors,  status: :unprocessable_entity}
+        format.json { render json: {errors: @ladder.errors.full_messages},  status: :unprocessable_entity}
       end
     end
   end
 
-  # GET /ladders/search
-  def search
-    if params[:id] =~ /\A[0-9]+\z/
-      ladder = Ladder.find_by_id(params[:id])
-    else
-      error = "Ladder IDs can only be numbers, please try again."
-    end
-
-    unless ladder.nil? or error
-      redirect_to ladder
-    else
-      error ||= "That Ladder ID was not found, please try again."
-      flash[:error] = error
-      redirect_to root_path
-    end
-  end
-
-  # GET /ladders/1/admin_preferences
-  def admin_preferences
-  end
 
   private
 
+    def search
+      if params[:query]
+        @query = params[:query].strip! || params[:query]
+        if @query =~ /\A[0-9]+\z/
+          @ladders = Ladder.where("id = :query", query: @query)
+        elsif @query =~ /\A[\w ]+\z/
+          @ladders = Ladder.where("name LIKE :query", query: "%#{@query}%")
+        else
+          @ladders = []
+        end
+      else
+        @ladders = current_org ? current_org.ladders : []
+      end
+    end
+
     def set_ladder
-      @ladder = Ladder.find_by_id(params[:id])
+      begin
+        @ladder = Ladder.find(params[:id])
+      rescue
+        redirect_with_error('That ladder no longer exists', (current_user_and_org? ? organization_path(current_org) : root_path))
+      end
+    end
+
+    def set_organization
+      @organization = Organization.find_by_id(params[:organization_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ladder_params
-      params.require(:ladder).permit(:name, :admin_email, :password_digest, :password, :password_confirmation)
+      params.require(:ladder).permit(:name, :organization_id)
     end
 
-    def user_is_submitting_preferences?
-      request.referer =~ /admin_preferences/ || !ladder_params[:password_confirmation].blank?
+    def all_matches_json
+      ActiveModel::ArraySerializer.new(
+        @ladder.all_matches,
+        each_serializer: MatchSerializer,
+        scope: serialization_scope
+      ).to_json
     end
 
+    def editable_matches_json
+      ActiveModel::ArraySerializer.new(
+        @ladder.editable_matches,
+        each_serializer: MatchSerializer,
+        scope: serialization_scope
+      ).to_json
+    end
+
+    def competitors_json
+      ActiveModel::ArraySerializer.new(
+        @ladder.competitors,
+        each_serializer: CompetitorSerializer,
+        scope: serialization_scope
+      ).to_json
+    end
 end

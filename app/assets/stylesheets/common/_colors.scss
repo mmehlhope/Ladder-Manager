@@ -1,0 +1,70 @@
+////////////
+// Colors //
+////////////
+
+// General
+$defaultBodyBg: #fff;
+$bodyText: #575757;
+$bodyBg: $bodyText;
+$asideBg: #242424;
+$sidebarLinkColor: #646464;
+$subduedText: #999;
+$link: #D3643B;
+
+///////////
+// Forms //
+///////////
+$inputBorderColor: #bdbdbd;
+$inputFocusBorderColor: $bodyText;
+$subduedLink: $inputBorderColor;
+
+//////////
+// Misc //
+//////////
+
+// Panels
+$panelHeaderBg      : #2C333A;
+$panelTitleColor    : $asideBg;
+
+// Tables
+$tableBg            : $defaultBodyBg;
+$tableBorder        : lighten($inputBorderColor, 15%);
+
+// Breadcrumbs
+$breadcrumbBg       : #343C46;
+$breadcrumbColor    : $tableBorder;
+$breadcrumbLinkColor: lighten($link, 20%);
+$breadcrumbBorder   : lighten($sidebarLinkColor, 50%);
+
+// Ratings
+$ratingBar         : #94C7B6;
+
+// Badges
+$badgeBg           : $tableBorder;
+$badgeText         : darken($badgeBg, 50%);
+
+/////////////
+// Buttons //
+/////////////
+
+$defaultButtonBg: #fff;
+$defaultButtonText: $bodyText;
+// primary
+$primaryButtonText: #fff;
+$primaryButtonBg: $link;
+$primaryButtonHighlight: lighten($primaryButtonBg, 5%);
+// danger
+$dangerButtonBg: #bb0000;
+$dangerButtonHighlight: lighten($dangerButtonBg, 5%);
+$dangerButtonTint: lighten($dangerButtonBg, 60%);
+// success
+$successButtonBg: #00bb00;
+$successButtonHighlight: lighten($successButtonBg, 5%);
+$successButtonTint: lighten($successButtonBg, 60%);
+// info
+$infoButtonBg: #0065bb;
+$infoButtonHighlight: lighten($infoButtonBg, 5%);
+$infoButtonTint: lighten($infoButtonBg, 60%);
+// neutral
+$neutralButtonBg: $tableBorder;
+$neutralButtonHighlight: lighten($neutralButtonBg, 5%);

@@ -1,0 +1,27 @@
+- if @_view.inEditMode()
+  - action_url = "#{@user.urlRoot}/#{@user.get('id')}"
+  %form.success-bg.update(action="#{action_url}" method="PUT")
+    .list-item-content
+      %input.input-small(type="text" name="user[name]" value="#{@user.get('name')}" placeholder="Full name")
+    .list-item-actions
+      .btn-group
+        %button.btn.btn-small.btn-success(type="submit" value="Update")
+          Update
+        %button.btn.btn-small(data-action="cancel")
+          %span.glyphicon.glyphicon-remove
+- else
+  %div(class="list-item-content #{@_view.currentUserHighlight()}")
+    .name= @user.getFullName()
+    %dl
+      %dt Email:
+      %dd= @user.get('email')
+
+      %dt Last login:
+      %dd= @user.get('last_sign_in')
+
+  .list-item-actions
+    .btn-group
+      - if @currentUser.canDeleteUser(@user)
+        %a.btn.btn-danger.btn-small(href="/users/#{@user.get('id')}" data-action="delete")
+          %span.glyphicon.glyphicon-remove
+.messaging

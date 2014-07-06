@@ -1,0 +1,121 @@
+@import '../common/grid';
+
+aside {
+  background: $asideBg image-url('tactile_noise.png');
+  color: $defaultBodyBg;
+  height: 3em;
+  left: 0;
+  line-height: 3em;
+  padding: 0 0 0 1em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+
+  .logo-container {
+    color: $defaultBodyBg;
+    float: left;
+    padding: 0;
+
+    .logo {
+      display: none;
+      height: auto;
+      width: 100%;
+    }
+  }
+  a.nav-toggle {
+    background: none;
+    border: none;
+    color: $defaultBodyBg;
+    display: inline-block;
+    float: right;
+    padding: 0 1em;
+  }
+  .global-navigation {
+    background: $asideBg;
+    border-top: 1px solid darken($asideBg, 5%);
+    clear: left;
+    display: none;
+    line-height: 1;
+    margin: 0 -1em;
+    position: relative;
+    z-index: 10;
+
+    &.visible {
+      display: block;
+    }
+  }
+}
+
+.search {
+  padding: 1em 2em;
+
+  input[type="search"] {
+    border: 0;
+    color: #fff;
+    background: darken($asideBg, 5%);
+    padding-right: 2.5em;
+  }
+  .search-button {
+    color: #fff;
+  }
+}
+
+.sidebar-menu {
+  padding: 0 0 1em 0;
+  margin: 0;
+  list-style: none;
+
+  li:first-child a {
+    border-top: 0;
+  }
+  li.active a, li a:hover {
+    color: #fff;
+    border-left-color: $link;
+    background: darken($primaryButtonBg, 5%);
+  }
+  a, a:visited {
+    color: $sidebarLinkColor;
+    display: block;
+    padding: 0.75em 0 0.75em 2em;
+    border-left: 5px solid transparent;
+
+    &:active, &:focus {
+      color: $defaultBodyBg;
+    }
+  }
+}
+
+@include breakpoint(tablet) {
+  aside {
+    float: left;
+    line-height: 1em;
+    min-height: 100%;
+    padding: 0;
+    position: fixed;
+    width: $sidebarContainerWidth;
+
+    .global-navigation {
+      background: none;
+      border: none;
+      display: block;
+      margin: 0;
+    }
+    a.nav-toggle {
+      display: none;
+    }
+
+    .search {
+      padding: 0 2em 1em;
+    }
+
+    .logo-container {
+      display: block;
+      padding: 1.5em 3em;
+      width: 100%;
+
+      .logo {display: block;}
+      .logo-text {display: none;}
+    }
+  }
+}

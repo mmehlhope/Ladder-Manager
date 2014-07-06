@@ -1,0 +1,109 @@
+@import '../common/colors';
+@import '../common/type';
+
+.btn,
+a.btn, a.btn:visited,
+input[type="submit"].btn,
+input[type="reset"].btn {
+  color: $defaultButtonText;
+  background-color: $defaultButtonBg;
+  border: 0;
+  border-radius: 0.3em;
+  border: 1px solid transparent;
+  border-color: $inputBorderColor;
+  @include font-size(1.4);
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  &:focus {
+    outline: none;
+    border-color: $inputFocusBorderColor;
+  }
+  &:hover {
+    color: $defaultButtonText;
+    border-color: $defaultButtonText;
+  }
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    opacity: .65;
+    pointer-events: none;
+  }
+  &.btn-primary {
+    color: #fff;
+    background: $primaryButtonBg;
+    border-color: $primaryButtonBg;
+
+    &:hover {
+      background: $primaryButtonHighlight;
+    }
+  }
+  &.btn-success {
+    color: $successButtonBg;
+
+    &:hover {
+      border-color: $successButtonBg;
+    }
+  }
+  &.btn-danger {
+    color: $dangerButtonBg;
+
+    &:hover {
+      border-color: $dangerButtonBg;
+    }
+  }
+  &.btn-info {
+    color: $infoButtonBg;
+
+    &:hover {
+      background: $infoButtonBg;
+    }
+  }
+  &.btn-neutral {
+    color: $bodyText;
+    background: $neutralButtonBg;
+
+    &:hover {
+      background: $neutralButtonHighlight;
+    }
+    &:active, &:focus {
+      color: $defaultBodyBg;
+      background: $defaultButtonText;
+    }
+  }
+  &.btn-link {
+    color: $link;
+    background: transparent;
+    border-color: transparent;
+  }
+  &.btn-small {
+    @include font-size(1.2);
+    padding: 0.5em 0.75em;
+  }
+  &.icon-only {
+    @include font-size(1.2);
+    padding: 0.3em 0.5em 0.25em;
+
+    .glyphicon {
+      margin:0;
+    }
+  }
+  &.busy {
+    background: $neutralButtonBg image-url('spinner-small.gif') 0.5em center no-repeat;
+    color: $inputBorderColor;
+    padding-left: 2.5em;
+
+    &:hover, &:active, &:visited, &:focus {
+      background: $neutralButtonBg image-url('spinner-small.gif') 0.5em center no-repeat;
+      color: $inputBorderColor;
+      border-color: $inputBorderColor;
+    }
+  }
+}

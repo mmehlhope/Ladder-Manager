@@ -1,0 +1,24 @@
+%ul.list-view
+  - if current_org.has_ladders?
+    - current_org.ladders.each do |ladder|
+      %li.list-item
+        .list-item-content
+          .name
+            = link_to ladder.name, ladder_path(ladder)
+          %dl
+            %dt Competitors:
+            %dd= ladder.competitors.size
+
+            %dt Total matches:
+            %dd= ladder.matches.size
+
+            %dt Created:
+            %dd= ladder.created_at.strftime("%B %d, %Y")
+        .list-item-actions
+          .btn-group
+            %a.btn.btn-small(href="#{edit_ladder_path(ladder)}") Manage
+            %a.btn.btn-small.btn-danger(href="#{ladder_path(ladder)}" data-method="delete")
+              %span.glyphicon.glyphicon-remove
+  - else
+    %li
+      No ladders have been created

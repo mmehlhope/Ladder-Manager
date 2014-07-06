@@ -1,0 +1,117 @@
+@import 'colors';
+
+///////////////////
+// Atomic Styles //
+///////////////////
+
+// Positional
+
+@mixin clearfix {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+.clearfix {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+.centeredContainer {
+  float:none;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+
+// Dimensional
+.block {
+  display: block;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+.half-width {
+  width: 50%;
+}
+
+// bits
+.badge {
+  background: $badgeBg;
+  border-radius: 1em;
+  color: $badgeText;
+  font-size: 0.8em;
+  padding: 0.25em 0.75em;
+}
+
+.bordered {
+  border: 1px solid $tableBorder;
+  &:empty {
+    border: none;
+  }
+}
+
+// color
+.success-text { color: $successButtonBg !important; }
+.success-bg { background-color: $successButtonTint !important; }
+.danger-text { color: $dangerButtonBg !important; }
+.danger-bg { background-color: $dangerButtonTint !important; }
+.info-text { color: $infoButtonBg !important; }
+.info-bg { background-color: $infoButtonTint !important; }
+.subdued-text { color: $subduedText !important}
+
+// Accessibility
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Bootstrap
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+.fade.in {
+  opacity: 1;
+}
+.collapse {
+  display: none;
+}
+.collapse.in {
+  display: block;
+}
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 0.35s ease;
+  transition: height 0.35s ease;
+}
