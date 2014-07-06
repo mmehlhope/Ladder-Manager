@@ -2,7 +2,7 @@
   .section-title
     - if @competitors.length
       %h2 Edit Competitors
-      %p.subdued-text Add, edit, and remove competitors for this ladder.
+      %p.subdued-text Add, rename, and remove competitors for this ladder.
     - else
       %h2 Add some competitors!
       %p.subdued-text Start by adding at least 2 competitors, then you can record matches between them.

@@ -1,7 +1,7 @@
 .section-header
   .section-title
     %h2 Edit Settings
-    %p.subdued-text Manage this ladders settings and preferences
+    %p.subdued-text Manage this ladders settings and preferences. 
 
 %section#edit-details
   .messaging
