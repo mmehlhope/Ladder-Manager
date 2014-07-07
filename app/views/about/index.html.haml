@@ -1,11 +1,60 @@
-- content_for(:title, "Release notes")
+- content_for(:title, "Frequently Asked Questions")
 %section.main
   %header.clearfix
     .section-title
-      %h1 About Ladder Manager
+      %h1 Frequently Asked Questions
     .section-actions
       %form.full-width(action="#{ladders_path}" method="GET")
         .input-group.form-group
           %input.form-control(type="search" name="query" placeholder="Search public ladders")
           %button.search-button(type="submit")
             %span.glyphicon.glyphicon-search
+
+  %ul.list-view.about
+    %li.list-item
+      .list-item-content
+        %h2 What is Ladder Manager?
+        %p
+          Using Ladder Manager you can reduce the organizational headache of league, club, or gym competition tracking. It doesn’t matter if you need to track semi-professional racquetball, little league kickball, or even Fraternity beer pong, Ladder Manager will work for you.
+
+    %li.list-item
+      .list-item-content
+        %h2 As an organizer, can I run multiple ladders?
+        %p
+          Within your organization you can create multiple ladders, each with their own unique set of competitors and matches. You may create additional administrative accounts for your organization, allowing you to distribute the effort of managing multiple ladders.
+        %p 
+          %i For the current alpha release of Ladder Manager, there is a limit of 5 ladders per organization.
+
+    %li.list-item
+      .list-item-content
+        %h2 How does it rank competitors?
+        %p
+          Ladder Managers utilizes the powerful 
+          =link_to "Elo rating algorithm", "http://en.wikipedia.org/wiki/Elo_rating_system" 
+          to automatically adjusts rankings and ratings based on match results. Organizers no longer have to worry about doing the math themselves, everything is calculated automatically once a match is submitted.
+
+    %li.list-item
+      .list-item-content
+        %h2 Who can make changes to an organization and its ladders?
+        %p
+          Only administrators have access to modify an organization, its ladders, and any of the competitors or matches associated with it. In the future we would like to have a system for competitors to record their own matches, but for now all non-adminstrative users can simply view the ladder's current standings.
+
+    %li.list-item
+      .list-item-content
+        %h2 How do I add competitors and matches to a ladder?
+        %p
+          Once you've created a ladder from your organization's home page, click on the
+          %strong "Manage"
+          button to the right of that ladder. This will take you to the "Ladder Management" page which allows you to create competitors, record matches, and rename the ladder.
+
+    %li.list-item
+      .list-item-content
+        %h2 Why can't I edit previously-completed matches?
+        %p
+          Once you've recorded a match and pressed "complete" to finalize that match, it can no longer be edited. Editing historical matches would greatly affect the rankings and ratings of a ladder and thus that functionality is currently disabled.
+
+    %li.list-item
+      .list-item-content
+        %h2 I have some feedback, how can I submit it?
+        %p
+          Click the orange chat bubble in the bottom right-hand corner. Your feedback is extremely important in helping Ladder Manager become a better tool.

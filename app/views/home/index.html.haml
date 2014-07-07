@@ -1,5 +1,5 @@
 - content_for(:title, "Head-to-head competition made simple")
-- content_for(:description, "Request an invite to Ladder Manager")
+- content_for(:description, "Ladder Manager makes tracking head-to-head competition simple for any organization, large or small.")
 
 = form_tag(request_invite_path, method: :post, class: "full-width text-center") do
   %h2 Request an invite to Ladder Manager
@@ -12,3 +12,5 @@
 - content_for :footer do
   .auth-links
     %a.subdued(href="#{new_user_session_path}" title="Already have an invite? Sign in.") Already have an invite? Sign in!
+    %br
+    %a.subdued(href="#{about_path}" title="Curious? Read the FAQs") Check out the FAQs in the meantime
