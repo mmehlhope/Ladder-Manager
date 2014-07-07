@@ -49,7 +49,8 @@ class OrganizationsController < ApplicationController
         format.html { redirect_to @organization }
         format.json { render json: @organization }
       else
-        flash[:error] = @organization.errors.full_messages || "You have already created an organization."
+        messages = @organization.errors.present? ? @organization.errors.full_messages : "You have already created an organization."
+        flash[:error] = messages
         format.html { redirect_to new_organization_path }
         format.json { render json: {errors: @organization.errors.full_messages}, status: :unprocessable_entity }
       end
