@@ -1,7 +1,7 @@
 // Typography
 @import 'colors';
 @import 'grid';
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600);
 
 @mixin font-size($sizeValue: 1.4) {
   font-size: ($sizeValue * 10) + px;
