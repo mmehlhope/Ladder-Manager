@@ -1,26 +1,26 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.0'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 
 # MySQL for AR
-gem 'mysql'
+gem 'mysql', '~> 2.9.1'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '4.0.1'
 
 # Use haml coffee templates
-gem 'haml_coffee_assets'
-gem 'execjs'
+gem 'haml_coffee_assets', git: "https://github.com/netzpirat/haml_coffee_assets"
+gem 'execjs', "~> 2.0.2"
 
 # Requirejs
 gem 'requirejs-rails', git: 'git://github.com/jwhitley/requirejs-rails.git'
@@ -29,7 +29,7 @@ gem 'requirejs-rails', git: 'git://github.com/jwhitley/requirejs-rails.git'
 # gem 'therubyracer', platforms: :ruby
 
 # HAML
-gem 'haml'
+gem 'haml', "~> 4.0.4"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -42,20 +42,17 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Active Record session store
-# gem 'activerecord-session_store'
-
 # serializer
-gem "active_model_serializers"
+gem "active_model_serializers", "~> 0.8.1"
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-gem 'unicorn'
+gem 'unicorn', "~> 4.7.0"
 
-gem 'devise'
-
+gem 'devise', "~> 3.2.4"
+gem 'newrelic_rpm'
 # Use Capistrano for deployment
 # gem 'capistrano', group: [:development]
 # gem 'capistrano-rails', group: [:development]
