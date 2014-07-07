@@ -40,7 +40,7 @@ class OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(org_params)
     respond_to do |format|
-      if @organization.save
+      if !current_org && @organization.save
         # Assign org to user
         current_user.update_attributes(organization_id: @organization.id)
         # send welcome email
@@ -49,7 +49,7 @@ class OrganizationsController < ApplicationController
         format.html { redirect_to @organization }
         format.json { render json: @organization }
       else
-        flash[:error] = @organization.errors.full_messages
+        flash[:error] = @organization.errors.full_messages || "You have already created an organization."
         format.html { redirect_to new_organization_path }
         format.json { render json: {errors: @organization.errors.full_messages}, status: :unprocessable_entity }
       end
