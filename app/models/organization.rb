@@ -10,8 +10,8 @@ class Organization < ActiveRecord::Base
   validate :within_ladder_limits
   validate :within_user_limits
 
-  LADDER_LIMIT = 5
-  USER_LIMIT = 5
+  LADDER_LIMIT = 6
+  USER_LIMIT = 6
   
   def within_ladder_limits
     return if ladders.blank?
