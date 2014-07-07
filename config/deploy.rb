@@ -1,14 +1,14 @@
 set :application, 'ladder_manager'
 set :repo_url, 'git@github.com:mmehlhope/Ladder-Manager.git'
-set :user_sudo, false
+set :use_sudo, false
 set :branch, 'master'
 
 set :deploy_to, '/home/ladder_manager/ladder_manager_app/'
 set :scm, :git
 set :pty, true
 
-# set :log_level, :debug
-# set :format, :pretty
+set :log_level, :debug
+set :format, :pretty
 
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
