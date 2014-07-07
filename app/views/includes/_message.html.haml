@@ -1,12 +1,12 @@
 - flash.each do |key, messages|
   - case key
-  - when :notice
+  - when "notice"
     - style = "alert-info"
-  - when :success
+  - when "success"
     - style = "alert-success"
-  - when :alert
+  - when "alert"
     - style = "alert-warning"
-  - when :error
+  - when "error"
     - style = "alert-danger"
   .alert.alert-dismissable.text-left(class="#{style ? style : ''}")
     %button.close(type="button" data-dismiss="alert")
@@ -19,3 +19,4 @@
       %ul
         - messages.each do |message|
           %li= message
+
