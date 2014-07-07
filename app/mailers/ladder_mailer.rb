@@ -14,7 +14,7 @@ class LadderMailer < Devise::Mailer
     @user = user
     @organization = @user.organization
     @url  = "http://laddermanager.com/organizations/#{@organization.id}"
-    mail(to: @user.email, subject: "Welcome to LadderManager, #{@user.name}")
+    mail(to: @user.email, subject: "Welcome to LadderManager, #{@user.name}!")
   end
 
 

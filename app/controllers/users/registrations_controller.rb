@@ -2,11 +2,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters, :only => [:create]
   layout "application", only: [:edit]
 
-  def create
-    super
-    # send_welcome_email(@user) unless @user.invalid?
-  end
-
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
@@ -43,9 +38,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     organization_path(current_org)
-  end
-
-  def send_welcome_email(user)
-    LadderMailer.welcome_email(user).deliver
   end
 end

@@ -43,6 +43,8 @@ class OrganizationsController < ApplicationController
       if @organization.save
         # Assign org to user
         current_user.update_attributes(organization_id: @organization.id)
+        # send welcome email
+        send_welcome_email(current_user)
 
         format.html { redirect_to @organization }
         format.json { render json: @organization }
@@ -113,5 +115,9 @@ class OrganizationsController < ApplicationController
         each_serializer: UserSerializer,
         scope: serialization_scope
       ).to_json
+    end
+
+    def send_welcome_email(user)
+      LadderMailer.welcome_email(user).deliver
     end
 end
