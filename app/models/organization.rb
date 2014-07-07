@@ -1,8 +1,8 @@
 class Organization < ActiveRecord::Base
   include OrganizationHelper
 
-  has_many :ladders, dependent: :destroy
-  has_many :users, dependent: :destroy
+  has_many :ladders, dependent: :destroy, validate: false
+  has_many :users, dependent: :destroy, validate: false
 
   validates :name, presence: true, format: {
     with: /\A[a-zA-Z0-9  -]+\z/, message: "can only contain letters, numbers, spaces, and hyphens."

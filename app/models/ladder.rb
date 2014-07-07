@@ -3,8 +3,8 @@ class Ladder < ActiveRecord::Base
 
   belongs_to :organization
 
-  has_many :competitors, dependent: :destroy
-  has_many :matches, dependent: :destroy
+  has_many :competitors, dependent: :destroy, validate: false
+  has_many :matches, dependent: :destroy, validate: false
 
   validates :name, presence: true, format: {
     with: /\A[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9  ']*\z/, message: "can only contain letters, numbers, and spaces."
