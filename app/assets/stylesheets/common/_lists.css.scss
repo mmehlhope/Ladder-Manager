@@ -100,7 +100,14 @@
     }
   }
 }
-
+.list-view.about {
+  .list-item-content {
+    padding: 2em 0 1em;
+  }
+  p {
+    @include font-size($header);
+  }
+}
 ol.list-view {
   list-style-type: decimal-leading-zero;
   padding-left: 2em;

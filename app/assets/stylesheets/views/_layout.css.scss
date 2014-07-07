@@ -70,6 +70,10 @@ dl {
   width: 100%;
 }
 
+.auth-links {
+  padding: 0 0 0 2em;
+}
+
 @include breakpoint(tablet) {
 
   header {
@@ -113,8 +117,5 @@ dl {
   .user-auth-wrapper {
     width: $smallContainerWidth;
     margin: 0 auto;
-  }
-  .auth-links {
-    padding: 0 0 0 2em;
   }
 }
