@@ -107,7 +107,7 @@ class OrganizationsController < ApplicationController
     end
 
     def users_json
-      sorted_users = @organization.users.sort! { |x,y| x.full_name <=> y.full_name }
+      sorted_users = @organization.users.sort { |x,y| x.full_name <=> y.full_name }
       ActiveModel::ArraySerializer.new(
         sorted_users,
         each_serializer: UserSerializer,
