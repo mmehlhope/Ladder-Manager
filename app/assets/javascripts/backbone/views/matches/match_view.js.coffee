@@ -17,7 +17,7 @@ define (require, exports, module) ->
     className: 'list-item bordered'
 
     events:
-      'click [data-action="delete"]'   : 'deleteItem'
+      'click [data-action="deleteMatch"]'   : 'deleteItem'
       'click [data-action="add-game"]' : 'showNewGameRow'
       'click [data-action="finalize"]' : 'finalize'
 
