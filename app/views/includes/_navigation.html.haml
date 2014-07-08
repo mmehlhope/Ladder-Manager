@@ -1,6 +1,7 @@
 %aside
   .logo-container
-    = image_tag('ladder-manager-logo-white.svg', :class => 'logo')
+    %a(href="#{current_org ? organization_path(current_org) : root_path}" title="Home")
+      = image_tag('ladder-manager-logo-white.svg', :class => 'logo')
     %span.logo-text Ladder Manager
   %a.nav-toggle(href="#" title="Toggle menu")
     %span.glyphicon.glyphicon-align-justify
@@ -8,7 +9,7 @@
     .search
       %form.full-width(action="#{ladders_path}" method="GET")
         .input-group
-          %input.form-control(type="search" name="query" placeholder="Search public ladders")
+          %input.form-control(type="search" name="query" placeholder="Search ladders")
           %button.search-button(type="submit")
             %span.glyphicon.glyphicon-search
 
