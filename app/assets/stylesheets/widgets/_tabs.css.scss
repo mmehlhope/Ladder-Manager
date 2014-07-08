@@ -24,6 +24,9 @@
     &.active {
       background: $defaultBodyBg;
     }
+    &:hover {
+      background: lighten($tableBorder, 5%); 
+    }
   }
   li.active a,
   li.active a:visited,
