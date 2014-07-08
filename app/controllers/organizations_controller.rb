@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
   before_action :set_org, except: [:create, :new]
   before_action :ensure_user_can_view_organization, only: [:show]
   before_action :ensure_user_can_edit_resource, only: [:update, :destroy]
+  before_action :set_cache_buster, only: [:new, :show]
 
   # GET /organizations/1
   # GET /organizations/1.json
