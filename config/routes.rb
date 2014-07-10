@@ -20,7 +20,7 @@ LadderManager::Application.routes.draw do
   # Custom routes #
   #################
   get  '/release_notes', to: "release_notes#index"
-  get  '/about', to: "about#index"
+  get  '/faqs', to: "faqs#index"
   post '/request_invite', to: "signups#create"
 
   # Home page
