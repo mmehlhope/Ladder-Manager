@@ -15,14 +15,18 @@
 
     %ul.sidebar-menu.user-options
       - if current_user.id
-        %li(class="#{request.fullpath =~ /\/organizations/ ? 'active' : nil}")
-          %a(href="#{organization_path(current_org)}" title="My Organization")
+        %li(class="#{request.fullpath =~ /\/ladders/ ? 'active' : nil}")
+          %a(href="#{ladders_path}" title="Ladders (Rankings and Matches)")
             %span.glyphicon.glyphicon-globe
-            My Organization
+            Ladders
         %li(class="#{request.fullpath =~ /\/users/ ? 'active' : nil}")
           %a(href="#{edit_user_registration_path}" title="My Account")
             %span.glyphicon.glyphicon-user
             My Account
+        %li(class="#{request.fullpath =~ /\/organization/ ? 'active' : nil}")
+          %a(href="#{organization_path(current_org)}" title="Admin Settings")
+            %span.glyphicon.glyphicon-cog
+            Admin Settings
         %li
           %a(href="#{release_notes_path}" title="Release notes")
             %span.glyphicon.glyphicon-briefcase
@@ -30,7 +34,7 @@
         %li
           %a(href="#{faqs_path}" title="Frequently Asked Questions")
             %span.glyphicon.glyphicon-question-sign
-            FAQs
+            Help / FAQs
         %li
           %a.sign-out(href="#{destroy_user_session_path}" title="Sign out")
             %span.glyphicon.glyphicon-off
@@ -43,7 +47,7 @@
         %li
           %a(href="#{faqs_path}" title="Frequently Asked Questions")
             %span.glyphicon.glyphicon-question-sign
-            FAQs
+            Help / FAQs
         %li
           %a(href="#{release_notes_path}" title="Release notes")
             %span.glyphicon.glyphicon-briefcase
