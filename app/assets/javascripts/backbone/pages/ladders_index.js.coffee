@@ -8,8 +8,6 @@ define (require, exports, module) ->
 
   class LaddersIndexPage extends Backbone.View
 
-    el: '.ladders'
-
     initialize: (options={}) ->
       {@organization, @ladders} = options
       ladderCollection = new LadderCollection(@ladders)

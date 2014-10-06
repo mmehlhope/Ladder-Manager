@@ -12,7 +12,7 @@ define (require, exports, module) ->
 
   class LadderCollectionView extends Backbone.View
 
-    el: '#ladders'
+    el: '.ladders'
 
     events:
       'click #create-new-ladder' : 'showNewLadderForm'
