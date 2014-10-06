@@ -1,5 +1,5 @@
 %section.main
-  = render :partial => "includes/user_header" 
+  = render :partial => "includes/user_header"
   = render 'includes/message'
 
   %section.ladders
@@ -7,10 +7,9 @@
 
 - content_for :footer do
   :coffeescript
-    require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
-      new ManageOrgPage(
-        organization: #{@organization_json},
-        ladders: #{@ladders_json},
-        users: #{@users_json}
+    require ['backbone/pages/ladders_index'], (LaddersIndexPage) ->
+      new LaddersIndexPage(
+        organization: #{@organization_json}
+        ladders: #{@ladders_json}
       )
 
