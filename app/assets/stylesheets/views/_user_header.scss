@@ -1,0 +1,25 @@
+@import '../common/colors';
+@import '../common/grid';
+
+.user-header {
+  background: $inputBorderColor;
+  color: $defaultBodyBg;
+  margin: -1em;
+  overflow: auto;
+  padding: 1em;
+
+  .title {
+    float: left;
+  }
+  .user-menu {
+    float: right;
+    
+  }
+}
+
+@include breakpoint(tablet) {
+  .user-header {
+    margin: -1.5em -3em 1.5em;
+    padding: 1em 3em;
+  }
+}

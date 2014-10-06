@@ -1,6 +1,7 @@
 - content_for(:title, "Ladder Management")
 
 %section.main
+  = render :partial => "includes/user_header" 
   %header.clearfix
     .section-title
       %h1= yield(:title)

@@ -1,0 +1,10 @@
+- if current_org
+  .user-header
+    .title
+      = current_org.name
+    .user-menu
+      .user-name
+        %span.glyphicon.glyphicon-user
+        = current_user.name
+        \-
+        %a.sign-out(href="#{destroy_user_session_path}" title="Sign out") Sign out

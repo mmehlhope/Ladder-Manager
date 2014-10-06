@@ -1,38 +1,16 @@
 %section.main
-  %header.clearfix
-    .section-title
-      %h1 Ladder search results
-      %dl
-        %dt Results:
-        %dd= @ladders.length
-    .section-actions
-      %form.full-width(action="#{ladders_path}" method="GET")
-        .input-group.form-group
-          %input.form-control(type="search" name="query" placeholder="Search public ladders")
-          %button.search-button(type="submit")
-            %span.glyphicon.glyphicon-search
+  = render :partial => "includes/user_header" 
+  = render 'includes/message'
 
-  = render 'includes/message' if flash_message?
-  - if @ladders.present?
-    %ul.list-view.search-results
-      - @ladders.each do |ladder|
-        %li.list-item
-          .list-item-content
-            .name
-              = link_to ladder.name, ladder_path(ladder)
-            %dl
-              %dt Created:
-              %dd= ladder.created_at.strftime("%B %d, %Y")
-              %dt Organization:
-              %dd= ladder.organization.name
-              %dt Competitors:
-              %dd= ladder.competitors.length
-              %dt Matches
-              %dd= ladder.matches.length
-  - else
-    %p
-      - if @query
-        No ladders were found with your search term of
-        %strong= @query
-      - else
-        Your organization does not currently have any ladders and you have not entered a search term.
+  %section.ladders
+    #ladders
+
+- content_for :footer do
+  :coffeescript
+    require ['backbone/pages/manage_organization'], (ManageOrgPage) ->
+      new ManageOrgPage(
+        organization: #{@organization_json},
+        ladders: #{@ladders_json},
+        users: #{@users_json}
+      )
+

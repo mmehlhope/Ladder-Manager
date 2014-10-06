@@ -10,7 +10,7 @@ define (require, exports, module) ->
 
   class OrganizationEditPage extends Backbone.View
 
-    el: '.organization-panel'
+    el: '.ladders'
 
     initialize: (options={}) ->
       {@organization, @ladders, @users} = options

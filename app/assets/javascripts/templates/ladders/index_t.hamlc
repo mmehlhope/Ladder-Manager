@@ -1,6 +1,6 @@
 .section-header
   .section-title
-    %h2 Your organization's ladders
+    %h1 Ladders
     - if @ladders.length
       %p.subdued-text View and manage your organization's ladders
     - else
