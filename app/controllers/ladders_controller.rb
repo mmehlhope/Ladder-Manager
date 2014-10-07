@@ -1,8 +1,8 @@
 class LaddersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :set_organization
+  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
   before_action :set_ladder, only: [:show, :edit, :update, :destroy]
-  before_action :set_organization, only: [:create]
-  before_action :search, only: [:index]
+  before_action :set_ladders, only: [:index]
   before_action :ensure_user_can_create_resource, only: [:create]
   before_action :ensure_user_can_edit_resource, only: [:edit, :update, :destroy]
   before_action :set_cache_buster, only: [:edit]
@@ -11,9 +11,12 @@ class LaddersController < ApplicationController
   # GET /ladders.json
   def index
     respond_to do |format|
-      format.html {}
+      format.html {
+        @organization_json = current_org.to_json
+        @ladders_json      = ladders_json
+      }
       format.json {
-        render json: @ladders, root: false
+        render json: @ladders_json, root: false
       }
     end
   end
@@ -104,19 +107,8 @@ class LaddersController < ApplicationController
 
   private
 
-    def search
-      if params[:query]
-        @query = params[:query].strip! || params[:query]
-        if @query =~ /\A[0-9]+\z/
-          @ladders = Ladder.where("id = :query", query: @query)
-        elsif @query =~ /\A[\w ]+\z/
-          @ladders = Ladder.where("name LIKE :query", query: "%#{@query}%")
-        else
-          @ladders = []
-        end
-      else
-        @ladders = current_org ? current_org.ladders : []
-      end
+    def set_ladders
+      @ladders = current_org ? current_org.ladders : []
     end
 
     def set_ladder
@@ -128,7 +120,7 @@ class LaddersController < ApplicationController
     end
 
     def set_organization
-      @organization = Organization.find_by_id(params[:organization_id])
+      @organization = Organization.find_by_id(params[:organization_id]) || current_org
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -156,6 +148,14 @@ class LaddersController < ApplicationController
       ActiveModel::ArraySerializer.new(
         @ladder.competitors,
         each_serializer: CompetitorSerializer,
+        scope: serialization_scope
+      ).to_json
+    end
+
+    def ladders_json
+      ActiveModel::ArraySerializer.new(
+        @organization.ladders,
+        each_serializer: LadderSerializer,
         scope: serialization_scope
       ).to_json
     end
